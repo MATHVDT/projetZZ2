@@ -13,6 +13,8 @@ namespace model
 
         public double Latitude { get; set; }
     
+        //public GeoCoordinate Coordonnees { get; set; }
+
         public Ville(string nom, double longitude, double latitude)
         {
             this.Nom = nom;

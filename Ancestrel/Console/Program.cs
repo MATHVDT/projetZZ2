@@ -24,3 +24,10 @@ p.DateNaissance = DateOnly.FromDateTime(DateTime.Today);
 Console.WriteLine(p.Nom);
 Console.WriteLine("Personne : " + p.ToString());
 
+Homme h = new(iden: 1, nom: "Dupond", prenoms: "Jean Remi",
+   dateNaissance: DateOnly.Parse("16/02/2000"));
+
+Console.WriteLine(); 
+Console.WriteLine(h.ToString());
+Console.WriteLine(h.Prenoms);
+Console.WriteLine(h.GetPrenoms());

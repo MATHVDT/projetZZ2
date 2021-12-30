@@ -30,7 +30,7 @@ namespace model
         private List<string>? _listePrenom = null;
         private DateOnly? _dateNaissance = null;
         private DateOnly? _dateDeces = null;
-        
+
         /**
          * @var Identifiant
          * @brief Identifiant unique de la personne dans l'abre.
@@ -83,7 +83,12 @@ namespace model
                 if (_listePrenom is null || _listePrenom.Count == 0)
                     return null;
                 else
-                    return _listePrenom.ToString();
+                {
+                    StringBuilder strBuild = new();
+                    foreach (var p in _listePrenom)
+                        strBuild.Append(p + " ");
+                    return strBuild.ToString();
+                }
             }
             /**
              * Simpe setter
@@ -238,7 +243,12 @@ namespace model
             if (_listePrenom is null || _listePrenom.Count == 0)
                 return null;
             else
-                return _listePrenom.ToString();
+            {
+                StringBuilder strBuild = new();
+                foreach (var p in _listePrenom)
+                    strBuild.Append(p + " ");
+                return strBuild.ToString();
+            }
         }
 
         /**
