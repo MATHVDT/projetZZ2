@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['main_0',['Main',['../class_vue_1_1_app.html#ad94e1a5d603cef8f6f4a10b55f45bdd6',1,'Vue.App.Main()'],['../class_vue_1_1_app.html#ad94e1a5d603cef8f6f4a10b55f45bdd6',1,'Vue.App.Main()'],['../class_vue_1_1_app.html#ad94e1a5d603cef8f6f4a10b55f45bdd6',1,'Vue.App.Main()']]],
-  ['mainwindow_1',['MainWindow',['../class_vue_1_1_main_window.html#a844775168d9d3a8317cf1619ebfd0c3b',1,'Vue::MainWindow']]],
-  ['manager_2',['Manager',['../classmodel_1_1_manager.html#a7dca2ba9de1a5fd42db24a7d11e77f4b',1,'model::Manager']]]
+  ['initializecomponent_0',['InitializeComponent',['../class_vue_1_1_app.html#acb21aa06a6380057aa2f4e4e7225fa54',1,'Vue.App.InitializeComponent()'],['../class_vue_1_1_app.html#acb21aa06a6380057aa2f4e4e7225fa54',1,'Vue.App.InitializeComponent()'],['../class_vue_1_1_main_window.html#a8c4ccdd1956a69e354088ba2850c1fc5',1,'Vue.MainWindow.InitializeComponent()'],['../class_vue_1_1_main_window.html#a8c4ccdd1956a69e354088ba2850c1fc5',1,'Vue.MainWindow.InitializeComponent()'],['../class_vue_1_1_app.html#acb21aa06a6380057aa2f4e4e7225fa54',1,'Vue.App.InitializeComponent()'],['../class_vue_1_1_main_window.html#a8c4ccdd1956a69e354088ba2850c1fc5',1,'Vue.MainWindow.InitializeComponent()']]]
 ];

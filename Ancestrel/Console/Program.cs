@@ -16,10 +16,11 @@ using model;
 */
 Console.WriteLine("Hello, World!");
 
-Personne p = new Personne();
+Femme p = new Femme(1);
 
 p.Nom = "dupond";
-p.Prenoms = "toto";
+p.DateNaissance = DateOnly.FromDateTime(DateTime.Today);
 
 Console.WriteLine(p.Nom);
+Console.WriteLine("Personne : " + p.ToString());
 
