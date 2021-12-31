@@ -23,13 +23,23 @@ namespace model
     {
 
         /**
-         * @fn Homme 
-         * @brief Constructeur de la classe Homme
-         * @param uint i Identifiant de l'enfant
+         * @fn public Homme 
+         * @param uint iden *Identidiant de l'enfant*
+         * @param string? nom = null,
+         * @param string? prenoms = null
+         * @param DateOnly? dateNaissance = null
+         * @param DateOnly? dateDeces = null
+         * @param Ville? lieuNaissance = null
+         * @param string? nationalite = null
+         * 
+         * @brief Constructeur de la classe Homme.
+         * @details
+         * Definie les propiétés de la personne.
          */
         public Homme(uint iden, string? nom = null, string? prenoms = null,
-                     DateOnly? dateNaissance = null, DateOnly? dateDeces = null) :
-                base(iden, nom, prenoms, dateNaissance, dateDeces)
+                     DateOnly? dateNaissance = null, DateOnly? dateDeces = null,
+                     Ville? lieuNaissance = null, string? nationalite = null) :
+                base(iden, nom, prenoms, dateNaissance, dateDeces, lieuNaissance, nationalite)
         {
             Identifiant = 2 * iden;
         }

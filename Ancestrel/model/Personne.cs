@@ -31,7 +31,7 @@ namespace model
         protected DateOnly? _dateNaissance ;
         protected DateOnly? _dateDeces ;
         protected Ville? _lieuNaissance; 
-        protected string _nationalite;
+        protected string? _nationalite;
 
             
         
@@ -215,16 +215,29 @@ namespace model
 
 
         /**
-         * @fn Personne()
-         * @brief Constructeur d'une personne inconnue
+         * @fn public Personne 
+         * @param uint iden *Identidiant de l'enfant*
+         * @param string? nom = null,
+         * @param string? prenoms = null
+         * @param DateOnly? dateNaissance = null
+         * @param DateOnly? dateDeces = null
+         * @param Ville? lieuNaissance = null
+         * @param string? nationalite = null
+         * 
+         * @brief Constructeur de la classe Personne.
+         * @details
+         * Definie les propiétés de la personne.
          */
         public Personne(uint iden, string? nom = null, string? prenoms = null,
-            DateOnly? dateNaissance = null, DateOnly? dateDeces = null)
+            DateOnly? dateNaissance = null, DateOnly? dateDeces = null,
+            Ville? lieuNaissance = null, string? nationalite = null)
         {
             Nom = nom;
             Prenoms = prenoms;
             DateNaissance = dateNaissance;
             DateDeces = dateDeces;
+            LieuNaissance = lieuNaissance;
+            Nationalite = nationalite;
 
             if (Nom != null || Prenoms != null ||
                 DateNaissance != null || DateDeces != null)
@@ -241,7 +254,7 @@ namespace model
 
         /**
         * @fn public void SetPrenoms(string[] inListeValue)
-        * @param string[] inListeValue Liste de prenoms
+        * @param string[] inListeValue *Liste de prenoms*
         * @brief Ajouter un/des prenom(s) à la personne.
         * @details
         * Ajoute les prenoms passés en paramètre à la personne.
@@ -266,7 +279,7 @@ namespace model
 
         /**
         * @overload public void SetPrenoms(string value)
-        * @param string value Chaine de caractères de prenoms
+        * @param string value *Chaine de caractères de prenoms*
         */
         public void SetPrenoms(string value)
         {
@@ -282,7 +295,7 @@ namespace model
         /**
          * @fn public string? GetPrenoms()
          * @brief Donne les prenoms de la personnes.
-         * @return string? Chaine des prenoms
+         * @return string? *Chaine des prenoms*
          * @warning Retourne null s'il n'y a pas de prenoms
          */
         public string? GetPrenoms()
@@ -301,7 +314,7 @@ namespace model
         /**
          * @fn SupprimerPrenoms(string[] inListeValue)
          * @brief Supprime les prenoms
-         * @param string[] inListeValue Liste de prenoms
+         * @param string[] inListeValue *Liste de prenoms*
          */
         public void SupprimerPrenoms(string[] inListeValue)
         {
@@ -315,7 +328,7 @@ namespace model
         }
         /**
          * @overload SupprimerPrenoms(string value)
-         * @param string inValue Prenoms
+         * @param string inValue *Prenoms*
          */
         public void SupprimerPrenoms(string inValue)
         {
@@ -326,7 +339,7 @@ namespace model
         /**
          * @fn public override string ToString()
          * @brief Donne les informations sur la personne.
-         * @return un string
+         * @return string
          */
         public override string ToString()
         {

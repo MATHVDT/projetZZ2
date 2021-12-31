@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['personne_0',['Personne',['../classmodel_1_1_personne.html',1,'model']]]
+  ['mainwindow_0',['MainWindow',['../class_vue_1_1_main_window.html',1,'Vue']]],
+  ['manager_1',['Manager',['../classmodel_1_1_manager.html',1,'model']]]
 ];

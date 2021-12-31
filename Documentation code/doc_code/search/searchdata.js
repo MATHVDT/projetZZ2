@@ -1,12 +1,13 @@
 var indexSectionsWithContent =
 {
   0: "adfghilmnpstuv",
-  1: "afhmpuv",
+  1: "adfhmpuv",
   2: "mtv",
-  3: "fhp",
-  4: "fghimpst",
-  5: "dilnp",
-  6: "g"
+  3: "dfhip",
+  4: "dfghimpst",
+  5: "d",
+  6: "dilnp",
+  7: "g"
 };
 
 var indexSectionNames =
@@ -16,8 +17,9 @@ var indexSectionNames =
   2: "namespaces",
   3: "files",
   4: "functions",
-  5: "properties",
-  6: "pages"
+  5: "variables",
+  6: "properties",
+  7: "pages"
 };
 
 var indexSectionLabels =
@@ -27,7 +29,8 @@ var indexSectionLabels =
   2: "Espaces de nommage",
   3: "Fichiers",
   4: "Fonctions",
-  5: "Propriétés",
-  6: "Pages"
+  5: "Variables",
+  6: "Propriétés",
+  7: "Pages"
 };
 

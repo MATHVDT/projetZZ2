@@ -21,7 +21,7 @@ namespace model
      */
     public class Femme : Personne
     {
-        private string _nomJeuneFille;
+        private string? _nomJeuneFille;
 
         /**
          * @var NomJeuneFille
@@ -43,11 +43,13 @@ namespace model
 
         /**
          * @fn public Femme 
-         * @param uint iden 
+         * @param uint iden *Identidiant de l'enfant*
          * @param string? nom = null,
          * @param string? prenoms = null
          * @param DateOnly? dateNaissance = null
          * @param DateOnly? dateDeces = null
+         * @param Ville? lieuNaissance = null
+         * @param string? nationalite = null
          * @param string? nomJeuneFille
          * 
          * @brief Constructeur de la classe Femme.
@@ -57,8 +59,9 @@ namespace model
          */
         public Femme(uint iden, string? nom = null, string? prenoms = null,
                      DateOnly? dateNaissance = null, DateOnly? dateDeces = null,
+                     Ville? lieuNaissance = null, string? nationalite = null,
                      string? nomJeuneFille = null) :
-                base(iden, nom, prenoms, dateNaissance, dateDeces)
+                base(iden, nom, prenoms, dateNaissance, dateDeces, lieuNaissance, nationalite)
         {
             Identifiant = 2 * iden + 1;
             NomJeuneFille = NomJeuneFille;

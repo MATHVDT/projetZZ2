@@ -82,10 +82,9 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Fonctions membres publiques</h2></td></tr>
-<tr class="memitem:a24bae26e4b5dce514a20f38dfba62a2e"><td class="memItemLeft" align="right" valign="top"><a id="a24bae26e4b5dce514a20f38dfba62a2e" name="a24bae26e4b5dce514a20f38dfba62a2e"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Personne</b> (uint iden, string? nom=null, string? prenoms=null, DateOnly? dateNaissance=null, DateOnly? dateDeces=null)</td></tr>
-<tr class="memdesc:a24bae26e4b5dce514a20f38dfba62a2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructeur d'une personne inconnue. <br /></td></tr>
-<tr class="separator:a24bae26e4b5dce514a20f38dfba62a2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b47e97514447c6295c788b06bf92a61"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmodel_1_1_personne.html#a0b47e97514447c6295c788b06bf92a61">Personne</a> (uint iden, string? nom=null, string? prenoms=null, DateOnly? dateNaissance=null, DateOnly? dateDeces=null, <a class="el" href="classmodel_1_1_ville.html">Ville</a>? lieuNaissance=null, string? nationalite=null)</td></tr>
+<tr class="memdesc:a0b47e97514447c6295c788b06bf92a61"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructeur de la classe <a class="el" href="classmodel_1_1_personne.html" title="classe abstraite d&#39;une personne">Personne</a>.  <a href="classmodel_1_1_personne.html#a0b47e97514447c6295c788b06bf92a61">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a0b47e97514447c6295c788b06bf92a61"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e2afe41c929742dbfda819cac885ba9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmodel_1_1_personne.html#a5e2afe41c929742dbfda819cac885ba9">SetPrenoms</a> (string[] inListeValue)</td></tr>
 <tr class="memdesc:a5e2afe41c929742dbfda819cac885ba9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ajouter un/des prenom(s) à la personne.  <a href="classmodel_1_1_personne.html#a5e2afe41c929742dbfda819cac885ba9">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a5e2afe41c929742dbfda819cac885ba9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -120,9 +119,9 @@ DateOnly?&#160;</td><td class="memItemRight" valign="bottom"><b>_dateDeces</b></
 <tr class="memitem:aa5ed897d0b29e01c67a0745ae2084a4f"><td class="memItemLeft" align="right" valign="top"><a id="aa5ed897d0b29e01c67a0745ae2084a4f" name="aa5ed897d0b29e01c67a0745ae2084a4f"></a>
 <a class="el" href="classmodel_1_1_ville.html">Ville</a>?&#160;</td><td class="memItemRight" valign="bottom"><b>_lieuNaissance</b></td></tr>
 <tr class="separator:aa5ed897d0b29e01c67a0745ae2084a4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2f42c6239fc94bb5279530c157230278"><td class="memItemLeft" align="right" valign="top"><a id="a2f42c6239fc94bb5279530c157230278" name="a2f42c6239fc94bb5279530c157230278"></a>
-string&#160;</td><td class="memItemRight" valign="bottom"><b>_nationalite</b></td></tr>
-<tr class="separator:a2f42c6239fc94bb5279530c157230278"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e0f6e09ea467ff793ba390535a53e57"><td class="memItemLeft" align="right" valign="top"><a id="a9e0f6e09ea467ff793ba390535a53e57" name="a9e0f6e09ea467ff793ba390535a53e57"></a>
+string?&#160;</td><td class="memItemRight" valign="bottom"><b>_nationalite</b></td></tr>
+<tr class="separator:a9e0f6e09ea467ff793ba390535a53e57"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="properties" name="properties"></a>
 Propriétés</h2></td></tr>
@@ -153,7 +152,81 @@ Propriétés</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
 <div class="textblock"><p >classe abstraite d'une personne </p>
-</div><h2 class="groupheader">Documentation des fonctions membres</h2>
+</div><h2 class="groupheader">Documentation des constructeurs et destructeur</h2>
+<a id="a0b47e97514447c6295c788b06bf92a61" name="a0b47e97514447c6295c788b06bf92a61"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b47e97514447c6295c788b06bf92a61">&#9670;&nbsp;</a></span>Personne()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public model.Personne.Personne </td>
+          <td>(</td>
+          <td class="paramtype">uint&#160;</td>
+          <td class="paramname"><em>iden</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string?&#160;</td>
+          <td class="paramname"><em>nom</em> = <code>null</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string?&#160;</td>
+          <td class="paramname"><em>prenoms</em> = <code>null</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DateOnly?&#160;</td>
+          <td class="paramname"><em>dateNaissance</em> = <code>null</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DateOnly?&#160;</td>
+          <td class="paramname"><em>dateDeces</em> = <code>null</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classmodel_1_1_ville.html">Ville</a>?&#160;</td>
+          <td class="paramname"><em>lieuNaissance</em> = <code>null</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string?&#160;</td>
+          <td class="paramname"><em>nationalite</em> = <code>null</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructeur de la classe <a class="el" href="classmodel_1_1_personne.html" title="classe abstraite d&#39;une personne">Personne</a>. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">uint</td><td>iden <em>Identidiant de l'enfant</em> </td></tr>
+    <tr><td class="paramname">string?</td><td>nom = null, </td></tr>
+    <tr><td class="paramname">string?</td><td>prenoms = null </td></tr>
+    <tr><td class="paramname">DateOnly?</td><td>dateNaissance = null </td></tr>
+    <tr><td class="paramname">DateOnly?</td><td>dateDeces = null </td></tr>
+    <tr><td class="paramname">Ville?</td><td>lieuNaissance = null </td></tr>
+    <tr><td class="paramname">string?</td><td>nationalite = null</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Definie les propiétés de la personne. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Documentation des fonctions membres</h2>
 <a id="aca6555336a230ff88a501ff147d18acd" name="aca6555336a230ff88a501ff147d18acd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aca6555336a230ff88a501ff147d18acd">&#9670;&nbsp;</a></span>GetPrenoms()</h2>
 
@@ -170,7 +243,7 @@ Propriétés</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Donne les prenoms de la personnes. </p>
-<dl class="section return"><dt>Renvoie</dt><dd>string? Chaine des prenoms </dd></dl>
+<dl class="section return"><dt>Renvoie</dt><dd>string? <em>Chaine des prenoms</em> </dd></dl>
 <dl class="section warning"><dt>Avertissement</dt><dd>Retourne null s'il n'y a pas de prenoms </dd></dl>
 
 </div>
@@ -193,7 +266,7 @@ Propriétés</h2></td></tr>
 <p >Ceci est une fonction membre surchargée, proposée par commodité. Elle diffère de la fonction ci-dessus uniquement par le(s) argument(s) qu'elle accepte.</p>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
-    <tr><td class="paramname">string</td><td>value Chaine de caractères de prenoms </td></tr>
+    <tr><td class="paramname">string</td><td>value <em>Chaine de caractères de prenoms</em> </td></tr>
   </table>
   </dd>
 </dl>
@@ -219,7 +292,7 @@ Propriétés</h2></td></tr>
 <p>Ajouter un/des prenom(s) à la personne. </p>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
-    <tr><td class="paramname">string[]</td><td>inListeValue Liste de prenoms</td></tr>
+    <tr><td class="paramname">string[]</td><td>inListeValue <em>Liste de prenoms</em></td></tr>
   </table>
   </dd>
 </dl>
@@ -245,7 +318,7 @@ Propriétés</h2></td></tr>
 <p >Ceci est une fonction membre surchargée, proposée par commodité. Elle diffère de la fonction ci-dessus uniquement par le(s) argument(s) qu'elle accepte.</p>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
-    <tr><td class="paramname">string</td><td>inValue Prenoms </td></tr>
+    <tr><td class="paramname">string</td><td>inValue <em>Prenoms</em> </td></tr>
   </table>
   </dd>
 </dl>
@@ -271,7 +344,7 @@ Propriétés</h2></td></tr>
 <p>Supprime les prenoms. </p>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
-    <tr><td class="paramname">string[]</td><td>inListeValue Liste de prenoms </td></tr>
+    <tr><td class="paramname">string[]</td><td>inListeValue <em>Liste de prenoms</em> </td></tr>
   </table>
   </dd>
 </dl>
@@ -294,7 +367,7 @@ Propriétés</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Donne les informations sur la personne. </p>
-<dl class="section return"><dt>Renvoie</dt><dd>un string </dd></dl>
+<dl class="section return"><dt>Renvoie</dt><dd>string </dd></dl>
 
 </div>
 </div>
