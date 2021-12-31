@@ -21,12 +21,25 @@ namespace model
      */
     public class Femme : Personne
     {
+        private string _nomJeuneFille;
+
         /**
          * @var NomJeuneFille
          * @brief Nom de jeune fille de la personne.
          * @warning Peut être null.
          */
-        public string? NomJeuneFille { get; set; } = null;
+        public string? NomJeuneFille
+        {
+            get => _nomJeuneFille;
+            set
+            {
+                if (value != null)
+                {
+                    _nomJeuneFille = value;
+                    Inconnu = false;
+                }
+            }
+        }
 
         /**
          * @fn public Femme 
@@ -44,7 +57,7 @@ namespace model
          */
         public Femme(uint iden, string? nom = null, string? prenoms = null,
                      DateOnly? dateNaissance = null, DateOnly? dateDeces = null,
-                     string? nomJeuneFille = null)  : 
+                     string? nomJeuneFille = null) :
                 base(iden, nom, prenoms, dateNaissance, dateDeces)
         {
             Identifiant = 2 * iden + 1;
@@ -57,7 +70,7 @@ namespace model
          */
         public override string ToString()
         {
-            return base.ToString() + "née " + 
+            return base.ToString() + "née " +
                 (NomJeuneFille is null ? "NomJeuneFilleInconnu" : NomJeuneFille);
         }
     }

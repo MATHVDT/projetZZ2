@@ -163,7 +163,7 @@ namespace model
          * Valeur booleen qui indique si la personne est inconnue, accessible uniquement en lecture.
          * La valeur passe à false s'il l'une des valeurs est renseignées. (ie différent de null)
          */
-        public bool Inconnu { get; private set; }
+        public bool Inconnu { get; protected set; }
 
         //        public List<Document> ListeDoc { get; set; }
 
