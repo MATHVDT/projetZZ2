@@ -26,10 +26,15 @@ namespace model
     public abstract class Personne
     {
 
-        private string? _nom = null;
-        private List<string>? _listePrenom = null;
-        private DateOnly? _dateNaissance = null;
-        private DateOnly? _dateDeces = null;
+        protected string? _nom = null;
+        protected List<string>? _listePrenom ;
+        protected DateOnly? _dateNaissance ;
+        protected DateOnly? _dateDeces ;
+        protected Ville? _lieuNaissance; 
+        protected string _nationalite;
+
+            
+        
 
         /**
          * @var Identifiant
@@ -117,6 +122,7 @@ namespace model
         }
 
 
+        
 
         /**
          * @var DateNaissance
@@ -155,6 +161,43 @@ namespace model
             }
         }
 
+        /**
+         * @var LieuNaissance
+         * @brief Ville de naissance.
+         * @warning peut être null, ou incomplete.
+         */
+        public Ville? LieuNaissance
+        {
+            get => _lieuNaissance;
+            set
+            {
+                if(value !=null)
+                {
+                    _lieuNaissance = value;
+                    Inconnu = false;
+                }
+            }
+        }
+
+        /**
+         * @var Nationalite
+         * @brief Nationalite de la personne.
+         * @warning Peut être null.
+         * @remark Peut être mettre une Liste pour les nationalites, 
+         * et enregistrer les des valeurs predefinies.
+         */
+        public string? Nationalite
+        {
+            get => _nationalite;
+            set
+            {
+                if (value!=null)
+                {
+                    _nationalite = value;
+                    Inconnu = false;
+                }
+            }
+        }
 
         /**
          * @var Inconnu
@@ -166,6 +209,10 @@ namespace model
         public bool Inconnu { get; protected set; }
 
         //        public List<Document> ListeDoc { get; set; }
+
+
+
+
 
         /**
          * @fn Personne()
