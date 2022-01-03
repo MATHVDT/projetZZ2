@@ -9,13 +9,13 @@ namespace model
     public class Ville
     {
         public string Nom { get; set; }
-        public double Longitude { get; set; }
+        public double? Longitude { get; set; }
 
-        public double Latitude { get; set; }
+        public double? Latitude { get; set; }
     
         //public GeoCoordinate Coordonnees { get; set; }
 
-        public Ville(string nom, double longitude, double latitude)
+        public Ville(string nom, double? longitude = null, double? latitude = null)
         {
             this.Nom = nom;
             this.Longitude = longitude;

@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['tostring_0',['ToString',['../classmodel_1_1_femme.html#ad942e7a5eac21bf4e808a5f24e1b5c1d',1,'model.Femme.ToString()'],['../classmodel_1_1_personne.html#a7749abd205247cec55cd3be78505e5dd',1,'model.Personne.ToString()']]]
+  ['setprenoms_0',['SetPrenoms',['../classmodel_1_1_personne.html#a5e2afe41c929742dbfda819cac885ba9',1,'model.Personne.SetPrenoms(string[] inListeValue)'],['../classmodel_1_1_personne.html#a8acccc23cdccc4359ca91bafcd0f7c2b',1,'model.Personne.SetPrenoms(string value)']]],
+  ['supprimerpersonne_1',['SupprimerPersonne',['../classmodel_1_1_arbre.html#a0769a75bf218f4efa72d6ebf5979bfca',1,'model::Arbre']]],
+  ['supprimerprenoms_2',['SupprimerPrenoms',['../classmodel_1_1_personne.html#a43bf0716d2b3b29eed08df30378a9bb3',1,'model.Personne.SupprimerPrenoms(string[] inListeValue)'],['../classmodel_1_1_personne.html#a74f0565dc3bc07097b6ce3b6d5ecdd5e',1,'model.Personne.SupprimerPrenoms(string inValue)']]]
 ];

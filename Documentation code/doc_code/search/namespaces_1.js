@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['tests_0',['Tests',['../namespace_tests.html',1,'']]]
+  ['vue_0',['Vue',['../namespace_vue.html',1,'']]]
 ];

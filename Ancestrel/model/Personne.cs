@@ -337,6 +337,26 @@ namespace model
         }
 
         /**
+        * @fn public uint GetPereId()
+        * @brief Donne l'identifiant du pere
+        * @return uint *identifiant du père*
+        */
+        public uint GetPereId()
+        {
+            return Identifiant * 2;
+        }
+
+        /**
+        * @fn public uint GetMereId()
+        * @brief Donne l'identifiant de la mere
+        * @return uint *identifiant de la mere*
+        */
+        public uint GetMereId()
+        {
+            return Identifiant * 2 + 1;
+        }
+
+        /**
          * @fn public override string ToString()
          * @brief Donne les informations sur la personne.
          * @return string
