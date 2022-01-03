@@ -37,6 +37,7 @@ namespace model
                 {
                     _nomJeuneFille = value;
                     Inconnu = false;
+
                 }
             }
         }
@@ -65,6 +66,7 @@ namespace model
         {
             Identifiant = 2 * iden + 1;
             NomJeuneFille = NomJeuneFille;
+            
         }
 
         /**

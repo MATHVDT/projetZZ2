@@ -8,6 +8,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,15 +28,15 @@ namespace model
     public abstract class Personne
     {
 
-        protected string? _nom = null;
-        protected List<string>? _listePrenom ;
-        protected DateOnly? _dateNaissance ;
-        protected DateOnly? _dateDeces ;
-        protected Ville? _lieuNaissance; 
-        protected string? _nationalite;
+        private string? _nom = null;
+        private List<string>? _listePrenom;
+        private DateOnly? _dateNaissance;
+        private DateOnly? _dateDeces;
+        private Ville? _lieuNaissance;
+        private string? _nationalite;
 
-            
-        
+
+
 
         /**
          * @var Identifiant
@@ -44,7 +46,7 @@ namespace model
          * Le père de la personne à l'identifiant : (2 * Identifiant) et
          * la mère de la personne à l'identifiant : (2 * Identidiant + 1)
          */
-        public uint Identifiant { get; set; }
+        public uint Identifiant { get; protected set; }
 
 
         /**
@@ -122,7 +124,7 @@ namespace model
         }
 
 
-        
+
 
         /**
          * @var DateNaissance
@@ -171,7 +173,7 @@ namespace model
             get => _lieuNaissance;
             set
             {
-                if(value !=null)
+                if (value != null)
                 {
                     _lieuNaissance = value;
                     Inconnu = false;
@@ -191,7 +193,7 @@ namespace model
             get => _nationalite;
             set
             {
-                if (value!=null)
+                if (value != null)
                 {
                     _nationalite = value;
                     Inconnu = false;
@@ -208,9 +210,30 @@ namespace model
          */
         public bool Inconnu { get; protected set; }
 
-        //        public List<Document> ListeDoc { get; set; }
+        /**
+         * @var ListeImage
+         * @brief Liste des differentes Images sur la personne.
+         */
+        protected List<Image> _listeImage;
+        protected int? _indexImageProfil;
 
-
+        /**
+         * @var IndexImageProfil
+         * @brief Indice de l'image pour le profil de la personne.
+         * @warning Peut être null.
+         */
+        public int? IndexImageProfil
+        {
+            get { return _indexImageProfil; }
+            set
+            {
+                if (value != null && value >= 0 && value < _listeImage.Count)
+                {
+                    IndexImageProfil = value;
+                    Inconnu = false;
+                }
+            }
+        }
 
 
 
@@ -238,6 +261,8 @@ namespace model
             DateDeces = dateDeces;
             LieuNaissance = lieuNaissance;
             Nationalite = nationalite;
+            _listeImage = new List<Image>();
+
 
             if (Nom != null || Prenoms != null ||
                 DateNaissance != null || DateDeces != null)
@@ -359,6 +384,97 @@ namespace model
 
             return strBuil.ToString();
         }
+
+        /**
+         * @fn public void SetImageProfil(Image imageSelectionne)
+         * @brief Choisit la photo de profil.
+         * @param Image imageSelect
+         */
+        public void SetImageProfil(Image imageSelect)
+        {
+            int image_trouve = 0; // Sert a compter le nb d'image trouve, normalement que 1
+            for (int i = 0; i < _listeImage.Count; i++)
+            {
+                if (_listeImage[i] == imageSelect)
+                {
+                    _indexImageProfil = i;
+                    image_trouve++;
+                }
+            }
+
+            if (image_trouve == 0)
+            {
+                Console.WriteLine("Image non trouvee.");
+            }
+            else if (image_trouve == 1 && !(_indexImageProfil is null))
+            {
+                Console.WriteLine("Image trouvee, photo de profil selection : " +
+                    _listeImage[(int)_indexImageProfil].Tag + " ; "
+                    + _listeImage[(int)_indexImageProfil].ToString());
+            }
+            else
+            { Console.WriteLine("Plus d'une image de profil trouve."); }
+        }
+
+        /**
+         * @fn public void AjouterImage(string filename, bool imageProfil = false)
+         * @param string filename - Nom de l'image *(path)*
+         * @param bool imageProfil = false - Definit l'image pour le 
+         */
+        public void AjouterImage(string filename, bool imageProfil = false)
+        {
+
+            try
+            {
+                Image img = Image.FromFile(filename); // Charge l'image
+                _listeImage.Add(img);   // Ajoute l'image
+                if (imageProfil)    // Definit l'image comme image de profil
+                    _indexImageProfil = _listeImage.Count - 1;
+
+            }
+            catch (TypeInitializationException e)
+            {
+                Console.WriteLine(e.ToString());
+                Console.WriteLine("using System.Drawing : " +
+                    "bibliothèque spécifique à Windows ");
+            }
+            catch (OutOfMemoryException e)
+            {
+                Console.WriteLine(e.ToString());
+                Console.WriteLine("Format d'image du fichier n'est pas valide.");
+            }
+            catch (FileNotFoundException)
+            {
+                Console.WriteLine("Le fichier spécifié n'existe pas.");
+            }
+            catch (ArgumentException)
+            {
+                Console.WriteLine("ArgumentException");
+            }
+        }
+
+        /**
+         * @fn public Image? GetImageProfil()
+         * @brief Retourne l'image de profil
+         * @warning Peut être null.
+         * @return Image? l'image de profil de la personne.
+         */
+        public Image? GetImageProfil()
+        {
+            return _indexImageProfil is null ? null
+                                     : _listeImage[(int)_indexImageProfil];
+        }
+
+        /**
+         * @fn public List<Image> GetImagesPersonne
+         * @brief Retourne la liste des images de la personne.
+         * @return Liste des images de la personne
+         */
+        public List<Image> GetImagesPersonne()
+        {
+            return _listeImage;
+        }
+
 
     }
 }

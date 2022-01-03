@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['homme_0',['Homme',['../classmodel_1_1_homme.html#aafb37efd0f588eb6db23b21d13568a80',1,'model::Homme']]]
+  ['getimageprofil_0',['GetImageProfil',['../classmodel_1_1_personne.html#a0cc806c14fcb632938cea4b4eee39273',1,'model::Personne']]],
+  ['getimagespersonne_1',['GetImagesPersonne',['../classmodel_1_1_personne.html#abf995e82fb970d19eaf0d20423041d78',1,'model::Personne']]],
+  ['getprenoms_2',['GetPrenoms',['../classmodel_1_1_personne.html#aca6555336a230ff88a501ff147d18acd',1,'model::Personne']]]
 ];
