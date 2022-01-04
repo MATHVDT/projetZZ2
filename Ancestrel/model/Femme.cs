@@ -62,11 +62,11 @@ namespace model
                      DateOnly? dateNaissance = null, DateOnly? dateDeces = null,
                      Ville? lieuNaissance = null, string? nationalite = null,
                      string? nomJeuneFille = null) :
-                base(iden, nom, prenoms, dateNaissance, dateDeces, lieuNaissance, nationalite)
+                base(2 * iden + 1, nom, prenoms, dateNaissance, dateDeces, lieuNaissance, nationalite)
         {
-            Identifiant = 2 * iden + 1;
+            //Identifiant = 2 * iden + 1;
             NomJeuneFille = NomJeuneFille;
-            
+
         }
 
         /**

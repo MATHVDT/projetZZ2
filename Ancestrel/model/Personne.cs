@@ -46,7 +46,7 @@ namespace model
          * Le père de la personne à l'identifiant : (2 * Identifiant) et
          * la mère de la personne à l'identifiant : (2 * Identidiant + 1)
          */
-        public uint Identifiant { get; protected set; }
+        public uint Identifiant { get; private set; }
 
 
         /**
@@ -214,8 +214,8 @@ namespace model
          * @var ListeImage
          * @brief Liste des differentes Images sur la personne.
          */
-        protected List<Image> _listeImage;
-        protected int? _indexImageProfil;
+        private List<Image> _listeImage;
+        private int? _indexImageProfil;
 
         /**
          * @var IndexImageProfil
