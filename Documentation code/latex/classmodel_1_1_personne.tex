@@ -1,0 +1,333 @@
+\hypertarget{classmodel_1_1_personne}{}\doxysection{model.\+Personne Class Reference}
+\label{classmodel_1_1_personne}\index{model.Personne@{model.Personne}}
+
+
+classe abstraite d\textquotesingle{}une personne  
+
+
+Inheritance diagram for model.\+Personne\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classmodel_1_1_personne}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmodel_1_1_personne_a0b47e97514447c6295c788b06bf92a61}{Personne}} (uint iden, string? nom=null, string? prenoms=null, Date\+Only? date\+Naissance=null, Date\+Only? date\+Deces=null, \mbox{\hyperlink{classmodel_1_1_ville}{Ville}}? lieu\+Naissance=null, string? nationalite=null)
+\begin{DoxyCompactList}\small\item\em Constructeur de la classe \mbox{\hyperlink{classmodel_1_1_personne}{Personne}}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classmodel_1_1_personne_a5e2afe41c929742dbfda819cac885ba9}{Set\+Prenoms}} (string\mbox{[}$\,$\mbox{]} in\+Liste\+Value)
+\begin{DoxyCompactList}\small\item\em Ajouter un/des prenom(s) à la personne. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classmodel_1_1_personne_a8acccc23cdccc4359ca91bafcd0f7c2b}{Set\+Prenoms}} (string value)
+\item 
+string? \mbox{\hyperlink{classmodel_1_1_personne_aca6555336a230ff88a501ff147d18acd}{Get\+Prenoms}} ()
+\begin{DoxyCompactList}\small\item\em Donne les prenoms de la personnes. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classmodel_1_1_personne_a43bf0716d2b3b29eed08df30378a9bb3}{Supprimer\+Prenoms}} (string\mbox{[}$\,$\mbox{]} in\+Liste\+Value)
+\begin{DoxyCompactList}\small\item\em Supprime les prenoms. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classmodel_1_1_personne_a74f0565dc3bc07097b6ce3b6d5ecdd5e}{Supprimer\+Prenoms}} (string in\+Value)
+\item 
+uint \mbox{\hyperlink{classmodel_1_1_personne_a2f57a859db265cd7af4fc3200a0c0c2e}{Get\+Pere\+Id}} ()
+\begin{DoxyCompactList}\small\item\em Donne l\textquotesingle{}identifiant du pere. \end{DoxyCompactList}\item 
+uint \mbox{\hyperlink{classmodel_1_1_personne_a2f53fc1caf66f4ecd3af2fe85a8a676b}{Get\+Mere\+Id}} ()
+\begin{DoxyCompactList}\small\item\em Donne l\textquotesingle{}identifiant de la mere. \end{DoxyCompactList}\item 
+override string \mbox{\hyperlink{classmodel_1_1_personne_a7749abd205247cec55cd3be78505e5dd}{To\+String}} ()
+\begin{DoxyCompactList}\small\item\em Donne les informations sur la personne. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classmodel_1_1_personne_acb42ce25a80a63c6bc4c328129360452}\label{classmodel_1_1_personne_acb42ce25a80a63c6bc4c328129360452}} 
+string? {\bfseries \+\_\+nom} = null
+\item 
+\mbox{\Hypertarget{classmodel_1_1_personne_aa6b74409259a6a4ff9f5328435a0ef60}\label{classmodel_1_1_personne_aa6b74409259a6a4ff9f5328435a0ef60}} 
+List$<$ string $>$? {\bfseries \+\_\+liste\+Prenom}
+\item 
+\mbox{\Hypertarget{classmodel_1_1_personne_abb34aa3687c042213cb464a2c9baa7b1}\label{classmodel_1_1_personne_abb34aa3687c042213cb464a2c9baa7b1}} 
+Date\+Only? {\bfseries \+\_\+date\+Naissance}
+\item 
+\mbox{\Hypertarget{classmodel_1_1_personne_a1fc7576de927a08eeb45d169e619f250}\label{classmodel_1_1_personne_a1fc7576de927a08eeb45d169e619f250}} 
+Date\+Only? {\bfseries \+\_\+date\+Deces}
+\item 
+\mbox{\Hypertarget{classmodel_1_1_personne_aa5ed897d0b29e01c67a0745ae2084a4f}\label{classmodel_1_1_personne_aa5ed897d0b29e01c67a0745ae2084a4f}} 
+\mbox{\hyperlink{classmodel_1_1_ville}{Ville}}? {\bfseries \+\_\+lieu\+Naissance}
+\item 
+\mbox{\Hypertarget{classmodel_1_1_personne_a9e0f6e09ea467ff793ba390535a53e57}\label{classmodel_1_1_personne_a9e0f6e09ea467ff793ba390535a53e57}} 
+string? {\bfseries \+\_\+nationalite}
+\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+uint \mbox{\hyperlink{classmodel_1_1_personne_a65d6afee6aae4800b0987e6308daa4e2}{Identifiant}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Identifiant unique de la personne dans l\textquotesingle{}abre. \end{DoxyCompactList}\item 
+string? \mbox{\hyperlink{classmodel_1_1_personne_aaab510825049714b34831efc05a96623}{Nom}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Nom de famille d\textquotesingle{}une personne. \end{DoxyCompactList}\item 
+string? \mbox{\hyperlink{classmodel_1_1_personne_a260dfdb4deb0c59014bf2184a5ba5fa1}{Prenoms}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Prenoms d\textquotesingle{}une personne. \end{DoxyCompactList}\item 
+Date\+Only? \mbox{\hyperlink{classmodel_1_1_personne_a174747051dfe1268a042ed352c7bcdfb}{Date\+Naissance}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Date de naissance de la personne. \end{DoxyCompactList}\item 
+Date\+Only? \mbox{\hyperlink{classmodel_1_1_personne_aa91fb422080c67d996fb06835df85e64}{Date\+Deces}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Date de deces de la personne. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmodel_1_1_ville}{Ville}}? \mbox{\hyperlink{classmodel_1_1_personne_ae5cbb5a4c1a02fc627a338ba588fd6b4}{Lieu\+Naissance}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classmodel_1_1_ville}{Ville}} de naissance. \end{DoxyCompactList}\item 
+string? \mbox{\hyperlink{classmodel_1_1_personne_af2921da44f11852c1e5b1ceef71fe95f}{Nationalite}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Nationalite de la personne. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classmodel_1_1_personne_a617c267980f4aa0bf09f80ed1d2d2e79}{Inconnu}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, protected set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Booleen qui indique si la personne est inconnue. (Lecture seule) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+classe abstraite d\textquotesingle{}une personne 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classmodel_1_1_personne_a0b47e97514447c6295c788b06bf92a61}\label{classmodel_1_1_personne_a0b47e97514447c6295c788b06bf92a61}} 
+\index{model.Personne@{model.Personne}!Personne@{Personne}}
+\index{Personne@{Personne}!model.Personne@{model.Personne}}
+\doxysubsubsection{\texorpdfstring{Personne()}{Personne()}}
+{\footnotesize\ttfamily public model.\+Personne.\+Personne (\begin{DoxyParamCaption}\item[{uint}]{iden,  }\item[{string?}]{nom = {\ttfamily null},  }\item[{string?}]{prenoms = {\ttfamily null},  }\item[{Date\+Only?}]{date\+Naissance = {\ttfamily null},  }\item[{Date\+Only?}]{date\+Deces = {\ttfamily null},  }\item[{\mbox{\hyperlink{classmodel_1_1_ville}{Ville}}?}]{lieu\+Naissance = {\ttfamily null},  }\item[{string?}]{nationalite = {\ttfamily null} }\end{DoxyParamCaption})}
+
+
+
+Constructeur de la classe \mbox{\hyperlink{classmodel_1_1_personne}{Personne}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em uint} & iden {\itshape Identidiant de l\textquotesingle{}enfant} \\
+\hline
+{\em string?} & nom = null, \\
+\hline
+{\em string?} & prenoms = null \\
+\hline
+{\em Date\+Only?} & date\+Naissance = null \\
+\hline
+{\em Date\+Only?} & date\+Deces = null \\
+\hline
+{\em Ville?} & lieu\+Naissance = null \\
+\hline
+{\em string?} & nationalite = null\\
+\hline
+\end{DoxyParams}
+Definie les propiétés de la personne. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classmodel_1_1_personne_a2f53fc1caf66f4ecd3af2fe85a8a676b}\label{classmodel_1_1_personne_a2f53fc1caf66f4ecd3af2fe85a8a676b}} 
+\index{model.Personne@{model.Personne}!GetMereId@{GetMereId}}
+\index{GetMereId@{GetMereId}!model.Personne@{model.Personne}}
+\doxysubsubsection{\texorpdfstring{GetMereId()}{GetMereId()}}
+{\footnotesize\ttfamily public uint model.\+Personne.\+Get\+Mere\+Id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Donne l\textquotesingle{}identifiant de la mere. 
+
+\begin{DoxyReturn}{Returns}
+uint {\itshape identifiant de la mere} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classmodel_1_1_personne_a2f57a859db265cd7af4fc3200a0c0c2e}\label{classmodel_1_1_personne_a2f57a859db265cd7af4fc3200a0c0c2e}} 
+\index{model.Personne@{model.Personne}!GetPereId@{GetPereId}}
+\index{GetPereId@{GetPereId}!model.Personne@{model.Personne}}
+\doxysubsubsection{\texorpdfstring{GetPereId()}{GetPereId()}}
+{\footnotesize\ttfamily public uint model.\+Personne.\+Get\+Pere\+Id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Donne l\textquotesingle{}identifiant du pere. 
+
+\begin{DoxyReturn}{Returns}
+uint {\itshape identifiant du père} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classmodel_1_1_personne_aca6555336a230ff88a501ff147d18acd}\label{classmodel_1_1_personne_aca6555336a230ff88a501ff147d18acd}} 
+\index{model.Personne@{model.Personne}!GetPrenoms@{GetPrenoms}}
+\index{GetPrenoms@{GetPrenoms}!model.Personne@{model.Personne}}
+\doxysubsubsection{\texorpdfstring{GetPrenoms()}{GetPrenoms()}}
+{\footnotesize\ttfamily public string model.\+Personne.\+Get\+Prenoms (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Donne les prenoms de la personnes. 
+
+\begin{DoxyReturn}{Returns}
+string? {\itshape Chaine des prenoms} 
+\end{DoxyReturn}
+\begin{DoxyWarning}{Warning}
+Retourne null s\textquotesingle{}il n\textquotesingle{}y a pas de prenoms 
+\end{DoxyWarning}
+\mbox{\Hypertarget{classmodel_1_1_personne_a8acccc23cdccc4359ca91bafcd0f7c2b}\label{classmodel_1_1_personne_a8acccc23cdccc4359ca91bafcd0f7c2b}} 
+\index{model.Personne@{model.Personne}!SetPrenoms@{SetPrenoms}}
+\index{SetPrenoms@{SetPrenoms}!model.Personne@{model.Personne}}
+\doxysubsubsection{\texorpdfstring{SetPrenoms()}{SetPrenoms()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily public void model.\+Personne.\+Set\+Prenoms (\begin{DoxyParamCaption}\item[{string}]{value }\end{DoxyParamCaption})}
+
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+
+
+\begin{DoxyParams}{Parameters}
+{\em string} & value {\itshape Chaine de caractères de prenoms} \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classmodel_1_1_personne_a5e2afe41c929742dbfda819cac885ba9}\label{classmodel_1_1_personne_a5e2afe41c929742dbfda819cac885ba9}} 
+\index{model.Personne@{model.Personne}!SetPrenoms@{SetPrenoms}}
+\index{SetPrenoms@{SetPrenoms}!model.Personne@{model.Personne}}
+\doxysubsubsection{\texorpdfstring{SetPrenoms()}{SetPrenoms()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily public void model.\+Personne.\+Set\+Prenoms (\begin{DoxyParamCaption}\item[{string\mbox{[}$\,$\mbox{]}}]{in\+Liste\+Value }\end{DoxyParamCaption})}
+
+
+
+Ajouter un/des prenom(s) à la personne. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em string\mbox{[}$\,$\mbox{]}} & in\+Liste\+Value {\itshape Liste de prenoms}\\
+\hline
+\end{DoxyParams}
+Ajoute les prenoms passés en paramètre à la personne. Regarde si le nom n\textquotesingle{}est pas déjà ajouté dans la liste des prenoms. \mbox{\Hypertarget{classmodel_1_1_personne_a74f0565dc3bc07097b6ce3b6d5ecdd5e}\label{classmodel_1_1_personne_a74f0565dc3bc07097b6ce3b6d5ecdd5e}} 
+\index{model.Personne@{model.Personne}!SupprimerPrenoms@{SupprimerPrenoms}}
+\index{SupprimerPrenoms@{SupprimerPrenoms}!model.Personne@{model.Personne}}
+\doxysubsubsection{\texorpdfstring{SupprimerPrenoms()}{SupprimerPrenoms()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily model.\+Personne.\+Supprimer\+Prenoms (\begin{DoxyParamCaption}\item[{string}]{value }\end{DoxyParamCaption})}
+
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+
+
+\begin{DoxyParams}{Parameters}
+{\em string} & in\+Value {\itshape Prenoms} \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classmodel_1_1_personne_a43bf0716d2b3b29eed08df30378a9bb3}\label{classmodel_1_1_personne_a43bf0716d2b3b29eed08df30378a9bb3}} 
+\index{model.Personne@{model.Personne}!SupprimerPrenoms@{SupprimerPrenoms}}
+\index{SupprimerPrenoms@{SupprimerPrenoms}!model.Personne@{model.Personne}}
+\doxysubsubsection{\texorpdfstring{SupprimerPrenoms()}{SupprimerPrenoms()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily model.\+Personne.\+Supprimer\+Prenoms (\begin{DoxyParamCaption}\item[{string\mbox{[}$\,$\mbox{]}}]{in\+Liste\+Value }\end{DoxyParamCaption})}
+
+
+
+Supprime les prenoms. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em string\mbox{[}$\,$\mbox{]}} & in\+Liste\+Value {\itshape Liste de prenoms} \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classmodel_1_1_personne_a7749abd205247cec55cd3be78505e5dd}\label{classmodel_1_1_personne_a7749abd205247cec55cd3be78505e5dd}} 
+\index{model.Personne@{model.Personne}!ToString@{ToString}}
+\index{ToString@{ToString}!model.Personne@{model.Personne}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily public override string model.\+Personne.\+To\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Donne les informations sur la personne. 
+
+\begin{DoxyReturn}{Returns}
+string 
+\end{DoxyReturn}
+
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{classmodel_1_1_personne_aa91fb422080c67d996fb06835df85e64}\label{classmodel_1_1_personne_aa91fb422080c67d996fb06835df85e64}} 
+\index{model.Personne@{model.Personne}!DateDeces@{DateDeces}}
+\index{DateDeces@{DateDeces}!model.Personne@{model.Personne}}
+\doxysubsubsection{\texorpdfstring{DateDeces}{DateDeces}}
+{\footnotesize\ttfamily model.\+Personne.\+Date\+Deces\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Date de deces de la personne. 
+
+\begin{DoxyWarning}{Warning}
+Peut être null. 
+\end{DoxyWarning}
+\mbox{\Hypertarget{classmodel_1_1_personne_a174747051dfe1268a042ed352c7bcdfb}\label{classmodel_1_1_personne_a174747051dfe1268a042ed352c7bcdfb}} 
+\index{model.Personne@{model.Personne}!DateNaissance@{DateNaissance}}
+\index{DateNaissance@{DateNaissance}!model.Personne@{model.Personne}}
+\doxysubsubsection{\texorpdfstring{DateNaissance}{DateNaissance}}
+{\footnotesize\ttfamily model.\+Personne.\+Date\+Naissance\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Date de naissance de la personne. 
+
+\begin{DoxyWarning}{Warning}
+Peut être null. 
+\end{DoxyWarning}
+\mbox{\Hypertarget{classmodel_1_1_personne_a65d6afee6aae4800b0987e6308daa4e2}\label{classmodel_1_1_personne_a65d6afee6aae4800b0987e6308daa4e2}} 
+\index{model.Personne@{model.Personne}!Identifiant@{Identifiant}}
+\index{Identifiant@{Identifiant}!model.Personne@{model.Personne}}
+\doxysubsubsection{\texorpdfstring{Identifiant}{Identifiant}}
+{\footnotesize\ttfamily model.\+Personne.\+Identifiant\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Identifiant unique de la personne dans l\textquotesingle{}abre. 
+
+Identidiant unique de la personne dans l\textquotesingle{}arbre généalogique. Le père de la personne à l\textquotesingle{}identifiant \+: (2 $\ast$ Identifiant) et la mère de la personne à l\textquotesingle{}identifiant \+: (2 $\ast$ Identidiant + 1) \mbox{\Hypertarget{classmodel_1_1_personne_a617c267980f4aa0bf09f80ed1d2d2e79}\label{classmodel_1_1_personne_a617c267980f4aa0bf09f80ed1d2d2e79}} 
+\index{model.Personne@{model.Personne}!Inconnu@{Inconnu}}
+\index{Inconnu@{Inconnu}!model.Personne@{model.Personne}}
+\doxysubsubsection{\texorpdfstring{Inconnu}{Inconnu}}
+{\footnotesize\ttfamily model.\+Personne.\+Inconnu\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [protected set]}}
+
+
+
+Booleen qui indique si la personne est inconnue. (Lecture seule) 
+
+\begin{DoxyWarning}{Warning}
+La valeur est true par défaut. Valeur booleen qui indique si la personne est inconnue, accessible uniquement en lecture. La valeur passe à false s\textquotesingle{}il l\textquotesingle{}une des valeurs est renseignées. (ie différent de null) 
+\end{DoxyWarning}
+\mbox{\Hypertarget{classmodel_1_1_personne_ae5cbb5a4c1a02fc627a338ba588fd6b4}\label{classmodel_1_1_personne_ae5cbb5a4c1a02fc627a338ba588fd6b4}} 
+\index{model.Personne@{model.Personne}!LieuNaissance@{LieuNaissance}}
+\index{LieuNaissance@{LieuNaissance}!model.Personne@{model.Personne}}
+\doxysubsubsection{\texorpdfstring{LieuNaissance}{LieuNaissance}}
+{\footnotesize\ttfamily model.\+Personne.\+Lieu\+Naissance\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+\mbox{\hyperlink{classmodel_1_1_ville}{Ville}} de naissance. 
+
+\begin{DoxyWarning}{Warning}
+peut être null, ou incomplete. 
+\end{DoxyWarning}
+\mbox{\Hypertarget{classmodel_1_1_personne_af2921da44f11852c1e5b1ceef71fe95f}\label{classmodel_1_1_personne_af2921da44f11852c1e5b1ceef71fe95f}} 
+\index{model.Personne@{model.Personne}!Nationalite@{Nationalite}}
+\index{Nationalite@{Nationalite}!model.Personne@{model.Personne}}
+\doxysubsubsection{\texorpdfstring{Nationalite}{Nationalite}}
+{\footnotesize\ttfamily model.\+Personne.\+Nationalite\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Nationalite de la personne. 
+
+\begin{DoxyWarning}{Warning}
+Peut être null. 
+\end{DoxyWarning}
+\begin{DoxyRemark}{Remarks}
+Peut être mettre une Liste pour les nationalites, et enregistrer les des valeurs predefinies. 
+\end{DoxyRemark}
+\mbox{\Hypertarget{classmodel_1_1_personne_aaab510825049714b34831efc05a96623}\label{classmodel_1_1_personne_aaab510825049714b34831efc05a96623}} 
+\index{model.Personne@{model.Personne}!Nom@{Nom}}
+\index{Nom@{Nom}!model.Personne@{model.Personne}}
+\doxysubsubsection{\texorpdfstring{Nom}{Nom}}
+{\footnotesize\ttfamily model.\+Personne.\+Nom\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Nom de famille d\textquotesingle{}une personne. 
+
+\begin{DoxyWarning}{Warning}
+Peut être null.
+\end{DoxyWarning}
+Propriété de la classe qui indique le nom de famille d\textquotesingle{}une personne. \mbox{\Hypertarget{classmodel_1_1_personne_a260dfdb4deb0c59014bf2184a5ba5fa1}\label{classmodel_1_1_personne_a260dfdb4deb0c59014bf2184a5ba5fa1}} 
+\index{model.Personne@{model.Personne}!Prenoms@{Prenoms}}
+\index{Prenoms@{Prenoms}!model.Personne@{model.Personne}}
+\doxysubsubsection{\texorpdfstring{Prenoms}{Prenoms}}
+{\footnotesize\ttfamily model.\+Personne.\+Prenoms\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Prenoms d\textquotesingle{}une personne. 
+
+\begin{DoxyWarning}{Warning}
+Peut être null.
+\end{DoxyWarning}
+String des prenoms de la personne. Fait réference à \+\_\+liste\+Prenom, la liste des prenoms de la personne. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+model/\mbox{\hyperlink{_personne_8cs}{Personne.\+cs}}\end{DoxyCompactItemize}
