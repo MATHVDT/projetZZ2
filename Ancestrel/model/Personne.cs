@@ -28,8 +28,8 @@ namespace model
     public abstract class Personne
     {
 
-        private string? _nom = null;
-        private List<string>? _listePrenom;
+        private string? _nom;
+        private List<string> _listePrenom;
         private DateOnly? _dateNaissance;
         private DateOnly? _dateDeces;
         private Ville? _lieuNaissance;
@@ -46,7 +46,7 @@ namespace model
          * Le père de la personne à l'identifiant : (2 * Identifiant) et
          * la mère de la personne à l'identifiant : (2 * Identidiant + 1)
          */
-        public uint Identifiant { get;  set; }
+        public uint Identifiant { get; set; }
 
 
         /**
@@ -79,9 +79,9 @@ namespace model
         */
         public string? Prenoms
         {
-               get
+            get
             {
-                if (_listePrenom is null || _listePrenom.Count == 0)
+                if ( _listePrenom.Count == 0)
                     return null;
                 else
                 {
@@ -91,15 +91,13 @@ namespace model
                     return strBuild.ToString();
                 }
             }
-                        set
+            set
             {
                 if (value != null)
                 {
 
                     string[] listeValues = value.Split(" ", StringSplitOptions.RemoveEmptyEntries);
-                    if (_listePrenom is null)
-                        _listePrenom = new List<string>();
-
+       
                     foreach (var p in listeValues)
                     {
                         if (!_listePrenom.Contains(p)) // Verifie que le prenom n'y est pas deja
@@ -243,6 +241,7 @@ namespace model
         {
             Identifiant = iden;
             Nom = nom;
+            _listePrenom = new List<string>;
             Prenoms = prenoms;
             DateNaissance = dateNaissance;
             DateDeces = dateDeces;
@@ -251,11 +250,7 @@ namespace model
             _listeImage = new List<Image>();
 
 
-            if (Nom != null || Prenoms != null ||
-                DateNaissance != null || DateDeces != null)
-            { Inconnu = false; }
-            else
-            { Inconnu = true; }
+            Inconnu = _estInconnu();
 
         }
 
@@ -479,6 +474,110 @@ namespace model
             return _listeImage;
         }
 
+        /**
+         * @fn private bool _estInconnu() 
+         * @brief Check si la personne est inconnu.
+         * @return bool - * Toutes les proprietes sont nulles*
+         * @details
+         * Check suivant les proprietes, si la personne est inconnu. 
+         * Si la personne possede une propriete non null, alors *Inconnu = true*.
+         */
+        private bool _estInconnu()
+        {
+            if (Nom != null || Prenoms != null ||
+                 DateNaissance != null || DateDeces != null ||
+                 LieuNaissance != null || Nationalite != null ||
+                 _listeImage.Count > 0 || _indexImageProfil != null)
+            { return false; }
+            else
+            { return true; }
+        }
 
+        /**
+         * @fn public void SupprimerNom()
+         * @brief Supprime le nom de la personne.
+         * @details
+         * Supprime le nom de la personne, 
+         * et maintient à jour la propriete *Inconnu*.
+         */
+        public void SupprimerNom()
+        {
+            _nom = null;
+            Inconnu= _estInconnu(); 
+
+        }
+
+        /**
+         * @fn public void SupprimerPrenoms()
+         * @brief Supprime tous les prenoms de la personne.
+         * @details
+         * Supprime tous les prenoms de la personne, 
+         * et maintient à jour la propriete *Inconnu*.
+         */
+        public void SupprimerPrenoms()
+        {
+            _listePrenom.Clear(); // Check si la liste est bien supp en memoire
+            Inconnu = _estInconnu();
+        }
+
+        /**
+         * @fn public void SupprimerPrenomSpecifique(string prenom)
+         * @brief Supprime un prenom.
+         * @param string prenom - *Le prenom à supprimer*
+         * @details
+         * Supprime le prenom specifié en parametre dans la liste des prenoms de la personne,
+         * et maintient à jour la propriete *Inconnu*. 
+         */
+        public void SupprimerPrenomSpecifique(string prenom)
+        {
+            
+            _listePrenom.Remove(prenom);    
+            Inconnu = _estInconnu();
+        }
+
+
+        /**
+         * @overload public void SupprimerPrenomSpecifique(int position)
+         * @brief Supprime le ème prenom.
+         * @param int position - *Position du prenom à supprimer*
+         * @details
+         * Supprime le prenom à la position indiquée en parametre de la personne,
+         * et maintient à jour la propriete *Inconnu*. 
+         * @warning le premier prenom de la personne est à l'indice **0**. 
+         */
+        public void SupprimerPrenomSpecifique(int position)
+        {
+            if (position >= 0 && position < _listePrenom.Count)
+            {
+                _listePrenom.RemoveAt(position);
+                Inconnu = _estInconnu();
+            }
+            else
+            {
+                Console.WriteLine("Indice donnee en parametre hors de la liste"
+                    + " taille de la liste de prenoms : " + _listePrenom.Count);
+            }
+        }
+
+        /**
+         * @overload public void SupprimerPrenomSpecifique()
+         * @brief Supprime le dernier prenom.
+         * @details
+         * Supprime le dernier prenom, dans la liste des prenoms, de la personne,
+         * et maintient à jour la propriete *Inconnu*. 
+         */
+        public void SupprimerPrenomSpecifique()
+        {
+            if(_listePrenom.Count > 0)
+            {
+                _listePrenom.RemoveAt(_listePrenom.Count-1);
+                Inconnu = _estInconnu();
+            }
+            else
+            {
+                Console.WriteLine("Pas de prenom à supprimer.");
+            }
+        }
     }
 }
+
