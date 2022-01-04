@@ -46,7 +46,7 @@ namespace model
          * Le père de la personne à l'identifiant : (2 * Identifiant) et
          * la mère de la personne à l'identifiant : (2 * Identidiant + 1)
          */
-        public uint Identifiant { get; private set; }
+        public uint Identifiant { get;  set; }
 
 
         /**
@@ -79,13 +79,7 @@ namespace model
         */
         public string? Prenoms
         {
-            /**
-             * Simple getter 
-             * @brief Obtenir les prenoms de la personne.
-             * @warning Peut être null.
-             * @return Renvoie un string des prenoms de la personne.
-             */
-            get
+               get
             {
                 if (_listePrenom is null || _listePrenom.Count == 0)
                     return null;
@@ -97,15 +91,7 @@ namespace model
                     return strBuild.ToString();
                 }
             }
-            /**
-             * Simpe setter
-             * @param un string
-             * @brief Ajouter un/des prenoms à la personne.
-             * @details
-             * Prend la string et la split pour obtenir les différents prenoms 
-             * et les ajoute à la liste de prenoms.
-             */
-            set
+                        set
             {
                 if (value != null)
                 {
@@ -255,6 +241,7 @@ namespace model
             DateOnly? dateNaissance = null, DateOnly? dateDeces = null,
             Ville? lieuNaissance = null, string? nationalite = null)
         {
+            Identifiant = iden;
             Nom = nom;
             Prenoms = prenoms;
             DateNaissance = dateNaissance;
@@ -271,9 +258,6 @@ namespace model
             { Inconnu = true; }
 
         }
-
-
-
 
 
 
