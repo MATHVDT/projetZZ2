@@ -81,7 +81,7 @@ namespace model
         {
             get
             {
-                if ( _listePrenom.Count == 0)
+                if (_listePrenom.Count == 0)
                     return null;
                 else
                 {
@@ -97,7 +97,7 @@ namespace model
                 {
 
                     string[] listeValues = value.Split(" ", StringSplitOptions.RemoveEmptyEntries);
-       
+
                     foreach (var p in listeValues)
                     {
                         if (!_listePrenom.Contains(p)) // Verifie que le prenom n'y est pas deja
@@ -241,7 +241,7 @@ namespace model
         {
             Identifiant = iden;
             Nom = nom;
-            _listePrenom = new List<string>;
+            _listePrenom = new List<string>();
             Prenoms = prenoms;
             DateNaissance = dateNaissance;
             DateDeces = dateDeces;
@@ -503,8 +503,7 @@ namespace model
         public void SupprimerNom()
         {
             _nom = null;
-            Inconnu= _estInconnu(); 
-
+            Inconnu = _estInconnu();
         }
 
         /**
@@ -530,8 +529,7 @@ namespace model
          */
         public void SupprimerPrenomSpecifique(string prenom)
         {
-            
-            _listePrenom.Remove(prenom);    
+            _listePrenom.Remove(prenom);
             Inconnu = _estInconnu();
         }
 
@@ -568,9 +566,9 @@ namespace model
          */
         public void SupprimerPrenomSpecifique()
         {
-            if(_listePrenom.Count > 0)
+            if (_listePrenom.Count > 0)
             {
-                _listePrenom.RemoveAt(_listePrenom.Count-1);
+                _listePrenom.RemoveAt(_listePrenom.Count - 1);
                 Inconnu = _estInconnu();
             }
             else
@@ -614,8 +612,8 @@ namespace model
          */
         public void SupprimerLieuNaissance()
         {
-            _lieuNaissance = null ;
-            Inconnu= _estInconnu();
+            _lieuNaissance = null;
+            Inconnu = _estInconnu();
         }
 
         /**
@@ -627,8 +625,8 @@ namespace model
          */
         public void SupprimerNationalite()
         {
-            _nationalite = null ;
-            Inconnu=_estInconnu();  
+            _nationalite = null;
+            Inconnu = _estInconnu();
         }
 
         /**
@@ -641,7 +639,7 @@ namespace model
          */
         public void SupprimerImageProfil()
         {
-            _indexImageProfil = null ;
+            _indexImageProfil = null;
         }
     }
 }
