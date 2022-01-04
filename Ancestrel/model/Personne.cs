@@ -482,7 +482,7 @@ namespace model
          * Check suivant les proprietes, si la personne est inconnu. 
          * Si la personne possede une propriete non null, alors *Inconnu = true*.
          */
-        private bool _estInconnu()
+        protected bool _estInconnu()
         {
             if (Nom != null || Prenoms != null ||
                  DateNaissance != null || DateDeces != null ||
@@ -577,6 +577,71 @@ namespace model
             {
                 Console.WriteLine("Pas de prenom à supprimer.");
             }
+        }
+
+        /**
+         * @fn public void SupprimerDateNaissance()
+         * @brief Supprime la date de naissance de la personne.
+         * @details
+         * Supprime la date de naissance de la personne,
+         * et maintient à jour la propriete *Inconnu*. 
+         */
+        public void SupprimerDateNaissance()
+        {
+            _dateNaissance = null;
+            Inconnu = _estInconnu();
+        }
+
+        /**
+         * @fn public void SupprimerDateDeces()
+         * @brief Supprime la date de deces de la personne.
+         * @details
+         * Supprime la date de deces de la personne,
+         * et maintient à jour la propriete *Inconnu*. 
+         */
+        public void SupprimerDateDeces()
+        {
+            _dateDeces = null;
+            Inconnu = _estInconnu();
+        }
+
+        /**
+         * @fn public void SupprimerLieuNaissance()
+         * @brief Supprime le lieu de naissance de la personne.
+         * @details
+         * Supprime le lieu de naissance de la personne,
+         * et maintient à jour la propriete *Inconnu*. 
+         */
+        public void SupprimerLieuNaissance()
+        {
+            _lieuNaissance = null ;
+            Inconnu= _estInconnu();
+        }
+
+        /**
+         * @fn public void SupprimerNationalite()
+         * @brief Supprime la nationalite de la personne.
+         * @details
+         * Supprime la nationalite de la personne,
+         * et maintient à jour la propriete *Inconnu*. 
+         */
+        public void SupprimerNationalite()
+        {
+            _nationalite = null ;
+            Inconnu=_estInconnu();  
+        }
+
+        /**
+         * @fn public void SupprimerImageProfif()
+         * @brief Supprime l'index sur l'image de profil.
+         * @details
+         * Ne supprime pas l'image de la personne, mais ne la reference
+         * plus comme image de profil.
+         * @warning Une personne ne peut pas devenir inconnu après cette methode (image non supprimer)
+         */
+        public void SupprimerImageProfil()
+        {
+            _indexImageProfil = null ;
         }
     }
 }

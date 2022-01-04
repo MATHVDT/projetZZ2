@@ -78,5 +78,20 @@ namespace model
             return base.ToString() + "née " +
                 (NomJeuneFille is null ? "NomJeuneFilleInconnu" : NomJeuneFille);
         }
+
+
+        /**
+         * @fn public void SupprimerNomJeuneFille()
+         * @brief Supprime le nom de jeune fille de la personne.
+         * @details
+         * Supprime le nom de jeune fille de la personne,
+         * et maintient à jour la propriete *Inconnu*. 
+         */
+        public void SupprimerNomJeuneFille()
+        {
+            NomJeuneFille = null;
+            Inconnu = _estInconnu();
+        }
+
     }
 }
