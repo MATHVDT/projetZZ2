@@ -8,11 +8,23 @@ namespace model
 {
     public class Manager
     {
-        public Arbre Arbre { get; private set; }
+        private static Manager? _mInstance;
+        public Arbre? Arbre { get; private set; }
 
-        public Manager()
+        private Manager()
         {
+            _mInstance = this;
+        }
 
+        /**
+        * @brief Singleton
+        */
+        public static Manager GetInstance()
+        {
+            if (_mInstance is null)
+                _mInstance = new();
+
+            return _mInstance;
         }
 
         public void ChargerArbre(Arbre a)
