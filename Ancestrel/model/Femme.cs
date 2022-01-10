@@ -33,12 +33,10 @@ namespace model
             get => _nomJeuneFille;
             set
             {
-                if (value != null)
-                {
-                    _nomJeuneFille = value;
-                    Inconnu = false;
 
-                }
+                _nomJeuneFille = value;
+                Inconnu = _estInconnu();
+
             }
         }
 
@@ -65,7 +63,7 @@ namespace model
                 base(2 * iden + 1, nom, prenoms, dateNaissance, dateDeces, lieuNaissance, nationalite)
         {
             //Identifiant = 2 * iden + 1;
-            NomJeuneFille = NomJeuneFille;
+            NomJeuneFille = nomJeuneFille;
 
         }
 

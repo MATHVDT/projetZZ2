@@ -29,7 +29,7 @@ namespace model
     {
 
         private string? _nom;
-        private List<string> _listePrenom;
+        private List<string> _listePrenom = new List<string>();
         private DateOnly? _dateNaissance;
         private DateOnly? _dateDeces;
         private Ville? _lieuNaissance;
@@ -60,11 +60,9 @@ namespace model
             get { return _nom; }
             set
             {
-                if (value != null)
-                {
-                    _nom = value;
-                    Inconnu = false;
-                }
+
+                _nom = value;
+                Inconnu=_estInconnu();
             }
         }
 
@@ -88,11 +86,14 @@ namespace model
                     StringBuilder strBuild = new();
                     foreach (var p in _listePrenom)
                         strBuild.Append(p + " ");
+                    // Supprimer le dernier espace rajouté
+                    strBuild.Remove(strBuild.Length - 1, 1);
                     return strBuild.ToString();
                 }
             }
             set
             {
+                _listePrenom.Clear(); // Supprime tout les prénoms existants
                 if (value != null)
                 {
 
@@ -100,10 +101,10 @@ namespace model
 
                     foreach (var p in listeValues)
                     {
-                        if (!_listePrenom.Contains(p)) // Verifie que le prenom n'y est pas deja
-                            _listePrenom.Add(p);
+                        _listePrenom.Add(p.Trim());
                     }
                 }
+                Inconnu = _estInconnu();
             }
         }
 
@@ -120,7 +121,7 @@ namespace model
             get => _dateNaissance;
             set
             {
-                if (value is DateOnly)
+                if (value is DateOnly || value is null)
                 {
                     _dateNaissance = value;
                     Inconnu = false;
@@ -139,11 +140,11 @@ namespace model
             get => _dateDeces;
             set
             {
-                if (value is DateOnly)
+                if (value is DateOnly|| value is null)
                 {
                     _dateDeces = value;
-                    Inconnu = false;
                 }
+                Inconnu = _estInconnu();
             }
         }
 
@@ -157,11 +158,11 @@ namespace model
             get => _lieuNaissance;
             set
             {
-                if (value != null)
+                if (value is Ville || value is null)
                 {
                     _lieuNaissance = value;
-                    Inconnu = false;
                 }
+                Inconnu = _estInconnu();
             }
         }
 
@@ -177,11 +178,8 @@ namespace model
             get => _nationalite;
             set
             {
-                if (value != null)
-                {
-                    _nationalite = value;
-                    Inconnu = false;
-                }
+                _nationalite = value;
+                Inconnu = _estInconnu();
             }
         }
 
@@ -198,24 +196,25 @@ namespace model
          * @var ListeImage
          * @brief Liste des differentes Images sur la personne.
          */
-        private List<Image> _listeImage;
+        private List<Image> _listeImage = new List<Image>();
         private int? _indexImageProfil;
 
         /**
          * @var IndexImageProfil
          * @brief Indice de l'image pour le profil de la personne.
-         * @warning Peut être null.
+         * @warning Peut être null. 
+         * @bug NE PAS UTILISER, A ENLEVER
          */
         public int? IndexImageProfil
         {
             get { return _indexImageProfil; }
             set
             {
-                if (value != null && value >= 0 && value < _listeImage.Count)
+                if (value is null && value >= 0 && value < _listeImage.Count)
                 {
                     IndexImageProfil = value;
-                    Inconnu = false;
                 }
+                Inconnu = _estInconnu();
             }
         }
 
@@ -239,6 +238,7 @@ namespace model
             DateOnly? dateNaissance = null, DateOnly? dateDeces = null,
             Ville? lieuNaissance = null, string? nationalite = null)
         {
+
             Identifiant = iden;
             Nom = nom;
             _listePrenom = new List<string>();
@@ -248,37 +248,73 @@ namespace model
             LieuNaissance = lieuNaissance;
             Nationalite = nationalite;
             _listeImage = new List<Image>();
-
+            _indexImageProfil = null;
 
             Inconnu = _estInconnu();
 
         }
 
 
-
         /**
-        * @fn public void SetPrenoms(string[] inListeValue)
+        * @fn public void AddPrenoms(string[] inListeValue)
         * @param string[] inListeValue *Liste de prenoms*
         * @brief Ajouter un/des prenom(s) à la personne.
         * @details
         * Ajoute les prenoms passés en paramètre à la personne.
         * Regarde si le nom n'est pas déjà ajouté dans la liste des prenoms.
         */
-        public void SetPrenoms(string[] inListeValue)
+        public void AddPrenoms(string[] inListeValue)
         {
             if (inListeValue != null)
             {
                 if (_listePrenom is null)
-                    _listePrenom = new List<string>();
+                    throw new NullReferenceException();
 
                 foreach (var p in inListeValue)
                 {
                     // Regarde si le prenom n'est pas déjà present
-                    if (!_listePrenom.Contains(p))
-                        _listePrenom.Add(p);
+                    if (!_listePrenom.Contains(p.Trim()))
+                        _listePrenom.Add(p.Trim());
                 }
-                Inconnu = false;
             }
+            Inconnu = _estInconnu();
+        }
+
+        /**
+        * @overload public void AddPrenoms(string value)
+        * @param string value *Chaine de caractères de prenoms*
+        */
+        public void AddPrenoms(string value)
+        {
+            if (value != null)
+            {
+
+                string[] listeValues = value.Split(" ", StringSplitOptions.RemoveEmptyEntries);
+                this.AddPrenoms(listeValues);
+            }
+        }
+
+        /**
+        * @fn public void SetPrenoms(string[] inListeValue)
+        * @param string[] inListeValue *Liste de prenoms*
+        * @brief Définit un/des prenom(s) à la personne.
+        * @details
+        * Définit les prenoms passés en paramètre à la personne.
+        * Supprime les prénoms déjà existant de la personne.
+        * Regarde si le nom n'est pas déjà ajouté dans la liste des prenoms.
+        */
+        public void SetPrenoms(string[] inListeValue)
+        {
+            if (inListeValue != null)
+            {
+                _listePrenom.Clear();
+
+                foreach (var p in inListeValue)
+                {
+                    _listePrenom.Add(p.Trim());
+                }
+            }
+            Inconnu=_estInconnu();
         }
 
         /**
@@ -315,30 +351,7 @@ namespace model
             }
         }
 
-        /**
-         * @fn SupprimerPrenoms(string[] inListeValue)
-         * @brief Supprime les prenoms
-         * @param string[] inListeValue *Liste de prenoms*
-         */
-        public void SupprimerPrenoms(string[] inListeValue)
-        {
-            if (!(_listePrenom is null) && _listePrenom.Count() > 0)
-            {
-                foreach (var p in inListeValue)
-                {
-                    this.SupprimerPrenoms(p);
-                }
-            }
-        }
-        /**
-         * @overload SupprimerPrenoms(string value)
-         * @param string inValue *Prenoms*
-         */
-        public void SupprimerPrenoms(string inValue)
-        {
-            string[] listePrenomsSupp = inValue.Split(" ", StringSplitOptions.RemoveEmptyEntries);
-            SupprimerPrenoms(listePrenomsSupp);
-        }
+
 
         /**
         * @fn public uint GetPereId()
@@ -477,7 +490,7 @@ namespace model
         /**
          * @fn private bool _estInconnu() 
          * @brief Check si la personne est inconnu.
-         * @return bool - * Toutes les proprietes sont nulles*
+         * @return bool - *Toutes les proprietes sont nulles*
          * @details
          * Check suivant les proprietes, si la personne est inconnu. 
          * Si la personne possede une propriete non null, alors *Inconnu = true*.
@@ -519,23 +532,44 @@ namespace model
             Inconnu = _estInconnu();
         }
 
+
+
         /**
-         * @fn public void SupprimerPrenomSpecifique(string prenom)
-         * @brief Supprime un prenom.
-         * @param string prenom - *Le prenom à supprimer*
+         * @fn public void SupprimerPrenomSpecifique(string[] listePrenoms)
+         * @brief Supprime une liste de prenoms.
+         * @param string[] listePrenoms - *Liste de pénoms à supprimer*
          * @details
-         * Supprime le prenom specifié en parametre dans la liste des prenoms de la personne,
+         * Supprime les prenoms specifiés en parametre de la liste des prenoms de la personne,
          * et maintient à jour la propriete *Inconnu*. 
          */
-        public void SupprimerPrenomSpecifique(string prenom)
+        public void SupprimerPrenomsSpecifique(string[] listePrenoms)
         {
-            _listePrenom.Remove(prenom);
+            foreach (var prenom in listePrenoms)
+            {
+                if (!_listePrenom.Remove(prenom.Trim()))
+                {
+                    Console.WriteLine("Le prenom a supp n'est pas dans la liste des prenom");
+                }
+            }
             Inconnu = _estInconnu();
         }
 
+        /**
+         * @overload public void SupprimerPrenomSpecifique(string prenom)
+         * @brief Supprime un prenoms.
+         * @param string prenoms - *Le prenom à supprimer*
+         * @details
+         * Supprime les prenoms specifiés en parametre de la liste des prenoms de la personne,
+         * et maintient à jour la propriete *Inconnu*. 
+         */
+        public void SupprimerPrenomsSpecifique(string prenoms)
+        {
+            string[] listePrenoms = prenoms.Split(" ", StringSplitOptions.RemoveEmptyEntries);
+            this.SupprimerPrenomsSpecifique(listePrenoms);
+        }
 
         /**
-         * @overload public void SupprimerPrenomSpecifique(int position)
+         * @fn public void SupprimerPrenomPosition(int position)
          * @brief Supprime le ème prenom.
          * @param int position - *Position du prenom à supprimer*
          * @details
@@ -543,7 +577,7 @@ namespace model
          * et maintient à jour la propriete *Inconnu*. 
          * @warning le premier prenom de la personne est à l'indice **0**. 
          */
-        public void SupprimerPrenomSpecifique(int position)
+        public void SupprimerPrenomPosition(int position)
         {
             if (position >= 0 && position < _listePrenom.Count)
             {
@@ -558,13 +592,13 @@ namespace model
         }
 
         /**
-         * @overload public void SupprimerPrenomSpecifique()
+         * @fn public void SupprimerDernierPrenom()
          * @brief Supprime le dernier prenom.
          * @details
          * Supprime le dernier prenom, dans la liste des prenoms, de la personne,
          * et maintient à jour la propriete *Inconnu*. 
          */
-        public void SupprimerPrenomSpecifique()
+        public void SupprimerDernierPrenom()
         {
             if (_listePrenom.Count > 0)
             {

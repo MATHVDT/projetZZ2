@@ -48,4 +48,3 @@ h.AjouterImage("P:\\zz2\\genealogie\\Ancestrel\\Image1.png");
 
 Image imgTest = Image.FromFile("P:\\zz2\\genealogie\\Ancestrel\\Image1.png");
 Image img2 = (Image)imgTest.Clone();
-
