@@ -41,7 +41,8 @@ namespace ModelTests
             Assert.IsNull(h.DateDeces);
             Assert.IsNull(h.LieuNaissance);
             Assert.IsNull(h.Nationalite);
-            Assert.IsNull(h.IndexImageProfil);
+            Assert.IsNull(h.GetFichierImageProfil());
+            Assert.IsNull(h.GetImageProfil());
 
             Assert.IsTrue(h.Inconnu);
 
@@ -57,7 +58,8 @@ namespace ModelTests
             Assert.IsNull(f.DateDeces);
             Assert.IsNull(f.LieuNaissance);
             Assert.IsNull(f.Nationalite);
-            Assert.IsNull(f.IndexImageProfil);
+            Assert.IsNull(f.GetFichierImageProfil());
+            Assert.IsNull(f.GetImageProfil());
 
             Assert.IsTrue(f.Inconnu);
 

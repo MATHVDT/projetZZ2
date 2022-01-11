@@ -27,7 +27,6 @@ namespace model
      */
     public abstract class Personne
     {
-
         private string? _nom;
         private List<string> _listePrenom = new List<string>();
         private DateOnly? _dateNaissance;
@@ -35,8 +34,8 @@ namespace model
         private Ville? _lieuNaissance;
         private string? _nationalite;
 
-
-
+        private List<Fichier> _listeFichiers = new List<Fichier> { };
+        private int? _indexImageProfil;
 
         /**
          * @var Identifiant
@@ -47,7 +46,6 @@ namespace model
          * la mère de la personne à l'identifiant : (2 * Identidiant + 1)
          */
         public uint Identifiant { get; set; }
-
 
         /**
         * @var Nom
@@ -65,7 +63,6 @@ namespace model
                 Inconnu=_estInconnu();
             }
         }
-
 
         /**
         * @var Prenoms
@@ -108,9 +105,6 @@ namespace model
             }
         }
 
-
-
-
         /**
          * @var DateNaissance
          * @brief Date de naissance de la personne.
@@ -128,7 +122,6 @@ namespace model
                 }
             }
         }
-
 
         /**
          * @var DateDeces
@@ -193,34 +186,6 @@ namespace model
         public bool Inconnu { get; protected set; }
 
         /**
-         * @var ListeImage
-         * @brief Liste des differentes Images sur la personne.
-         */
-        private List<Image> _listeImage = new List<Image>();
-        private int? _indexImageProfil;
-
-        /**
-         * @var IndexImageProfil
-         * @brief Indice de l'image pour le profil de la personne.
-         * @warning Peut être null. 
-         * @bug NE PAS UTILISER, A ENLEVER
-         */
-        public int? IndexImageProfil
-        {
-            get { return _indexImageProfil; }
-            set
-            {
-                if (value is null && value >= 0 && value < _listeImage.Count)
-                {
-                    IndexImageProfil = value;
-                }
-                Inconnu = _estInconnu();
-            }
-        }
-
-
-
-        /**
          * @fn public Personne 
          * @param uint iden *Identidiant de l'enfant*
          * @param string? nom = null,
@@ -247,13 +212,11 @@ namespace model
             DateDeces = dateDeces;
             LieuNaissance = lieuNaissance;
             Nationalite = nationalite;
-            _listeImage = new List<Image>();
             _indexImageProfil = null;
 
             Inconnu = _estInconnu();
 
         }
-
 
         /**
         * @fn public void AddPrenoms(string[] inListeValue)
@@ -331,7 +294,6 @@ namespace model
             }
         }
 
-
         /**
          * @fn public string? GetPrenoms()
          * @brief Donne les prenoms de la personnes.
@@ -350,8 +312,6 @@ namespace model
                 return strBuild.ToString();
             }
         }
-
-
 
         /**
         * @fn public uint GetPereId()
@@ -398,96 +358,6 @@ namespace model
         }
 
         /**
-         * @fn public void SetImageProfil(Image imageSelectionne)
-         * @brief Choisit la photo de profil.
-         * @param Image imageSelect
-         */
-        public void SetImageProfil(Image imageSelect)
-        {
-            int image_trouve = 0; // Sert a compter le nb d'image trouve, normalement que 1
-            for (int i = 0; i < _listeImage.Count; i++)
-            {
-                if (_listeImage[i] == imageSelect)
-                {
-                    _indexImageProfil = i;
-                    image_trouve++;
-                }
-            }
-
-            if (image_trouve == 0)
-            {
-                Console.WriteLine("Image non trouvee.");
-            }
-            else if (image_trouve == 1 && !(_indexImageProfil is null))
-            {
-                Console.WriteLine("Image trouvee, photo de profil selection : " +
-                    _listeImage[(int)_indexImageProfil].Tag + " ; "
-                    + _listeImage[(int)_indexImageProfil].ToString());
-            }
-            else
-            { Console.WriteLine("Plus d'une image de profil trouve."); }
-        }
-
-        /**
-         * @fn public void AjouterImage(string filename, bool imageProfil = false)
-         * @param string filename - Nom de l'image *(path)*
-         * @param bool imageProfil = false - Definit l'image pour le 
-         */
-        public void AjouterImage(string filename, bool imageProfil = false)
-        {
-
-            try
-            {
-                Image img = Image.FromFile(filename); // Charge l'image
-                _listeImage.Add(img);   // Ajoute l'image
-                if (imageProfil)    // Definit l'image comme image de profil
-                    _indexImageProfil = _listeImage.Count - 1;
-
-            }
-            catch (TypeInitializationException e)
-            {
-                Console.WriteLine(e.ToString());
-                Console.WriteLine("using System.Drawing : " +
-                    "bibliothèque spécifique à Windows ");
-            }
-            catch (OutOfMemoryException e)
-            {
-                Console.WriteLine(e.ToString());
-                Console.WriteLine("Format d'image du fichier n'est pas valide.");
-            }
-            catch (FileNotFoundException)
-            {
-                Console.WriteLine("Le fichier spécifié n'existe pas.");
-            }
-            catch (ArgumentException)
-            {
-                Console.WriteLine("ArgumentException");
-            }
-        }
-
-        /**
-         * @fn public Image? GetImageProfil()
-         * @brief Retourne l'image de profil
-         * @warning Peut être null.
-         * @return Image? l'image de profil de la personne.
-         */
-        public Image? GetImageProfil()
-        {
-            return _indexImageProfil is null ? null
-                                     : _listeImage[(int)_indexImageProfil];
-        }
-
-        /**
-         * @fn public List<Image> GetImagesPersonne
-         * @brief Retourne la liste des images de la personne.
-         * @return Liste des images de la personne
-         */
-        public List<Image> GetImagesPersonne()
-        {
-            return _listeImage;
-        }
-
-        /**
          * @fn private bool _estInconnu() 
          * @brief Check si la personne est inconnu.
          * @return bool - *Toutes les proprietes sont nulles*
@@ -500,7 +370,7 @@ namespace model
             if (Nom != null || Prenoms != null ||
                  DateNaissance != null || DateDeces != null ||
                  LieuNaissance != null || Nationalite != null ||
-                 _listeImage.Count > 0 || _indexImageProfil != null)
+                 _listeFichiers.Count > 0)
             { return false; }
             else
             { return true; }
@@ -531,8 +401,6 @@ namespace model
             _listePrenom.Clear(); // Check si la liste est bien supp en memoire
             Inconnu = _estInconnu();
         }
-
-
 
         /**
          * @fn public void SupprimerPrenomSpecifique(string[] listePrenoms)
@@ -664,17 +532,229 @@ namespace model
         }
 
         /**
-         * @fn public void SupprimerImageProfif()
-         * @brief Supprime l'index sur l'image de profil.
+         * @fn public void EnleverImageProfil()
+         * @brief Enleve l'index sur l'image de profil.
          * @details
          * Ne supprime pas l'image de la personne, mais ne la reference
          * plus comme image de profil.
          * @warning Une personne ne peut pas devenir inconnu après cette methode (image non supprimer)
          */
-        public void SupprimerImageProfil()
+        public void EnleverImageProfil()
         {
             _indexImageProfil = null;
         }
+
+        /**
+         * @fn public void SetImageProfil(Guid g)
+         * @brief Choisit la photo de profil.
+         * @param Guid g - *identifiant du fichier de l'image*
+         */
+        public void SetImageProfil(Guid g)
+        {
+            int image_trouve = 0; // Sert a compter le nb d'image trouve, normalement que 1
+            for (int i = 0; i < _listeFichiers.Count; i++)
+            { // Verifie que le fichier est bien une image
+                if (_listeFichiers[i].Id == g)
+                    if (_listeFichiers[i] is FichierImage)
+                    {
+                        _indexImageProfil = i;
+                        image_trouve++;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Fichier "+
+                            $"{_listeFichiers[i].NomFichier} ({g})"
+                            + " n'est pas une image.");
+                        break;
+                    }
+            }
+
+            if (image_trouve == 0)
+            {
+                Console.WriteLine("Image non trouvee.");
+            }
+            else if (image_trouve == 1 && !(_indexImageProfil is null))
+            {
+                Console.WriteLine("Image trouvee, photo de profil selection : " +
+                    $"{_listeFichiers[(int)_indexImageProfil].NomFichier} " +
+                    $"({_listeFichiers[(int)_indexImageProfil].Id})");
+            }
+            else
+            { Console.WriteLine("Plus d'une image de profil trouve."); }
+        }
+
+        /**
+        * @overload public void SetImageProfil(FichierImage imageSelectionne)
+        * @brief Choisit la photo de profil.
+        * @param Image imageSelect
+        */
+        public void SetImageProfil(FichierImage imageSelect)
+        {
+            SetImageProfil(imageSelect.Id);
+        }
+
+
+        /**
+         * @fn public void AjouterImage(string filename, bool imageProfil = false)
+         * @param FichierImage image 
+         * @param bool imageProfil = false - Definit l'image pour le profil 
+         */
+        public void AjouterImage(FichierImage image, bool imageProfil = false)
+        {
+
+            _listeFichiers.Add(image);
+            if (imageProfil)
+                _indexImageProfil = _listeFichiers.Count - 1;
+        }
+
+        /**
+         * @fn public FichierImage? GetFichierImageProfil()
+         * @brief Retourne le FichierImage du profil de la personne
+         * @warning Peut être null.
+         * @return FichierImage? *Le FichierImage du profil de la personne*
+         */
+        public FichierImage? GetFichierImageProfil()
+        {
+            if (!(_indexImageProfil is null))
+            {
+                if (_listeFichiers[(int)_indexImageProfil] is FichierImage)
+                {
+                    return (FichierImage)_listeFichiers[(int)_indexImageProfil];
+                }
+                else
+                {
+                    Console.WriteLine("Erreur indexImageProfil pas un FichierImage");
+                }
+            }
+            return null;
+        }
+
+        /**
+         * @fn public Image? GetrImageProfil()
+         * @brief Retourne l'image du profil de la personne
+         * @warning Peut être null.
+         * @return Image? *L'image du profil de la personne*
+         */
+        public Image? GetImageProfil()
+        {
+            if (!(_indexImageProfil is null))
+            {
+                if (_listeFichiers[(int)_indexImageProfil] is FichierImage)
+                {
+                    return ((FichierImage)_listeFichiers[(int)_indexImageProfil]).Image;
+                }
+                else
+                {
+                    Console.WriteLine("Erreur indexImageProfil pas un FichierImage");
+                }
+            }
+            return null;
+        }
+
+
+
+        /**
+         * @fn public List<FichierImage> GetFichierImages
+         * @brief Retourne la liste des images de la personne.
+         * @return List<FichierImage> Liste des images de la personne
+         */
+        public List<FichierImage> GetFichierImages()
+        {
+            List<FichierImage> listeFichierImage = new List<FichierImage>();
+            foreach (var fich in _listeFichiers)
+            {
+                if (fich is FichierImage)
+                {
+                    listeFichierImage.Add((FichierImage)fich);
+                }
+            }
+            return listeFichierImage;
+        }
+
+        /**
+         * @fn public List<Image> GetImages
+         * @brief Retourne la liste des images de la personne.
+         * @return Liste des images de la personne
+         */
+        public List<Image> GetImages()
+        {
+            List<FichierImage> fichierImages = GetFichierImages();
+            List<Image> listeImage = new List<Image>();
+
+            foreach (var item in fichierImages)
+            {
+                listeImage.Add(item.Image);
+            };
+
+            return listeImage;
+        }
+
+
+        /**
+         * @fn public void AjouterFichier()
+         * @param Fichier inDoc
+         * @brief Ajoute un fichier à la personne.
+         * @warning Le fichier n'est pas forcement une image. 
+         * (...)
+         */
+        public void AjouterFichier(Fichier inDoc)
+        {
+            _listeFichiers.Add(inDoc);
+        }
+
+        /**
+         * @fn public void SupprimerFichier()
+         * @param Fichier inDoc
+         * @brief Supprime un fichier à la personne.
+         * @warning Le fichier n'est pas forcement une image. 
+         * (...)
+         */
+        public void SupprimerFichier(Fichier inDoc)
+        {
+            if (_listeFichiers.Remove(inDoc))
+                Console.WriteLine("Fichier supprimé");
+            else
+                Console.WriteLine("Fichier pas supp, absent de la liste").
+        }
+
+        /**
+         * @foverload  public void SupprimerFichier()
+         * @param Guid g - *Id du fichier à supprimer*
+         * @brief Supprime un fichier à la personne.
+         * @warning Le fichier n'est pas forcement une image. 
+         * (...)
+         */
+        public void SupprimerFichier(Guid g)
+        {
+            foreach (var fich in _listeFichiers)
+            {
+                if (fich.Id == g)
+                {
+                    _listeFichiers.Remove(fich);
+                    Console.WriteLine("Fichier supprimé");
+                }
+            }
+        }
+        /**
+         * @foverload  public void SupprimerFichier()
+         * @param Guid g - *Id du fichier à supprimer*
+         * @brief Supprime un fichier à la personne.
+         * @warning Le fichier n'est pas forcement une image. 
+         * (...)
+         */
+        public void SupprimerFichier(string nomFichier)
+        {
+            foreach (var fich in _listeFichiers)
+            {
+                if (fich.NomFichier == nomFichier)
+                {
+                    _listeFichiers.Remove(fich);
+                    Console.WriteLine("Fichier supprimé");
+                }
+            }
+        }
+
+
     }
 }
 

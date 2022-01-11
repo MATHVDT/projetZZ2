@@ -18,33 +18,48 @@ using System.IO;
 namespace model
 {
     /**
-     * @class DocumentImage
-     * @brief Classe pour les documents de type images.
+     * @class FichierImage
+     * @brief Classe pour les fichiers de type images.
      */
-    public sealed class DocumentImage : Document
+    public sealed class FichierImage : Fichier
     {
         private readonly Image _image;
-        public Image Image { get; }
+        public Image Image { get { return _image; } }
 
-        public DocumentImage(string filename)
+
+        /**
+         * @fn public FichierImage(string filename, string nomFichier)
+         * @brief Constructeur d'un FichierImage
+         * @param string filename  - *Chemin de l'image à charger*
+         */
+        public FichierImage(string filename, string nomFichier = "") : base(nomFichier)
         {
             try
             {
                 _image = Image.FromFile(filename);
-            }catch(TypeInitializationException e)
+            }
+            catch (TypeInitializationException e)
             {
                 Console.WriteLine(e.ToString());
                 Console.WriteLine("using System.Drawing : bibliothèque spécifique à Windows ");
-            }catch (OutOfMemoryException e)
+            }
+            catch (OutOfMemoryException e)
             {
                 Console.WriteLine(e.ToString());
                 Console.WriteLine("Format d'image du fichier n'est pas valide.");
-            }catch(FileNotFoundException )
+            }
+            catch (FileNotFoundException)
             {
                 Console.WriteLine("Le fichier spécifié n'existe pas.");
-            }catch(ArgumentException )
+            }
+            catch (ArgumentException)
             {
                 Console.WriteLine("ArgumentException");
+            }
+            if(_image==null)
+            {
+                Console.WriteLine("image non chargée");
+                throw new Exception("Image non chargée");
             }
 
         }
