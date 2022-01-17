@@ -14,8 +14,8 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Image VerticalAlignment="Top" Source="/logo.png"/>
-            <StackPanel VerticalAlignment="Center" Grid.Column="1">
+        <Image VerticalAlignment="Center" Source="/logo.png"/>
+            <StackPanel VerticalAlignment="Center"  Grid.Column="1">
             <Button Height="70" Margin="30" Name="CreerArbre" Content="Créer un nouvel arbre" Click="CreerArbre_Click" Background="#FF016B15" BorderThickness="0" Foreground="White">
                 <Button.Resources>
                     <Style TargetType="Border">

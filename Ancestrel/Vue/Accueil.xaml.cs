@@ -27,7 +27,7 @@ namespace Vue
 
         private void CreerArbre_Click(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            this.NavigationService.Navigate(new CreerPersonne());
         }
 
         private void ChargerArbre_Click(object sender, RoutedEventArgs e)
