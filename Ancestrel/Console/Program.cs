@@ -23,6 +23,8 @@ using model;
 */
 Console.WriteLine("Hello, World!");
 
+Manager m = Manager.GetInstance();
+
 Femme p = new Femme(1);
 
 p.Nom = "dupond";
@@ -42,13 +44,18 @@ Console.WriteLine(h.Prenoms);
 Console.WriteLine(h.GetPrenoms());
 
 
-Console.WriteLine(File.Exists("P:\\zz2\\genealogie\\Ancestrel\\Image1.png"));
-string path = "P:\\zz2\\genealogie\\Ancestrel\\Image1.png";
+Console.WriteLine(File.Exists("C:/Users/emper/OneDrive/Documents/ISIMA/ZZ2/Projet/Ancestrel/Console/Image1.jpg"));
+string path = "C:\\Users\\emper\\OneDrive\\Documents\\ISIMA\\ZZ2\\Projet\\Ancestrel\\Console\\Image1.jpg";
 
 FichierImage f = new FichierImage(path, "image");
 
 h.AjouterImage(f);
 
+Console.WriteLine(f.NomFichier);
 
-Image imgTest = Image.FromFile("P:\\zz2\\genealogie\\Ancestrel\\Image1.png");
-Image img2 = (Image)imgTest.Clone();
+
+/*Image imgTest = Image.FromFile("P:\\zz2\\genealogie\\Ancestrel\\Image1.png");
+Image img2 = (Image)imgTest.Clone();*/
+
+
+
