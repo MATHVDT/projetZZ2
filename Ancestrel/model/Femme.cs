@@ -33,11 +33,10 @@ namespace model
             get => _nomJeuneFille;
             set
             {
-                if (value != null)
-                {
-                    _nomJeuneFille = value;
-                    Inconnu = false;
-                }
+
+                _nomJeuneFille = value;
+                Inconnu = _estInconnu();
+
             }
         }
 
@@ -61,10 +60,11 @@ namespace model
                      DateOnly? dateNaissance = null, DateOnly? dateDeces = null,
                      Ville? lieuNaissance = null, string? nationalite = null,
                      string? nomJeuneFille = null) :
-                base(iden, nom, prenoms, dateNaissance, dateDeces, lieuNaissance, nationalite)
+                base(2 * iden + 1, nom, prenoms, dateNaissance, dateDeces, lieuNaissance, nationalite)
         {
-            Identifiant = 2 * iden + 1;
-            NomJeuneFille = NomJeuneFille;
+            //Identifiant = 2 * iden + 1;
+            NomJeuneFille = nomJeuneFille;
+
         }
 
         /**
@@ -76,5 +76,20 @@ namespace model
             return base.ToString() + "née " +
                 (NomJeuneFille is null ? "NomJeuneFilleInconnu" : NomJeuneFille);
         }
+
+
+        /**
+         * @fn public void SupprimerNomJeuneFille()
+         * @brief Supprime le nom de jeune fille de la personne.
+         * @details
+         * Supprime le nom de jeune fille de la personne,
+         * et maintient à jour la propriete *Inconnu*. 
+         */
+        public void SupprimerNomJeuneFille()
+        {
+            NomJeuneFille = null;
+            Inconnu = _estInconnu();
+        }
+
     }
 }

@@ -8,6 +8,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,16 +27,15 @@ namespace model
      */
     public abstract class Personne
     {
+        private string? _nom;
+        private List<string> _listePrenom = new List<string>();
+        private DateOnly? _dateNaissance;
+        private DateOnly? _dateDeces;
+        private Ville? _lieuNaissance;
+        private string? _nationalite;
 
-        protected string? _nom = null;
-        protected List<string>? _listePrenom ;
-        protected DateOnly? _dateNaissance ;
-        protected DateOnly? _dateDeces ;
-        protected Ville? _lieuNaissance; 
-        protected string? _nationalite;
-
-            
-        
+        private List<Fichier> _listeFichiers = new List<Fichier> { };
+        private int? _indexImageProfil;
 
         /**
          * @var Identifiant
@@ -45,7 +46,6 @@ namespace model
          * la mère de la personne à l'identifiant : (2 * Identidiant + 1)
          */
         public uint Identifiant { get; set; }
-
 
         /**
         * @var Nom
@@ -58,14 +58,11 @@ namespace model
             get { return _nom; }
             set
             {
-                if (value != null)
-                {
-                    _nom = value;
-                    Inconnu = false;
-                }
+
+                _nom = value;
+                Inconnu=_estInconnu();
             }
         }
-
 
         /**
         * @var Prenoms
@@ -77,52 +74,36 @@ namespace model
         */
         public string? Prenoms
         {
-            /**
-             * Simple getter 
-             * @brief Obtenir les prenoms de la personne.
-             * @warning Peut être null.
-             * @return Renvoie un string des prenoms de la personne.
-             */
             get
             {
-                if (_listePrenom is null || _listePrenom.Count == 0)
+                if (_listePrenom.Count == 0)
                     return null;
                 else
                 {
                     StringBuilder strBuild = new();
                     foreach (var p in _listePrenom)
                         strBuild.Append(p + " ");
+                    // Supprimer le dernier espace rajouté
+                    strBuild.Remove(strBuild.Length - 1, 1);
                     return strBuild.ToString();
                 }
             }
-            /**
-             * Simpe setter
-             * @param un string
-             * @brief Ajouter un/des prenoms à la personne.
-             * @details
-             * Prend la string et la split pour obtenir les différents prenoms 
-             * et les ajoute à la liste de prenoms.
-             */
             set
             {
+                _listePrenom.Clear(); // Supprime tout les prénoms existants
                 if (value != null)
                 {
 
                     string[] listeValues = value.Split(" ", StringSplitOptions.RemoveEmptyEntries);
-                    if (_listePrenom is null)
-                        _listePrenom = new List<string>();
 
                     foreach (var p in listeValues)
                     {
-                        if (!_listePrenom.Contains(p)) // Verifie que le prenom n'y est pas deja
-                            _listePrenom.Add(p);
+                        _listePrenom.Add(p.Trim());
                     }
                 }
+                Inconnu = _estInconnu();
             }
         }
-
-
-        
 
         /**
          * @var DateNaissance
@@ -134,14 +115,13 @@ namespace model
             get => _dateNaissance;
             set
             {
-                if (value is DateOnly)
+                if (value is DateOnly || value is null)
                 {
                     _dateNaissance = value;
                     Inconnu = false;
                 }
             }
         }
-
 
         /**
          * @var DateDeces
@@ -153,11 +133,11 @@ namespace model
             get => _dateDeces;
             set
             {
-                if (value is DateOnly)
+                if (value is DateOnly|| value is null)
                 {
                     _dateDeces = value;
-                    Inconnu = false;
                 }
+                Inconnu = _estInconnu();
             }
         }
 
@@ -171,11 +151,11 @@ namespace model
             get => _lieuNaissance;
             set
             {
-                if(value !=null)
+                if (value is Ville || value is null)
                 {
                     _lieuNaissance = value;
-                    Inconnu = false;
                 }
+                Inconnu = _estInconnu();
             }
         }
 
@@ -191,11 +171,8 @@ namespace model
             get => _nationalite;
             set
             {
-                if (value!=null)
-                {
-                    _nationalite = value;
-                    Inconnu = false;
-                }
+                _nationalite = value;
+                Inconnu = _estInconnu();
             }
         }
 
@@ -207,12 +184,6 @@ namespace model
          * La valeur passe à false s'il l'une des valeurs est renseignées. (ie différent de null)
          */
         public bool Inconnu { get; protected set; }
-
-        //        public List<Document> ListeDoc { get; set; }
-
-
-
-
 
         /**
          * @fn public Personne 
@@ -232,49 +203,81 @@ namespace model
             DateOnly? dateNaissance = null, DateOnly? dateDeces = null,
             Ville? lieuNaissance = null, string? nationalite = null)
         {
+
+            Identifiant = iden;
             Nom = nom;
+            _listePrenom = new List<string>();
             Prenoms = prenoms;
             DateNaissance = dateNaissance;
             DateDeces = dateDeces;
             LieuNaissance = lieuNaissance;
             Nationalite = nationalite;
+            _indexImageProfil = null;
 
-            if (Nom != null || Prenoms != null ||
-                DateNaissance != null || DateDeces != null)
-            { Inconnu = false; }
-            else
-            { Inconnu = true; }
+            Inconnu = _estInconnu();
 
         }
 
-
-
-
-
-
         /**
-        * @fn public void SetPrenoms(string[] inListeValue)
+        * @fn public void AddPrenoms(string[] inListeValue)
         * @param string[] inListeValue *Liste de prenoms*
         * @brief Ajouter un/des prenom(s) à la personne.
         * @details
         * Ajoute les prenoms passés en paramètre à la personne.
         * Regarde si le nom n'est pas déjà ajouté dans la liste des prenoms.
         */
-        public void SetPrenoms(string[] inListeValue)
+        public void AddPrenoms(string[] inListeValue)
         {
             if (inListeValue != null)
             {
                 if (_listePrenom is null)
-                    _listePrenom = new List<string>();
+                    throw new NullReferenceException();
 
                 foreach (var p in inListeValue)
                 {
                     // Regarde si le prenom n'est pas déjà present
-                    if (!_listePrenom.Contains(p))
-                        _listePrenom.Add(p);
+                    if (!_listePrenom.Contains(p.Trim()))
+                        _listePrenom.Add(p.Trim());
                 }
-                Inconnu = false;
             }
+            Inconnu = _estInconnu();
+        }
+
+        /**
+        * @overload public void AddPrenoms(string value)
+        * @param string value *Chaine de caractères de prenoms*
+        */
+        public void AddPrenoms(string value)
+        {
+            if (value != null)
+            {
+
+                string[] listeValues = value.Split(" ", StringSplitOptions.RemoveEmptyEntries);
+                this.AddPrenoms(listeValues);
+            }
+        }
+
+        /**
+        * @fn public void SetPrenoms(string[] inListeValue)
+        * @param string[] inListeValue *Liste de prenoms*
+        * @brief Définit un/des prenom(s) à la personne.
+        * @details
+        * Définit les prenoms passés en paramètre à la personne.
+        * Supprime les prénoms déjà existant de la personne.
+        * Regarde si le nom n'est pas déjà ajouté dans la liste des prenoms.
+        */
+        public void SetPrenoms(string[] inListeValue)
+        {
+            if (inListeValue != null)
+            {
+                _listePrenom.Clear();
+
+                foreach (var p in inListeValue)
+                {
+                    _listePrenom.Add(p.Trim());
+                }
+            }
+            Inconnu=_estInconnu();
         }
 
         /**
@@ -290,7 +293,6 @@ namespace model
                 this.SetPrenoms(listeValues);
             }
         }
-
 
         /**
          * @fn public string? GetPrenoms()
@@ -309,31 +311,6 @@ namespace model
                     strBuild.Append(p + " ");
                 return strBuild.ToString();
             }
-        }
-
-        /**
-         * @fn SupprimerPrenoms(string[] inListeValue)
-         * @brief Supprime les prenoms
-         * @param string[] inListeValue *Liste de prenoms*
-         */
-        public void SupprimerPrenoms(string[] inListeValue)
-        {
-            if (!(_listePrenom is null) && _listePrenom.Count() > 0)
-            {
-                foreach (var p in inListeValue)
-                {
-                    this.SupprimerPrenoms(p);
-                }
-            }
-        }
-        /**
-         * @overload SupprimerPrenoms(string value)
-         * @param string inValue *Prenoms*
-         */
-        public void SupprimerPrenoms(string inValue)
-        {
-            string[] listePrenomsSupp = inValue.Split(" ", StringSplitOptions.RemoveEmptyEntries);
-            SupprimerPrenoms(listePrenomsSupp);
         }
 
         /**
@@ -380,5 +357,404 @@ namespace model
             return strBuil.ToString();
         }
 
+        /**
+         * @fn private bool _estInconnu() 
+         * @brief Check si la personne est inconnu.
+         * @return bool - *Toutes les proprietes sont nulles*
+         * @details
+         * Check suivant les proprietes, si la personne est inconnu. 
+         * Si la personne possede une propriete non null, alors *Inconnu = true*.
+         */
+        protected bool _estInconnu()
+        {
+            if (Nom != null || Prenoms != null ||
+                 DateNaissance != null || DateDeces != null ||
+                 LieuNaissance != null || Nationalite != null ||
+                 _listeFichiers.Count > 0)
+            { return false; }
+            else
+            { return true; }
+        }
+
+        /**
+         * @fn public void SupprimerNom()
+         * @brief Supprime le nom de la personne.
+         * @details
+         * Supprime le nom de la personne, 
+         * et maintient à jour la propriete *Inconnu*.
+         */
+        public void SupprimerNom()
+        {
+            _nom = null;
+            Inconnu = _estInconnu();
+        }
+
+        /**
+         * @fn public void SupprimerPrenoms()
+         * @brief Supprime tous les prenoms de la personne.
+         * @details
+         * Supprime tous les prenoms de la personne, 
+         * et maintient à jour la propriete *Inconnu*.
+         */
+        public void SupprimerPrenoms()
+        {
+            _listePrenom.Clear(); // Check si la liste est bien supp en memoire
+            Inconnu = _estInconnu();
+        }
+
+        /**
+         * @fn public void SupprimerPrenomSpecifique(string[] listePrenoms)
+         * @brief Supprime une liste de prenoms.
+         * @param string[] listePrenoms - *Liste de pénoms à supprimer*
+         * @details
+         * Supprime les prenoms specifiés en parametre de la liste des prenoms de la personne,
+         * et maintient à jour la propriete *Inconnu*. 
+         */
+        public void SupprimerPrenomsSpecifique(string[] listePrenoms)
+        {
+            foreach (var prenom in listePrenoms)
+            {
+                if (!_listePrenom.Remove(prenom.Trim()))
+                {
+                    Console.WriteLine("Le prenom a supp n'est pas dans la liste des prenom");
+                }
+            }
+            Inconnu = _estInconnu();
+        }
+
+        /**
+         * @overload public void SupprimerPrenomSpecifique(string prenom)
+         * @brief Supprime un prenoms.
+         * @param string prenoms - *Le prenom à supprimer*
+         * @details
+         * Supprime les prenoms specifiés en parametre de la liste des prenoms de la personne,
+         * et maintient à jour la propriete *Inconnu*. 
+         */
+        public void SupprimerPrenomsSpecifique(string prenoms)
+        {
+            string[] listePrenoms = prenoms.Split(" ", StringSplitOptions.RemoveEmptyEntries);
+            this.SupprimerPrenomsSpecifique(listePrenoms);
+        }
+
+        /**
+         * @fn public void SupprimerPrenomPosition(int position)
+         * @brief Supprime le ème prenom.
+         * @param int position - *Position du prenom à supprimer*
+         * @details
+         * Supprime le prenom à la position indiquée en parametre de la personne,
+         * et maintient à jour la propriete *Inconnu*. 
+         * @warning le premier prenom de la personne est à l'indice **0**. 
+         */
+        public void SupprimerPrenomPosition(int position)
+        {
+            if (position >= 0 && position < _listePrenom.Count)
+            {
+                _listePrenom.RemoveAt(position);
+                Inconnu = _estInconnu();
+            }
+            else
+            {
+                Console.WriteLine("Indice donnee en parametre hors de la liste"
+                    + " taille de la liste de prenoms : " + _listePrenom.Count);
+            }
+        }
+
+        /**
+         * @fn public void SupprimerDernierPrenom()
+         * @brief Supprime le dernier prenom.
+         * @details
+         * Supprime le dernier prenom, dans la liste des prenoms, de la personne,
+         * et maintient à jour la propriete *Inconnu*. 
+         */
+        public void SupprimerDernierPrenom()
+        {
+            if (_listePrenom.Count > 0)
+            {
+                _listePrenom.RemoveAt(_listePrenom.Count - 1);
+                Inconnu = _estInconnu();
+            }
+            else
+            {
+                Console.WriteLine("Pas de prenom à supprimer.");
+            }
+        }
+
+        /**
+         * @fn public void SupprimerDateNaissance()
+         * @brief Supprime la date de naissance de la personne.
+         * @details
+         * Supprime la date de naissance de la personne,
+         * et maintient à jour la propriete *Inconnu*. 
+         */
+        public void SupprimerDateNaissance()
+        {
+            _dateNaissance = null;
+            Inconnu = _estInconnu();
+        }
+
+        /**
+         * @fn public void SupprimerDateDeces()
+         * @brief Supprime la date de deces de la personne.
+         * @details
+         * Supprime la date de deces de la personne,
+         * et maintient à jour la propriete *Inconnu*. 
+         */
+        public void SupprimerDateDeces()
+        {
+            _dateDeces = null;
+            Inconnu = _estInconnu();
+        }
+
+        /**
+         * @fn public void SupprimerLieuNaissance()
+         * @brief Supprime le lieu de naissance de la personne.
+         * @details
+         * Supprime le lieu de naissance de la personne,
+         * et maintient à jour la propriete *Inconnu*. 
+         */
+        public void SupprimerLieuNaissance()
+        {
+            _lieuNaissance = null;
+            Inconnu = _estInconnu();
+        }
+
+        /**
+         * @fn public void SupprimerNationalite()
+         * @brief Supprime la nationalite de la personne.
+         * @details
+         * Supprime la nationalite de la personne,
+         * et maintient à jour la propriete *Inconnu*. 
+         */
+        public void SupprimerNationalite()
+        {
+            _nationalite = null;
+            Inconnu = _estInconnu();
+        }
+
+        /**
+         * @fn public void EnleverImageProfil()
+         * @brief Enleve l'index sur l'image de profil.
+         * @details
+         * Ne supprime pas l'image de la personne, mais ne la reference
+         * plus comme image de profil.
+         * @warning Une personne ne peut pas devenir inconnu après cette methode (image non supprimer)
+         */
+        public void EnleverImageProfil()
+        {
+            _indexImageProfil = null;
+        }
+
+        /**
+         * @fn public void SetImageProfil(Guid g)
+         * @brief Choisit la photo de profil.
+         * @param Guid g - *identifiant du fichier de l'image*
+         */
+        public void SetImageProfil(Guid g)
+        {
+            int image_trouve = 0; // Sert a compter le nb d'image trouve, normalement que 1
+            for (int i = 0; i < _listeFichiers.Count; i++)
+            { // Verifie que le fichier est bien une image
+                if (_listeFichiers[i].Id == g)
+                    if (_listeFichiers[i] is FichierImage)
+                    {
+                        _indexImageProfil = i;
+                        image_trouve++;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Fichier "+
+                            $"{_listeFichiers[i].NomFichier} ({g})"
+                            + " n'est pas une image.");
+                        break;
+                    }
+            }
+
+            if (image_trouve == 0)
+            {
+                Console.WriteLine("Image non trouvee.");
+            }
+            else if (image_trouve == 1 && !(_indexImageProfil is null))
+            {
+                Console.WriteLine("Image trouvee, photo de profil selection : " +
+                    $"{_listeFichiers[(int)_indexImageProfil].NomFichier} " +
+                    $"({_listeFichiers[(int)_indexImageProfil].Id})");
+            }
+            else
+            { Console.WriteLine("Plus d'une image de profil trouve."); }
+        }
+
+        /**
+        * @overload public void SetImageProfil(FichierImage imageSelectionne)
+        * @brief Choisit la photo de profil.
+        * @param Image imageSelect
+        */
+        public void SetImageProfil(FichierImage imageSelect)
+        {
+            SetImageProfil(imageSelect.Id);
+        }
+
+
+        /**
+         * @fn public void AjouterImage(string filename, bool imageProfil = false)
+         * @param FichierImage image 
+         * @param bool imageProfil = false - Definit l'image pour le profil 
+         */
+        public void AjouterImage(FichierImage image, bool imageProfil = false)
+        {
+
+            _listeFichiers.Add(image);
+            if (imageProfil)
+                _indexImageProfil = _listeFichiers.Count - 1;
+        }
+
+        /**
+         * @fn public FichierImage? GetFichierImageProfil()
+         * @brief Retourne le FichierImage du profil de la personne
+         * @warning Peut être null.
+         * @return FichierImage? *Le FichierImage du profil de la personne*
+         */
+        public FichierImage? GetFichierImageProfil()
+        {
+            if (!(_indexImageProfil is null))
+            {
+                if (_listeFichiers[(int)_indexImageProfil] is FichierImage)
+                {
+                    return (FichierImage)_listeFichiers[(int)_indexImageProfil];
+                }
+                else
+                {
+                    Console.WriteLine("Erreur indexImageProfil pas un FichierImage");
+                }
+            }
+            return null;
+        }
+
+        /**
+         * @fn public Image? GetrImageProfil()
+         * @brief Retourne l'image du profil de la personne
+         * @warning Peut être null.
+         * @return Image? *L'image du profil de la personne*
+         */
+        public Image? GetImageProfil()
+        {
+            if (!(_indexImageProfil is null))
+            {
+                if (_listeFichiers[(int)_indexImageProfil] is FichierImage)
+                {
+                    return ((FichierImage)_listeFichiers[(int)_indexImageProfil]).Image;
+                }
+                else
+                {
+                    Console.WriteLine("Erreur indexImageProfil pas un FichierImage");
+                }
+            }
+            return null;
+        }
+
+
+
+        /**
+         * @fn public List<FichierImage> GetFichierImages
+         * @brief Retourne la liste des images de la personne.
+         * @return List<FichierImage> Liste des images de la personne
+         */
+        public List<FichierImage> GetFichierImages()
+        {
+            List<FichierImage> listeFichierImage = new List<FichierImage>();
+            foreach (var fich in _listeFichiers)
+            {
+                if (fich is FichierImage)
+                {
+                    listeFichierImage.Add((FichierImage)fich);
+                }
+            }
+            return listeFichierImage;
+        }
+
+        /**
+         * @fn public List<Image> GetImages
+         * @brief Retourne la liste des images de la personne.
+         * @return Liste des images de la personne
+         */
+        public List<Image> GetImages()
+        {
+            List<FichierImage> fichierImages = GetFichierImages();
+            List<Image> listeImage = new List<Image>();
+
+            foreach (var item in fichierImages)
+            {
+                listeImage.Add(item.Image);
+            };
+
+            return listeImage;
+        }
+
+
+        /**
+         * @fn public void AjouterFichier()
+         * @param Fichier inDoc
+         * @brief Ajoute un fichier à la personne.
+         * @warning Le fichier n'est pas forcement une image. 
+         * (...)
+         */
+        public void AjouterFichier(Fichier inDoc)
+        {
+            _listeFichiers.Add(inDoc);
+        }
+
+        /**
+         * @fn public void SupprimerFichier()
+         * @param Fichier inDoc
+         * @brief Supprime un fichier à la personne.
+         * @warning Le fichier n'est pas forcement une image. 
+         * (...)
+         */
+        public void SupprimerFichier(Fichier inDoc)
+        {
+            if (_listeFichiers.Remove(inDoc))
+                Console.WriteLine("Fichier supprimé");
+            else
+                Console.WriteLine("Fichier pas supp, absent de la liste"); 
+        }
+
+        /**
+         * @foverload  public void SupprimerFichier()
+         * @param Guid g - *Id du fichier à supprimer*
+         * @brief Supprime un fichier à la personne.
+         * @warning Le fichier n'est pas forcement une image. 
+         * (...)
+         */
+        public void SupprimerFichier(Guid g)
+        {
+            foreach (var fich in _listeFichiers)
+            {
+                if (fich.Id == g)
+                {
+                    _listeFichiers.Remove(fich);
+                    Console.WriteLine("Fichier supprimé");
+                }
+            }
+        }
+        /**
+         * @foverload  public void SupprimerFichier()
+         * @param Guid g - *Id du fichier à supprimer*
+         * @brief Supprime un fichier à la personne.
+         * @warning Le fichier n'est pas forcement une image. 
+         * (...)
+         */
+        public void SupprimerFichier(string nomFichier)
+        {
+            foreach (var fich in _listeFichiers)
+            {
+                if (fich.NomFichier == nomFichier)
+                {
+                    _listeFichiers.Remove(fich);
+                    Console.WriteLine("Fichier supprimé");
+                }
+            }
+        }
+
+
     }
 }
+

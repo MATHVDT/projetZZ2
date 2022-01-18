@@ -1,5 +1,15 @@
 var indexSectionsWithContent =
 {
+<<<<<<< HEAD
+  0: "adfghilmnpstuv",
+  1: "adfhmpuv",
+  2: "mtv",
+  3: "dfhp",
+  4: "adfghimpst",
+  5: "d",
+  6: "dilnp",
+  7: "g"
+=======
   0: "adfghilmnpstv",
   1: "adfhmpv",
   2: "mv",
@@ -7,6 +17,7 @@ var indexSectionsWithContent =
   4: "adfghimpst",
   5: "dp",
   6: "dilnp"
+>>>>>>> main
 };
 
 var indexSectionNames =

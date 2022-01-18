@@ -27,11 +27,19 @@ var menudata={children:[
 {text:"Packages",url:"namespaces.html",children:[
 {text:"Packages",url:"namespaces.html"}]},
 {text:"Classes",url:"annotated.html",children:[
+<<<<<<< HEAD
+{text:"Liste des classes",url:"annotated.html"},
+{text:"Index des classes",url:"classes.html"},
+{text:"Hiérarchie des classes",url:"hierarchy.html"},
+{text:"Membres de classe",url:"functions.html",children:[
+{text:"Tout",url:"functions.html",children:[
+=======
 {text:"Class List",url:"annotated.html"},
 {text:"Class Index",url:"classes.html"},
 {text:"Class Hierarchy",url:"hierarchy.html"},
 {text:"Class Members",url:"functions.html",children:[
 {text:"All",url:"functions.html",children:[
+>>>>>>> main
 {text:"a",url:"functions.html#index_a"},
 {text:"d",url:"functions.html#index_d"},
 {text:"f",url:"functions.html#index_f"},

@@ -39,9 +39,9 @@ namespace model
         public Homme(uint iden, string? nom = null, string? prenoms = null,
                      DateOnly? dateNaissance = null, DateOnly? dateDeces = null,
                      Ville? lieuNaissance = null, string? nationalite = null) :
-                base(iden, nom, prenoms, dateNaissance, dateDeces, lieuNaissance, nationalite)
+                base(2*iden, nom, prenoms, dateNaissance, dateDeces, lieuNaissance, nationalite)
         {
-            Identifiant = 2 * iden;
+            //Identifiant = 2 * iden;
         }
     }
 }

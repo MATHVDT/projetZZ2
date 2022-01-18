@@ -6,7 +6,14 @@
 * @brief Fichier pour lancer en mode console
 * @details Le fichier ne contient que les instructions de la fonction main
 */
-
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
 using model;
 
 
@@ -27,7 +34,21 @@ Console.WriteLine("Personne : " + p.ToString());
 Homme h = new(iden: 1, nom: "Dupond", prenoms: "Jean Remi",
    dateNaissance: DateOnly.Parse("16/02/2000"));
 
+
+
 Console.WriteLine(); 
 Console.WriteLine(h.ToString());
 Console.WriteLine(h.Prenoms);
 Console.WriteLine(h.GetPrenoms());
+
+
+Console.WriteLine(File.Exists("P:\\zz2\\genealogie\\Ancestrel\\Image1.png"));
+string path = "P:\\zz2\\genealogie\\Ancestrel\\Image1.png";
+
+FichierImage f = new FichierImage(path, "image");
+
+h.AjouterImage(f);
+
+
+Image imgTest = Image.FromFile("P:\\zz2\\genealogie\\Ancestrel\\Image1.png");
+Image img2 = (Image)imgTest.Clone();
