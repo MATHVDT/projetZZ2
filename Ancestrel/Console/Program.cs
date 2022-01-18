@@ -43,7 +43,11 @@ Console.WriteLine(h.GetPrenoms());
 
 
 Console.WriteLine(File.Exists("P:\\zz2\\genealogie\\Ancestrel\\Image1.png"));
-h.AjouterImage("P:\\zz2\\genealogie\\Ancestrel\\Image1.png");
+string path = "P:\\zz2\\genealogie\\Ancestrel\\Image1.png";
+
+FichierImage f = new FichierImage(path, "image");
+
+h.AjouterImage(f);
 
 
 Image imgTest = Image.FromFile("P:\\zz2\\genealogie\\Ancestrel\\Image1.png");

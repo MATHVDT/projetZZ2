@@ -714,7 +714,7 @@ namespace model
             if (_listeFichiers.Remove(inDoc))
                 Console.WriteLine("Fichier supprimé");
             else
-                Console.WriteLine("Fichier pas supp, absent de la liste").
+                Console.WriteLine("Fichier pas supp, absent de la liste"); 
         }
 
         /**
