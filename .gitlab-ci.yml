@@ -3,24 +3,24 @@ image : mcr.microsoft.com/dotnet/sdk:6.0
 stages:
   - build
   - test
-  - release
+# - release
 
 build:
   stage: build
   script:
-    - dotnet build ./Ancestrel
+    - dotnet build ./Ancestrel/model/model.csproj
 
 test:
   stage: test
   script:
     - dotnet test
 
-release:
-  stage: release
-  only:
-    - master
-  artifacts:
-    paths:
-      - publish/
-  script:
-    - dotnet publish -c Release -o ../publish MyApp/MyApp.csproj
+#release:
+#  stage: release
+#  only:
+#    - master
+#  artifacts:
+#    paths:
+#      - publish/
+#  script:
+#    - dotnet publish -c Release -o ../publish MyApp/MyApp.csproj
