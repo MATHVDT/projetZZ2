@@ -78,18 +78,18 @@ namespace ModelTests
             string prenoms = "Jean Toto";
             DateOnly dateNaissance = new DateOnly(2000,02,16);
             DateOnly dateDeces = new DateOnly(2048,02,28);
-            Ville villeNaissance = new Ville("Dijon");
+            //Ville villeNaissance = new Ville("Dijon");
             string nationalite = "fr";
 
 
-            Homme h = new Homme(i,nom, prenoms, dateNaissance,dateDeces,villeNaissance,nationalite); ;
+            Homme h = new Homme(i,nom, prenoms, dateNaissance,dateDeces,null,nationalite); ;
             Assert.IsNotNull(h);
             Assert.AreEqual((uint)2*i, h.Identifiant);
             Assert.AreEqual( nom, h.Nom);    
             Assert.AreEqual(prenoms, h.Prenoms);
             Assert.AreEqual(dateNaissance, h.DateNaissance);
             Assert.AreEqual(dateDeces, h.DateDeces);    
-            Assert.AreEqual(villeNaissance, h.LieuNaissance);
+          //  Assert.AreEqual(villeNaissance, h.LieuNaissance);
             Assert.AreEqual(nationalite, h.Nationalite);
         }
 
@@ -106,13 +106,13 @@ namespace ModelTests
             string prenoms = "Diana";
             DateOnly dateNaissance = new DateOnly(2000, 02, 16);
             DateOnly dateDeces = new DateOnly(2048, 02, 28);
-            Ville villeNaissance = new Ville("Dijon");
+           // Ville villeNaissance = new Ville("Dijon");
             string nationalite = "fr";
 
             string nomJeuneFille = "Price";
 
             Femme f = new Femme(i, nom, prenoms, 
-                dateNaissance, dateDeces, villeNaissance, nationalite,
+                dateNaissance, dateDeces, null, nationalite,
                 nomJeuneFille); ;
             Assert.IsNotNull(f);
             Assert.AreEqual((uint)2*i+1, f.Identifiant);
@@ -120,7 +120,7 @@ namespace ModelTests
             Assert.AreEqual(prenoms, f.Prenoms);
             Assert.AreEqual(dateNaissance, f.DateNaissance);
             Assert.AreEqual(dateDeces, f.DateDeces);
-            Assert.AreEqual(villeNaissance, f.LieuNaissance);
+        //    Assert.AreEqual(villeNaissance, f.LieuNaissance);
             Assert.AreEqual(nationalite, f.Nationalite);
             Assert.AreEqual(nomJeuneFille, f.NomJeuneFille);
         }
