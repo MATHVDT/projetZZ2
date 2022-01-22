@@ -57,7 +57,7 @@ build_job:
 test_job:
   stage: test
   script:
-    - dotnet test
+    - dotnet test Ancestrel
     # - '& "$env:NUNIT_PATH" ".\$env:TEST_FOLDER\Tests.dll"'  # running NUnit tests
   artifacts:
     when: always  # save test results even when the task fails
