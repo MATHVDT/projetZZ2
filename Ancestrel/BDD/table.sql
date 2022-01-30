@@ -1,0 +1,38 @@
+CREATE TABLE [dbo].[Arbre]
+(
+	[Id] INT NOT NULL PRIMARY KEY,
+	[Nom] VARCHAR(100) NOT NULL
+)
+
+CREATE TABLE [dbo].[Prenom]
+(
+	[Id] INT NOT NULL PRIMARY KEY,
+	[Prenom] VARCHAR(100) NOT NULL UNIQUE
+)
+
+
+CREATE TABLE [dbo].[Pays]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+	[Code] INT,
+	[Alpha2] VARCHAR(2) UNIQUE,
+	[Alpha3] VARCHAR(3) UNIQUE,
+	[Nom_en_gb] VARCHAR(50),
+	[Nom_fr_fr] VARCHAR(50) NOT NULL,
+	[Nationalite] VARCHAR(70) NOT NULL
+)
+
+CREATE TABLE [dbo].[Image]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+	[Image] IMAGE NOT NULL
+)
+
+CREATE TABLE [dbo].[Ville]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+	[Nom] VARCHAR(200) UNIQUE NOT NULL,
+	[Latitude] DECIMAL(10,7),
+	[Longitude] DECIMAL(10,7),
+	[Pays] INT FOREIGN KEY REFERENCES [Pays]([Id])
+)
