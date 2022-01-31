@@ -68,7 +68,7 @@ namespace model
          */
         public Ville(string nom, double? longitude = null, double? latitude = null)
         {
-            Id = new Guid(nom);
+            Id = Guid.NewGuid();
             this.Nom = nom;
             this.Longitude = longitude;
             this.Latitude = latitude;
