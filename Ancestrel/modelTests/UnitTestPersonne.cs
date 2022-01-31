@@ -23,8 +23,8 @@ namespace ModelTests
     {
 
         /*
-         *@fn public void PersonneInconnueTest()
-         *@brief [TestMethod] Création personne inconnue.
+         * @fn public void PersonneInconnueTest()
+         * @brief [TestMethod] Création personne inconnue.
          */
         [TestMethod]
         public void PersonneInconnueTest()
