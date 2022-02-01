@@ -64,8 +64,8 @@ namespace model
             Nom = nom;
             Description = desc;
             Personnes = new Dictionary<uint, Personne>();
-            cujus.Identifiant = 1;
-            Personnes.Add(cujus.Identifiant, cujus);
+            cujus.Numero = 1;
+            Personnes.Add(cujus.Numero, cujus);
         }
 
 
@@ -82,14 +82,14 @@ namespace model
         * @param Ville? lieuNaissance = null
         * @param string? nationalite = null
         * @details
-        * Ajoute une personne de type Homme avec l'identifiant calculé en fonction de celui de l'enfant
+        * Ajoute une personne de type Homme avec le Numero calculé en fonction de celui de l'enfant
         */
         public void AjouterPere(uint idEnfant, string? nom = null, string? prenoms = null,
             DateOnly? dateNaissance = null, DateOnly? dateDeces = null,
             Ville? lieuNaissance = null, string? nationalite = null)
         {
-            Homme pere = new Homme(idEnfant, nom, prenoms, dateNaissance, dateDeces, lieuNaissance, nationalite);
-            Personnes.Add(pere.Identifiant, pere);
+            Homme pere = new Homme(idEnfant, null, nom, prenoms, dateNaissance, dateDeces, lieuNaissance, nationalite);
+            Personnes.Add(pere.Numero, pere);
         }
 
         /**
@@ -105,14 +105,14 @@ namespace model
         * @param Ville? lieuNaissance = null
         * @param string? nationalite = null
         * @details
-        * Ajoute une personne de type Femme avec l'identifiant calculé en fonction de celui de l'enfant
+        * Ajoute une personne de type Femme avec le Numero calculé en fonction de celui de l'enfant
         */
         public void AjouterMere(uint idEnfant, string? nom = null, string? prenoms = null,
             DateOnly? dateNaissance = null, DateOnly? dateDeces = null,
             Ville? lieuNaissance = null, string? nationalite = null)
         {
-            Femme mere = new Femme(idEnfant, nom, prenoms, dateNaissance, dateDeces, lieuNaissance, nationalite);
-            Personnes.Add(mere.Identifiant, mere);
+            Femme mere = new Femme(idEnfant, null, nom, prenoms, dateNaissance, dateDeces, lieuNaissance, nationalite);
+            Personnes.Add(mere.Numero, mere);
         }
 
         /**

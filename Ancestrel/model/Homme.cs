@@ -24,7 +24,8 @@ namespace model
 
         /**
          * @fn public Homme 
-         * @param uint iden *Identidiant de l'enfant*
+         * @param uint num *Numero de l'enfant*
+         * @param Guid id *Id de la personne dans la table*
          * @param string? nom = null,
          * @param string? prenoms = null
          * @param DateOnly? dateNaissance = null
@@ -36,12 +37,12 @@ namespace model
          * @details
          * Definie les propiétés de la personne.
          */
-        public Homme(uint iden, string? nom = null, string? prenoms = null,
+        public Homme(uint num, Guid? id = null, string? nom = null, string? prenoms = null,
                      DateOnly? dateNaissance = null, DateOnly? dateDeces = null,
                      Ville? lieuNaissance = null, string? nationalite = null) :
-                base(2*iden, nom, prenoms, dateNaissance, dateDeces, lieuNaissance, nationalite)
+                base(2 * num, id, nom, prenoms, dateNaissance, dateDeces, lieuNaissance, nationalite)
         {
-            //Identifiant = 2 * iden;
+            //Numero = 2 * iden;
         }
     }
 }

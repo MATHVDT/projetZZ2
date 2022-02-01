@@ -42,7 +42,8 @@ namespace model
 
         /**
          * @fn public Femme 
-         * @param uint iden *Identidiant de l'enfant*
+         * @param uint num *Numero de l'enfant*
+         * @param Guid id *Id de la personne dans la table*
          * @param string? nom = null,
          * @param string? prenoms = null
          * @param DateOnly? dateNaissance = null
@@ -54,15 +55,15 @@ namespace model
          * @brief Constructeur de la classe Femme.
          * @details
          * Definie les propiétés de la personne.
-         * Definie l'identifiant et le nom de jeune fille de la personne.
+         * Definie le Numero et le nom de jeune fille de la personne.
          */
-        public Femme(uint iden, string? nom = null, string? prenoms = null,
+        public Femme(uint num, Guid? id = null, string? nom = null, string? prenoms = null,
                      DateOnly? dateNaissance = null, DateOnly? dateDeces = null,
                      Ville? lieuNaissance = null, string? nationalite = null,
                      string? nomJeuneFille = null) :
-                base(2 * iden + 1, nom, prenoms, dateNaissance, dateDeces, lieuNaissance, nationalite)
+                base(2 * num + 1, id, nom, prenoms, dateNaissance, dateDeces, lieuNaissance, nationalite)
         {
-            //Identifiant = 2 * iden + 1;
+            //Numero = 2 * num + 1;
             NomJeuneFille = nomJeuneFille;
 
         }

@@ -38,14 +38,21 @@ namespace model
         private int? _indexImageProfil;
 
         /**
-         * @var Identifiant
-         * @brief Identifiant unique de la personne dans l'abre.
+         * @var Id
+         * @brief Id de la personne dans la bdd.
+         */
+        public Guid Id { get; set; }
+
+
+        /**
+         * @var Numero
+         * @brief Numéro unique de la personne dans l'arbre.
          * @details
          * Identidiant unique de la personne dans l'arbre généalogique. 
-         * Le père de la personne à l'identifiant : (2 * Identifiant) et
-         * la mère de la personne à l'identifiant : (2 * Identidiant + 1)
+         * Le père de la personne à le Numero : (2 * Numero) et
+         * la mère de la personne à le Numero : (2 * Numero + 1)
          */
-        public uint Identifiant { get; set; }
+        public uint Numero { get; set; }
 
         /**
         * @var Nom
@@ -60,7 +67,7 @@ namespace model
             {
 
                 _nom = value;
-                Inconnu=_estInconnu();
+                Inconnu = _estInconnu();
             }
         }
 
@@ -133,7 +140,7 @@ namespace model
             get => _dateDeces;
             set
             {
-                if (value is DateOnly|| value is null)
+                if (value is DateOnly || value is null)
                 {
                     _dateDeces = value;
                 }
@@ -186,8 +193,9 @@ namespace model
         public bool Inconnu { get; protected set; }
 
         /**
-         * @fn public Personne 
-         * @param uint iden *Identidiant de l'enfant*
+         * @fn public Personne
+         * @param uint num *Numero de l'enfant*
+         * @param Guid id *Id de la personne dans la table*
          * @param string? nom = null,
          * @param string? prenoms = null
          * @param DateOnly? dateNaissance = null
@@ -199,12 +207,19 @@ namespace model
          * @details
          * Definie les propiétés de la personne.
          */
-        public Personne(uint iden, string? nom = null, string? prenoms = null,
+        public Personne(uint num, Guid? id = null, string? nom = null, string? prenoms = null,
             DateOnly? dateNaissance = null, DateOnly? dateDeces = null,
             Ville? lieuNaissance = null, string? nationalite = null)
         {
-
-            Identifiant = iden;
+            if (id is null)
+            {
+                Id = Guid.NewGuid();
+            }
+            else
+            {
+                Id = (Guid)id;
+            }
+            Numero = num;
             Nom = nom;
             _listePrenom = new List<string>();
             Prenoms = prenoms;
@@ -277,7 +292,7 @@ namespace model
                     _listePrenom.Add(p.Trim());
                 }
             }
-            Inconnu=_estInconnu();
+            Inconnu = _estInconnu();
         }
 
         /**
@@ -315,22 +330,22 @@ namespace model
 
         /**
         * @fn public uint GetPereId()
-        * @brief Donne l'identifiant du pere
-        * @return uint *identifiant du père*
+        * @brief Donne le Numero du pere
+        * @return uint *Numero du père*
         */
         public uint GetPereId()
         {
-            return Identifiant * 2;
+            return Numero * 2;
         }
 
         /**
         * @fn public uint GetMereId()
-        * @brief Donne l'identifiant de la mere
-        * @return uint *identifiant de la mere*
+        * @brief Donne le Numero de la mere
+        * @return uint *Numero de la mere*
         */
         public uint GetMereId()
         {
-            return Identifiant * 2 + 1;
+            return Numero * 2 + 1;
         }
 
         /**
@@ -547,7 +562,7 @@ namespace model
         /**
          * @fn public void SetImageProfil(Guid g)
          * @brief Choisit la photo de profil.
-         * @param Guid g - *identifiant du fichier de l'image*
+         * @param Guid g - *Id du fichier de l'image*
          */
         public void SetImageProfil(Guid g)
         {
@@ -562,7 +577,7 @@ namespace model
                     }
                     else
                     {
-                        Console.WriteLine("Fichier "+
+                        Console.WriteLine("Fichier " +
                             $"{_listeFichiers[i].NomFichier} ({g})"
                             + " n'est pas une image.");
                         break;
@@ -714,7 +729,7 @@ namespace model
             if (_listeFichiers.Remove(inDoc))
                 Console.WriteLine("Fichier supprimé");
             else
-                Console.WriteLine("Fichier pas supp, absent de la liste"); 
+                Console.WriteLine("Fichier pas supp, absent de la liste");
         }
 
         /**

@@ -14,7 +14,7 @@ namespace model.Tests
         [TestMethod()]
         public void ArbreTest()
         {
-            Arbre arbre = new Arbre("arbre1", "arbre de test", new Homme(0, "Joe"));
+            Arbre arbre = new Arbre("arbre1", "arbre de test", new Homme(0, null, "Joe"));
             Assert.IsNotNull(arbre);
             Assert.IsNotNull(arbre.Personnes[1]);
             arbre.AjouterMere(1, "Marie");

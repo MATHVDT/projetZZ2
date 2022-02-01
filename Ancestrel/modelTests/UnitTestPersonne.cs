@@ -34,7 +34,7 @@ namespace ModelTests
 
             Assert.IsNotNull(h); // Bonne création de l'objet
             // Vérification des propiétés à null
-            Assert.AreEqual(h.Identifiant, Convert.ToUInt32(2));
+            Assert.AreEqual(h.Numero, Convert.ToUInt32(2));
             Assert.IsNull(h.Nom);
             Assert.IsNull(h.Prenoms);
             Assert.IsNull(h.DateNaissance);
@@ -51,7 +51,7 @@ namespace ModelTests
 
             Assert.IsNotNull(f); // Bonne création de l'objet
             // Vérification des propiétés à null
-            Assert.AreEqual(f.Identifiant, Convert.ToUInt32(2+1));
+            Assert.AreEqual(f.Numero, Convert.ToUInt32(2+1));
             Assert.IsNull(f.Nom);
             Assert.IsNull(f.Prenoms);
             Assert.IsNull(f.DateNaissance);
@@ -82,9 +82,9 @@ namespace ModelTests
             string nationalite = "fr";
 
 
-            Homme h = new Homme(i,nom, prenoms, dateNaissance,dateDeces,villeNaissance,nationalite); ;
+            Homme h = new Homme(i, null,nom, prenoms, dateNaissance,dateDeces,villeNaissance,nationalite); ;
             Assert.IsNotNull(h);
-            Assert.AreEqual((uint)2*i, h.Identifiant);
+            Assert.AreEqual((uint)2*i, h.Numero);
             Assert.AreEqual( nom, h.Nom);    
             Assert.AreEqual(prenoms, h.Prenoms);
             Assert.AreEqual(dateNaissance, h.DateNaissance);
@@ -111,11 +111,11 @@ namespace ModelTests
 
             string nomJeuneFille = "Price";
 
-            Femme f = new Femme(i, nom, prenoms, 
+            Femme f = new Femme(i,null, nom, prenoms, 
                 dateNaissance, dateDeces, villeNaissance, nationalite,
                 nomJeuneFille); ;
             Assert.IsNotNull(f);
-            Assert.AreEqual((uint)2*i+1, f.Identifiant);
+            Assert.AreEqual((uint)2*i+1, f.Numero);
             Assert.AreEqual(nom, f.Nom);
             Assert.AreEqual(prenoms, f.Prenoms);
             Assert.AreEqual(dateNaissance, f.DateNaissance);

@@ -33,7 +33,7 @@ p.DateNaissance = DateOnly.FromDateTime(DateTime.Today);
 Console.WriteLine(p.Nom);
 Console.WriteLine("Personne : " + p.ToString());
 
-Homme h = new(iden: 1, nom: "Dupond", prenoms: "Jean Remi",
+Homme h = new(num: 1, nom: "Dupond", prenoms: "Jean Remi",
    dateNaissance: DateOnly.Parse("16/02/2000"));
 
 
