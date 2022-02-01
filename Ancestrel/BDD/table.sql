@@ -39,6 +39,7 @@ CREATE TABLE [dbo].[Image]
 CREATE TABLE [dbo].[Ville]
 (
 	[Id] INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+	[CODE] INT,
 	[Nom] VARCHAR(200) UNIQUE NOT NULL,
 	[Latitude] DECIMAL(10,7),
 	[Longitude] DECIMAL(10,7),
