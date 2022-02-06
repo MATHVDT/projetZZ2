@@ -26,12 +26,18 @@ namespace model
     public class Arbre
     {
 
-         /**
-         * @var Nom
-         * @brief Nom de l'arbre
-         * @details
-         * Nom de l'arbre
+        /**
+         * @var Id
+         * @brief Id de l'arbre dans la BDD.
          */
+        public string? Id { get; set; }
+
+        /**
+        * @var Nom
+        * @brief Nom de l'arbre
+        * @details
+        * Nom de l'arbre
+        */
         public string Nom { get; set; }
 
         /**
@@ -52,6 +58,7 @@ namespace model
 
         /**
          * @fn public Arbre 
+         * @param int? id = null
          * @param string nom
          * @param string desc
          * @param Personne cujus *Personne à la base de l'arbre*
@@ -59,14 +66,24 @@ namespace model
          * @details
          * Construit la base d'un arbre.
          */
-        public Arbre(string nom, string desc, Personne cujus)
+        public Arbre(int? id, string nom, string desc, Personne cujus)
         {
+            Id = Id;
             Nom = nom;
             Description = desc;
             Personnes = new Dictionary<uint, Personne>();
             cujus.Numero = 1;
             Personnes.Add(cujus.Numero, cujus);
         }
+
+
+        /**
+         * @overload public Arbre(string nom, string desc, Personne cujus)
+         * @brief Constructeur d'un nouvel arbre. *sans id*
+         */
+        public Arbre(string nom, string desc, Personne cujus)
+            : this(null, nom, desc, cujus) { }
+
 
 
         /**
@@ -131,7 +148,7 @@ namespace model
             }
             else
             {
-                throw new ArgumentException("La personne n'est pas présente dans l'arbre (id : "+idPersonne+")");
+                throw new ArgumentException("La personne n'est pas présente dans l'arbre (id : " + idPersonne + ")");
             }
         }
 
