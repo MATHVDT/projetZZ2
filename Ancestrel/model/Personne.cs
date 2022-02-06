@@ -556,17 +556,19 @@ namespace model
             _indexImageProfil = null;
         }
 
+
         /**
-         * @fn public void SetImageProfil(Guid g)
+         * @fn public void SetImageProfil(FichierImage imageSelectionne)
          * @brief Choisit la photo de profil.
-         * @param Guid g - *Id du fichier de l'image*
+         * @param Image imageSelect
+         * 
          */
-        public void SetImageProfil(Guid g)
+        public void SetImageProfil(FichierImage imageSelect)
         {
             int image_trouve = 0; // Sert a compter le nb d'image trouve, normalement que 1
             for (int i = 0; i < _listeFichiers.Count; i++)
             { // Verifie que le fichier est bien une image
-                if (_listeFichiers[i].Id == g)
+                if (_listeFichiers[i] == imageSelect)
                     if (_listeFichiers[i] is FichierImage)
                     {
                         _indexImageProfil = i;
@@ -575,7 +577,7 @@ namespace model
                     else
                     {
                         Console.WriteLine("Fichier " +
-                            $"{_listeFichiers[i].NomFichier} ({g})"
+                            $"{_listeFichiers[i].NomFichier} ({imageSelect})"
                             + " n'est pas une image.");
                         break;
                     }
@@ -593,16 +595,6 @@ namespace model
             }
             else
             { Console.WriteLine("Plus d'une image de profil trouve."); }
-        }
-
-        /**
-        * @overload public void SetImageProfil(FichierImage imageSelectionne)
-        * @brief Choisit la photo de profil.
-        * @param Image imageSelect
-        */
-        public void SetImageProfil(FichierImage imageSelect)
-        {
-            SetImageProfil(imageSelect.Id);
         }
 
 
@@ -736,11 +728,11 @@ namespace model
          * @warning Le fichier n'est pas forcement une image. 
          * (...)
          */
-        public void SupprimerFichier(Guid g)
+        public void SupprimerFichier(int idFichierImage)
         {
             foreach (var fich in _listeFichiers)
             {
-                if (fich.Id == g)
+                if (fich.Id == idFichierImage)
                 {
                     _listeFichiers.Remove(fich);
                     Console.WriteLine("Fichier supprimé");

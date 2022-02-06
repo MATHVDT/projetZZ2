@@ -68,6 +68,13 @@ namespace model
             DateAjoutFichier = DateTime.Now;
         }
 
+        /**
+         * @overload public Fichier(string? nomFichier = null)
+         * @brief Constructeur d'un nouveau fichier. *sans id*
+         */
+        public Fichier(string? nomFichier = null)
+            : this(null, nomFichier) { }
+
         public override string ToString()
         {
             return NomFichier;

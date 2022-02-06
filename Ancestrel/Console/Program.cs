@@ -38,7 +38,7 @@ Homme h = new(num: 1, nom: "Dupond", prenoms: "Jean Remi",
 
 
 
-Console.WriteLine(); 
+Console.WriteLine();
 Console.WriteLine(h.ToString());
 Console.WriteLine(h.Prenoms);
 Console.WriteLine(h.GetPrenoms());
@@ -47,7 +47,7 @@ Console.WriteLine(h.GetPrenoms());
 Console.WriteLine(File.Exists("C:/Users/emper/OneDrive/Documents/ISIMA/ZZ2/Projet/Ancestrel/Console/Image1.jpg"));
 string path = "C:\\Users\\emper\\OneDrive\\Documents\\ISIMA\\ZZ2\\Projet\\Ancestrel\\Console\\Image1.jpg";
 
-FichierImage f = new FichierImage(path, "image");
+FichierImage f = new FichierImage(path, nomFichier: "image");
 
 h.AjouterImage(f);
 

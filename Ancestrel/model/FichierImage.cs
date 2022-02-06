@@ -34,11 +34,11 @@ namespace model
          * @param int? id = null - *Id du fichier dans la bdd*
          * @param  string nomFichier = "" - *Nom du fichier*
          */
-        public FichierImage(string filename, int? id = null, string nomFichier = "") : base(id, nomFichier)
+        public FichierImage(string fileName, int? id = null, string nomFichier = "") : base(id, nomFichier)
         {
             try
             {
-                _image = Image.FromFile(filename);
+                _image = Image.FromFile(fileName);
             }
             catch (TypeInitializationException e)
             {
@@ -63,7 +63,14 @@ namespace model
                 Console.WriteLine("image non chargée");
                 throw new Exception("Image non chargée");
             }
-
         }
+
+        /**
+         * overload public FichierImage(string fileName, string nomFichier = "")
+         * @brief Constructeur d'une nouvelle image. *sans id*
+         */
+        public FichierImage(string fileName, string nomFichier = "")
+            : this(fileName, null, nomFichier) { }
+
     }
 }

@@ -30,7 +30,7 @@ namespace model
         * @details
         * Identifiant de la ville
         */
-        public Guid Id { get; private set; }
+        public int? Id { get; private set; }
 
         /**
         * @var Nom
@@ -51,14 +51,15 @@ namespace model
         * @brief Lattitude de la ville
         * @details
         * Coordonnée en lattitude de la ville
-        */ 
+        */
         public double? Latitude { get; set; }
 
         //public GeoCoordinate Coordonnees { get; set; }
 
         /**
          * @fn public Ville 
-         * @param string nom
+         * @param int? id = null - *Id de la ville*
+         * @param string nom = null
          * @param double? longitude = null
          * @param double? lattitude = null
          * 
@@ -66,12 +67,27 @@ namespace model
          * @details
          * Definie les propiétés de la ville.
          */
-        public Ville(string nom, double? longitude = null, double? latitude = null)
+        public Ville(int? id = null, string? nom = null, double? longitude = null, double? latitude = null)
         {
-            Id = Guid.NewGuid();
+            this.Id = id;
+
+            // Donne une nom à une ville
+            if (!(nom is null) && (nom.Length > 0))
+                this.Nom = nom;
+            else
+                nom = id is null ? $"NouvelleVille_{Guid.NewGuid()}" : $"NouvelleVille_{Id}";
+
             this.Nom = nom;
             this.Longitude = longitude;
             this.Latitude = latitude;
         }
+
+
+        /**
+         * @overload public Ville(string nom = "", double? longitude = null, double? latitude = null)
+         * @brief Constructeur d'une nouvelle ville. *sans id*
+         */
+        public Ville(string? nom = null, double? longitude = null, double? latitude = null)
+        : this(null, nom, longitude, latitude) { }
     }
 }
