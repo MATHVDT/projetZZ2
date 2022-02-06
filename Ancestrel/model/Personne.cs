@@ -40,8 +40,12 @@ namespace model
         /**
          * @var Id
          * @brief Id de la personne dans la bdd.
+         * @details 
+         * Id de la personne dans la BDD.
+         * Est nulle si l'on vient de créer la personne dans l'application et qu'elle 
+         * et qu'elle n'existe pas dans la BDD.
          */
-        public Guid Id { get; set; }
+        public int? Id { get; set; }
 
 
         /**
@@ -195,7 +199,7 @@ namespace model
         /**
          * @fn public Personne
          * @param uint num *Numero de l'enfant*
-         * @param Guid id *Id de la personne dans la table*
+         * @param int? id *Id de la personne dans la BDD*
          * @param string? nom = null,
          * @param string? prenoms = null
          * @param DateOnly? dateNaissance = null
@@ -207,18 +211,11 @@ namespace model
          * @details
          * Definie les propiétés de la personne.
          */
-        public Personne(uint num, Guid? id = null, string? nom = null, string? prenoms = null,
+        public Personne(uint num, int? id = null, string? nom = null, string? prenoms = null,
             DateOnly? dateNaissance = null, DateOnly? dateDeces = null,
             Ville? lieuNaissance = null, string? nationalite = null)
         {
-            if (id is null)
-            {
-                Id = Guid.NewGuid();
-            }
-            else
-            {
-                Id = (Guid)id;
-            }
+            Id = id;
             Numero = num;
             Nom = nom;
             _listePrenom = new List<string>();

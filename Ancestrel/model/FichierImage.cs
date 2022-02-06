@@ -31,8 +31,10 @@ namespace model
          * @fn public FichierImage(string filename, string nomFichier)
          * @brief Constructeur d'un FichierImage
          * @param string filename  - *Chemin de l'image à charger*
+         * @param int? id = null - *Id du fichier dans la bdd*
+         * @param  string nomFichier = "" - *Nom du fichier*
          */
-        public FichierImage(string filename, string nomFichier = "") : base(nomFichier)
+        public FichierImage(string filename, int? id = null, string nomFichier = "") : base(id, nomFichier)
         {
             try
             {
@@ -56,7 +58,7 @@ namespace model
             {
                 Console.WriteLine("ArgumentException");
             }
-            if(_image==null)
+            if (_image == null)
             {
                 Console.WriteLine("image non chargée");
                 throw new Exception("Image non chargée");

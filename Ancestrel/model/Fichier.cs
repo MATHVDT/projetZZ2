@@ -21,9 +21,9 @@ namespace model
     {
         /**
          * @var Id
-         * @brief Identifiant unique du fichier.
+         * @brief Id du fichier dans la BDD.
          */
-        public Guid Id { get; }
+        public int? Id { get; }
 
         /**
          * @var NomFichier
@@ -35,50 +35,38 @@ namespace model
         /**
          * @var DateAjoutFichier
          * @brief Date d'ajout du fichier dans le logiciel.
+         * @todo Peut etre plutot la date d'ajout dans la bdd ???
          */
         public readonly DateTime DateAjoutFichier;
 
 
+
         /**
-         * @fn Fichier(string inNomFichier)
-         * @param string inNomFichier
+         * @overload public Fichier(int? inId = null, string? inNomFichier = null)
          * @brief Constructeur du fichier.
+         * 
+         * @param int? inId = null - *Identifiant du fichier dans la BDD*
+         * @param string? inNomFichier = null - *Nom du fichier*
+         * 
          * @details
-         * Definit l'Id du fichier à l'aide d'un GUID. Si aucun nom de fichier
-         * est fournit alors le nom par defaut est l'Id.
+         * Crée un ficher. L'id est celui dans la BDD,
+         * s'il est null, cela veut dire qu'il n'a pas encore été ajouté 
+         * dans la BDD.
+         * @todo 
+         * La var dateAjout est modifier ici, mais peut etre la virer de la classe 
+         * et gerer la date au moment de l'insertion de l'element dans la BDD.
          */
-        public Fichier(string inNomFichier = "") :
-            this(Guid.NewGuid(), inNomFichier)
-        { }
-
-        /**
-         * @overload public Fichier()
-         */
-        public Fichier() : this(Guid.NewGuid()) { }
-
-        /**
-        * @overload public Fichier(Guid inId)
-        * @param Guid inId Identifiant du fichier
-        */
-        public Fichier(Guid inId) : this(inId, inId.ToString()) { }
-
-        /**
-         * @overload public Fichier(Guid inId, string inNomFichier)
-         * @param Guid inId Identifiant du fichier
-         * @param string inNomFichier
-         */
-        public Fichier(Guid inId, string inNomFichier)
+        public Fichier(int? inId = null, string? inNomFichier = null)
         {
             Id = inId;
-            if (inNomFichier.Length > 0)
+            if (!(inNomFichier is null) && (inNomFichier.Length > 0))
                 NomFichier = inNomFichier;
             else
-                NomFichier = Id.ToString();
+                NomFichier = inId is null ? $"Fichier_{Guid.NewGuid()}" : $"Fcihier_{Id}";
+
 
             DateAjoutFichier = DateTime.Now;
         }
-
-
 
         public override string ToString()
         {
