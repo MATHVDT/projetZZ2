@@ -45,6 +45,7 @@ namespace model
          * @overload public Fichier(int? inId = null, string? inNomFichier = null)
          * @brief Constructeur du fichier.
          * 
+         * @param DateTime dateAjout - *Date d'ajout du fichier*
          * @param int? inId = null - *Identifiant du fichier dans la BDD*
          * @param string? inNomFichier = null - *Nom du fichier*
          * 
@@ -56,13 +57,13 @@ namespace model
          * La var dateAjout est modifier ici, mais peut etre la virer de la classe 
          * et gerer la date au moment de l'insertion de l'element dans la BDD.
          */
-        public Fichier(int? inId = null, string? inNomFichier = null)
+        public Fichier(DateTime dateAjout, int? inId = null, string? inNomFichier = null)
         {
             Id = inId;
             if (!(inNomFichier is null) && (inNomFichier.Length > 0))
                 NomFichier = inNomFichier;
             else
-                NomFichier = inId is null ? $"Fichier_{Guid.NewGuid()}" : $"Fcihier_{Id}";
+                NomFichier = inId is null ? $"Fichier_{Guid.NewGuid()}" : $"Fichier_{Id}";
 
 
             DateAjoutFichier = DateTime.Now;
@@ -74,6 +75,13 @@ namespace model
          */
         public Fichier(string? nomFichier = null)
             : this(null, nomFichier) { }
+
+        /**
+         * @overload public Fichier(int? inId = null, string? nomFichier = null)
+         * @brief Constructeur d'un nouveau fichier. *sans id*
+         */
+        public Fichier(int? inId = null, string? inNomFichier = null)
+        :this(DateTime.Now, null, inNomFichier) { }
 
         public override string ToString()
         {

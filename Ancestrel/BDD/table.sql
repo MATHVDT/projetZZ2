@@ -1,15 +1,22 @@
-DROP TABLE IF EXISTS Arbre;
-DROP TABLE IF EXISTS Prenom;
-DROP TABLE IF EXISTS Pays;
-DROP TABLE IF EXISTS Image;
-DROP TABLE IF EXISTS Ville;
-DROP TABLE IF EXISTS Personne;
+DROP TABLE IF EXISTS dbo.Image_Personne;
+DROP TABLE IF EXISTS dbo.Description_Personne;
+DROP TABLE IF EXISTS dbo.Prenom_Personne;
+DROP TABLE IF EXISTS dbo.Arbre;
+DROP TABLE IF EXISTS dbo.Prenom;
+DROP TABLE IF EXISTS dbo.Ville;
+DROP TABLE IF EXISTS dbo.Sexe;
+DROP TABLE IF EXISTS dbo.Description;
+DROP TABLE IF EXISTS dbo.Personne;
+DROP TABLE IF EXISTS dbo.Nationalite;
+DROP TABLE IF EXISTS dbo.Pays;
+DROP TABLE IF EXISTS dbo.Image;
+
 
 
 CREATE TABLE [dbo].[Arbre]
 (
 	[Id] INT NOT NULL PRIMARY KEY,
-	[Nom] VARCHAR(100) NOT NULL
+	[Nom] VARCHAR(100) NOT NULL UNIQUE
 )
 
 CREATE TABLE [dbo].[Prenom]
@@ -33,7 +40,9 @@ CREATE TABLE [dbo].[Pays]
 CREATE TABLE [dbo].[Image]
 (
 	[Id] INT NOT NULL PRIMARY KEY IDENTITY(1,1),
-	[Image] IMAGE NOT NULL
+	[Image] IMAGE NOT NULL,
+	[Nom] VARCHAR(200) NOT NULL,
+	[DateAjout] DATE NOT NULL
 )
 
 CREATE TABLE [dbo].[Ville]
@@ -49,7 +58,8 @@ CREATE TABLE [dbo].[Ville]
 CREATE TABLE [dbo].[Sexe]
 (
 	[Id] INT NOT NULL PRIMARY KEY IDENTITY(1,1),
-	[Sexe] VARCHAR(30) UNIQUE NOT NULL
+	[Sexe] VARCHAR(5) UNIQUE NOT NULL,
+	CONSTRAINT chk_valeur_sexe CHECK (Sexe LIKE 'FEMME' OR Sexe LIKE 'HOMME')
 )
 
 CREATE TABLE [dbo].[Description]
@@ -61,7 +71,6 @@ CREATE TABLE [dbo].[Description]
 CREATE TABLE [dbo].[Personne]
 (
 	[Id] INT NOT NULL PRIMARY KEY IDENTITY(1,1),
-	[Numero] INT NOT NULL UNIQUE,
 	[Nom_usage] VARCHAR(200) NOT NULL,
 	[Nom] VARCHAR(200) NOT NULL,
 	[Date_naissance] DATE,
@@ -91,9 +100,10 @@ CREATE TABLE [dbo].[Arbre_Personne]
 (
 	[Id_arbre] INT,
 	[Id_personne] INT,
-	CONSTRAINT pk_arper PRIMARY KEY(Id_arbre, Id_personne),
-	CONSTRAINT fk_arper_arbre FOREIGN KEY(Id_arbre) REFERENCES Arbre(Id),
-	CONSTRAINT fk_arper_personne FOREIGN KEY(Id_personne) REFERENCES Personne(Id)
+	[Numero] INT,
+	CONSTRAINT pk_arb_pers PRIMARY KEY(Id_arbre, Id_personne),
+	CONSTRAINT fk_arb_pers_arbre FOREIGN KEY(Id_arbre) REFERENCES Arbre(Id),
+	CONSTRAINT fk_arb_pers_personne FOREIGN KEY(Id_personne) REFERENCES Personne(Id)
 )
 
 CREATE TABLE [dbo].[Image_Personne]
