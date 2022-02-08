@@ -54,7 +54,7 @@ namespace model
         * @details
         * Dictionnaire contenant les personnes apparaissant dans l'arbre
         */
-        public Dictionary<uint, Personne> Personnes;
+        public Dictionary<int, Personne> Personnes;
 
         /**
          * @fn public Arbre 
@@ -71,7 +71,7 @@ namespace model
             Id = Id;
             Nom = nom;
             Description = desc;
-            Personnes = new Dictionary<uint, Personne>();
+            Personnes = new Dictionary<int, Personne>();
             cujus.Numero = 1;
             Personnes.Add(cujus.Numero, cujus);
         }
@@ -87,11 +87,11 @@ namespace model
 
 
         /**
-        * @fn AjouterPere(uint idEnfant, string? nom = null, string? prenoms = null,
+        * @fn AjouterPere(int idEnfant, string? nom = null, string? prenoms = null,
            DateOnly? dateNaissance = null, DateOnly? dateDeces = null,
            Ville? lieuNaissance = null, string? nationalite = null)
         * @brief Ajoute un père
-        * @param uint idEnfant
+        * @param int idEnfant
         * @param  string? nom = null
         * @param string? prenoms = null
         * @param DateOnly? dateNaissance = null
@@ -101,7 +101,7 @@ namespace model
         * @details
         * Ajoute une personne de type Homme avec le Numero calculé en fonction de celui de l'enfant
         */
-        public void AjouterPere(uint idEnfant, string? nom = null, string? prenoms = null,
+        public void AjouterPere(int idEnfant, string? nom = null, string? prenoms = null,
             DateOnly? dateNaissance = null, DateOnly? dateDeces = null,
             Ville? lieuNaissance = null, string? nationalite = null)
         {
@@ -110,11 +110,11 @@ namespace model
         }
 
         /**
-        * @fn AjouterMere(uint idEnfant, string? nom = null, string? prenoms = null,
+        * @fn AjouterMere(int idEnfant, string? nom = null, string? prenoms = null,
            DateOnly? dateNaissance = null, DateOnly? dateDeces = null,
            Ville? lieuNaissance = null, string? nationalite = null)
         * @brief Ajoute une mere
-        * @param uint idEnfant
+        * @param int idEnfant
         * @param  string? nom = null
         * @param string? prenoms = null
         * @param DateOnly? dateNaissance = null
@@ -124,7 +124,7 @@ namespace model
         * @details
         * Ajoute une personne de type Femme avec le Numero calculé en fonction de celui de l'enfant
         */
-        public void AjouterMere(uint idEnfant, string? nom = null, string? prenoms = null,
+        public void AjouterMere(int idEnfant, string? nom = null, string? prenoms = null,
             DateOnly? dateNaissance = null, DateOnly? dateDeces = null,
             Ville? lieuNaissance = null, string? nationalite = null)
         {
@@ -133,14 +133,14 @@ namespace model
         }
 
         /**
-        * @fn SupprimerPersonne(uint idPersonne)
+        * @fn SupprimerPersonne(int idPersonne)
         * @brief Supprime une personne
-        * @param uint idPersonne
+        * @param int idPersonne
         * @details
         * Supprime une personne de l'arbre à partir de son id si elle est bien présente dans celui-ci.
         * @warning ArgumentException si l'id ne correspond à aucune personne de l'arbre
         */
-        public void SupprimerPersonne(uint idPersonne)
+        public void SupprimerPersonne(int idPersonne)
         {
             if (Personnes.ContainsKey(idPersonne))
             {

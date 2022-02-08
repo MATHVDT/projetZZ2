@@ -55,12 +55,12 @@ CREATE TABLE [dbo].[Ville]
 	[Pays] INT FOREIGN KEY REFERENCES [Pays]([Id])
 )
 
-CREATE TABLE [dbo].[Sexe]
-(
-	[Id] INT NOT NULL PRIMARY KEY IDENTITY(1,1),
-	[Sexe] VARCHAR(5) UNIQUE NOT NULL,
-	CONSTRAINT chk_valeur_sexe CHECK (Sexe LIKE 'FEMME' OR Sexe LIKE 'HOMME')
-)
+-- CREATE TABLE [dbo].[Sexe]
+-- (
+-- 	[Id] INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+-- 	[Sexe] VARCHAR(5) UNIQUE NOT NULL,
+-- 	CONSTRAINT chk_valeur_sexe CHECK (Sexe.TOUPPER 'FEMME' OR Sexe LIKE 'HOMME')
+-- )
 
 CREATE TABLE [dbo].[Description]
 (

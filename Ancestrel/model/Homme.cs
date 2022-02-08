@@ -24,7 +24,7 @@ namespace model
 
         /**
          * @fn public Homme 
-         * @param uint num *Numero de l'enfant*
+         * @param int num *Numero de l'enfant*
          * @param int? id *Id de la personne dans la BDD*
          * @param string? nom = null,
          * @param string? prenoms = null
@@ -37,7 +37,7 @@ namespace model
          * @details
          * Definie les propiétés de la personne.
          */
-        public Homme(uint num, int? id = null, string? nom = null, string? prenoms = null,
+        public Homme(int num, int? id = null, string? nom = null, string? prenoms = null,
                      DateOnly? dateNaissance = null, DateOnly? dateDeces = null,
                      Ville? lieuNaissance = null, string? nationalite = null) :
                 base(2 * num, id, nom, prenoms, dateNaissance, dateDeces, lieuNaissance, nationalite)

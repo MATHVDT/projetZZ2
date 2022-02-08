@@ -56,7 +56,7 @@ namespace model
          * Le père de la personne à le Numero : (2 * Numero) et
          * la mère de la personne à le Numero : (2 * Numero + 1)
          */
-        public uint Numero { get; set; }
+        public int Numero { get; set; }
 
         /**
         * @var Nom
@@ -198,7 +198,7 @@ namespace model
 
         /**
          * @fn public Personne
-         * @param uint num *Numero de l'enfant*
+         * @param int num *Numero de l'enfant*
          * @param int? id *Id de la personne dans la BDD*
          * @param string? nom = null,
          * @param string? prenoms = null
@@ -211,7 +211,7 @@ namespace model
          * @details
          * Definie les propiétés de la personne.
          */
-        public Personne(uint num, int? id = null, string? nom = null, string? prenoms = null,
+        public Personne(int num, int? id = null, string? nom = null, string? prenoms = null,
             DateOnly? dateNaissance = null, DateOnly? dateDeces = null,
             Ville? lieuNaissance = null, string? nationalite = null)
         {
@@ -326,21 +326,21 @@ namespace model
         }
 
         /**
-        * @fn public uint GetPereId()
+        * @fn public int GetPereId()
         * @brief Donne le Numero du pere
-        * @return uint *Numero du père*
+        * @return int *Numero du père*
         */
-        public uint GetPereId()
+        public int GetPereId()
         {
             return Numero * 2;
         }
 
         /**
-        * @fn public uint GetMereId()
+        * @fn public int GetMereId()
         * @brief Donne le Numero de la mere
-        * @return uint *Numero de la mere*
+        * @return int *Numero de la mere*
         */
-        public uint GetMereId()
+        public int GetMereId()
         {
             return Numero * 2 + 1;
         }
