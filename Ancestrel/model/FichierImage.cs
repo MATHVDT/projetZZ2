@@ -15,7 +15,7 @@ using System.Drawing;
 using System.IO;
 
 
-namespace model
+namespace Model
 {
     /**
      * @class FichierImage

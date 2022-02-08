@@ -13,10 +13,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 /**
- * @namespace model
+ * @namespace Model
  * Espace de nom des classes de l'application
  */
-namespace model
+namespace Model
 {
     /**
     * @class Ville
@@ -69,17 +69,17 @@ namespace model
          */
         public Ville(int? id = null, string? nom = null, double? longitude = null, double? latitude = null)
         {
-            this.Id = id;
+            Id = id;
 
             // Donne une nom à une ville
-            if (!(nom is null) && (nom.Length > 0))
-                this.Nom = nom;
+            if (!(nom is null) && nom.Length > 0)
+                Nom = nom;
             else
                 nom = id is null ? $"NouvelleVille_{Guid.NewGuid()}" : $"NouvelleVille_{Id}";
 
-            this.Nom = nom;
-            this.Longitude = longitude;
-            this.Latitude = latitude;
+            Nom = nom;
+            Longitude = longitude;
+            Latitude = latitude;
         }
 
 

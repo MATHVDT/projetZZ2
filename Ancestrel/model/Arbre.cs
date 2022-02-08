@@ -6,6 +6,7 @@
  * @copyright ...
  */
 
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,10 +15,10 @@ using System.Threading.Tasks;
 
 
 /**
- * @namespace model
+ * @namespace Model
  * Espace de nom des classes de l'application
  */
-namespace model
+namespace Model
 {
     /**
    * @class Arbre
