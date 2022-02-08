@@ -82,9 +82,20 @@ namespace DataBase
 
         public static void InsererPersonne(Personne personne)
         {
+            const string VALUENULL = "NULL";
+            /*
+            string values = $"{personne.Id}, " +
+                $"{(personne is Homme ? 0 : 1)}" +
+                $"{personne.Nom ?? VALUENULL}, " +
+                $"{((Femme)personne).NomJeuneFille ?? VALUENULL}, " +
+                $"{personne.DateNaissance ?? VALUENULL}, " +
+                $"{personne.DateDeces ?? VALUENULL}, " +
+                $"{personne.GetFichierImageProfil().Id}";
+            */
+
             // Requete SQL pour inserer la personne 
             string queryString = $"INSERT INTO {_PersonneTable} " +
-                                 $"VALUES ;";
+                                 $"VALUES {personne.Id};";
 
             // Connexion à la bdd
             SqlConnection connexion = new SqlConnection(chaineConnexion);
@@ -94,7 +105,8 @@ namespace DataBase
             SqlCommand commandSql = new SqlCommand(queryString, connexion);
             SqlDataReader reader = commandSql.ExecuteReader();
 
-        }
+            // SqlTransaction
 
+        }
     }
 }

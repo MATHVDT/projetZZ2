@@ -39,10 +39,10 @@ CREATE TABLE [dbo].[Image]
 CREATE TABLE [dbo].[Ville]
 (
 	[Id] INT NOT NULL PRIMARY KEY IDENTITY(1,1),
-	[CODE] INT,
+	[CODE] INT NULL,
 	[Nom] VARCHAR(200) UNIQUE NOT NULL,
-	[Latitude] DECIMAL(10,7),
-	[Longitude] DECIMAL(10,7),
+	[Latitude] DECIMAL(10,7) NULL,
+	[Longitude] DECIMAL(10,7) NULL,
 	[Pays] INT FOREIGN KEY REFERENCES [Pays]([Id]) 
 )
 
@@ -50,21 +50,21 @@ CREATE TABLE [dbo].[Ville]
 CREATE TABLE [dbo].[Description]
 (
 	[Id] INT NOT NULL PRIMARY KEY IDENTITY(1,1),
-	[Description] VARCHAR(2000) NOT NULL
+	[Description] VARCHAR(2000) NULL
 )
 
 CREATE TABLE [dbo].[Personne]
 (
 	[Id] INT NOT NULL PRIMARY KEY IDENTITY(1,1),
 	[Sexe] INT NOT NULL,  
-	[Nom_usage] VARCHAR(200) NOT NULL,
-	[Nom] VARCHAR(200) NOT NULL,
-	[Date_naissance] DATE,
-	[Date_deces] DATE,
-	[Id_ville_naissance] INT,
-	[Id_img_principale] INT,
-	[Id_pere] INT,
-	[Id_mere] INT,
+	[Nom_usage] VARCHAR(200)  NULL,
+	[Nom] VARCHAR(200)  NULL,
+	[Date_naissance] DATE NULL,
+	[Date_deces] DATE NULL,
+	[Id_ville_naissance] INT NULL,
+	[Id_img_principale] INT NULL,
+	[Id_pere] INT NULL,
+	[Id_mere] INT NULL,
 	CONSTRAINT fk_perso_ville FOREIGN KEY([Id_ville_naissance]) REFERENCES Ville(Id),
 	CONSTRAINT fk_perso_img FOREIGN KEY(Id_img_principale) REFERENCES Image(Id),
 	CONSTRAINT fk_perso_pere FOREIGN KEY(Id_pere) REFERENCES Personne(Id),
