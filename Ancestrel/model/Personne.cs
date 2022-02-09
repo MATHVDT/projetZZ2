@@ -50,6 +50,18 @@ namespace Model
 
 
         /**
+         * @var IdPere
+         * @brief Id du père dans la BDD.
+         */
+        public int? IdPere { get; set; }
+        
+        /**
+         * @var IdMere
+         * @brief Id du mère dans la BDD.
+         */
+        public int? IdMere { get; set; }
+
+        /**
          * @var Numero
          * @brief Numéro unique de la personne dans l'arbre.
          * @details
@@ -217,6 +229,8 @@ namespace Model
             Ville? lieuNaissance = null, string? nationalite = null)
         {
             Id = id;
+            IdPere = null;
+            IdMere = null;
             Numero = num;
             Nom = nom;
             _listePrenom = new List<string>();
@@ -324,6 +338,16 @@ namespace Model
                     strBuild.Append(p + " ");
                 return strBuild.ToString();
             }
+        }
+
+        /**
+         * @fn public List<string> GetListPrenoms()
+         * @brief Liste des prénoms.
+         * @return List<string>
+         */
+        public List<string> GetListPrenoms()
+        {
+            return _listePrenom;
         }
 
         /**

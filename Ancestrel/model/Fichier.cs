@@ -23,7 +23,7 @@ namespace Model
          * @var Id
          * @brief Id du fichier dans la BDD.
          */
-        public int? Id { get; }
+        public int? Id { get; set; }
 
         /**
          * @var NomFichier
