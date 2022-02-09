@@ -9,7 +9,8 @@ namespace DataBase
 {
     public class PrenomBdd
     {
-        static string chaineConnexion = "Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=..\\ANCESTREL\\DATABASE\\SAMPLEDATABASE.MDF;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        //static string chaineConnexion = "Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=..\\ANCESTREL\\DATABASE\\SAMPLEDATABASE.MDF;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        static string chaineConnexion = "Data Source = (LocalDB)\\MSSQLLocalDB;AttachDbFilename=master;Integrated Security = True";
 
         static readonly string _PrenomTable = "dbo.Prenom";
         static readonly string _PrenomPersonneTable = "dbo.Prenom_Personne";

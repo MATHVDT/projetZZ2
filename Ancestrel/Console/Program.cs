@@ -12,8 +12,10 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using DataBase;
 using Model;
 using Model;
 
@@ -43,7 +45,7 @@ Console.WriteLine(h.ToString());
 Console.WriteLine(h.Prenoms);
 Console.WriteLine(h.GetPrenoms());
 
-
+/*
 Console.WriteLine(File.Exists("C:/Users/emper/OneDrive/Documents/ISIMA/ZZ2/Projet/Ancestrel/Console/Image1.jpg"));
 string path = "C:\\Users\\emper\\OneDrive\\Documents\\ISIMA\\ZZ2\\Projet\\Ancestrel\\Console\\Image1.jpg";
 
@@ -52,10 +54,16 @@ FichierImage f = new FichierImage(path, nomFichier: "image");
 h.AjouterImage(f);
 
 Console.WriteLine(f.NomFichier);
-
+*/
 
 /*Image imgTest = Image.FromFile("P:\\zz2\\genealogie\\Ancestrel\\Image1.png");
 Image img2 = (Image)imgTest.Clone();*/
 
+const string VALUENULL = "NULL";
+
+Personne personne = new Homme(num: 1, nom: "Dupond", prenoms: "Jean Remi",
+                               dateNaissance: DateOnly.Parse("16/02/2000"), dateDeces: DateOnly.Parse("04/12/2048"));
 
 
+
+PersonneBdd.InsererPersonne(personne);
