@@ -19,8 +19,9 @@ namespace DataBase
         static readonly string _IdVilleNaissance = "Id_ville_naissance";
         static readonly string _IdImgProfil = "[Id_img_principale]";
 
-        //static string chaineConnexion = "Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=..\\ANCESTREL\\DATABASE\\SAMPLEDATABASE.MDF;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-        static string chaineConnexion = "Data Source = (LocalDB)\\MSSQLLocalDB;AttachDbFilename=master;Integrated Security = True";
+        //static string chaineConnexion = $@"Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\Users\emper\OneDrive\Documents\ISIMA\ZZ2\Projet\Ancestrel\DataBase\SampleDatabase.mdf;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        static string chaineConnexion = $@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\emper\OneDrive\Documents\ISIMA\ZZ2\Projet\Ancestrel\DataBase\Database.mdf;Integrated Security=True";
+
 
         public static Personne GetPersonneById(int id)
         {
@@ -108,16 +109,15 @@ namespace DataBase
 
             string values = valuesBuilder.ToString();
 
-
+            
             // Requete SQL pour inserer la personne 
             string queryString = $"INSERT INTO {_PersonneTable} " +
-                                 $"VALUES {values}" +
+                                 $"VALUES ({values});" +
                                  $"SELECT IDENT_CURRENT('{_PersonneTable}');";
 
             // Connexion à la bdd
             SqlConnection connexion = new SqlConnection(chaineConnexion);
-
-
+            
             try
             {
                 connexion.Open(); // Ouverture connexion
@@ -126,9 +126,9 @@ namespace DataBase
                 SqlCommand commandSql = new SqlCommand(queryString, connexion);
 
                 SqlDataReader reader = commandSql.ExecuteReader();
-                Console.WriteLine("Records Inserted Successfully et Id : " + reader[0]);
+                //Console.WriteLine("Records Inserted Successfully et Id : " + reader[0]);
                 reader.Close();
-
+             
                 //commandSql.ExecuteNonQuery();
                 //Console.WriteLine("Records Inserted Successfully et Id : " );
             }

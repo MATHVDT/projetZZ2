@@ -27,7 +27,7 @@ Console.WriteLine("Hello, World!");
 
 Manager m = Manager.GetInstance();
 
-Femme p = new Femme(1);
+/*Femme p = new Femme(1);
 
 p.Nom = "dupond";
 p.DateNaissance = DateOnly.FromDateTime(DateTime.Today);
@@ -43,7 +43,7 @@ Homme h = new(num: 1, nom: "Dupond", prenoms: "Jean Remi",
 Console.WriteLine();
 Console.WriteLine(h.ToString());
 Console.WriteLine(h.Prenoms);
-Console.WriteLine(h.GetPrenoms());
+Console.WriteLine(h.GetPrenoms());*/
 
 /*
 Console.WriteLine(File.Exists("C:/Users/emper/OneDrive/Documents/ISIMA/ZZ2/Projet/Ancestrel/Console/Image1.jpg"));
