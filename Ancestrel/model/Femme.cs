@@ -75,8 +75,8 @@ namespace Model
          */
         public override string ToString()
         {
-            return base.ToString() + "née " +
-                (NomJeuneFille is null ? "NomJeuneFilleInconnu" : NomJeuneFille);
+            return base.ToString() + " née " +
+                (NomJeuneFille is null ? "NomJeuneFilleInconnu " : NomJeuneFille);
         }
 
 

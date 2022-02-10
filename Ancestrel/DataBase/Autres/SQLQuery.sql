@@ -1,1 +1,1 @@
-﻿SELECT * FROM Personne;
+﻿SELECT IDENT_CURRENT('Personne') AS AAA;

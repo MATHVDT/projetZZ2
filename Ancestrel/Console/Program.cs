@@ -25,7 +25,7 @@ using Model;
 */
 Console.WriteLine("Hello, World!");
 
-Manager m = Manager.GetInstance();
+//Manager m = Manager.GetInstance();
 
 /*Femme p = new Femme(1);
 
@@ -59,11 +59,16 @@ Console.WriteLine(f.NomFichier);
 /*Image imgTest = Image.FromFile("P:\\zz2\\genealogie\\Ancestrel\\Image1.png");
 Image img2 = (Image)imgTest.Clone();*/
 
-const string VALUENULL = "NULL";
+//const string VALUENULL = "NULL";
 
 Personne personne = new Homme(num: 1, nom: "Dupond", prenoms: "Jean Remi",
                                dateNaissance: DateOnly.Parse("16/02/2000"), dateDeces: DateOnly.Parse("04/12/2048"));
 
 
+//Console.WriteLine($"{System.DBNull.Value}");
+
+//Console.WriteLine(PersonneBdd.PersonneValuesInsert(personne));
 
 PersonneBdd.InsererPersonne(personne);
+
+//Console.WriteLine(PersonneBdd.GetPersonneById(2).ToString());
