@@ -74,7 +74,7 @@ PersonneBdd.InsererPersonne(personne);
 //Console.WriteLine(PersonneBdd.GetPersonneById(2).ToString());
 
 List<string> listPrenoms = new List<string>();
-listPrenoms.Add("Toto");
-listPrenoms.Add("Tutu");
+listPrenoms.Add("averel");
+listPrenoms.Add("joe");
 
 PrenomBdd.InsererPrenomsPersonne(listPrenoms, 1);

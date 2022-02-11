@@ -9,7 +9,8 @@ namespace DataBase
 {
     public class PrenomBdd
     {
-        static string chaineConnexion = $@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=E:\ma_th\Documents\Programmations\pgenealogie\Ancestrel\DataBase\SampleDatabase.mdf;Integrated Security=True";
+        static string chaineConnexion = $@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\mavilledie4\Source\Repos\genealogie\Ancestrel\DataBase\SampleDatabase.mdf;Integrated Security=True";
+        //static string chaineConnexion = $@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=E:\ma_th\Documents\Programmations\pgenealogie\Ancestrel\DataBase\SampleDatabase.mdf;Integrated Security=True";
         //static string chaineConnexion = $@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\emper\OneDrive\Documents\ISIMA\ZZ2\Projet\Ancestrel\DataBase\Database.mdf;Integrated Security=True";
 
         static readonly string _PrenomTable = "dbo.Prenom";
@@ -97,13 +98,14 @@ namespace DataBase
                 Console.WriteLine(queryString);
                 reader = commandSql.ExecuteReader();
 
-                Console.Write("Prénoms déjà enregistrés : ");
+                Console.WriteLine("Prénoms déjà enregistrés : ");
                 // Stockage des id des prénoms déjà enregistrés
                 while (reader.Read())
                 {
                     prenomsDejaEnregistres.Add((string)reader[_Prenom], (int)reader[_Id]);
-                    Console.WriteLine((string)reader[_Prenom]);
+                    Console.Write((string)reader[_Prenom] + " ");
                 }
+                Console.WriteLine();
 
                 reader.Close(); // Fermeture du SqlReader
 
@@ -137,7 +139,8 @@ namespace DataBase
                         Console.WriteLine(queryString);
                         reader = commandSql.ExecuteReader();
                         reader.Read(); // Lecture du resultat
-                        prenomsDejaEnregistres.Add(prenom, Convert.ToInt32(reader[0])); 
+                        prenomsDejaEnregistres.Add(prenom, Convert.ToInt32(reader[0]));
+                        Console.WriteLine("Id auto incrementé du prenom inseré : " + reader[0]);
                         reader.Close(); // Fermeture du reader
                     }
 
@@ -147,7 +150,7 @@ namespace DataBase
 
                     // Requete SQL d'INSERTION dans la TABLE association des prenoms-personne
                     queryString = $"INSERT INTO {_PrenomPersonneTable} " +
-                                  $"VALUES ({idPersonne}, {idPrenomEnregistre}, {i});";
+                                  $"VALUES ({idPersonne}, {idPrenomEnregistre});";
 
                     // Création de la requete SQL d'INSERTION dans la TABLE association des prenoms-personne
                     commandSql = new SqlCommand(queryString, connexion);
