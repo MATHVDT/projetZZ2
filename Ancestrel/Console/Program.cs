@@ -72,3 +72,9 @@ Personne personne = new Homme(num: 1, nom: "Dupond", prenoms: "Jean Remi",
 PersonneBdd.InsererPersonne(personne);
 
 //Console.WriteLine(PersonneBdd.GetPersonneById(2).ToString());
+
+List<string> listPrenoms = new List<string>();
+listPrenoms.Add("Toto");
+listPrenoms.Add("Tutu");
+
+PrenomBdd.InsererPrenomsPersonne(listPrenoms, 1);

@@ -101,6 +101,19 @@ namespace DataBase
             return p;
         }
 
+
+        /**
+         * @fn public static void InsererPersonne
+         * @brief Insere une personne dans la bdd.
+         * 
+         * @param Personne personne - *Personne à ajouté dans la bdd*
+         * 
+         * @details
+         * Ajoute une nouvelle personne dans la bdd.
+         * Et tiens à jour les autres tables d'associations.
+         * 
+         * @warning La personne ajoutée ne doit pas être présente dans la bdd.
+         */
         public static void InsererPersonne(Personne personne)
         {
             // Récupération des champs personne (prénoms exclus)
@@ -128,7 +141,7 @@ namespace DataBase
 
                 // Excecution de l'insertion
                 Console.WriteLine(queryString);
-                Console.WriteLine(commandSql.ExecuteNonQuery() + " ligne(s) inserées.");
+                Console.WriteLine(commandSql.ExecuteNonQuery() + " ligne inserée.");
 
                 // Requete SQL pour récupérer l'id de la personne
                 queryString = $"SELECT IDENT_CURRENT('{_PersonneTable}');";
@@ -140,11 +153,11 @@ namespace DataBase
                 Console.WriteLine(queryString);
                 SqlDataReader reader = commandSql.ExecuteReader();
                 reader.Read();
-                int idAutoIncrementePersonne = (int)reader[0];
+                int idAutoIncrementePersonne = Convert.ToInt32( reader[0]);
                 personne.Id = idAutoIncrementePersonne;
                 Console.WriteLine("Id auto incrementé de la personne : " + idAutoIncrementePersonne);
 
-                reader.Close();
+                reader.Close(); // Le mettre dans le finally ?
 
             }
             catch (SqlException e)
