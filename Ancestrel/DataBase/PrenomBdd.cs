@@ -33,13 +33,13 @@ namespace DataBase
 
 
 
-        public string? GetPrenomById(int id)
+        public string? GetPrenomById(int idPersonne)
         {
-            // Requete SQL pour récuperer les infos sur une personne 
+            // Requete SQL pour récuperer les prénoms de la personne
             string queryString = $"SELECT {_OrdrePrenom}, {_Prenom} " +
                                  $"FROM {_PrenomPersonneTable} JOIN {_PrenomTable} " +
-                                 $"ON {_IdPrenom} = {_Id} " +
-                                 $"WHERE {_IdPersonne} = {id}" +
+                                 $"ON {_IdPersonne} = {_Id} " +
+                                 $"WHERE {_IdPersonne} = {idPersonne}" +
                                  $"ORDER BY {_OrdrePrenom} ASC;";
 
             // Connexion à la bdd

@@ -9,7 +9,7 @@ namespace Model
     public interface BddLoader
     {
 
-        public Personne GetPersonneById(int id);
+        public Personne GetPersonneById(int idPersonne);
         public string? GetPrenomById(int id);
         public FichierImage GetFichierImageById(int id);
         public Ville GetVilleById(int id);

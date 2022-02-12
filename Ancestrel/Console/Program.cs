@@ -76,10 +76,12 @@ Bdd bdd = new Bdd(chaineConnexion);
 bdd.InsererPersonne(personne);
 
 
-//Console.WriteLine(PersonneBdd.GetPersonneById(2).ToString());
+//Console.WriteLine(PersonneBdd.GetPersonneTableById(2).ToString());
 
 List<string> listPrenoms = new List<string>();
 listPrenoms.Add("jack");
 listPrenoms.Add("william");
 
 bdd.InsererPrenomsPersonne(personne);
+
+Console.WriteLine(bdd.GetPersonneById(1).ToString());

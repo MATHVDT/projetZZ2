@@ -39,14 +39,14 @@ namespace DataBase
 
 
         /**
-         * @fn public static Personne GetPersonneById(int id)
-         * @brief Récuperer une personne grâce à son id dans la BDD.
+         * @fn public static Personne GetPersonneTableById(int id)
+         * @brief Récuperer une personne Table grâce à son id dans la BDD.
          * 
          * @param int id - *Id de la personne dans la BDD*
          * 
-         * @return Personne *Personne avec les champs remplis*
+         * @return Personne *Personne avec les champs de la table complétés*
          */
-        public Personne GetPersonneById(int id)
+        public Personne GetPersonneTableById(int id)
         {
             // Requete SQL pour récuperer les infos sur une personne 
             string queryString = $"SELECT * " +
@@ -71,9 +71,6 @@ namespace DataBase
             string? nomUsageBdd = (string?)(reader[_NomUsage] is System.DBNull ? null : reader[_NomUsage]);
             string? nomBdd = (string?)(reader[_Nom] is System.DBNull ? null : reader[_Nom]);
 
-            //string? nomBdd = SqlString.Null
-            //Console.WriteLine("nomBdd : " + nomBdd + " valeur de reader[_Nom] : " + reader[_Nom]);
-
             DateOnly? dateNaissanceBdd = (DateOnly?)(reader[_DateNaissance] is System.DBNull ? null : DateOnly.FromDateTime((DateTime)reader[_DateNaissance]));
             DateOnly? dateDecesBdd = (DateOnly?)(reader[_DateDeces] is System.DBNull ? null : DateOnly.FromDateTime((DateTime)reader[_DateDeces]));
 
@@ -86,22 +83,17 @@ namespace DataBase
 
             int sexe = (int)reader[_Sexe]; // 0 -> Homme et 1 -> Femme
 
-
-            // Récupération des prénoms
-            string? prenomsBdd = null;
-            //PrenomBdd.GetPrenomById(id);
-
             // Création de la personne avec les infos récupérées
             Personne p;
 
             if (sexe == 1) // Femme 
             {
-                p = new Femme(0, idBdd, nomUsageBdd, prenomsBdd, dateNaissanceBdd, dateDecesBdd,
+                p = new Femme(0, idBdd, nomUsageBdd, null, dateNaissanceBdd, dateDecesBdd,
                     null, null, nomBdd);
             }
             else // Homme
             {
-                p = new Homme(0, idBdd, nomUsageBdd, prenomsBdd, dateNaissanceBdd, dateDecesBdd,
+                p = new Homme(0, idBdd, nomUsageBdd, null, dateNaissanceBdd, dateDecesBdd,
                     null, null);
             }
 
@@ -117,7 +109,7 @@ namespace DataBase
 
 
         /**
-         * @fn public static void InsererPersonne
+         * @fn public static void InsererPersonneTable
          * @brief Insere une personne dans la bdd.
          * 
          * @param Personne personne - *Personne à ajouté dans la bdd*
@@ -128,7 +120,7 @@ namespace DataBase
          * 
          * @warning La personne ajoutée ne doit pas être présente dans la bdd.
          */
-        public void InsererPersonne(Personne personne)
+        public void InsererPersonneTable(Personne personne)
         {
             // Récupération des champs personne (prénoms exclus)
             string values = PersonneValuesInsert(personne);
@@ -167,7 +159,7 @@ namespace DataBase
                 Console.WriteLine(queryString);
                 SqlDataReader reader = commandSql.ExecuteReader();
                 reader.Read();
-                int idAutoIncrementePersonne = Convert.ToInt32( reader[0]);
+                int idAutoIncrementePersonne = Convert.ToInt32(reader[0]);
                 personne.Id = idAutoIncrementePersonne;
                 Console.WriteLine("Id auto incrementé de la personne : " + idAutoIncrementePersonne);
 
