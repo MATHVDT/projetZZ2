@@ -9,23 +9,31 @@ namespace DataBase
 {
     public class PrenomBdd
     {
-        static string chaineConnexion = $@"Data Source=(LocalDB)\MSSQLLocalDB;Integrated Security=True";
+        private readonly string _chaineConnexion;
 
+        //static string chaineConnexion = $@"Data Source=(LocalDB)\MSSQLLocalDB;Integrated Security=True";
         //static string chaineConnexion = $@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\mavilledie4\Source\Repos\genealogie\Ancestrel\DataBase\SampleDatabase.mdf;Integrated Security=True";
         //static string chaineConnexion = $@"Data Source=(LocalDB)\MSSQLLocalDB;Integrated Security=True";
         //static string chaineConnexion = $@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\emper\OneDrive\Documents\ISIMA\ZZ2\Projet\Ancestrel\DataBase\Database.mdf;Integrated Security=True";
 
-        static readonly string _PrenomTable = "dbo.Prenom";
-        static readonly string _PrenomPersonneTable = "dbo.Prenom_Personne";
+        private readonly string _PrenomTable = "dbo.Prenom";
+        private readonly string _PrenomPersonneTable = "dbo.Prenom_Personne";
 
-        static readonly string _IdPrenom = "Id_prenom";
-        static readonly string _IdPersonne = "Id_personne";
-        static readonly string _OrdrePrenom = "Ordre";
-        static readonly string _Id = "Id";
-        static readonly string _Prenom = "Prenom";
+        private readonly string _IdPrenom = "Id_prenom";
+        private readonly string _IdPersonne = "Id_personne";
+        private readonly string _OrdrePrenom = "Ordre";
+        private readonly string _Id = "Id";
+        private readonly string _Prenom = "Prenom";
 
 
-        public static string? GetPrenomById(int id)
+        public PrenomBdd(string chaineConnexion)
+        {
+            _chaineConnexion = chaineConnexion;
+        }
+
+
+
+        public string? GetPrenomById(int id)
         {
             // Requete SQL pour récuperer les infos sur une personne 
             string queryString = $"SELECT {_OrdrePrenom}, {_Prenom} " +
@@ -35,7 +43,7 @@ namespace DataBase
                                  $"ORDER BY {_OrdrePrenom} ASC;";
 
             // Connexion à la bdd
-            SqlConnection connexion = new SqlConnection(chaineConnexion);
+            SqlConnection connexion = new SqlConnection(_chaineConnexion);
             connexion.Open();
 
             // Création et execution de la requete SQL
@@ -55,7 +63,7 @@ namespace DataBase
             return prenoms;
         }
 
-        public static void InsererPrenomsPersonne(List<string> listPrenoms, int idPersonne)
+        public void InsererAssociationPrenomsPersonneId(List<string> listPrenoms, int idPersonne)
         {
             // Construction de la string Values pour la requete SQL
             StringBuilder listPrenomsValuesBuilder = new StringBuilder();
@@ -76,7 +84,7 @@ namespace DataBase
             Dictionary<string, int> prenomsDejaEnregistres = new Dictionary<string, int>();
 
             // Connexion à la bdd
-            SqlConnection connexion = new SqlConnection(chaineConnexion);
+            SqlConnection connexion = new SqlConnection(_chaineConnexion);
             SqlCommand commandSql;
             SqlDataReader reader;
             string queryString;
@@ -154,7 +162,7 @@ namespace DataBase
                     queryString = $"INSERT INTO {_PrenomPersonneTable} " +
                                   $"( {_IdPersonne}, {_IdPrenom} ) " +
                                   $"VALUES ({idPersonne}, {idPrenomEnregistre});";
-                    
+
                     // Création de la requete SQL d'INSERTION dans la TABLE association des prenoms-personne
                     commandSql = new SqlCommand(queryString, connexion);
 

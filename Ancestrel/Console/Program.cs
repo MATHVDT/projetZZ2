@@ -65,11 +65,16 @@ Personne personne = new Homme(num: 1, nom: "Dupond", prenoms: "Jean Remi",
                                dateNaissance: DateOnly.Parse("16/02/2000"), dateDeces: DateOnly.Parse("04/12/2048"));
 
 
+string chaineConnexion = $@"Data Source=(LocalDB)\MSSQLLocalDB;Integrated Security=True";
+
+Bdd bdd = new Bdd(chaineConnexion);
+
 //Console.WriteLine($"{System.DBNull.Value}");
 
 //Console.WriteLine(PersonneBdd.PersonneValuesInsert(personne));
 
-PersonneBdd.InsererPersonne(personne);
+bdd.InsererPersonne(personne);
+
 
 //Console.WriteLine(PersonneBdd.GetPersonneById(2).ToString());
 
@@ -77,4 +82,4 @@ List<string> listPrenoms = new List<string>();
 listPrenoms.Add("jack");
 listPrenoms.Add("william");
 
-PrenomBdd.InsererPrenomsPersonne(listPrenoms, 1);
+bdd.InsererPrenomsPersonne(personne);

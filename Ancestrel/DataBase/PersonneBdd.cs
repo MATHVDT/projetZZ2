@@ -7,24 +7,36 @@ namespace DataBase
 {
     public class PersonneBdd
     {
-        static readonly string _PersonneTable = "Personne";
+        private readonly string _chaineConnexion;
 
-        static readonly string _Id = "Id";
-        static readonly string _Sexe = "Sexe";
-        static readonly string _NomUsage = "Nom_usage";
-        static readonly string _Nom = "Nom";
-        static readonly string _DateNaissance = "Date_naissance";
-        static readonly string _DateDeces = "Date_deces";
-        static readonly string _IdVilleNaissance = "Id_ville_naissance";
-        static readonly string _IdImgProfil = "Id_img_principale";
-        static readonly string _IdPere = "Id_pere";
-        static readonly string _IdMere = "Id_mere";
+        private readonly string _PersonneTable = "Personne";
+
+        private readonly string _Id = "Id";
+        private readonly string _Sexe = "Sexe";
+        private readonly string _NomUsage = "Nom_usage";
+        private readonly string _Nom = "Nom";
+        private readonly string _DateNaissance = "Date_naissance";
+        private readonly string _DateDeces = "Date_deces";
+        private readonly string _IdVilleNaissance = "Id_ville_naissance";
+        private readonly string _IdImgProfil = "Id_img_principale";
+        private readonly string _IdPere = "Id_pere";
+        private readonly string _IdMere = "Id_mere";
 
 
-        static string chaineConnexion = $@"Data Source=(LocalDB)\MSSQLLocalDB;Integrated Security=True";
+        //static string chaineConnexion = $@"Data Source=(LocalDB)\MSSQLLocalDB;Integrated Security=True";
         //static string chaineConnexion = $@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\mavilledie4\Source\Repos\genealogie\Ancestrel\DataBase\SampleDatabase.mdf;Integrated Security=True";
         //static string chaineConnexion = $@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=E:\ma_th\Documents\Programmations\pgenealogie\Ancestrel\DataBase\SampleDatabase.mdf;Integrated Security=True";
         //static string chaineConnexion = $@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\emper\OneDrive\Documents\ISIMA\ZZ2\Projet\Ancestrel\DataBase\Database.mdf;Integrated Security=True";
+
+
+        public PersonneBdd(string chaineConnexion)
+        {
+            _chaineConnexion = chaineConnexion;
+        }
+
+
+
+
 
         /**
          * @fn public static Personne GetPersonneById(int id)
@@ -34,7 +46,7 @@ namespace DataBase
          * 
          * @return Personne *Personne avec les champs remplis*
          */
-        public static Personne GetPersonneById(int id)
+        public Personne GetPersonneById(int id)
         {
             // Requete SQL pour récuperer les infos sur une personne 
             string queryString = $"SELECT * " +
@@ -44,7 +56,7 @@ namespace DataBase
 
             Console.WriteLine(queryString);
             // Connexion à la bdd
-            SqlConnection connexion = new SqlConnection(chaineConnexion);
+            SqlConnection connexion = new SqlConnection(_chaineConnexion);
             connexion.Open();
 
             // Création et execution de la requete SQL
@@ -116,7 +128,7 @@ namespace DataBase
          * 
          * @warning La personne ajoutée ne doit pas être présente dans la bdd.
          */
-        public static void InsererPersonne(Personne personne)
+        public void InsererPersonne(Personne personne)
         {
             // Récupération des champs personne (prénoms exclus)
             string values = PersonneValuesInsert(personne);
@@ -126,7 +138,7 @@ namespace DataBase
             //Console.WriteLine(queryString);
 
             // Connexion à la bdd
-            SqlConnection connexion = new SqlConnection(chaineConnexion);
+            SqlConnection connexion = new SqlConnection(_chaineConnexion);
             SqlCommand commandSql;
             string queryString;
 
