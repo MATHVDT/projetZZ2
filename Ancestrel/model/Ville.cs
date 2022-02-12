@@ -89,5 +89,19 @@ namespace Model
          */
         public Ville(string? nom = null, double? longitude = null, double? latitude = null)
         : this(null, nom, longitude, latitude) { }
+
+        /**
+         * @overload public ToString()
+         */
+        public override string ToString()
+        {
+            StringBuilder strBuil = new();
+
+            strBuil.Append(Nom is null ? "NomInconnu " : Nom + " (");
+            strBuil.Append(Latitude is null ? "x.xxx" : "Latitude : " + Latitude + "; ");
+            strBuil.Append(Longitude is null ? "x.xxx" : "Longitude : " + Longitude+")");
+
+            return strBuil.ToString();
+        }
     }
 }

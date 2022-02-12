@@ -85,3 +85,5 @@ listPrenoms.Add("william");
 bdd.InsererPrenomsPersonne(personne);
 
 Console.WriteLine(bdd.GetPersonneById(1).ToString());
+
+Console.WriteLine(bdd.GetVilleById(2));

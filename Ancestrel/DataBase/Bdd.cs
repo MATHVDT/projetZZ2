@@ -10,8 +10,9 @@ namespace DataBase
     public class Bdd : BddLoader, BddSaver
     {
         private readonly string _chaineConnexion;
-        private PersonneBdd _personneBdd;
-        private PrenomBdd _prenomBdd;
+        private readonly PersonneBdd _personneBdd;
+        private readonly PrenomBdd _prenomBdd;
+        private readonly VilleBdd _villeBdd;
 
         public Bdd(string chaineConnexion)
         {
@@ -19,6 +20,7 @@ namespace DataBase
 
             _personneBdd = new PersonneBdd(_chaineConnexion);
             _prenomBdd = new PrenomBdd(_chaineConnexion);
+            _villeBdd = new VilleBdd(_chaineConnexion);
         }
 
         public FichierImage GetFichierImageById(int id)
@@ -62,9 +64,9 @@ namespace DataBase
             return GetPrenomById(id);
         }
 
-        public Ville GetVilleById(int id)
+        public Ville GetVilleById(int idVille)
         {
-            throw new NotImplementedException();
+            return _villeBdd.GetVilleTableById(idVille);
         }
 
         public void InsererFichierImage(FichierImage fichierImage)

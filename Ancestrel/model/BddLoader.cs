@@ -12,6 +12,6 @@ namespace Model
         public Personne GetPersonneById(int idPersonne);
         public string? GetPrenomById(int id);
         public FichierImage GetFichierImageById(int id);
-        public Ville GetVilleById(int id);
+        public Ville GetVilleById(int idVille);
     }
 }

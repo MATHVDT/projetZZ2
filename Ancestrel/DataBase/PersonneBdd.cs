@@ -48,60 +48,73 @@ namespace DataBase
          */
         public Personne GetPersonneTableById(int id)
         {
+            // Création de la personne avec les infos récupérées
+            Personne p = null;
+
             // Requete SQL pour récuperer les infos sur une personne 
             string queryString = $"SELECT * " +
                                  $"FROM {_PersonneTable} " +
                                  $"WHERE {_Id} = {id};";
 
-
-            Console.WriteLine(queryString);
             // Connexion à la bdd
             SqlConnection connexion = new SqlConnection(_chaineConnexion);
-            connexion.Open();
+            SqlCommand commandSql;
+            SqlDataReader reader;
 
-            // Création et execution de la requete SQL
-            SqlCommand commandSql = new SqlCommand(queryString, connexion);
-            SqlDataReader reader = commandSql.ExecuteReader();
-
-            reader.Read();
-
-            // Recupération de différent champs de la requete
-            int idBdd = (int)reader[_Id];
-
-            string? nomUsageBdd = (string?)(reader[_NomUsage] is System.DBNull ? null : reader[_NomUsage]);
-            string? nomBdd = (string?)(reader[_Nom] is System.DBNull ? null : reader[_Nom]);
-
-            DateOnly? dateNaissanceBdd = (DateOnly?)(reader[_DateNaissance] is System.DBNull ? null : DateOnly.FromDateTime((DateTime)reader[_DateNaissance]));
-            DateOnly? dateDecesBdd = (DateOnly?)(reader[_DateDeces] is System.DBNull ? null : DateOnly.FromDateTime((DateTime)reader[_DateDeces]));
-
-            int? idPere = (reader[_IdPere] is System.DBNull ? null : (int?)reader[_IdPere]);
-            int? idMere = (reader[_IdMere] is System.DBNull ? null : (int?)reader[_IdMere]);
-
-
-            int? idImgProfil = (reader[_IdImgProfil] is System.DBNull ? null : (int?)reader[_IdImgProfil]);
-            int? idVilleNaissance = (reader[_IdVilleNaissance] is System.DBNull ? null : (int?)reader[_IdVilleNaissance]);
-
-            int sexe = (int)reader[_Sexe]; // 0 -> Homme et 1 -> Femme
-
-            // Création de la personne avec les infos récupérées
-            Personne p;
-
-            if (sexe == 1) // Femme 
+            try
             {
-                p = new Femme(0, idBdd, nomUsageBdd, null, dateNaissanceBdd, dateDecesBdd,
-                    null, null, nomBdd);
+                connexion.Open(); // Ouverture de la connexion à la bdd
+
+                // Création et execution de la requete SQL
+                Console.WriteLine(queryString);
+                commandSql = new SqlCommand(queryString, connexion);
+                reader = commandSql.ExecuteReader();
+
+                reader.Read(); // Debut de la lecture du la requete
+
+                // Recupération de différent champs de la requete
+                int idBdd = (int)reader[_Id];
+
+                string? nomUsageBdd = (string?)(reader[_NomUsage] is System.DBNull ? null : reader[_NomUsage]);
+                string? nomBdd = (string?)(reader[_Nom] is System.DBNull ? null : reader[_Nom]);
+
+                DateOnly? dateNaissanceBdd = (DateOnly?)(reader[_DateNaissance] is System.DBNull ? null : DateOnly.FromDateTime((DateTime)reader[_DateNaissance]));
+                DateOnly? dateDecesBdd = (DateOnly?)(reader[_DateDeces] is System.DBNull ? null : DateOnly.FromDateTime((DateTime)reader[_DateDeces]));
+
+                int? idPere = (reader[_IdPere] is System.DBNull ? null : (int?)reader[_IdPere]);
+                int? idMere = (reader[_IdMere] is System.DBNull ? null : (int?)reader[_IdMere]);
+
+
+                int? idImgProfil = (reader[_IdImgProfil] is System.DBNull ? null : (int?)reader[_IdImgProfil]);
+                int? idVilleNaissance = (reader[_IdVilleNaissance] is System.DBNull ? null : (int?)reader[_IdVilleNaissance]);
+
+                int sexe = (int)reader[_Sexe]; // 0 -> Homme et 1 -> Femme
+
+                reader.Close();  // Fermeture de la lecture de la requete
+
+
+                if (sexe == 1) // Femme 
+                {
+                    p = new Femme(0, idBdd, nomUsageBdd, null, dateNaissanceBdd, dateDecesBdd,
+                        null, null, nomBdd);
+                }
+                else // Homme
+                {
+                    p = new Homme(0, idBdd, nomUsageBdd, null, dateNaissanceBdd, dateDecesBdd,
+                        null, null);
+                }
+
             }
-            else // Homme
+            catch (SqlException e)
             {
-                p = new Homme(0, idBdd, nomUsageBdd, null, dateNaissanceBdd, dateDecesBdd,
-                    null, null);
+                Console.WriteLine("Error Generated. Details: " + e.ToString());
+            }
+            finally
+            {
+                connexion.Close();
             }
 
-            reader.Close();
-            connexion.Close();
 
-            // Ajout Image 
-            // Ajout Image profil
 
 
             return p;
