@@ -69,7 +69,7 @@ namespace DataBase
             //    listPrenomsValuesBuilder.Append(p);
             //    listPrenomsValuesBuilder.Append("', ");
             //}
-            //// On enlève les deux dernier caractères ", "
+            // On enlève les deux dernier caractères ", "
             //listPrenomsValuesBuilder.Remove(listPrenomsValuesBuilder.Length - 2, listPrenomsValuesBuilder.Length - 1);
 
             // Sert à garder en mémoire les prenoms et leurs id associé qui sont enregistré
@@ -100,7 +100,7 @@ namespace DataBase
                 Console.WriteLine(queryString);
                 reader = commandSql.ExecuteReader();
 
-                Console.WriteLine("Prénoms déjà enregistrés : ");
+                Console.Write("Prénoms déjà enregistrés : ");
                 // Stockage des id des prénoms déjà enregistrés
                 while (reader.Read())
                 {
@@ -152,8 +152,9 @@ namespace DataBase
 
                     // Requete SQL d'INSERTION dans la TABLE association des prenoms-personne
                     queryString = $"INSERT INTO {_PrenomPersonneTable} " +
+                                  $"( {_IdPersonne}, {_IdPrenom} ) " +
                                   $"VALUES ({idPersonne}, {idPrenomEnregistre});";
-
+                    
                     // Création de la requete SQL d'INSERTION dans la TABLE association des prenoms-personne
                     commandSql = new SqlCommand(queryString, connexion);
 

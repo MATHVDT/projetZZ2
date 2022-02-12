@@ -12,7 +12,7 @@ DROP TABLE IF EXISTS dbo.Personne;
 
 CREATE TABLE [dbo].[Prenom]
 (
-	[Id] INT NOT NULL PRIMARY KEY,
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY (1,1),
 	[Prenom] VARCHAR(100) NOT NULL UNIQUE
 )
 
@@ -104,7 +104,7 @@ CREATE TABLE [dbo].[Prenom_Personne]
 (
 	[Id_prenom] INT NOT NULL,
 	[Id_personne] INT NOT NULL,
-	[Ordre] INT NOT NULL IDENTITY (1,1),
+	[Ordre] INT NOT NULL,
 	CONSTRAINT pk_preper PRIMARY KEY(Id_prenom, Id_personne, Ordre),
 	CONSTRAINT fk_preper_prenom FOREIGN KEY(Id_prenom) REFERENCES Prenom(Id) ON DELETE CASCADE,
 	CONSTRAINT fk_preper_personne FOREIGN KEY(Id_personne) REFERENCES Personne(Id) ON DELETE CASCADE
