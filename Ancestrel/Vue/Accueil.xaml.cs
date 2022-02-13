@@ -1,4 +1,5 @@
-﻿using System;
+﻿using model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,7 @@ namespace Vue
         public Accueil()
         {
             InitializeComponent();
+            SP.Children.Add(new UCPersonne(new Homme(10, "joe", "cad")));
         }
 
         private void CreerArbre_Click(object sender, RoutedEventArgs e)
