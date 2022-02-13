@@ -61,7 +61,7 @@ Image img2 = (Image)imgTest.Clone();*/
 
 //const string VALUENULL = "NULL";
 
-Personne personne = new Homme(num: 1, nom: "Dupond", prenoms: "Jean Remi",
+Personne personne = new Homme(num: 1, nom: "Dupond", prenoms: "Jean Remi jean",
                                dateNaissance: DateOnly.Parse("16/02/2000"), dateDeces: DateOnly.Parse("04/12/2048"));
 
 
@@ -86,4 +86,4 @@ bdd.InsererPrenomsPersonne(personne);
 
 Console.WriteLine(bdd.GetPersonneById(1).ToString());
 
-Console.WriteLine(bdd.GetVilleById(2));
+//Console.WriteLine(bdd.GetVilleById(2));

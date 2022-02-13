@@ -48,6 +48,7 @@ namespace DataBase
 
             // Création et execution de la requete SQL
             SqlCommand commandSql = new SqlCommand(queryString, connexion);
+            Console.WriteLine(queryString);
             SqlDataReader reader = commandSql.ExecuteReader();
 
             // Récupération des prénoms 
@@ -55,7 +56,7 @@ namespace DataBase
 
             while (reader.Read())
             {
-                prenomBuilder.Append(reader[_Prenom].ToString());
+                prenomBuilder.Append(reader[_Prenom].ToString() + " ");
             }
             // Concatenation des prenoms
             string? prenoms = (prenomBuilder.Length == 0) ? null : prenomBuilder.ToString();

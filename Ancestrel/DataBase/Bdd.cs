@@ -14,6 +14,8 @@ namespace DataBase
         private readonly PrenomBdd _prenomBdd;
         private readonly VilleBdd _villeBdd;
 
+        private Dictionary<int, Ville> _villeDejaChargee;
+
         public Bdd(string chaineConnexion)
         {
             _chaineConnexion = chaineConnexion;
@@ -21,6 +23,8 @@ namespace DataBase
             _personneBdd = new PersonneBdd(_chaineConnexion);
             _prenomBdd = new PrenomBdd(_chaineConnexion);
             _villeBdd = new VilleBdd(_chaineConnexion);
+
+            _villeDejaChargee = new Dictionary<int, Ville>();
         }
 
         public FichierImage GetFichierImageById(int id)

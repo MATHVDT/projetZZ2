@@ -54,7 +54,7 @@ namespace Model
          * @brief Id du père dans la BDD.
          */
         public int? IdPere { get; set; }
-        
+
         /**
          * @var IdMere
          * @brief Id du mère dans la BDD.
@@ -212,7 +212,9 @@ namespace Model
         /**
          * @fn public Personne
          * @param int num *Numero de l'enfant*
-         * @param int? id *Id de la personne dans la BDD*
+         * @param int? id = null *Id de la personne dans la BDD*
+         * @param int? idPere = null *Id du pere dans la BDD*
+         * @param int? idMere = null *Id de la mere dans la BDD*
          * @param string? nom = null,
          * @param string? prenoms = null
          * @param DateOnly? dateNaissance = null
@@ -224,13 +226,14 @@ namespace Model
          * @details
          * Definie les propiétés de la personne.
          */
-        public Personne(int num, int? id = null, string? nom = null, string? prenoms = null,
+        public Personne(int num, int? id = null, int? idPere = null, int? idMere = null,
+            string? nom = null, string? prenoms = null,
             DateOnly? dateNaissance = null, DateOnly? dateDeces = null,
             Ville? lieuNaissance = null, string? nationalite = null)
         {
             Id = id;
-            IdPere = null;
-            IdMere = null;
+            IdPere = idPere;
+            IdMere = idMere;
             Numero = num;
             Nom = nom;
             _listePrenom = new List<string>();
@@ -244,6 +247,7 @@ namespace Model
             Inconnu = _estInconnu();
 
         }
+
 
         /**
         * @fn public void AddPrenoms(string[] inListeValue)
@@ -381,7 +385,7 @@ namespace Model
             if (Inconnu == false)
             {
                 strBuil.Append(Nom is null ? "NomInconnu " : Nom + " ");
-                strBuil.Append(Prenoms is null ? "PrenomInconnu " : Prenoms);
+                strBuil.Append(Prenoms is null ? "PrenomInconnu " : Prenoms + " ");
                 strBuil.Append(DateNaissance is null ? "[NaissanceInconnu-" :
                     "[" + DateNaissance + "-");
                 strBuil.Append(DateDeces is null ? "DecesInconnu] " : DateDeces + "] ");
