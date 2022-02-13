@@ -17,23 +17,15 @@ using System.Windows.Shapes;
 namespace Vue
 {
     /// <summary>
-    /// Logique d'interaction pour Accueil.xaml
+    /// Logique d'interaction pour Arbre.xaml
     /// </summary>
-    public partial class Accueil : Page
+    public partial class Arbre : Page
     {
-        public Accueil()
+        private Manager manager = Manager.GetInstance();
+
+        public Arbre()
         {
             InitializeComponent();
-        }
-
-        private void CreerArbre_Click(object sender, RoutedEventArgs e)
-        {
-            this.NavigationService.Navigate(new CreerPersonne());
-        }
-
-        private void ChargerArbre_Click(object sender, RoutedEventArgs e)
-        {
-            throw new NotImplementedException();
         }
     }
 }
