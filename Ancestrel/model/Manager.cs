@@ -31,5 +31,43 @@ namespace Model
         {
             Arbre = a;
         }
+
+        public void CreerArbre(Personne p)
+        {
+            Arbre = new Arbre(p);
+            //AjouterPersonne dans BDD
+        }
+
+        public void SupprimerPersonne(Personne p)
+        {
+            if(p.Id != null)
+            {
+                //DELETEPERSONNE(p)
+                Arbre.SupprimerPersonne((int)p.Id);
+            }
+        }
+
+        public void ModifierPersonne(Personne p)
+        {
+            //UpdatePersonne(p)
+        }
+
+        public void AjouterPere(Personne enfant, Homme pere)
+        {
+            int idPere = 0;
+            //id=AJOUTPere
+            enfant.IdPere = idPere;
+            //UpdateEnfant(idPere)!
+
+        }
+
+        public void AjouterMere(Personne enfant, Femme mere)
+        {
+            int idMere=0; //
+            //id=AJOUTMERE
+            enfant.IdMere = idMere;
+            //UpdateEnfant(idMere)
+        }
+
     }
 }

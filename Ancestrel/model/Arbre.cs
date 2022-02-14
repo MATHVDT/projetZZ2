@@ -28,28 +28,6 @@ namespace Model
     {
 
         /**
-         * @var Id
-         * @brief Id de l'arbre dans la BDD.
-         */
-        public string? Id { get; set; }
-
-        /**
-        * @var Nom
-        * @brief Nom de l'arbre
-        * @details
-        * Nom de l'arbre
-        */
-        public string Nom { get; set; }
-
-        /**
-         * @var Description
-         * @brief Description de l'arbre
-         * @details
-         * Description de l'arbre
-         */
-        public string Description { get; set; }
-
-        /**
         * @var Personnes
         * @brief Dictionnaire des personnes
         * @details
@@ -67,24 +45,12 @@ namespace Model
          * @details
          * Construit la base d'un arbre.
          */
-        public Arbre(int? id, string nom, string desc, Personne cujus)
+        public Arbre(Personne cujus)
         {
-            Id = Id;
-            Nom = nom;
-            Description = desc;
             Personnes = new Dictionary<int, Personne>();
             cujus.Numero = 1;
             Personnes.Add(cujus.Numero, cujus);
         }
-
-
-        /**
-         * @overload public Arbre(string nom, string desc, Personne cujus)
-         * @brief Constructeur d'un nouvel arbre. *sans id*
-         */
-        public Arbre(string nom, string desc, Personne cujus)
-            : this(null, nom, desc, cujus) { }
-
 
 
         /**
