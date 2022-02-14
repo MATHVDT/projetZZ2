@@ -21,6 +21,7 @@ namespace Vue
     /// </summary>
     public partial class UCPersonne : UserControl
     {
+        private const string _INCONNUE = "Inconnue";
         private Personne personne;
         public UCPersonne(Personne p)
         {
@@ -32,14 +33,22 @@ namespace Vue
 
         private void AffectationValeur()
         {
-            Nom.Content = personne.Nom;
-            if(personne.Prenoms != null)
+            if (personne.Inconnu)
             {
-                Prenom.Content = personne.Prenoms;
+                Portrait.Source = personne is Homme ? new BitmapImage(new Uri(@"Images/Homme.png", UriKind.RelativeOrAbsolute)) : new BitmapImage(new Uri(@"Images/Femme.png", UriKind.RelativeOrAbsolute));
+                Nom.Content = _INCONNUE;
+                Prenom.Content = "";
+                Naissance.Content = "";
+                Deces.Content = "";
             }
-            Naissance.Content = personne.DateNaissance;
-            Deces.Content = personne.DateDeces;
-            //Portrait.Source = personne.Portrait;
+            else
+            {
+                Nom.Content = personne.Nom != null ? personne.Nom : _INCONNUE;
+                Prenom.Content = personne.Prenoms != null ? personne.Prenoms : _INCONNUE;
+                Naissance.Content = personne.DateNaissance != null ? personne.DateNaissance : _INCONNUE;
+                Deces.Content = personne.DateDeces != null ? personne.DateDeces : _INCONNUE;
+                //Portrait = personne.GetFichierImageProfil().Image; //Utiliser un converter
+            }
         }
     }
 }
