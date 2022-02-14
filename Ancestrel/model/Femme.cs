@@ -65,21 +65,12 @@ namespace Model
                      DateOnly? dateNaissance = null, DateOnly? dateDeces = null,
                      Ville? lieuNaissance = null, string? nationalite = null,
                      string? nomJeuneFille = null) :
-                base(2 * num, id, idPere, idMere, nom, prenoms, dateNaissance, dateDeces, lieuNaissance, nationalite)
+                base(2 * num + 1, id, idPere, idMere, nom, prenoms, dateNaissance, dateDeces, lieuNaissance, nationalite)
         {
             //Numero = 2 * num + 1;
             NomJeuneFille = nomJeuneFille;
 
         }
-
-        public Femme(int num, int? id = null,
-                   string? nom = null, string? prenoms = null,
-                   DateOnly? dateNaissance = null, DateOnly? dateDeces = null,
-                   Ville? lieuNaissance = null, string? nationalite = null,
-                   string? nomJeuneFille = null) :
-              this(num, id, null, null, nom, prenoms, dateNaissance, dateDeces, lieuNaissance, nationalite,
-                  nomJeuneFille)
-        { }
 
         /**
          * @overload public override string ToString()

@@ -248,16 +248,25 @@ namespace Model
 
         }
 
+        public Personne(int? id = null, int? idPere = null, int? idMere = null,
+    string? nom = null, string? prenoms = null,
+    DateOnly? dateNaissance = null, DateOnly? dateDeces = null,
+    Ville? lieuNaissance = null, string? nationalite = null)
+        {
+            Numero = 1;
+        }
+
+
 
         /**
-        * @fn public void AddPrenoms(string[] inListeValue)
+        * @fn public void AjouterPrenoms(string[] inListeValue)
         * @param string[] inListeValue *Liste de prenoms*
         * @brief Ajouter un/des prenom(s) à la personne.
         * @details
         * Ajoute les prenoms passés en paramètre à la personne.
         * Regarde si le nom n'est pas déjà ajouté dans la liste des prenoms.
         */
-        public void AddPrenoms(string[] inListeValue)
+        public void AjouterPrenoms(string[] inListeValue)
         {
             if (inListeValue != null)
             {
@@ -275,16 +284,16 @@ namespace Model
         }
 
         /**
-        * @overload public void AddPrenoms(string value)
+        * @overload public void AjouterPrenoms(string value)
         * @param string value *Chaine de caractères de prenoms*
         */
-        public void AddPrenoms(string value)
+        public void AjouterPrenoms(string value)
         {
             if (value != null)
             {
 
                 string[] listeValues = value.Split(" ", StringSplitOptions.RemoveEmptyEntries);
-                this.AddPrenoms(listeValues);
+                this.AjouterPrenoms(listeValues);
             }
         }
 

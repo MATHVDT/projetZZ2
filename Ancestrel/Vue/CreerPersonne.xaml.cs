@@ -21,9 +21,11 @@ namespace Vue
     /// </summary>
     public partial class CreerPersonne : Page
     {
+        private Manager manager= Manager.GetInstance();
         private int Numero;
         private int Index = 0;
         private bool EstNouvelArbre = true;
+        private Personne personne;
 
         public CreerPersonne()
         {
@@ -77,7 +79,7 @@ namespace Vue
         private void ButtonAjout_Click(object sender, RoutedEventArgs e)
         {
             Boolean test = true;
-
+            personne = Sexe_ComboBox.SelectedValue == "Masculin" ? new Homme(): new Femme(); 
             if (string.IsNullOrWhiteSpace(Nom_TextBox.Text))
             {
                 Nom_TextBox.Background = new SolidColorBrush(Colors.Red);
@@ -85,6 +87,7 @@ namespace Vue
             }
             else
             {
+                personne.Nom=Nom_TextBox.Text;
                 Nom_TextBox.Background = new SolidColorBrush(Colors.White);
             }
             foreach (Object o in SP_Prenoms.Children)
@@ -98,6 +101,7 @@ namespace Vue
                     }
                     else
                     {
+                        personne.AjouterPrenoms(((TextBox)o).Text);
                         ((TextBox)o).Background = new SolidColorBrush(Colors.White);
                     }
                 }
@@ -128,10 +132,7 @@ namespace Vue
                     }
                     else
                     {
-                        //CreerArbre
-                        /*
-                         * ici
-                         * */
+                        manager.CreerArbre(personne);
                         this.NavigationService.Navigate(new Arbre());
                     }
                 }

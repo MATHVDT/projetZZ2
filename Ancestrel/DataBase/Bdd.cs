@@ -46,7 +46,7 @@ namespace DataBase
             // Recupération des prénoms de la personne dans la Table Prenom et la Table d'association
             string? prenomsBdd = _prenomBdd.GetPrenomById(idPersonne);
             if (prenomsBdd is not null)
-                personne.AddPrenoms(prenomsBdd);
+                personne.AjouterPrenoms(prenomsBdd);
 
             // Recupération lieu de naissance dans la Table Ville et la Table d'association
 
