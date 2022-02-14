@@ -68,7 +68,7 @@ namespace DataBase
             }
             catch (SqlException e)
             {
-                Console.WriteLine("Error Generated. Details: " + e.ToString());
+                Console.WriteLine("Error SQL Generated. Details: " + e.ToString());
             }
             catch (Exception e)
             {
@@ -76,7 +76,6 @@ namespace DataBase
             }
             finally
             {
-
                 connexion.Close();
             }
 

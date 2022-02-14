@@ -17,6 +17,7 @@ namespace DataBase
         private readonly string _Nom = "Nom";
         private readonly string _DateNaissance = "Date_naissance";
         private readonly string _DateDeces = "Date_deces";
+        private readonly string _Description = "Description";
         private readonly string _IdVilleNaissance = "Id_ville_naissance";
         private readonly string _IdImgProfil = "Id_img_principale";
         private readonly string _IdPere = "Id_pere";
@@ -106,15 +107,16 @@ namespace DataBase
             }
             catch (SqlException e)
             {
+                Console.WriteLine("Error SQL Generated. Details: " + e.ToString());
+            }
+            catch (Exception e)
+            {
                 Console.WriteLine("Error Generated. Details: " + e.ToString());
             }
             finally
             {
                 connexion.Close();
             }
-
-
-
 
             return p;
         }
@@ -138,7 +140,6 @@ namespace DataBase
             string values = PersonneValuesInsert(personne);
 
 
-
             //Console.WriteLine(queryString);
 
             // Connexion à la bdd
@@ -151,8 +152,9 @@ namespace DataBase
                 connexion.Open(); // Ouverture connexion
 
                 // Requete SQL pour inserer la personne 
-                queryString = $"INSERT INTO {_PersonneTable} " +
-                                     $"VALUES ({values});";
+                queryString = $"INSERT INTO {_PersonneTable} \n" +
+                              $"( {_Sexe}, {_NomUsage}, {_Nom}, {_DateNaissance}, {_DateDeces}, {_Description}, {_IdImgProfil}, {_IdVilleNaissance}, {_IdPere}, {_IdMere} ) \n" +
+                              $"VALUES ({values});";
 
                 // Création de la requete SQL d'INSERTION
                 commandSql = new SqlCommand(queryString, connexion);
@@ -179,6 +181,10 @@ namespace DataBase
 
             }
             catch (SqlException e)
+            {
+                Console.WriteLine("Error SQL Generated. Details: " + e.ToString());
+            }
+            catch (Exception e)
             {
                 Console.WriteLine("Error Generated. Details: " + e.ToString());
             }
@@ -222,6 +228,8 @@ namespace DataBase
 
             valuesBuilder.Append($"{(personne.DateNaissance is null ? VALUENULL : $"CONVERT(date, '{personne.DateNaissance}', 103)")}, ");
             valuesBuilder.Append($"{(personne.DateDeces is null ? VALUENULL : $"CONVERT(date, '{personne.DateDeces}', 103)")}, ");
+
+            valuesBuilder.Append($"{(personne.Description is null ? VALUENULL : personne.Description )}, ");
 
             int? idLieuNaissance = personne.LieuNaissance is null ? null : personne.LieuNaissance.Id;
             valuesBuilder.Append($"{(idLieuNaissance is null ? VALUENULL : idLieuNaissance)}, ");
@@ -276,6 +284,10 @@ namespace DataBase
 
             }
             catch (SqlException e)
+            {
+                Console.WriteLine("Error SQL Generated. Details: " + e.ToString());
+            }
+            catch (Exception e)
             {
                 Console.WriteLine("Error Generated. Details: " + e.ToString());
             }

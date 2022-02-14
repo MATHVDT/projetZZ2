@@ -1,5 +1,1 @@
-﻿select * from Personne;
-select * from Prenom;
-select * from Ville;
-
-
+﻿select * from Personne

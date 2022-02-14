@@ -49,7 +49,7 @@ CREATE TABLE [dbo].[Ville]
 CREATE TABLE [dbo].[Description]
 (
 	[Id] INT NOT NULL PRIMARY KEY IDENTITY(1,1),
-	[Description] VARCHAR(2000) NULL
+	[Description] VARCHAR(MAX) NULL
 )
 
 CREATE TABLE [dbo].[Personne]
@@ -60,6 +60,7 @@ CREATE TABLE [dbo].[Personne]
 	[Nom] VARCHAR(200)  NULL,
 	[Date_naissance] DATE NULL,
 	[Date_deces] DATE NULL,
+	[Description] INT NULL,
 	[Id_ville_naissance] INT NULL,
 	[Id_img_principale] INT NULL,
 	[Id_pere] INT NULL,
@@ -69,16 +70,6 @@ CREATE TABLE [dbo].[Personne]
 	CONSTRAINT fk_perso_pere FOREIGN KEY(Id_pere) REFERENCES Personne(Id),
 	CONSTRAINT fk_perso_mere FOREIGN KEY(Id_mere) REFERENCES Personne(Id) 
 )
-
-CREATE TABLE [dbo].[Description_Personne]
-(
-	[Id_description] INT,
-	[Id_personne] INT,
-	CONSTRAINT pk_descper PRIMARY KEY(Id_description, Id_personne),
-	CONSTRAINT fk_descper_prenom FOREIGN KEY(Id_description) REFERENCES Description(Id) ON DELETE CASCADE,
-	CONSTRAINT fk_descper_personne FOREIGN KEY(Id_personne) REFERENCES Personne(Id) ON DELETE CASCADE
-)
-
 
 
 CREATE TABLE [dbo].[Image_Personne]

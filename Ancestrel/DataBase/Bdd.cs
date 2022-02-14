@@ -27,8 +27,8 @@ namespace DataBase
             _villeDejaChargee = new Dictionary<int, Ville>();
 
             // Ajout temp
-            Ville villeTest = _villeBdd.GetVilleTableById(1);
-            _villeDejaChargee.Add((int)villeTest.Id, villeTest);
+            //Ville villeTest = _villeBdd.GetVilleTableById(1);
+            //_villeDejaChargee.Add((int)villeTest.Id, villeTest);
         }
 
         public FichierImage GetFichierImageById(int id)

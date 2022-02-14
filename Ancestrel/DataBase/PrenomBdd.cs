@@ -180,6 +180,10 @@ namespace DataBase
             }
             catch (SqlException e)
             {
+                Console.WriteLine("Error SQL Generated. Details: " + e.ToString());
+            }
+            catch (Exception e)
+            {
                 Console.WriteLine("Error Generated. Details: " + e.ToString());
             }
             finally

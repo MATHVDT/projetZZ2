@@ -83,8 +83,8 @@ List<string> listPrenoms = new List<string>();
 listPrenoms.Add("jack");
 listPrenoms.Add("william");
 
-//bdd.InsererPrenomsPersonne(personne);
+bdd.InsererPrenomsPersonne(personne);
 
-Console.WriteLine(bdd.GetPersonneById(2).ToString());
+//Console.WriteLine(bdd.GetPersonneById(2).ToString());
 
 //Console.WriteLine(bdd.GetVilleById(1));
