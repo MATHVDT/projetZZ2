@@ -1,12 +1,12 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using model;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace model.Tests
+namespace Model.Tests
 {
     [TestClass()]
     public class ArbreTests
@@ -14,7 +14,7 @@ namespace model.Tests
         [TestMethod()]
         public void ArbreTest()
         {
-            Arbre arbre = new Arbre("arbre1", "arbre de test", new Homme(0, "Joe"));
+            Arbre arbre = new Arbre("arbre1", "arbre de test", new Homme(0, null, "Joe"));
             Assert.IsNotNull(arbre);
             Assert.IsNotNull(arbre.Personnes[1]);
             arbre.AjouterMere(1, "Marie");

@@ -6,6 +6,7 @@
  * @copyright ...
  */
 
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,10 +15,10 @@ using System.Threading.Tasks;
 
 
 /**
- * @namespace model
+ * @namespace Model
  * Espace de nom des classes de l'application
  */
-namespace model
+namespace Model
 {
     /**
    * @class Arbre
@@ -26,12 +27,18 @@ namespace model
     public class Arbre
     {
 
-         /**
-         * @var Nom
-         * @brief Nom de l'arbre
-         * @details
-         * Nom de l'arbre
+        /**
+         * @var Id
+         * @brief Id de l'arbre dans la BDD.
          */
+        public string? Id { get; set; }
+
+        /**
+        * @var Nom
+        * @brief Nom de l'arbre
+        * @details
+        * Nom de l'arbre
+        */
         public string Nom { get; set; }
 
         /**
@@ -48,10 +55,11 @@ namespace model
         * @details
         * Dictionnaire contenant les personnes apparaissant dans l'arbre
         */
-        public Dictionary<uint, Personne> Personnes;
+        public Dictionary<int, Personne> Personnes;
 
         /**
          * @fn public Arbre 
+         * @param int? id = null
          * @param string nom
          * @param string desc
          * @param Personne cujus *Personne à la base de l'arbre*
@@ -59,22 +67,32 @@ namespace model
          * @details
          * Construit la base d'un arbre.
          */
-        public Arbre(string nom, string desc, Personne cujus)
+        public Arbre(int? id, string nom, string desc, Personne cujus)
         {
+            Id = Id;
             Nom = nom;
             Description = desc;
-            Personnes = new Dictionary<uint, Personne>();
-            cujus.Identifiant = 1;
-            Personnes.Add(cujus.Identifiant, cujus);
+            Personnes = new Dictionary<int, Personne>();
+            cujus.Numero = 1;
+            Personnes.Add(cujus.Numero, cujus);
         }
 
 
         /**
-        * @fn AjouterPere(uint idEnfant, string? nom = null, string? prenoms = null,
+         * @overload public Arbre(string nom, string desc, Personne cujus)
+         * @brief Constructeur d'un nouvel arbre. *sans id*
+         */
+        public Arbre(string nom, string desc, Personne cujus)
+            : this(null, nom, desc, cujus) { }
+
+
+
+        /**
+        * @fn AjouterPere(int idEnfant, string? nom = null, string? prenoms = null,
            DateOnly? dateNaissance = null, DateOnly? dateDeces = null,
            Ville? lieuNaissance = null, string? nationalite = null)
         * @brief Ajoute un père
-        * @param uint idEnfant
+        * @param int idEnfant
         * @param  string? nom = null
         * @param string? prenoms = null
         * @param DateOnly? dateNaissance = null
@@ -82,22 +100,22 @@ namespace model
         * @param Ville? lieuNaissance = null
         * @param string? nationalite = null
         * @details
-        * Ajoute une personne de type Homme avec l'identifiant calculé en fonction de celui de l'enfant
+        * Ajoute une personne de type Homme avec le Numero calculé en fonction de celui de l'enfant
         */
-        public void AjouterPere(uint idEnfant, string? nom = null, string? prenoms = null,
+        public void AjouterPere(int idEnfant, string? nom = null, string? prenoms = null,
             DateOnly? dateNaissance = null, DateOnly? dateDeces = null,
             Ville? lieuNaissance = null, string? nationalite = null)
         {
-            Homme pere = new Homme(idEnfant, nom, prenoms, dateNaissance, dateDeces, lieuNaissance, nationalite);
-            Personnes.Add(pere.Identifiant, pere);
+            Homme pere = new Homme(idEnfant, null, nom, prenoms, dateNaissance, dateDeces, lieuNaissance, nationalite);
+            Personnes.Add(pere.Numero, pere);
         }
 
         /**
-        * @fn AjouterMere(uint idEnfant, string? nom = null, string? prenoms = null,
+        * @fn AjouterMere(int idEnfant, string? nom = null, string? prenoms = null,
            DateOnly? dateNaissance = null, DateOnly? dateDeces = null,
            Ville? lieuNaissance = null, string? nationalite = null)
         * @brief Ajoute une mere
-        * @param uint idEnfant
+        * @param int idEnfant
         * @param  string? nom = null
         * @param string? prenoms = null
         * @param DateOnly? dateNaissance = null
@@ -105,25 +123,25 @@ namespace model
         * @param Ville? lieuNaissance = null
         * @param string? nationalite = null
         * @details
-        * Ajoute une personne de type Femme avec l'identifiant calculé en fonction de celui de l'enfant
+        * Ajoute une personne de type Femme avec le Numero calculé en fonction de celui de l'enfant
         */
-        public void AjouterMere(uint idEnfant, string? nom = null, string? prenoms = null,
+        public void AjouterMere(int idEnfant, string? nom = null, string? prenoms = null,
             DateOnly? dateNaissance = null, DateOnly? dateDeces = null,
             Ville? lieuNaissance = null, string? nationalite = null)
         {
-            Femme mere = new Femme(idEnfant, nom, prenoms, dateNaissance, dateDeces, lieuNaissance, nationalite);
-            Personnes.Add(mere.Identifiant, mere);
+            Femme mere = new Femme(idEnfant, null, nom, prenoms, dateNaissance, dateDeces, lieuNaissance, nationalite);
+            Personnes.Add(mere.Numero, mere);
         }
 
         /**
-        * @fn SupprimerPersonne(uint idPersonne)
+        * @fn SupprimerPersonne(int idPersonne)
         * @brief Supprime une personne
-        * @param uint idPersonne
+        * @param int idPersonne
         * @details
         * Supprime une personne de l'arbre à partir de son id si elle est bien présente dans celui-ci.
         * @warning ArgumentException si l'id ne correspond à aucune personne de l'arbre
         */
-        public void SupprimerPersonne(uint idPersonne)
+        public void SupprimerPersonne(int idPersonne)
         {
             if (Personnes.ContainsKey(idPersonne))
             {
@@ -131,7 +149,7 @@ namespace model
             }
             else
             {
-                throw new ArgumentException("La personne n'est pas présente dans l'arbre (id : "+idPersonne+")");
+                throw new ArgumentException("La personne n'est pas présente dans l'arbre (id : " + idPersonne + ")");
             }
         }
 

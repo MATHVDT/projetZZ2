@@ -12,10 +12,12 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using model;
-
+using DataBase;
+using Model;
+using Model;
 
 /**
 * @fn Main
@@ -23,9 +25,9 @@ using model;
 */
 Console.WriteLine("Hello, World!");
 
-Manager m = Manager.GetInstance();
+//Manager m = Manager.GetInstance();
 
-Femme p = new Femme(1);
+/*Femme p = new Femme(1);
 
 p.Nom = "dupond";
 p.DateNaissance = DateOnly.FromDateTime(DateTime.Today);
@@ -33,29 +35,55 @@ p.DateNaissance = DateOnly.FromDateTime(DateTime.Today);
 Console.WriteLine(p.Nom);
 Console.WriteLine("Personne : " + p.ToString());
 
-Homme h = new(iden: 1, nom: "Dupond", prenoms: "Jean Remi",
+Homme h = new(num: 1, nom: "Dupond", prenoms: "Jean Remi",
    dateNaissance: DateOnly.Parse("16/02/2000"));
 
 
 
-Console.WriteLine(); 
+Console.WriteLine();
 Console.WriteLine(h.ToString());
 Console.WriteLine(h.Prenoms);
-Console.WriteLine(h.GetPrenoms());
+Console.WriteLine(h.GetPrenoms());*/
 
-
+/*
 Console.WriteLine(File.Exists("C:/Users/emper/OneDrive/Documents/ISIMA/ZZ2/Projet/Ancestrel/Console/Image1.jpg"));
 string path = "C:\\Users\\emper\\OneDrive\\Documents\\ISIMA\\ZZ2\\Projet\\Ancestrel\\Console\\Image1.jpg";
 
-FichierImage f = new FichierImage(path, "image");
+FichierImage f = new FichierImage(path, nomFichier: "image");
 
 h.AjouterImage(f);
 
 Console.WriteLine(f.NomFichier);
-
+*/
 
 /*Image imgTest = Image.FromFile("P:\\zz2\\genealogie\\Ancestrel\\Image1.png");
 Image img2 = (Image)imgTest.Clone();*/
 
+//const string VALUENULL = "NULL";
+
+Personne personne = new Homme(num: 1, nom: "Dupond", prenoms: "Jean Remi jean",
+                               dateNaissance: DateOnly.Parse("16/02/2000"), dateDeces: DateOnly.Parse("04/12/2048"));
 
 
+string chaineConnexion = $@"Data Source=(LocalDB)\MSSQLLocalDB;Integrated Security=True";
+
+Bdd bdd = new Bdd(chaineConnexion);
+
+//Console.WriteLine($"{System.DBNull.Value}");
+
+//Console.WriteLine(PersonneBdd.PersonneValuesInsert(personne));
+
+bdd.InsererPersonne(personne);
+
+
+//Console.WriteLine(PersonneBdd.GetPersonneTableById(2).ToString());
+
+List<string> listPrenoms = new List<string>();
+listPrenoms.Add("jack");
+listPrenoms.Add("william");
+
+bdd.InsererPrenomsPersonne(personne);
+
+Console.WriteLine(bdd.GetPersonneById(1).ToString());
+
+//Console.WriteLine(bdd.GetVilleById(2));

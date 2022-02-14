@@ -1,0 +1,9 @@
+// Chaine de connexion corrige avec chemin relatif
+Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=..\\ANCESTREL\\DATABASE\\SAMPLEDATABASE.MDF;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False
+
+// Chaine de connexion avec chemin absolue
+Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=E:\ma_th\Documents\Programmations\pgenealogie\Ancestrel\DataBase\SampleDatabase.mdf;Integrated Security=True
+
+
+// Ancienne chaine de connexion
+Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\DataBase.mdf;Integrated Security=True

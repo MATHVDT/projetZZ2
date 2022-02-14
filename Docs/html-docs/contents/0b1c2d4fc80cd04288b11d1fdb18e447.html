@@ -208,21 +208,8 @@
           </tr>
           
           <tr>
-            <td><a href="21e448cf8a18f86c3d4410f5dcf03eb7.html">numero</a></td>
-            <td></td>
-            <td><span class='label label-info'>false</span></td>
-            <td><span class='label label-info'>false</span></td>
-            <td>
-              
-              <span class='label label-info'>null</span>
-            </td>
-            <td><span class='label label-info'>false</span></td>
-            <td><span class='label label-info'>false</span></td>
-          </tr>
-          
-          <tr>
             <td><a href="eb84d647c52c28823fa5931d98b7e1bf.html">nomUsage</a></td>
-            <td></td>
+            <td>varchar(200)</td>
             <td><span class='label label-info'>false</span></td>
             <td><span class='label label-info'>false</span></td>
             <td>
@@ -235,7 +222,7 @@
           
           <tr>
             <td><a href="076ea43ae833aded161fef173f88f86f.html">nom</a></td>
-            <td></td>
+            <td>varchar(200)</td>
             <td><span class='label label-info'>false</span></td>
             <td><span class='label label-info'>false</span></td>
             <td>
@@ -250,10 +237,12 @@
             <td><a href="933b7e6256d83108a7342161e0713e7f.html">sexe</a></td>
             <td>int</td>
             <td><span class='label label-info'>false</span></td>
-            <td><span class='label label-info'>false</span></td>
+            <td><span class='label label-info'>true</span></td>
             <td>
               
-              <span class='label label-info'>null</span>
+                <a href='ed2d969e9fcd8585ed6ec4900565fd19.html'><span class='node-icon staruml-icon icon-ERDEntity'></span>Sexe</a> ::
+              
+              <a href='0892ec06080ef88dcec17ec0b2c6ada3.html'><span class='node-icon staruml-icon icon-ERDColumn'></span>sexe</a>
             </td>
             <td><span class='label label-info'>false</span></td>
             <td><span class='label label-info'>false</span></td>
@@ -286,13 +275,15 @@
           </tr>
           
           <tr>
-            <td><a href="2a9d45a1cfe36e6332dae0a662335b13.html">description</a></td>
-            <td>VARCHAR(2000)</td>
+            <td><a href="2a9d45a1cfe36e6332dae0a662335b13.html">IdDescription</a></td>
+            <td>int</td>
             <td><span class='label label-info'>false</span></td>
-            <td><span class='label label-info'>false</span></td>
+            <td><span class='label label-info'>true</span></td>
             <td>
               
-              <span class='label label-info'>null</span>
+                <a href='6575734ead86e5cdb8cbce51f6a126aa.html'><span class='node-icon staruml-icon icon-ERDEntity'></span>Description_Personne</a> ::
+              
+              <a href='56da4c3b1de391f4aaea6fba218bf0b2.html'><span class='node-icon staruml-icon icon-ERDColumn'></span>IdDescription</a>
             </td>
             <td><span class='label label-info'>false</span></td>
             <td><span class='label label-info'>false</span></td>
@@ -314,7 +305,7 @@
           </tr>
           
           <tr>
-            <td><a href="456edc2b2569bfc0c0f66b9ba8dc2237.html">Img</a></td>
+            <td><a href="456edc2b2569bfc0c0f66b9ba8dc2237.html">ImgPrincipale</a></td>
             <td>int</td>
             <td><span class='label label-info'>false</span></td>
             <td><span class='label label-info'>true</span></td>
@@ -329,8 +320,8 @@
           </tr>
           
           <tr>
-            <td><a href="10f9a566ff4ceb6a801be4923101b8d4.html">Pere</a></td>
-            <td>int</td>
+            <td><a href="10f9a566ff4ceb6a801be4923101b8d4.html">idPere</a></td>
+            <td>int?</td>
             <td><span class='label label-info'>false</span></td>
             <td><span class='label label-info'>true</span></td>
             <td>
@@ -344,8 +335,8 @@
           </tr>
           
           <tr>
-            <td><a href="af79cac496595754deb74886daee3599.html">Mere</a></td>
-            <td>int</td>
+            <td><a href="af79cac496595754deb74886daee3599.html">idMere</a></td>
+            <td>int?</td>
             <td><span class='label label-info'>false</span></td>
             <td><span class='label label-info'>true</span></td>
             <td>
@@ -432,6 +423,22 @@
             <td><a href='265e99d8e1638579250dbceefad85211.html'><span class='node-icon staruml-icon icon-ERDRelationship'></span>(Image—Personne)</a></td>
           </tr>
           
+          
+          <tr>
+            <td><a href='6575734ead86e5cdb8cbce51f6a126aa.html'><span class='node-icon staruml-icon icon-ERDEntity'></span>Description_Personne</a></td>
+            <td>1</td>
+            <td></td>
+            <td><a href='c9eea5eadc4f66c60c0cdcb0f3f0f930.html'><span class='node-icon staruml-icon icon-ERDRelationship'></span>(Description_Personne—Personne)</a></td>
+          </tr>
+          
+          
+          <tr>
+            <td><a href='ed2d969e9fcd8585ed6ec4900565fd19.html'><span class='node-icon staruml-icon icon-ERDEntity'></span>Sexe</a></td>
+            <td>1</td>
+            <td></td>
+            <td><a href='c81b00b956f4b1c2210eedf575969940.html'><span class='node-icon staruml-icon icon-ERDRelationship'></span>(Sexe—Personne)</a></td>
+          </tr>
+          
         </table>                
       </section>
       
@@ -509,6 +516,10 @@
         <li><a href='55ae5b760e87391ec22456d448c29177.html'><span class='node-icon staruml-icon icon-ERDRelationship'></span>(Prenom—Personne)</a></li>
         
         <li><a href='265e99d8e1638579250dbceefad85211.html'><span class='node-icon staruml-icon icon-ERDRelationship'></span>(Image—Personne)</a></li>
+        
+        <li><a href='c9eea5eadc4f66c60c0cdcb0f3f0f930.html'><span class='node-icon staruml-icon icon-ERDRelationship'></span>(Description_Personne—Personne)</a></li>
+        
+        <li><a href='c81b00b956f4b1c2210eedf575969940.html'><span class='node-icon staruml-icon icon-ERDRelationship'></span>(Sexe—Personne)</a></li>
         
     </ul>
 </section>
