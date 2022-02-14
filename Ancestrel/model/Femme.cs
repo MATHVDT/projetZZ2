@@ -62,8 +62,8 @@ namespace Model
                      string? nom = null, string? prenoms = null,
                      DateOnly? dateNaissance = null, DateOnly? dateDeces = null,
                      Ville? lieuNaissance = null, string? nationalite = null,
-                     string? nomJeuneFille = null) :
-                base(2 * num+1, id,  nom, prenoms, dateNaissance, dateDeces, lieuNaissance, nationalite)
+                     string? nomJeuneFille = null, string? description = null) :
+                base(2 * num + 1, id, nom, prenoms, dateNaissance, dateDeces, lieuNaissance, nationalite, description)
         {
             //Numero = 2 * num + 1;
             NomJeuneFille = nomJeuneFille;

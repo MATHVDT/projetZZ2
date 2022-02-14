@@ -41,8 +41,9 @@ namespace Model
         public Homme(int num, int? id = null, 
                      string? nom = null, string? prenoms = null,
                      DateOnly? dateNaissance = null, DateOnly? dateDeces = null,
-                     Ville? lieuNaissance = null, string? nationalite = null) :
-                base(2 * num, id,   nom, prenoms, dateNaissance, dateDeces, lieuNaissance, nationalite)
+                     Ville? lieuNaissance = null, string? nationalite = null,
+                     string? description = null) :
+                base(2 * num, id,   nom, prenoms, dateNaissance, dateDeces, lieuNaissance, nationalite, description)
         {
             //Numero = 2 * iden;
         }

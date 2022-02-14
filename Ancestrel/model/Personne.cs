@@ -34,6 +34,7 @@ namespace Model
         private DateOnly? _dateDeces;
         private Ville? _lieuNaissance;
         private string? _nationalite;
+        private string? _decription;
 
         private List<Fichier> _listeFichiers = new List<Fichier> { };
         private int? _indexImageProfil;
@@ -201,6 +202,23 @@ namespace Model
         }
 
         /**
+         * @var Description
+         * @brief Description de la personne.
+         * @warning Peut être null.
+         */
+        public string? Description
+        {
+            get => _decription;
+            set
+            { // Verifier que l'on insere pas une chaine vide
+                if (value is not null)
+                    value = value.Length > 0 ? value : null;
+                _decription = value;
+                Inconnu = _estInconnu();
+            }
+        }
+
+        /**
          * @var Inconnu
          * @brief Booleen qui indique si la personne est inconnue. (Lecture seule)
          * @warning La valeur est true par défaut.
@@ -227,7 +245,8 @@ namespace Model
         public Personne(int num, int? id = null,
             string? nom = null, string? prenoms = null,
             DateOnly? dateNaissance = null, DateOnly? dateDeces = null,
-            Ville? lieuNaissance = null, string? nationalite = null)
+            Ville? lieuNaissance = null, string? nationalite = null,
+            string? description = null)
         {
             Numero = num;
             Id = id;
@@ -240,6 +259,10 @@ namespace Model
             DateDeces = dateDeces;
             LieuNaissance = lieuNaissance;
             Nationalite = nationalite;
+
+            Description = description;
+
+
             _indexImageProfil = null;
 
             Inconnu = _estInconnu();
@@ -410,6 +433,7 @@ namespace Model
             if (Nom != null || Prenoms != null ||
                  DateNaissance != null || DateDeces != null ||
                  LieuNaissance != null || Nationalite != null ||
+                 Description != null ||
                  _listeFichiers.Count > 0)
             { return false; }
             else
