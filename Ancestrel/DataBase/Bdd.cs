@@ -25,6 +25,10 @@ namespace DataBase
             _villeBdd = new VilleBdd(_chaineConnexion);
 
             _villeDejaChargee = new Dictionary<int, Ville>();
+
+            // Ajout temp
+            Ville villeTest = _villeBdd.GetVilleTableById(1);
+            _villeDejaChargee.Add((int)villeTest.Id, villeTest);
         }
 
         public FichierImage GetFichierImageById(int id)
@@ -49,12 +53,33 @@ namespace DataBase
                 personne.AddPrenoms(prenomsBdd);
 
             // Recupération lieu de naissance dans la Table Ville et la Table d'association
+            int? idVilleNaissance = _personneBdd.GetIdVilleNaissancePersonneById(idPersonne);
 
+            // A une ville de naissance
+            if (idVilleNaissance is not null)
+            {
+                Ville? villeNaissance;
+
+                // Cherche si la ville est déjà chargée et obtient ca valeur
+                if (!_villeDejaChargee.TryGetValue((int)idVilleNaissance, out villeNaissance))
+                {  // Ville pas chargée, requete pour la récupérée
+
+                    villeNaissance = _villeBdd.GetVilleTableById((int)idVilleNaissance);
+
+                    if (villeNaissance != null) // Ajout dans la liste des villes chargées
+                        _villeDejaChargee.Add((int)villeNaissance.Id, (Ville)villeNaissance);
+                }
+                // Ajout du lieu de naissance à la personne
+                personne.LieuNaissance = villeNaissance;
+            }
 
             // Recupération de la description de la personne dans la Table Description  et la Table d'association
             // .... Demander si on a besoin de table association ou si on peut mettre PK de la Table = id personne => FK
 
             // Recupération des images de la personne dans la Table Image et la Table d'association
+            //int? idImgProfil = (reader[_IdImgProfil] is System.DBNull ? null : (int?)reader[_IdImgProfil]);
+
+
 
             // Recupération de la Nationnalité dans la Table d'association
             // Récupération des prénoms
@@ -106,9 +131,16 @@ namespace DataBase
                 Console.WriteLine("Personne pas encore ajouté à la bdd.");
                 _personneBdd.InsererPersonneTable(personne);
             }
-            int idPersonne = (int)personne.Id;
+            try
+            {
+                int idPersonne = (int)personne.Id;
+                _prenomBdd.InsererAssociationPrenomsPersonneId(listPrenoms, idPersonne);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
 
-            _prenomBdd.InsererAssociationPrenomsPersonneId(listPrenoms, idPersonne);
         }
 
         public void InsererVille(Ville ville)

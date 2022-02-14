@@ -66,6 +66,7 @@ Personne personne = new Homme(num: 1, nom: "Dupond", prenoms: "Jean Remi jean",
 
 
 string chaineConnexion = $@"Data Source=(LocalDB)\MSSQLLocalDB;Integrated Security=True";
+//string chaineConnexion = $@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\mavilledie4\Source\Repos\genealogie\Ancestrel\DataBase\SampleDatabase.mdf;Integrated Security=True";
 
 Bdd bdd = new Bdd(chaineConnexion);
 
@@ -73,7 +74,7 @@ Bdd bdd = new Bdd(chaineConnexion);
 
 //Console.WriteLine(PersonneBdd.PersonneValuesInsert(personne));
 
-bdd.InsererPersonne(personne);
+//bdd.InsererPersonne(personne);
 
 
 //Console.WriteLine(PersonneBdd.GetPersonneTableById(2).ToString());
@@ -82,8 +83,8 @@ List<string> listPrenoms = new List<string>();
 listPrenoms.Add("jack");
 listPrenoms.Add("william");
 
-bdd.InsererPrenomsPersonne(personne);
+//bdd.InsererPrenomsPersonne(personne);
 
-Console.WriteLine(bdd.GetPersonneById(1).ToString());
+Console.WriteLine(bdd.GetPersonneById(2).ToString());
 
-//Console.WriteLine(bdd.GetVilleById(2));
+//Console.WriteLine(bdd.GetVilleById(1));

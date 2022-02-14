@@ -387,6 +387,7 @@ namespace Model
                 strBuil.Append(DateNaissance is null ? "[NaissanceInconnu-" :
                     "[" + DateNaissance + "-");
                 strBuil.Append(DateDeces is null ? "DecesInconnu] " : DateDeces + "] ");
+                strBuil.Append(LieuNaissance is null ? "LieuNaissanceInconnu " : LieuNaissance);
             }
             else
             {

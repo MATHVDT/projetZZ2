@@ -57,16 +57,20 @@ namespace DataBase
                 SqlDataReader reader = commandSql.ExecuteReader();
 
                 reader.Read(); // Ouverture du reader
-
+                int idVilleBdd = (int)reader[_Id];
                 string nomBdd = (string)reader[_Nom];
                 double? latitudeBdd = (double?)(reader[_Latitude] is System.DBNull ? null : Convert.ToDouble(reader[_Latitude]));
-                double? longitudeBdd = (double?)(reader[_Longitude] is System.DBNull ? null : Convert.ToDouble( reader[_Longitude]));
-                Console.WriteLine(longitudeBdd);
+                double? longitudeBdd = (double?)(reader[_Longitude] is System.DBNull ? null : Convert.ToDouble(reader[_Longitude]));
+                //Console.WriteLine(longitudeBdd);
                 reader.Close(); // Fermeture du reader
 
-                ville = new Ville(nomBdd, latitudeBdd, longitudeBdd);
+                ville = new Ville(idVilleBdd, nomBdd, latitudeBdd, longitudeBdd);
             }
             catch (SqlException e)
+            {
+                Console.WriteLine("Error Generated. Details: " + e.ToString());
+            }
+            catch (Exception e)
             {
                 Console.WriteLine("Error Generated. Details: " + e.ToString());
             }
@@ -78,5 +82,8 @@ namespace DataBase
 
             return ville;
         }
+
+
+
     }
 }

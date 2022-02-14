@@ -85,7 +85,6 @@ namespace DataBase
                 int? idMere = (reader[_IdMere] is System.DBNull ? null : (int?)reader[_IdMere]);
 
 
-                int? idImgProfil = (reader[_IdImgProfil] is System.DBNull ? null : (int?)reader[_IdImgProfil]);
                 int? idVilleNaissance = (reader[_IdVilleNaissance] is System.DBNull ? null : (int?)reader[_IdVilleNaissance]);
 
                 int sexe = (int)reader[_Sexe]; // 0 -> Homme et 1 -> Femme
@@ -236,7 +235,56 @@ namespace DataBase
             return valuesBuilder.ToString();
         }
 
+        /**
+         * @fn public int? GetIdVilleNaissancePersonneById(int idPersonne)
+         * @brief Recupere l'id de la ville de naissance d'une personne.
+         * 
+         * @param int idPersonne
+         * 
+         * @return int? idVilleNaissance 
+         */
+        public int? GetIdVilleNaissancePersonneById(int idPersonne)
+        {
+            // id de la ville de naissance à récup
+            int? idVilleNaissance = null;
+
+            // Requete SQL pour récuperer les infos sur une personne 
+            string queryString = $"SELECT {_IdVilleNaissance} " +
+                                 $"FROM {_PersonneTable} " +
+                                 $"WHERE {_Id} = {idPersonne};";
+
+            // Connexion à la bdd
+            SqlConnection connexion = new SqlConnection(_chaineConnexion);
+            SqlCommand commandSql;
+            SqlDataReader reader;
+
+            try
+            {
+                connexion.Open(); // Ouverture de la connexion à la bdd
+
+                // Création et execution de la requete SQL
+                Console.WriteLine(queryString);
+                commandSql = new SqlCommand(queryString, connexion);
+                reader = commandSql.ExecuteReader();
+
+                reader.Read(); // Debut de la lecture du la requete
+
+                idVilleNaissance = (reader[_IdVilleNaissance] is System.DBNull ? null : (int?)reader[_IdVilleNaissance]);
 
 
+                reader.Close();  // Fermeture de la lecture de la requete
+
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("Error Generated. Details: " + e.ToString());
+            }
+            finally
+            {
+                connexion.Close();
+            }
+
+            return idVilleNaissance;
+        }
     }
 }

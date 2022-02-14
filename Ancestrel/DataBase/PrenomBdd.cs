@@ -39,7 +39,7 @@ namespace DataBase
             string queryString = $"SELECT {_OrdrePrenom}, {_Prenom} " +
                                  $"FROM {_PrenomPersonneTable} JOIN {_PrenomTable} " +
                                  $"ON {_IdPersonne} = {_Id} " +
-                                 $"WHERE {_IdPersonne} = {idPersonne}" +
+                                 $"WHERE {_IdPersonne} = {idPersonne} " +
                                  $"ORDER BY {_OrdrePrenom} ASC;";
 
             // Connexion à la bdd
