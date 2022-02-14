@@ -114,7 +114,7 @@ namespace ModelTests
 
             Femme f = new Femme(i,null, nom, prenoms, 
                 dateNaissance, dateDeces, villeNaissance, nationalite,
-                nomJeuneFille); ;
+                nomJeuneFille); 
             Assert.IsNotNull(f);
             Assert.AreEqual((int)2*i+1, f.Numero);
             Assert.AreEqual(nom, f.Nom);

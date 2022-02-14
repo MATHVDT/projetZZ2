@@ -45,8 +45,6 @@ namespace Model
          * @fn public Femme 
          * @param int num *Numero de l'enfant*
          * @param int? id = null *Id de la personne dans la BDD*    
-         * @param int? idPere = null *Id du pere dans la BDD*
-         * @param int? idMere = null *Id de la mere dans la BDD*
          * @param string? nom = null,
          * @param string? prenoms = null
          * @param DateOnly? dateNaissance = null
@@ -60,26 +58,18 @@ namespace Model
          * Definie les propiétés de la personne.
          * Definie le Numero et le nom de jeune fille de la personne.
          */
-        public Femme(int num, int? id = null, int? idPere = null, int? idMere = null,
+        public Femme(int num, int? id = null,
                      string? nom = null, string? prenoms = null,
                      DateOnly? dateNaissance = null, DateOnly? dateDeces = null,
                      Ville? lieuNaissance = null, string? nationalite = null,
                      string? nomJeuneFille = null) :
-                base(2 * num, id, idPere, idMere, nom, prenoms, dateNaissance, dateDeces, lieuNaissance, nationalite)
+                base(2 * num+1, id,  nom, prenoms, dateNaissance, dateDeces, lieuNaissance, nationalite)
         {
             //Numero = 2 * num + 1;
             NomJeuneFille = nomJeuneFille;
 
         }
 
-        public Femme(int num, int? id = null,
-                   string? nom = null, string? prenoms = null,
-                   DateOnly? dateNaissance = null, DateOnly? dateDeces = null,
-                   Ville? lieuNaissance = null, string? nationalite = null,
-                   string? nomJeuneFille = null) :
-              this(num, id, null, null, nom, prenoms, dateNaissance, dateDeces, lieuNaissance, nationalite,
-                  nomJeuneFille)
-        { }
 
         /**
          * @overload public override string ToString()
