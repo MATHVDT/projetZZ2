@@ -32,14 +32,19 @@ namespace DataBase
         }
 
 
-
-        public string? GetPrenomById(int idPersonne)
+        /**
+         * @fn public string? GetPrenomByIdPersonne(int idPersonne)
+         * @brief Retourne la chaine des prénoms
+         * 
+         * @param int idPersonne
+         */
+        public string? GetPrenomByIdPersonne(int idPersonne)
         {
             // Requete SQL pour récuperer les prénoms de la personne
-            string queryString = $"SELECT {_OrdrePrenom}, {_Prenom} " +
-                                 $"FROM {_PrenomPersonneTable} JOIN {_PrenomTable} " +
-                                 $"ON {_IdPersonne} = {_Id} " +
-                                 $"WHERE {_IdPersonne} = {idPersonne} " +
+            string queryString = $"SELECT {_OrdrePrenom}, {_Prenom} \n" +
+                                 $"FROM {_PrenomPersonneTable} JOIN {_PrenomTable} \n" +
+                                 $"ON {_IdPrenom} = {_Id} \n" +
+                                 $"WHERE {_IdPersonne} = {idPersonne} \n" +
                                  $"ORDER BY {_OrdrePrenom} ASC;";
 
             // Connexion à la bdd
@@ -161,8 +166,8 @@ namespace DataBase
 
                     // Requete SQL d'INSERTION dans la TABLE association des prenoms-personne
                     queryString = $"INSERT INTO {_PrenomPersonneTable} " +
-                                  $"( {_IdPersonne}, {_IdPrenom} ) " +
-                                  $"VALUES ({idPersonne}, {idPrenomEnregistre});";
+                                  $"( {_IdPersonne}, {_OrdrePrenom}, {_IdPrenom} ) " +
+                                  $"VALUES ({idPersonne}, {i}, {idPrenomEnregistre});";
 
                     // Création de la requete SQL d'INSERTION dans la TABLE association des prenoms-personne
                     commandSql = new SqlCommand(queryString, connexion);

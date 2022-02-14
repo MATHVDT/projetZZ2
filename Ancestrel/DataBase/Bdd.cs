@@ -48,7 +48,7 @@ namespace DataBase
                 return personne;
 
             // Recupération des prénoms de la personne dans la Table Prenom et la Table d'association
-            string? prenomsBdd = _prenomBdd.GetPrenomById(idPersonne);
+            string? prenomsBdd = _prenomBdd.GetPrenomByIdPersonne(idPersonne);
             if (prenomsBdd is not null)
                 personne.AddPrenoms(prenomsBdd);
 
@@ -73,8 +73,7 @@ namespace DataBase
                 personne.LieuNaissance = villeNaissance;
             }
 
-            // Recupération de la description de la personne dans la Table Description  et la Table d'association
-            // .... Demander si on a besoin de table association ou si on peut mettre PK de la Table = id personne => FK
+
 
             // Recupération des images de la personne dans la Table Image et la Table d'association
             //int? idImgProfil = (reader[_IdImgProfil] is System.DBNull ? null : (int?)reader[_IdImgProfil]);
@@ -82,7 +81,10 @@ namespace DataBase
 
 
             // Recupération de la Nationnalité dans la Table d'association
+
             // Récupération des prénoms
+            string? prenoms = _prenomBdd.GetPrenomByIdPersonne(idPersonne);
+            personne.Prenoms = prenoms;
 
 
             return personne;

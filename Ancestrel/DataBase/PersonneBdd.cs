@@ -82,6 +82,8 @@ namespace DataBase
                 DateOnly? dateNaissanceBdd = (DateOnly?)(reader[_DateNaissance] is System.DBNull ? null : DateOnly.FromDateTime((DateTime)reader[_DateNaissance]));
                 DateOnly? dateDecesBdd = (DateOnly?)(reader[_DateDeces] is System.DBNull ? null : DateOnly.FromDateTime((DateTime)reader[_DateDeces]));
 
+                string? description = (string?)(reader[_Description] is System.DBNull ? null : reader[_Description]);
+
                 int? idPere = (reader[_IdPere] is System.DBNull ? null : (int?)reader[_IdPere]);
                 int? idMere = (reader[_IdMere] is System.DBNull ? null : (int?)reader[_IdMere]);
 
@@ -96,12 +98,12 @@ namespace DataBase
                 if (sexe == 1) // Femme 
                 {
                     p = new Femme(0, idBdd, nomUsageBdd, null, dateNaissanceBdd, dateDecesBdd,
-                        null, null, nomBdd);
+                        null, null, nomBdd, description);
                 }
                 else // Homme
                 {
                     p = new Homme(0, idBdd, nomUsageBdd, null, dateNaissanceBdd, dateDecesBdd,
-                        null, null);
+                        null, null, description);
                 }
 
             }
@@ -298,5 +300,7 @@ namespace DataBase
 
             return idVilleNaissance;
         }
+
+
     }
 }
