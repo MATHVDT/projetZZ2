@@ -76,7 +76,7 @@ namespace Vue
             }
         }
 
-        private void ButtonAjout_Click(object sender, RoutedEventArgs e)
+        private void ButtonAjout_Click(object sender, RoutedEventArgs e) 
         {
             Boolean test = true;
             personne = Sexe_ComboBox.SelectedValue == "Masculin" ? new Homme(): new Femme(); 

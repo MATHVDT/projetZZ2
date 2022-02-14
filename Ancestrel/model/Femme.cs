@@ -72,6 +72,15 @@ namespace Model
 
         }
 
+        public Femme(int? id = null, int? idPere = null, int? idMere = null,
+                     string? nom = null, string? prenoms = null,
+                     DateOnly? dateNaissance = null, DateOnly? dateDeces = null,
+                     Ville? lieuNaissance = null, string? nationalite = null,
+                     string? nomJeuneFille = null) : base(id, idPere, idMere, nom, prenoms, dateNaissance, dateDeces, lieuNaissance, nationalite)
+        {
+
+        }
+
         /**
          * @overload public override string ToString()
          * @brief Rajoute le nom de jeune fille.
