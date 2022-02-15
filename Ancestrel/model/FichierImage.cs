@@ -58,6 +58,11 @@ namespace Model
             {
                 Console.WriteLine("ArgumentException");
             }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
             if (_image == null)
             {
                 Console.WriteLine("image non chargée");
@@ -99,5 +104,14 @@ namespace Model
         }
 
 
+        public void SaveTest()
+        {
+            string path = @"C:\Users\ma_th\Desktop\test\";
+            Console.WriteLine(path);
+            //Image.Save();
+
+            _image.Save(path + Guid.NewGuid() + ".png", ImageFormat.Png);
+
+        }
     }
 }
