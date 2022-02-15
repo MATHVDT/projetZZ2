@@ -13,8 +13,10 @@ namespace DataBase
         private readonly PersonneBdd _personneBdd;
         private readonly PrenomBdd _prenomBdd;
         private readonly VilleBdd _villeBdd;
+        private readonly ImageBdd _imageBdd;
 
         private Dictionary<int, Ville> _villeDejaChargee;
+        private Dictionary<int, Fichier> _fichierDejaChargee;
 
         public Bdd(string chaineConnexion)
         {
@@ -23,8 +25,11 @@ namespace DataBase
             _personneBdd = new PersonneBdd(_chaineConnexion);
             _prenomBdd = new PrenomBdd(_chaineConnexion);
             _villeBdd = new VilleBdd(_chaineConnexion);
+            _imageBdd = new ImageBdd(_chaineConnexion);
 
             _villeDejaChargee = new Dictionary<int, Ville>();
+            _fichierDejaChargee = new Dictionary<int, Fichier>();
+
 
             // Ajout temp
             //Ville villeTest = _villeBdd.GetVilleTableById(1);

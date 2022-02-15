@@ -33,7 +33,14 @@ namespace DataBase
         }
 
 
-
+        /**
+         * @fn public FichierImage GetVilleTableById
+         * @brief Récupère dans la bdd une image par son Id.
+         * 
+         * @param int idImage - *Id de l'image à récupérer*
+         * 
+         * @return FichierImage *Image chargée depuis la bdd*
+         */
         public FichierImage GetImageById(int idImage)
         {
             FichierImage fichierImage = null;
@@ -86,5 +93,32 @@ namespace DataBase
             return fichierImage;
         }
 
+
+        /**
+         * public string ImageValuesInsert
+         * @brief Récupère et donne les valeurs des champs à inserer dans la bdd.
+         * 
+         * @param FichierImage fichierImage
+         * 
+         * @return string *Valeurs à inserer*
+         */
+        public string ImageValuesInsert(FichierImage fichierImage)
+        {
+            // Récupération des champs du fichierImage
+            //const string VALUENULL = "NULL";
+
+            StringBuilder valuesBuilder = new StringBuilder();
+
+            byte[] tmp = FichierImage.ImageToByteArray(fichierImage.Image);
+            foreach (var x in tmp)
+                valuesBuilder.Append($"{x.ToString()}");
+            valuesBuilder.Append($" , ");
+            valuesBuilder.Append($"{$"CONVERT(date, '{fichierImage.DateAjoutFichier}', 103)"}, ");
+            valuesBuilder.Append($"{fichierImage.NomFichier} ");
+
+            Console.WriteLine(valuesBuilder.ToString());
+
+            return valuesBuilder.ToString();
+        }
     }
 }

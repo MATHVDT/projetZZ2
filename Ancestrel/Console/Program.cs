@@ -100,3 +100,5 @@ FichierImage f2 = new FichierImage(FichierImage.ImageToByteArray(f.Image));
 Console.WriteLine(f.NomFichier);
 Console.WriteLine(f2.NomFichier);
 
+
+
