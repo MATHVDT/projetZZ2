@@ -39,8 +39,9 @@ namespace DataBase
         public FichierImage GetFichierImageById(int idImage)
         {
             FichierImage fichierImage;
+
             // Checke si l'image a pas déjà été chargée
-            if (!_imageDejaChargee.TryGetValue((int)idImage, out fichierImage))
+            if (!_imageDejaChargee.TryGetValue(idImage, out fichierImage))
             {
                 // Requete dans la bdd
                 fichierImage = _imageBdd.GetImageById(idImage);
@@ -71,17 +72,9 @@ namespace DataBase
             // A une ville de naissance
             if (idVilleNaissance is not null)
             {
-                Ville? villeNaissance;
+                // Récupère la ville de naissance
+                Ville villeNaissance = GetVilleById((int)idVilleNaissance);
 
-                // Cherche si la ville est déjà chargée et obtient ca valeur
-                if (!_villeDejaChargee.TryGetValue((int)idVilleNaissance, out villeNaissance))
-                {  // Ville pas chargée, requete pour la récupérée
-
-                    villeNaissance = _villeBdd.GetVilleTableById((int)idVilleNaissance);
-
-                    if (villeNaissance != null) // Ajout dans la liste des villes chargées
-                        _villeDejaChargee.Add((int)villeNaissance.Id, (Ville)villeNaissance);
-                }
                 // Ajout du lieu de naissance à la personne
                 personne.LieuNaissance = villeNaissance;
             }
@@ -89,8 +82,20 @@ namespace DataBase
 
 
             // Recupération des images de la personne dans la Table Image et la Table d'association
-            //int? idImgProfil = (reader[_IdImgProfil] is System.DBNull ? null : (int?)reader[_IdImgProfil]);
+            List<int> idImage = _imageBdd.GetListIdImagePersonneById(idPersonne);
 
+            FichierImage image; bool imgProfil = false;
+
+            // Pour chaque Image, on l'ajoute à la personne
+            foreach (int idImageId in idImage)
+            {
+                image = GetFichierImageById(idImageId); // Récupération de l'image
+
+                // Check si ce n'est pas l'image de profil
+                //imgProfil = idImage == personne.IdImageProfil; 
+
+                personne.AjouterImage(image, imgProfil);
+            }
 
 
             // Recupération de la Nationnalité dans la Table d'association
@@ -110,12 +115,20 @@ namespace DataBase
 
         public Ville GetVilleById(int idVille)
         {
-            return _villeBdd.GetVilleTableById(idVille);
+            Ville ville;
+            if (!_villeDejaChargee.TryGetValue((int)idVille, out ville))
+            {
+                ville = _villeBdd.GetVilleTableById(idVille);
+                _villeDejaChargee.Add(idVille, ville);
+            }
+            return ville;
         }
 
         public void InsererFichierImage(FichierImage fichierImage)
         {
+            // Verifier s'il y est deja insere ie si id != null => ModifierFichierImage
             _imageBdd.InsererImageTable(fichierImage);
+            _imageDejaChargee.Add((int)fichierImage.Id, fichierImage);
         }
 
 

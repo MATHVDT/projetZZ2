@@ -158,9 +158,114 @@ namespace DataBase
             }
         }
 
+
+        /**
+         * @fn public List<int> GetListIdImagePersonneById
+         * @brief Récupère la liste des id des images associés à une personne.
+         * 
+         * @param int idPersonne
+         */
+        public List<int> GetListIdImagePersonneById(int idPersonne)
+        {
+
+            List<int> list = new List<int>();
+
+
+            // Requete SQL pour récuperer les id des Images associés à une personne
+            string queryString = $"SELECT {_IdImage} " +
+                                 $"FROM {_ImagePersonneTable} " +
+                                 $"WHERE {_Id} = {idPersonne};";
+
+            // Connexion à la bdd
+            SqlConnection connexion = new SqlConnection(_chaineConnexion);
+
+            try
+            {
+                connexion.Open(); // Ouverture de la connexion à la bdd
+
+                // Création et execution de la requete SQL
+                Console.WriteLine(queryString);
+                SqlCommand commandSql = new SqlCommand(queryString, connexion);
+                SqlDataReader reader = commandSql.ExecuteReader();
+
+                reader.Read(); // Ouverture du reader
+
+                while (reader.Read())
+                {
+                    list.Add((int)reader[_IdImage]);
+                }
+
+                reader.Close(); // Fermeture du reader
+
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("Error SQL Generated. Details: " + e.ToString());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error Generated. Details: " + e.ToString());
+            }
+            finally
+            {
+                connexion.Close();
+            }
+            return list;
+        }
+
+
+
+
+        /**
+         * @fn public void InsererAssociationImagePersonneId
+         * @brief Insere l'association entre une personne et image.
+         * 
+         * @param int idImage
+         * @param int idPersonne
+         */
+        public void InsererAssociationImagePersonneId(int idImage, int idPersonne)
+        {
+            // Connexion à la bdd
+            SqlConnection connexion = new SqlConnection(_chaineConnexion);
+            SqlCommand commandSql;
+            string queryString;
+
+            try
+            {
+                connexion.Open(); // Ouverture connexion
+
+                // Requete SQL pour inserer l'association
+                queryString = $"INSERT INTO {_ImagePersonneTable} \n" +
+                              $"({_IdImage}, {_IdPersonne} ) \n" +
+                              $"VALUES ({idImage}, {_IdPersonne} );";
+
+
+                // Création de la requete SQL d'INSERTION
+                commandSql = new SqlCommand(queryString, connexion);
+
+                // Excecution de l'insertion
+                Console.WriteLine(queryString);
+                Console.WriteLine(commandSql.ExecuteNonQuery() + " ligne inserée.");
+
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("Error SQL Generated. Details: " + e.ToString());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error Generated. Details: " + e.ToString());
+            }
+            finally
+            {
+                connexion.Close();
+            }
+        }
+
+
         /**
          * public string ImageValuesInsert
-         * @brief Récupère et donne les valeurs des champs à inserer dans la bdd.
+         * @brief Récupère et donne les valeurs des champs à inserer dans la bdd. (image exclue)
          * 
          * @param FichierImage fichierImage
          * 
