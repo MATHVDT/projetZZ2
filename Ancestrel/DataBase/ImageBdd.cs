@@ -1,6 +1,7 @@
 ﻿using Model;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
@@ -69,13 +70,8 @@ namespace DataBase
                 string nomBdd = (string)reader[_Nom];
                 DateTime? dateAjout = (DateTime?)(reader[_DateAjout] is System.DBNull ? null : (DateTime)reader[_DateAjout]);
 
-
-
                 byte[] imgByteBdd = (byte[])reader[_Image];
-    
-                //foreach (var x in imgByteBdd)
-                //    Console.Write(x);
-
+                Console.WriteLine(imgByteBdd);
 
                 reader.Close(); // Fermeture du reader
 
@@ -88,10 +84,10 @@ namespace DataBase
             {
                 Console.WriteLine("Error SQL Generated. Details: " + e.ToString());
             }
-            catch (Exception e)
-            {
-                Console.WriteLine("Error Generated. Details: " + e.ToString());
-            }
+            //catch (Exception e)
+            //{
+            //    Console.WriteLine("Error Generated. Details: " + e.ToString());
+            //}
             finally
             {
                 connexion.Close();
@@ -118,10 +114,14 @@ namespace DataBase
                 // Requete SQL pour inserer l'image
                 queryString = $"INSERT INTO {_ImageTable} \n" +
                               $"({_Nom}, {_DateAjout}, {_Image} ) \n" +
-                              $"VALUES ({values});";
+                              $"VALUES ({values} " + " @imgByteArray );";
+
 
                 // Création de la requete SQL d'INSERTION
                 commandSql = new SqlCommand(queryString, connexion);
+
+                // Ajout de l'image en byteArray pour une conversion en varbinary(max)
+                commandSql.Parameters.Add("@imgByteArray", SqlDbType.VarBinary).Value = FichierImage.ImageToByteArray(fichierImage.Image);
 
                 // Excecution de l'insertion
                 Console.WriteLine(queryString);
@@ -177,14 +177,13 @@ namespace DataBase
 
             valuesBuilder.Append($"{$"CONVERT(date, '{fichierImage.DateAjoutFichier}', 103)"}, ");
 
-            byte[] tmp = FichierImage.ImageToByteArray(fichierImage.Image);
+            //byte[] tmp = FichierImage.ImageToByteArray(fichierImage.Image);
+            //valuesBuilder.Append("CONVERT(VARBINARY(MAX), '");
 
-            valuesBuilder.Append("CONVERT(VARBINARY(MAX), '");
+            //foreach (var x in tmp)
+            //    valuesBuilder.Append($"{x.ToString()}");
 
-            foreach (var x in tmp)
-                valuesBuilder.Append($"{x.ToString()}");
-
-            valuesBuilder.Append("' ) ");
+            //valuesBuilder.Append("' ) ");
 
             return valuesBuilder.ToString();
         }
