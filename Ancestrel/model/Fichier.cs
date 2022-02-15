@@ -57,7 +57,7 @@ namespace Model
          * La var dateAjout est modifier ici, mais peut etre la virer de la classe 
          * et gerer la date au moment de l'insertion de l'element dans la BDD.
          */
-        public Fichier(DateTime dateAjout, int? inId = null, string? inNomFichier = null)
+        public Fichier(DateTime? dateAjout = null, int? inId = null, string? inNomFichier = null)
         {
             Id = inId;
             if (!(inNomFichier is null) && (inNomFichier.Length > 0))
@@ -66,7 +66,7 @@ namespace Model
                 NomFichier = inId is null ? $"Fichier_{Guid.NewGuid()}" : $"Fichier_{Id}";
 
 
-            DateAjoutFichier = DateTime.Now;
+            DateAjoutFichier = dateAjout ?? DateTime.Now;
         }
 
         /**
@@ -81,7 +81,7 @@ namespace Model
          * @brief Constructeur d'un nouveau fichier. *sans id*
          */
         public Fichier(int? inId = null, string? inNomFichier = null)
-        :this(DateTime.Now, null, inNomFichier) { }
+        :this(null, null, inNomFichier) { }
 
         public override string ToString()
         {

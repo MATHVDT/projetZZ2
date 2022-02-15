@@ -77,10 +77,10 @@ namespace Model
          * 
          * @param byte[] imgByte - *Image en tableau de byte*
          */
-        public FichierImage(byte[] imgBin, int? id = null, string? nomFichier = null)
-            : base(id, nomFichier)
+        public FichierImage(byte[] imgByte, int? id = null, string? nomFichier = null, DateTime? dateAjout = null)
+            : base(dateAjout, id, nomFichier)
         {
-            _image = ByteArrayToImage(imgBin);
+            _image = ByteArrayToImage(imgByte);
         }
 
 
