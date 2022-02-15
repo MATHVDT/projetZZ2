@@ -85,6 +85,18 @@ listPrenoms.Add("william");
 
 //bdd.InsererPrenomsPersonne(personne);
 
-Console.WriteLine(bdd.GetPersonneById(3).ToString());
+//Console.WriteLine(bdd.GetPersonneById(3).ToString());
 
 //Console.WriteLine(bdd.GetVilleById(1));
+
+
+string path = @"E:\ma_th\Documents\Programmations\pgenealogie\Ancestrel\Image1.png";
+Console.WriteLine(File.Exists(path));
+
+FichierImage f = new FichierImage(path, nomFichier: "image");
+
+FichierImage f2 = new FichierImage(FichierImage.ImageToByteArray(f.Image));
+
+Console.WriteLine(f.NomFichier);
+Console.WriteLine(f2.NomFichier);
+

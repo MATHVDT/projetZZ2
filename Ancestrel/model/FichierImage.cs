@@ -13,7 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using System.IO;
-
+using System.Drawing.Imaging;
 
 namespace Model
 {
@@ -30,15 +30,15 @@ namespace Model
         /**
          * @fn public FichierImage(string filename, string nomFichier)
          * @brief Constructeur d'un FichierImage
-         * @param string filename  - *Chemin de l'image à charger*
+         * @param string pathFile  - *Chemin de l'image à charger*
          * @param int? id = null - *Id du fichier dans la bdd*
          * @param  string nomFichier = "" - *Nom du fichier*
          */
-        public FichierImage(string fileName, int? id = null, string nomFichier = "") : base(id, nomFichier)
+        public FichierImage(string pathFile, int? id = null, string nomFichier = "") : base(id, nomFichier)
         {
             try
             {
-                _image = Image.FromFile(fileName);
+                _image = Image.FromFile(pathFile);
             }
             catch (TypeInitializationException e)
             {
@@ -66,11 +66,36 @@ namespace Model
         }
 
         /**
-         * overload public FichierImage(string fileName, string nomFichier = "")
+         * overload public FichierImage(string pathFile, string nomFichier = "")
          * @brief Constructeur d'une nouvelle image. *sans id*
          */
-        public FichierImage(string fileName, string nomFichier = "")
-            : this(fileName, null, nomFichier) { }
+        public FichierImage(string pathFile, string nomFichier = "")
+            : this(pathFile, null, nomFichier) { }
 
+        /**
+         * @overload public FichierImage()
+         * 
+         * @param byte[] imgByte - *Image en tableau de byte*
+         */
+        public FichierImage(byte[] imgBin, int? id = null, string? nomFichier = null)
+            : base(id, nomFichier)
+        {
+            _image = ByteArrayToImage(imgBin);
+        }
+
+
+        public static byte[] ImageToByteArray(Image imageIn)
+        {
+            MemoryStream ms = new MemoryStream();
+            imageIn.Save(ms, imageIn.RawFormat);
+            return ms.ToArray();
+        }
+
+        public static Image ByteArrayToImage(byte[] byteArrayIn)
+        {
+            MemoryStream ms = new MemoryStream(byteArrayIn);
+            Image returnImage = Image.FromStream(ms);
+            return returnImage;
+        }
     }
 }
