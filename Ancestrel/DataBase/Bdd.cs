@@ -99,6 +99,7 @@ namespace DataBase
 
 
             // Recupération de la Nationnalité dans la Table d'association
+            // ...
 
             // Récupération des prénoms
             string? prenoms = _prenomBdd.GetPrenomByIdPersonne(idPersonne);

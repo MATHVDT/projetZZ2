@@ -292,5 +292,20 @@ namespace DataBase
 
             return valuesBuilder.ToString();
         }
+
+        // Inutilisé
+        // Transformer byte[] en string pour insertion dans bdd
+        private string ToVarbinary(byte[] data)
+        {
+            var sb = new StringBuilder((data.Length * 2) + 2);
+            sb.Append("0x");
+
+            for (int i = 0; i < data.Length; i++)
+            {
+                sb.Append(data[i].ToString("X2"));
+            }
+
+            return sb.ToString();
+        }
     }
 }

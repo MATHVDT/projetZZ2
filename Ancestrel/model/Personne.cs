@@ -40,6 +40,12 @@ namespace Model
         private int? _indexImageProfil;
 
         /**
+         * @var IdImageProfil
+         * @brief Id de l'image de profil dans la bdd.
+         */
+        public int? IdImageProfil { get; set; }
+
+        /**
          * @var Id
          * @brief Id de la personne dans la bdd.
          * @details 
@@ -660,7 +666,10 @@ namespace Model
 
             _listeFichiers.Add(image);
             if (imageProfil)
+            {
                 _indexImageProfil = _listeFichiers.Count - 1;
+                IdImageProfil = image.Id;
+            }
         }
 
         /**
