@@ -34,6 +34,8 @@ variables:
   MSBUILD_PATH: 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\MSBbuild.exe'
   NUNIT_PATH: 'C:\Program Files (x86)\NUnit.org\nunit-console\nunit3-console.exe'
 
+image : "mcr.microsoft.com/dotnet/sdk:6,0"
+
 stages:
   - build
   - test
