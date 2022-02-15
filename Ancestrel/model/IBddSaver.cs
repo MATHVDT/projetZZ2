@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public interface BddSaver
+    public interface IBddSaver
     {
 
         /**

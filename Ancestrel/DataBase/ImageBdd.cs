@@ -21,7 +21,7 @@ namespace DataBase
         private readonly string _Id = "Id";
         private readonly string _Image = "Image";
         private readonly string _Nom = "Nom";
-        private readonly string _DateAjout = "Ordre";
+        private readonly string _DateAjout = "DateAjout";
 
         private readonly string _IdImage = "Id_image";
         private readonly string _IdPersonne = "Id_personne";
@@ -68,7 +68,14 @@ namespace DataBase
                 int idBdd = (int)reader[_Id];
                 string nomBdd = (string)reader[_Nom];
                 DateTime? dateAjout = (DateTime?)(reader[_DateAjout] is System.DBNull ? null : (DateTime)reader[_DateAjout]);
+
+
+
                 byte[] imgByteBdd = (byte[])reader[_Image];
+    
+                //foreach (var x in imgByteBdd)
+                //    Console.Write(x);
+
 
                 reader.Close(); // Fermeture du reader
 
@@ -94,6 +101,63 @@ namespace DataBase
         }
 
 
+        public void InsererImageTable(FichierImage fichierImage)
+        {
+            string values = ImageValuesInsert(fichierImage);
+
+
+            // Connexion à la bdd
+            SqlConnection connexion = new SqlConnection(_chaineConnexion);
+            SqlCommand commandSql;
+            string queryString;
+
+            try
+            {
+                connexion.Open(); // Ouverture connexion
+
+                // Requete SQL pour inserer l'image
+                queryString = $"INSERT INTO {_ImageTable} \n" +
+                              $"({_Nom}, {_DateAjout}, {_Image} ) \n" +
+                              $"VALUES ({values});";
+
+                // Création de la requete SQL d'INSERTION
+                commandSql = new SqlCommand(queryString, connexion);
+
+                // Excecution de l'insertion
+                Console.WriteLine(queryString);
+                Console.WriteLine(commandSql.ExecuteNonQuery() + " ligne inserée.");
+
+                // Requete SQL pour récupérer l'id de l'image
+                queryString = $"SELECT IDENT_CURRENT('{_ImageTable}');";
+
+                // Création de la requete SQL pour récupérer l'Id attribué àl'image inserée
+                commandSql = new SqlCommand(queryString, connexion);
+
+                // Excecution de la requete de récupération de l'Id
+                Console.WriteLine(queryString);
+                SqlDataReader reader = commandSql.ExecuteReader();
+                reader.Read();
+                int idAutoIncrementeImage = Convert.ToInt32(reader[0]);
+                fichierImage.Id = idAutoIncrementeImage;
+                Console.WriteLine("Id auto incrementé de la personne : " + idAutoIncrementeImage);
+
+                reader.Close(); // Fermeture du reader
+
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("Error SQL Generated. Details: " + e.ToString());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error Generated. Details: " + e.ToString());
+            }
+            finally
+            {
+                connexion.Close();
+            }
+        }
+
         /**
          * public string ImageValuesInsert
          * @brief Récupère et donne les valeurs des champs à inserer dans la bdd.
@@ -109,14 +173,18 @@ namespace DataBase
 
             StringBuilder valuesBuilder = new StringBuilder();
 
+            valuesBuilder.Append($"'{fichierImage.NomFichier}', ");
+
+            valuesBuilder.Append($"{$"CONVERT(date, '{fichierImage.DateAjoutFichier}', 103)"}, ");
+
             byte[] tmp = FichierImage.ImageToByteArray(fichierImage.Image);
+
+            valuesBuilder.Append("CONVERT(VARBINARY(MAX), '");
+
             foreach (var x in tmp)
                 valuesBuilder.Append($"{x.ToString()}");
-            valuesBuilder.Append($" , ");
-            valuesBuilder.Append($"{$"CONVERT(date, '{fichierImage.DateAjoutFichier}', 103)"}, ");
-            valuesBuilder.Append($"{fichierImage.NomFichier} ");
 
-            Console.WriteLine(valuesBuilder.ToString());
+            valuesBuilder.Append("' ) ");
 
             return valuesBuilder.ToString();
         }

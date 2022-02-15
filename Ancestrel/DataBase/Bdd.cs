@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DataBase
 {
-    public class Bdd : BddLoader, BddSaver
+    public class Bdd : IBddLoader, IBddSaver
     {
         private readonly string _chaineConnexion;
         private readonly PersonneBdd _personneBdd;
@@ -16,7 +16,7 @@ namespace DataBase
         private readonly ImageBdd _imageBdd;
 
         private Dictionary<int, Ville> _villeDejaChargee;
-        private Dictionary<int, Fichier> _fichierDejaChargee;
+        private Dictionary<int, FichierImage> _imageDejaChargee;
 
         public Bdd(string chaineConnexion)
         {
@@ -28,7 +28,7 @@ namespace DataBase
             _imageBdd = new ImageBdd(_chaineConnexion);
 
             _villeDejaChargee = new Dictionary<int, Ville>();
-            _fichierDejaChargee = new Dictionary<int, Fichier>();
+            _imageDejaChargee = new Dictionary<int, FichierImage>();
 
 
             // Ajout temp
@@ -36,9 +36,17 @@ namespace DataBase
             //_villeDejaChargee.Add((int)villeTest.Id, villeTest);
         }
 
-        public FichierImage GetFichierImageById(int id)
+        public FichierImage GetFichierImageById(int idImage)
         {
-            throw new NotImplementedException();
+            FichierImage fichierImage;
+            // Checke si l'image a pas déjà été chargée
+            if (!_imageDejaChargee.TryGetValue((int)idImage, out fichierImage))
+            {
+                // Requete dans la bdd
+                fichierImage = _imageBdd.GetImageById(idImage);
+            }
+
+            return fichierImage;
         }
 
         public Personne GetPersonneById(int idPersonne)
@@ -107,7 +115,7 @@ namespace DataBase
 
         public void InsererFichierImage(FichierImage fichierImage)
         {
-            throw new NotImplementedException();
+            _imageBdd.InsererImageTable(fichierImage);
         }
 
 

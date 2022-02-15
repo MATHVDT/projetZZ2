@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public interface BddLoader
+    public interface IBddLoader
     {
 
         public Personne GetPersonneById(int idPersonne);
