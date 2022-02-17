@@ -64,7 +64,7 @@ Image img2 = (Image)imgTest.Clone();*/
 
 Ville ville = new Ville("Blancherive", 4.444, 48.42);
 
-Personne personne = new Homme(num: 1, nom: "Dupond", prenoms: "Jean Remi jean",
+Personne personne = new Homme(num: 1, 
                               nationalite: "française Chilienne", lieuNaissance: ville,
                               dateNaissance: DateOnly.Parse("16/02/2000"), dateDeces: DateOnly.Parse("04/12/2048"));
 

@@ -207,10 +207,10 @@ namespace DataBase
             // Insertion de la personne dans la Table Personne
             _personneBdd.InsererPersonneTable(personne);
 
-            Console.WriteLine("\n Id personne : " + personne.Id);
 
             // Insertion des prénoms de la personne dans la Table Prenom et la Table d'association
-            InsererPrenomsPersonne(personne);
+            if (personne.Prenoms is not null)
+                InsererPrenomsPersonne(personne);
 
             // Insertion de la Nationnalité dans la Table d'association
             _paysBdd.InsererNationalitePersonne(personne);

@@ -225,7 +225,7 @@ namespace DataBase
             StringBuilder valuesBuilder = new StringBuilder();
 
             valuesBuilder.Append($"{(personne is Homme ? 0 : 1)}, ");
-            valuesBuilder.Append($"{"'" + personne.Nom + "'" ?? VALUENULL}, ");
+            valuesBuilder.Append($"{(personne.Nom is null ? VALUENULL : "'" + personne.Nom + "'")}, ");
             valuesBuilder.Append($"{(personne is Femme ? "'" + ((Femme)personne).NomJeuneFille + "'" ?? VALUENULL : VALUENULL)}, ");
 
             valuesBuilder.Append($"{(personne.Description is null ? VALUENULL : personne.Description)}, ");
