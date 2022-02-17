@@ -14,6 +14,7 @@ namespace DataBase
         private readonly PrenomBdd _prenomBdd;
         private readonly VilleBdd _villeBdd;
         private readonly ImageBdd _imageBdd;
+        private readonly PaysBdd _paysBdd;
 
         private Dictionary<int, Ville> _villeDejaChargee;
         private Dictionary<int, FichierImage> _imageDejaChargee;
@@ -26,6 +27,7 @@ namespace DataBase
             _prenomBdd = new PrenomBdd(_chaineConnexion);
             _villeBdd = new VilleBdd(_chaineConnexion);
             _imageBdd = new ImageBdd(_chaineConnexion);
+            _paysBdd = new PaysBdd(_chaineConnexion);
 
             _villeDejaChargee = new Dictionary<int, Ville>();
             _imageDejaChargee = new Dictionary<int, FichierImage>();
@@ -48,6 +50,11 @@ namespace DataBase
             }
 
             return fichierImage;
+        }
+
+        public string? GetNationaliteByIdPays(int idPays)
+        {
+            return _paysBdd.GetNationaliteTableByIdPays(idPays);
         }
 
         public Personne GetPersonneById(int idPersonne)

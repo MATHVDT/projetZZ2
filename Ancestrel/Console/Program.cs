@@ -72,17 +72,12 @@ string chaineConnexion = $@"Data Source=(LocalDB)\MSSQLLocalDB;Integrated Securi
 Bdd bdd = new Bdd(chaineConnexion);
 
 
-bdd.InsererPersonne(personne);
+//bdd.InsererPersonne(personne);
 
 
 
-//List<string> listPrenoms = new List<string>();
-//listPrenoms.Add("jack");
-//listPrenoms.Add("william");
-
-//bdd.InsererPrenomsPersonne(personne);
-
-Console.WriteLine(bdd.GetPersonneById(1).ToString());
+Console.WriteLine(bdd.GetPersonneById(1555)?.ToString() ?? "personne pas trouvée");
+Console.WriteLine(bdd.GetNationaliteByIdPays(888)?.ToString() ?? "Pays pas trouvé");
 
 //Console.WriteLine(bdd.GetVilleById(1));
 

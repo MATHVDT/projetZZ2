@@ -13,5 +13,6 @@ namespace Model
         public string? GetPrenomById(int id);
         public FichierImage GetFichierImageById(int id);
         public Ville GetVilleById(int idVille);
+        public string? GetNationaliteByIdPays(int idPays);
     }
 }
