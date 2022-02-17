@@ -383,6 +383,16 @@ namespace Model
         }
 
         /**
+         * @fn public List<string> GetListNationalites()
+         * @brief Liste des nationalites.
+         * @return List<string>
+         */
+        public List<string> GetListNationalites()
+        {
+            return Nationalite?.Split(' ', StringSplitOptions.RemoveEmptyEntries).ToList() ?? new List<string>();
+        }
+
+        /**
         * @fn public int GetPereId()
         * @brief Donne le Numero du pere
         * @return int *Numero du père*
@@ -784,7 +794,7 @@ namespace Model
         }
 
         /**
-         * @foverload  public void SupprimerFichier()
+         * @overload public void SupprimerFichier()
          * @param Guid g - *Id du fichier à supprimer*
          * @brief Supprime un fichier à la personne.
          * @warning Le fichier n'est pas forcement une image. 
@@ -802,7 +812,7 @@ namespace Model
             }
         }
         /**
-         * @foverload  public void SupprimerFichier()
+         * @overload public void SupprimerFichier()
          * @param Guid g - *Id du fichier à supprimer*
          * @brief Supprime un fichier à la personne.
          * @warning Le fichier n'est pas forcement une image. 
