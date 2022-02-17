@@ -43,8 +43,6 @@ namespace DataBase
          */
         public string? GetNationaliteTableByIdPays(int idPays)
         {
-
-
             string? nationalite = null;
 
             // Requete SQL pour récuperer la nationalite d'un pays
@@ -193,7 +191,7 @@ namespace DataBase
                 }
                 reader.Close(); // Fermeture du SqlReader
 
-                foreach(int id in idPays)
+                foreach (int id in idPays)
                 {
                     queryString = $"INSERT INTO {_Nationalite} " +
                                   $"( {_IdPays}, {_IdPersonne} ) " +

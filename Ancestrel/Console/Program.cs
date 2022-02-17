@@ -64,7 +64,7 @@ Image img2 = (Image)imgTest.Clone();*/
 
 Ville ville = new Ville("Blancherive", 4.444, 48.42);
 
-Personne personne = new Homme(num: 1, 
+Personne personne = new Homme(num: 1,
                               nationalite: "française Chilienne", lieuNaissance: ville,
                               dateNaissance: DateOnly.Parse("16/02/2000"), dateDeces: DateOnly.Parse("04/12/2048"));
 
@@ -75,25 +75,33 @@ string chaineConnexion = $@"Data Source=(LocalDB)\MSSQLLocalDB;Integrated Securi
 Bdd bdd = new Bdd(chaineConnexion);
 
 
-bdd.InsererPersonne(personne);
+//bdd.InsererPersonne(personne);
 
 
-
-Console.WriteLine(bdd.GetPersonneById((int)personne.Id)?.ToString() ?? "personne pas trouvée");
+//Console.WriteLine(bdd.GetPersonneById((int)personne.Id)?.ToString() ?? "personne pas trouvée");
 //Console.WriteLine(bdd.GetNationaliteByIdPays(5)?.ToString() ?? "Pays pas trouvé");
 
 //Console.WriteLine(bdd.GetVilleById(1));
 
 
 //string path = @"E:\ma_th\Documents\Programmations\pgenealogie\Ancestrel\Image1.png";
-//Console.WriteLine(File.Exists(path));
+//Console.WriteLine("Fichier existe ? " + File.Exists(path));
 
 //FichierImage f = new FichierImage(path, nomFichier: "imageToto");
 
 //bdd.InsererFichierImage(f);
-//bdd.InsererFichierImage(f);
-//f = bdd.GetFichierImageById(2);
+//f = bdd.GetFichierImageById((int)f.Id);
 //f.SaveTest();
+
+
+//try
+//{
+//    bdd.GetNationaliteByIdPays(42);
+//}
+//catch (ArgumentNullException e)
+//{
+//    Console.WriteLine(e.Message);
+//}
 
 
 

@@ -36,10 +36,18 @@ namespace DataBase
 
         }
 
+        public void AjouterRelationParente(int idEnfant, int? idPere, int? idMere)
+        {
+            throw new NotImplementedException();
+        }
+
         public Arbre ChargerArbre(int idPersonne)
         {
             // Récupération du cujus
             Personne cujus = GetPersonneById(idPersonne);
+            if (cujus == null)
+                throw new ArgumentNullException($"Cujus {idPersonne} pas dans la bdd"); // Créer une exception pas de cujus
+
             // Création de l'arbre
             Arbre arbre = new Arbre("Arbre Chargé depuis la bdd",
                                     $"Abre à partir de {cujus.Id} : {cujus.Nom} {cujus.Prenoms}",
@@ -81,23 +89,28 @@ namespace DataBase
             return arbre;
         }
 
-        public FichierImage GetFichierImageById(int idImage)
+        public FichierImage GetFichierImageById(int idFichierImage)
         {
             FichierImage fichierImage;
 
             // Checke si l'image a pas déjà été chargée
-            if (!_imageDejaChargee.TryGetValue(idImage, out fichierImage))
+            if (!_imageDejaChargee.TryGetValue(idFichierImage, out fichierImage))
             {
                 // Requete dans la bdd
-                fichierImage = _imageBdd.GetImageById(idImage);
+                fichierImage = _imageBdd.GetImageById(idFichierImage);
             }
+            if (fichierImage is null)
+                throw new ArgumentNullException($"FichierImage {idFichierImage} idnon trouvé dans la BDD.");
 
             return fichierImage;
         }
 
-        public string? GetNationaliteByIdPays(int idPays)
+        public string GetNationaliteByIdPays(int idPays)
         {
-            return _paysBdd.GetNationaliteTableByIdPays(idPays);
+            string? nationalite = _paysBdd.GetNationaliteTableByIdPays(idPays);
+            if (nationalite is null)
+                throw new ArgumentNullException($"Nationalite pour pays {idPays} non trouvée dans BDD.");
+            return (string)nationalite;
         }
 
         public string? GetNationalitesByIdPersonne(int idPersonne)
@@ -109,22 +122,21 @@ namespace DataBase
         {
             Personne personne;
 
-
             // Recupération de la personne dans la Table Personne
             personne = _personneBdd.GetPersonneTableById(idPersonne);
 
             if (personne is null)
-                return personne;
+                throw new ArgumentNullException($"Personne {idPersonne} pas dans la BDD.");
 
             // Recupération des prénoms de la personne dans la Table Prenom et la Table d'association
-            string? prenomsBdd = _prenomBdd.GetPrenomByIdPersonne(idPersonne);
+            string? prenomsBdd = GetPrenomByIdPersonne(idPersonne);
             if (prenomsBdd is not null)
                 personne.AddPrenoms(prenomsBdd);
 
             // Recupération lieu de naissance dans la Table Ville et la Table d'association
             int? idVilleNaissance = _personneBdd.GetIdVilleNaissancePersonneById(idPersonne);
 
-            Console.WriteLine("id ville : " + idVilleNaissance ?? "null");
+            Console.WriteLine("Id ville : " + idVilleNaissance ?? "null");
 
             // A une ville de naissance
             if (idVilleNaissance is not null)
@@ -135,8 +147,6 @@ namespace DataBase
                 // Ajout du lieu de naissance à la personne
                 personne.LieuNaissance = villeNaissance;
             }
-
-
 
             // Recupération des images de la personne dans la Table Image et la Table d'association
             List<int> listIdImage = _imageBdd.GetListIdImagePersonneById(idPersonne);
@@ -155,7 +165,6 @@ namespace DataBase
                 personne.AjouterImage(image, imgProfil);
             }
 
-
             // Recupération de la Nationnalité dans la Table d'association
             personne.Nationalite = GetNationalitesByIdPersonne(idPersonne);
 
@@ -167,9 +176,9 @@ namespace DataBase
             return personne;
         }
 
-        public string? GetPrenomById(int id)
+        public string? GetPrenomByIdPersonne(int idPersonne)
         {
-            return GetPrenomById(id);
+            return _prenomBdd.GetPrenomByIdPersonne(idPersonne);
         }
 
         public Ville GetVilleById(int idVille)
@@ -180,6 +189,9 @@ namespace DataBase
                 ville = _villeBdd.GetVilleTableById(idVille);
                 _villeDejaChargee.Add(idVille, ville);
             }
+            if (ville is null)
+                throw new ArgumentNullException($"Ville {idVille} non trouvée dans la BDD");
+
             return ville;
         }
 
@@ -219,6 +231,9 @@ namespace DataBase
         public void InsererPrenomsPersonne(Personne personne)
         {
             List<string> listPrenoms = personne.GetListPrenoms();
+            if (listPrenoms.Count == 0)
+                return;
+
             // La personne n'a pas encore été inséré dans la table
             if (personne.Id is null)
             {
