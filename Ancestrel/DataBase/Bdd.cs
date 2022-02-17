@@ -97,6 +97,7 @@ namespace DataBase
 
             // Recupération des images de la personne dans la Table Image et la Table d'association
             List<int> listIdImage = _imageBdd.GetListIdImagePersonneById(idPersonne);
+            int? idImageProfilBdd = _personneBdd.GetIdImageProfilPersonneById(idPersonne);
 
             FichierImage image; bool imgProfil = false;
 
@@ -106,7 +107,7 @@ namespace DataBase
                 image = GetFichierImageById(idImageId); // Récupération de l'image
 
                 // Check si ce n'est pas l'image de profil
-                //imgProfil = idImage == personne.IdImageProfil; 
+                imgProfil = (idImageId == idImageProfilBdd); 
 
                 personne.AjouterImage(image, imgProfil);
             }

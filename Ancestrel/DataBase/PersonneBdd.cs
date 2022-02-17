@@ -302,5 +302,62 @@ namespace DataBase
         }
 
 
+        /**
+      * @fn public int? GetIdImageProfilPersonneById(int idPersonne)
+      * @brief Recupere l'id de la ville de naissance d'une personne.
+      * 
+      * @param int idPersonne
+      * 
+      * @return int? idImageProfil 
+      */
+        public int? GetIdImageProfilPersonneById(int idPersonne)
+        {
+            // id de la ville de naissance à récup
+            int? idImageProfil = null;
+
+            // Requete SQL pour récuperer les infos sur une personne 
+            string queryString = $"SELECT {_IdImgProfil} " +
+                                 $"FROM {_PersonneTable} " +
+                                 $"WHERE {_Id} = {idPersonne};";
+
+            // Connexion à la bdd
+            SqlConnection connexion = new SqlConnection(_chaineConnexion);
+            SqlCommand commandSql;
+            SqlDataReader reader;
+
+            try
+            {
+                connexion.Open(); // Ouverture de la connexion à la bdd
+
+                // Création et execution de la requete SQL
+                Console.WriteLine(queryString);
+                commandSql = new SqlCommand(queryString, connexion);
+                reader = commandSql.ExecuteReader();
+
+                reader.Read(); // Debut de la lecture du la requete
+
+                idImageProfil = (reader[_IdImgProfil] is System.DBNull ? null : (int?)reader[_IdImgProfil]);
+
+
+                reader.Close();  // Fermeture de la lecture de la requete
+
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("Error SQL Generated. Details: " + e.ToString());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error Generated. Details: " + e.ToString());
+            }
+            finally
+            {
+                connexion.Close();
+            }
+
+            return idImageProfil;
+        }
+
+
     }
 }
