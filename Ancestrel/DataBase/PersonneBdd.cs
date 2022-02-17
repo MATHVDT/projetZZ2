@@ -155,7 +155,7 @@ namespace DataBase
 
                 // Requete SQL pour inserer la personne 
                 queryString = $"INSERT INTO {_PersonneTable} \n" +
-                              $"( {_Sexe}, {_NomUsage}, {_Nom}, {_DateNaissance}, {_DateDeces}, {_Description}, {_IdImgProfil}, {_IdVilleNaissance}, {_IdPere}, {_IdMere} ) \n" +
+                              $"( {_Sexe}, {_NomUsage}, {_Nom}, {_Description}, {_DateNaissance}, {_DateDeces}, {_IdVilleNaissance}, {_IdImgProfil}, {_IdPere}, {_IdMere} ) \n" +
                               $"VALUES ({values});";
 
                 // Création de la requete SQL d'INSERTION
@@ -228,10 +228,10 @@ namespace DataBase
             valuesBuilder.Append($"{"'" + personne.Nom + "'" ?? VALUENULL}, ");
             valuesBuilder.Append($"{(personne is Femme ? "'" + ((Femme)personne).NomJeuneFille + "'" ?? VALUENULL : VALUENULL)}, ");
 
+            valuesBuilder.Append($"{(personne.Description is null ? VALUENULL : personne.Description)}, ");
+
             valuesBuilder.Append($"{(personne.DateNaissance is null ? VALUENULL : $"CONVERT(date, '{personne.DateNaissance}', 103)")}, ");
             valuesBuilder.Append($"{(personne.DateDeces is null ? VALUENULL : $"CONVERT(date, '{personne.DateDeces}', 103)")}, ");
-
-            valuesBuilder.Append($"{(personne.Description is null ? VALUENULL : personne.Description)}, ");
 
             int? idLieuNaissance = personne.LieuNaissance is null ? null : personne.LieuNaissance.Id;
             valuesBuilder.Append($"{(idLieuNaissance is null ? VALUENULL : idLieuNaissance)}, ");

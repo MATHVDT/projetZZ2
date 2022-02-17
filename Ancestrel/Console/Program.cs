@@ -62,8 +62,10 @@ Image img2 = (Image)imgTest.Clone();*/
 
 //const string VALUENULL = "NULL";
 
+Ville ville = new Ville("Blancherive", 4.444, 48.42);
+
 Personne personne = new Homme(num: 1, nom: "Dupond", prenoms: "Jean Remi jean",
-                              nationalite: "française Chilienne",
+                              nationalite: "française Chilienne", lieuNaissance: ville,
                               dateNaissance: DateOnly.Parse("16/02/2000"), dateDeces: DateOnly.Parse("04/12/2048"));
 
 
@@ -73,11 +75,11 @@ string chaineConnexion = $@"Data Source=(LocalDB)\MSSQLLocalDB;Integrated Securi
 Bdd bdd = new Bdd(chaineConnexion);
 
 
-//bdd.InsererPersonne(personne);
+bdd.InsererPersonne(personne);
 
 
 
-//Console.WriteLine(bdd.GetPersonneById(1)?.ToString() ?? "personne pas trouvée");
+Console.WriteLine(bdd.GetPersonneById((int)personne.Id)?.ToString() ?? "personne pas trouvée");
 //Console.WriteLine(bdd.GetNationaliteByIdPays(5)?.ToString() ?? "Pays pas trouvé");
 
 //Console.WriteLine(bdd.GetVilleById(1));
@@ -94,10 +96,7 @@ Bdd bdd = new Bdd(chaineConnexion);
 //f.SaveTest();
 
 
-Ville ville = new Ville("Blancherive", 4.444, 48.42);
-
-bdd.InsererVille(ville);
 
 
-Console.WriteLine(bdd.GetVilleById((int)ville.Id).ToString() ?? "Ville pas trouvé");
+
 

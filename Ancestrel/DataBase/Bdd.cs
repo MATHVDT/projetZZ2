@@ -193,6 +193,10 @@ namespace DataBase
 
         public void InsererPersonne(Personne personne)
         {
+            // Insertion ville
+            if (personne.LieuNaissance is not null)
+                InsererVille(personne.LieuNaissance);
+
             // Insertion des images de la personne dans la Table Image et la Table d'association
             List<FichierImage> fichierImages = personne.GetFichierImages();
             foreach (var x in fichierImages)
@@ -202,6 +206,8 @@ namespace DataBase
 
             // Insertion de la personne dans la Table Personne
             _personneBdd.InsererPersonneTable(personne);
+
+            Console.WriteLine("\n Id personne : " + personne.Id);
 
             // Insertion des prénoms de la personne dans la Table Prenom et la Table d'association
             InsererPrenomsPersonne(personne);
