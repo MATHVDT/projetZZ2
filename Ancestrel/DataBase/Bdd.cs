@@ -69,6 +69,8 @@ namespace DataBase
             // Recupération lieu de naissance dans la Table Ville et la Table d'association
             int? idVilleNaissance = _personneBdd.GetIdVilleNaissancePersonneById(idPersonne);
 
+            Console.WriteLine("id ville : " + idVilleNaissance ?? "null");
+
             // A une ville de naissance
             if (idVilleNaissance is not null)
             {
@@ -82,12 +84,12 @@ namespace DataBase
 
 
             // Recupération des images de la personne dans la Table Image et la Table d'association
-            List<int> idImage = _imageBdd.GetListIdImagePersonneById(idPersonne);
+            List<int> listIdImage = _imageBdd.GetListIdImagePersonneById(idPersonne);
 
             FichierImage image; bool imgProfil = false;
 
             // Pour chaque Image, on l'ajoute à la personne
-            foreach (int idImageId in idImage)
+            foreach (int idImageId in listIdImage)
             {
                 image = GetFichierImageById(idImageId); // Récupération de l'image
 

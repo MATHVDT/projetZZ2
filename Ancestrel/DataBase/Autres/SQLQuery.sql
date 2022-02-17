@@ -1,1 +1,2 @@
-﻿select * from Image
+﻿select *from Personne
+select * from Prenom

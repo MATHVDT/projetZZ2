@@ -42,6 +42,7 @@ namespace Model
         /**
          * @var IdImageProfil
          * @brief Id de l'image de profil dans la bdd.
+         * @warning Normalement pas besoin je me débrouille autrement pour l'avoir
          */
         public int? IdImageProfil { get; set; }
 

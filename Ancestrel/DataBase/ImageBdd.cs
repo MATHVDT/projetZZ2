@@ -174,7 +174,7 @@ namespace DataBase
             // Requete SQL pour récuperer les id des Images associés à une personne
             string queryString = $"SELECT {_IdImage} " +
                                  $"FROM {_ImagePersonneTable} " +
-                                 $"WHERE {_Id} = {idPersonne};";
+                                 $"WHERE {_IdPersonne} = {idPersonne};";
 
             // Connexion à la bdd
             SqlConnection connexion = new SqlConnection(_chaineConnexion);

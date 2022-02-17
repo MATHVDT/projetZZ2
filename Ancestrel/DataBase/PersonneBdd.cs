@@ -231,12 +231,12 @@ namespace DataBase
             valuesBuilder.Append($"{(personne.DateNaissance is null ? VALUENULL : $"CONVERT(date, '{personne.DateNaissance}', 103)")}, ");
             valuesBuilder.Append($"{(personne.DateDeces is null ? VALUENULL : $"CONVERT(date, '{personne.DateDeces}', 103)")}, ");
 
-            valuesBuilder.Append($"{(personne.Description is null ? VALUENULL : personne.Description )}, ");
+            valuesBuilder.Append($"{(personne.Description is null ? VALUENULL : personne.Description)}, ");
 
             int? idLieuNaissance = personne.LieuNaissance is null ? null : personne.LieuNaissance.Id;
             valuesBuilder.Append($"{(idLieuNaissance is null ? VALUENULL : idLieuNaissance)}, ");
 
-            int? idImageProfil = (personne.GetFichierImageProfil() is null ? null : personne.GetFichierImageProfil().Id);
+            int? idImageProfil = personne.GetFichierImageProfil()?.Id;
             valuesBuilder.Append($"{(idImageProfil is null ? VALUENULL : idImageProfil)}, ");
 
             valuesBuilder.Append($"{(personne.IdPere is null ? VALUENULL : personne.IdPere) }, ");

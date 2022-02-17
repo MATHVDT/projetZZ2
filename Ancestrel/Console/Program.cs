@@ -71,32 +71,28 @@ string chaineConnexion = $@"Data Source=(LocalDB)\MSSQLLocalDB;Integrated Securi
 
 Bdd bdd = new Bdd(chaineConnexion);
 
-//Console.WriteLine($"{System.DBNull.Value}");
 
-//Console.WriteLine(PersonneBdd.PersonneValuesInsert(personne));
-
-//bdd.InsererPersonne(personne);
+bdd.InsererPersonne(personne);
 
 
-//Console.WriteLine(PersonneBdd.GetPersonneTableById(2).ToString());
 
-List<string> listPrenoms = new List<string>();
-listPrenoms.Add("jack");
-listPrenoms.Add("william");
+//List<string> listPrenoms = new List<string>();
+//listPrenoms.Add("jack");
+//listPrenoms.Add("william");
 
 //bdd.InsererPrenomsPersonne(personne);
 
-//Console.WriteLine(bdd.GetPersonneById(3).ToString());
+Console.WriteLine(bdd.GetPersonneById(1).ToString());
 
 //Console.WriteLine(bdd.GetVilleById(1));
 
 
-string path = @"E:\ma_th\Documents\Programmations\pgenealogie\Ancestrel\Image1.png";
-Console.WriteLine(File.Exists(path));
+//string path = @"E:\ma_th\Documents\Programmations\pgenealogie\Ancestrel\Image1.png";
+//Console.WriteLine(File.Exists(path));
 
-FichierImage f = new FichierImage(path, nomFichier: "imageToto");
+//FichierImage f = new FichierImage(path, nomFichier: "imageToto");
 
-bdd.InsererFichierImage(f);
-bdd.InsererFichierImage(f);
-f = bdd.GetFichierImageById(2);
-f.SaveTest();
+//bdd.InsererFichierImage(f);
+//bdd.InsererFichierImage(f);
+//f = bdd.GetFichierImageById(2);
+//f.SaveTest();
