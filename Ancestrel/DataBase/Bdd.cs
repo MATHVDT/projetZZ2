@@ -150,18 +150,19 @@ namespace DataBase
 
         public void InsererPersonne(Personne personne)
         {
+            // Insertion des images de la personne dans la Table Image et la Table d'association
+            List<FichierImage> fichierImages = personne.GetFichierImages();
+            foreach(var x in fichierImages)
+            {
+                InsererFichierImage(x);
+            }
+
             // Insertion de la personne dans la Table Personne
             _personneBdd.InsererPersonneTable(personne);
 
             // Insertion des prénoms de la personne dans la Table Prenom et la Table d'association
             InsererPrenomsPersonne(personne);
 
-            // Insertion lieu de naissance dans la Table Ville et la Table d'association
-
-            // Insertion de la description de la personne dans la Table Description  et la Table d'association
-            // .... Demander si on a besoin de table association ou si on peut mettre PK de la Table = id personne => FK
-
-            // Insertion des images de la personne dans la Table Image et la Table d'association
 
             // Insertion de la Nationnalité dans la Table d'association
         }
