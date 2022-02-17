@@ -81,6 +81,60 @@ namespace DataBase
             return ville;
         }
 
+        public void InsererVilleTable(Ville ville)
+        {
+            // Connexion à la bdd
+            SqlConnection connexion = new SqlConnection(_chaineConnexion);
+            SqlCommand commandSql;
+            string queryString;
+
+            try
+            {
+                connexion.Open(); // Ouverture connexion
+
+                // Requete SQL pour inserer la ville
+                queryString = $"INSERT INTO {_VilleTable} \n" +
+                              $"( {_Nom}, {_Latitude}, {_Longitude} ) \n" + // , {_Pays}
+                              $"VALUES ( '{ville.Nom}', '{ville.Latitude.ToString().Replace(",", ".")}', '{ville.Longitude.ToString().Replace(",", ".")}' );";
+
+
+                // Création de la requete SQL d'INSERTION
+                commandSql = new SqlCommand(queryString, connexion);
+
+                // Excecution de l'insertion
+                Console.WriteLine(queryString);
+                Console.WriteLine(commandSql.ExecuteNonQuery() + " ligne inserée.");
+
+                // Requete SQL pour récupérer l'id de la ville
+                queryString = $"SELECT IDENT_CURRENT('{_VilleTable}');";
+
+                // Création de la requete SQL pour récupérer l'Id à la ville
+                commandSql = new SqlCommand(queryString, connexion);
+
+                // Excecution de la requete de récupération de l'Id
+                Console.WriteLine(queryString);
+                SqlDataReader reader = commandSql.ExecuteReader();
+                reader.Read();
+                int idAutoIncrementeVille = Convert.ToInt32(reader[0]);
+                ville.Id = idAutoIncrementeVille;
+                Console.WriteLine("Id auto incrementé de la ville : " + idAutoIncrementeVille);
+
+                reader.Close(); // Fermeture du reader
+
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("Error SQL Generated. Details: " + e.ToString());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error Generated. Details: " + e.ToString());
+            }
+            finally
+            {
+                connexion.Close();
+            }
+        }
 
 
     }

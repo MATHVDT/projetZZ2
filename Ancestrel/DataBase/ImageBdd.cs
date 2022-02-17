@@ -84,10 +84,10 @@ namespace DataBase
             {
                 Console.WriteLine("Error SQL Generated. Details: " + e.ToString());
             }
-            //catch (Exception e)
-            //{
-            //    Console.WriteLine("Error Generated. Details: " + e.ToString());
-            //}
+            catch (Exception e)
+            {
+                Console.WriteLine("Error Generated. Details: " + e.ToString());
+            }
             finally
             {
                 connexion.Close();
@@ -139,7 +139,7 @@ namespace DataBase
                 reader.Read();
                 int idAutoIncrementeImage = Convert.ToInt32(reader[0]);
                 fichierImage.Id = idAutoIncrementeImage;
-                Console.WriteLine("Id auto incrementé de la personne : " + idAutoIncrementeImage);
+                Console.WriteLine("Id auto incrementé de la image : " + idAutoIncrementeImage);
 
                 reader.Close(); // Fermeture du reader
 

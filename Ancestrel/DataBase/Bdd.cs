@@ -57,10 +57,10 @@ namespace DataBase
             while (queue.Count > 0)
             {
                 // Récupere une enfant dans la file
-                enfant = queue.Dequeue(); 
+                enfant = queue.Dequeue();
 
                 idPere = enfant.IdPere;
-                if(idPere is not null)
+                if (idPere is not null)
                 {
                     pere = GetPersonneById((int)idPere);
                     arbre.AjouterPere(enfant.Numero, (Homme)pere);
@@ -233,7 +233,8 @@ namespace DataBase
 
         public void InsererVille(Ville ville)
         {
-            throw new NotImplementedException();
+            // Verifier si la ville existe pas déjà => id
+            _villeBdd.InsererVilleTable(ville);
         }
     }
 }
