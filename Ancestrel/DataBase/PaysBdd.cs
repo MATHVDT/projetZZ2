@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -144,6 +145,82 @@ namespace DataBase
                 connexion.Close();
             }
             return nationalites;
+        }
+
+
+
+
+        public void InsererNationalitePersonne(Personne personne)
+        {
+            int idPersonne = (int)personne.Id;
+            List<string> listNationalites = personne.GetListNationalites();
+            List<int> idPays = new List<int>();
+
+            // Construction de la string Values pour la requete SQL
+            StringBuilder listNationaliteValuesBuilder = new StringBuilder();
+
+            listNationalites.ForEach(x => listNationaliteValuesBuilder.Append("'" + x.ToUpper() + "' "));
+            listNationaliteValuesBuilder.Replace(" '", ", '");
+
+
+            // Connexion à la bdd
+            SqlConnection connexion = new SqlConnection(_chaineConnexion);
+            SqlCommand commandSql;
+            SqlDataReader reader;
+            string queryString;
+
+
+
+            // Requete SQL pour récupérer les id des pays correspondant aux natio
+            queryString = $"SELECT {_Id} " +
+                          $"FROM {_PaysTable} " +
+                          $"WHERE {_Nationalite} IN ( {listNationaliteValuesBuilder.ToString()} );";
+            try
+            {
+                connexion.Open();
+
+                // Création de la requete SQL
+                commandSql = new SqlCommand(queryString, connexion);
+
+                // Excecution de la requete de récupération des l'Id des pays
+                Console.WriteLine(queryString);
+                reader = commandSql.ExecuteReader();
+
+                // Stockage de id des pays
+                while (reader.Read())
+                {
+                    idPays.Add((int)reader[_Id]);
+                }
+                reader.Close(); // Fermeture du SqlReader
+
+                foreach(int id in idPays)
+                {
+                    queryString = $"INSERT INTO {_Nationalite} " +
+                                  $"( {_IdPays}, {_IdPersonne} ) " +
+                                  $"VALUES ({id},  {idPersonne});";
+
+                    // Création de la requete SQL d'INSERTION 
+                    commandSql = new SqlCommand(queryString, connexion);
+
+                    // Excecution de la requete SQL d'INSERTION 
+                    Console.WriteLine(queryString);
+                    Console.WriteLine(commandSql.ExecuteNonQuery() + " ligne inserée.");
+                }
+
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("Error SQL Generated. Details: " + e.ToString());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error Generated. Details: " + e.ToString());
+            }
+            finally
+            {
+                connexion.Close();
+            }
+
         }
     }
 }

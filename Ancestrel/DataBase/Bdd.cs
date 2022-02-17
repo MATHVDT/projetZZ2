@@ -163,8 +163,8 @@ namespace DataBase
             // Insertion des prénoms de la personne dans la Table Prenom et la Table d'association
             InsererPrenomsPersonne(personne);
 
-
             // Insertion de la Nationnalité dans la Table d'association
+            _paysBdd.InsererNationalitePersonne(personne);
         }
 
         public void InsererPrenomsPersonne(Personne personne)

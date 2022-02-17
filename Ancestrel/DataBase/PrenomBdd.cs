@@ -77,15 +77,7 @@ namespace DataBase
             listPrenoms.ForEach(x => listPrenomsValuesBuilder.Append("'" + x.ToUpper() + "' "));
             listPrenomsValuesBuilder.Replace(" '", ", '");
 
-            //foreach (string p in listPrenoms)
-            //{
-            //    listPrenomsValuesBuilder.Append("'");
-            //    listPrenomsValuesBuilder.Append(p);
-            //    listPrenomsValuesBuilder.Append("', ");
-            //}
-            // On enlève les deux dernier caractères ", "
-            //listPrenomsValuesBuilder.Remove(listPrenomsValuesBuilder.Length - 2, listPrenomsValuesBuilder.Length - 1);
-
+  
             // Sert à garder en mémoire les prenoms et leurs id associé qui sont enregistré
             Dictionary<string, int> prenomsDejaEnregistres = new Dictionary<string, int>();
 
