@@ -87,5 +87,63 @@ namespace DataBase
 
             return nationalite;
         }
+
+
+
+        /**
+         * @fn public string? GetNationalitesByIdPersonne(int idPersonne)
+         * @brief Retourne la chaine des nationalite de la personne
+         * 
+         * @param int idPersonne
+         * 
+         * @return string? *Nationalités de la personne*
+         */
+        public string? GetNationalitesByIdPersonne(int idPersonne)
+        {
+            string? nationalites = null;
+
+            // Requete SQL pour récuperer les prénoms de la personne
+            string queryString = $"SELECT {_Nationalite} \n" +
+                                 $"FROM {_PaysTable} JOIN {_NationaliteTable} \n" +
+                                 $"ON {_PaysTable}.{_Id} = {_NationaliteTable}.{_IdPays} \n" +
+                                 $"WHERE {_IdPersonne} = {idPersonne};";
+
+            // Connexion à la bdd
+            SqlConnection connexion = new SqlConnection(_chaineConnexion);
+
+            try
+            {
+                connexion.Open();
+
+                // Création et execution de la requete SQL
+                SqlCommand commandSql = new SqlCommand(queryString, connexion);
+                Console.WriteLine(queryString);
+                SqlDataReader reader = commandSql.ExecuteReader();
+
+                // Récupération des  nationalite 
+                StringBuilder nationalitesBuilder = new StringBuilder();
+
+                while (reader.Read())
+                {
+                    nationalitesBuilder.Append(reader[_Nationalite].ToString() + " ");
+                }
+
+                // Concatenation des nationalite
+                nationalites = (nationalitesBuilder.Length == 0) ? null : nationalitesBuilder.ToString();
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("Error SQL Generated. Details: " + e.ToString());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error Generated. Details: " + e.ToString());
+            }
+            finally
+            {
+                connexion.Close();
+            }
+            return nationalites;
+        }
     }
 }

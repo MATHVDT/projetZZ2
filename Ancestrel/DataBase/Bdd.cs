@@ -57,6 +57,11 @@ namespace DataBase
             return _paysBdd.GetNationaliteTableByIdPays(idPays);
         }
 
+        public string? GetNationalitesByIdPersonne(int idPersonne)
+        {
+            return _paysBdd.GetNationalitesByIdPersonne(idPersonne);
+        }
+
         public Personne GetPersonneById(int idPersonne)
         {
             Personne personne;
@@ -108,7 +113,7 @@ namespace DataBase
 
 
             // Recupération de la Nationnalité dans la Table d'association
-            // ...
+            personne.Nationalite = GetNationalitesByIdPersonne(idPersonne);
 
             // Récupération des prénoms
             string? prenoms = _prenomBdd.GetPrenomByIdPersonne(idPersonne);

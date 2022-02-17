@@ -14,5 +14,7 @@ namespace Model
         public FichierImage GetFichierImageById(int id);
         public Ville GetVilleById(int idVille);
         public string? GetNationaliteByIdPays(int idPays);
+        public string? GetNationalitesByIdPersonne(int idPersonne);
+
     }
 }

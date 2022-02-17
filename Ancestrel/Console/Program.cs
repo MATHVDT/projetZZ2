@@ -76,8 +76,8 @@ Bdd bdd = new Bdd(chaineConnexion);
 
 
 
-Console.WriteLine(bdd.GetPersonneById(1555)?.ToString() ?? "personne pas trouvée");
-Console.WriteLine(bdd.GetNationaliteByIdPays(888)?.ToString() ?? "Pays pas trouvé");
+Console.WriteLine(bdd.GetPersonneById(1)?.ToString() ?? "personne pas trouvée");
+Console.WriteLine(bdd.GetNationaliteByIdPays(5)?.ToString() ?? "Pays pas trouvé");
 
 //Console.WriteLine(bdd.GetVilleById(1));
 
