@@ -394,20 +394,40 @@ namespace Model
 
         /**
         * @fn public int GetPereId()
+        * @brief Donne l'Id du pere de la bdd
+        * @return int *Id du père dans la bdd*
+        */
+        public int? GetPereId()
+        {
+            return IdPere;
+        }
+
+        /**
+        * @fn public int GetMereId()
+        * @brief Donne l'Id de la mere de la bdd
+        * @return int? *Id de la mere dans la bdd*
+        */
+        public int? GetMereId()
+        {
+            return IdMere;
+        }
+
+        /**
+        * @fn public int GetPereNumero()
         * @brief Donne le Numero du pere
         * @return int *Numero du père*
         */
-        public int GetPereId()
+        public int GetPereNumero()
         {
             return Numero * 2;
         }
 
         /**
-        * @fn public int GetMereId()
+        * @fn public int GetMereNumero()
         * @brief Donne le Numero de la mere
         * @return int *Numero de la mere*
         */
-        public int GetMereId()
+        public int GetMereNumero()
         {
             return Numero * 2 + 1;
         }

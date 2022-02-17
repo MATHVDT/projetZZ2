@@ -18,11 +18,11 @@ namespace Model.Tests
             Assert.IsNotNull(arbre);
             Assert.IsNotNull(arbre.Personnes[1]);
             arbre.AjouterMere(1, "Marie");
-            Assert.IsNotNull(arbre.Personnes[1].GetMereId());
+            Assert.IsNotNull(arbre.Personnes[1].GetMereNumero());
             arbre.AjouterPere(1, "Richard");
-            Assert.IsNotNull(arbre.Personnes[1].GetPereId());
+            Assert.IsNotNull(arbre.Personnes[1].GetPereNumero());
             Assert.AreEqual(arbre.Personnes.Count(), 3);
-            arbre.SupprimerPersonne(arbre.Personnes[1].GetPereId());
+            arbre.SupprimerPersonne(arbre.Personnes[1].GetPereNumero());
             Assert.AreEqual(arbre.Personnes.Count(), 2);
         }
     }
