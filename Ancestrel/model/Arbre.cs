@@ -110,6 +110,18 @@ namespace Model
             Personnes.Add(pere.Numero, pere);
         }
 
+
+        /**
+         * @overload AjouterPere
+         * @brief Ajout d'une personne comme le pere 
+         */
+        public void AjouterPere(int numEnfant, Homme pere)
+        {
+            pere.Numero = 2 * numEnfant;
+            Personnes.Add(pere.Numero, pere);
+        }
+
+
         /**
         * @fn AjouterMere(int idEnfant, string? nom = null, string? prenoms = null,
            DateOnly? dateNaissance = null, DateOnly? dateDeces = null,
@@ -132,6 +144,18 @@ namespace Model
             Femme mere = new Femme(idEnfant, null, nom, prenoms, dateNaissance, dateDeces, lieuNaissance, nationalite);
             Personnes.Add(mere.Numero, mere);
         }
+
+
+        /**
+         * @overload AjouterMere
+         * @brief Ajout d'une personne comme la mere 
+         */
+        public void AjouterMere(int numEnfant, Femme mere)
+        {
+            mere.Numero = 2 * numEnfant+1;
+            Personnes.Add(mere.Numero, mere);
+        }
+
 
         /**
         * @fn SupprimerPersonne(int idPersonne)

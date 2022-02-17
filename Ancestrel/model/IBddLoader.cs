@@ -8,7 +8,7 @@ namespace Model
 {
     public interface IBddLoader
     {
-
+        public Arbre ChargerArbre(int idPersonne);
         public Personne GetPersonneById(int idPersonne);
         public string? GetPrenomById(int id);
         public FichierImage GetFichierImageById(int id);

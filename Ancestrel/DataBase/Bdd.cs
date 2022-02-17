@@ -33,7 +33,52 @@ namespace DataBase
             _imageDejaChargee = new Dictionary<int, FichierImage>();
 
 
-       
+
+        }
+
+        public Arbre ChargerArbre(int idPersonne)
+        {
+            // Récupération du cujus
+            Personne cujus = GetPersonneById(idPersonne);
+            // Création de l'arbre
+            Arbre arbre = new Arbre("Arbre Chargé depuis la bdd",
+                                    $"Abre à partir de {cujus.Id} : {cujus.Nom} {cujus.Prenoms}",
+                                    cujus);
+            // Création de la file de cujus dont les parents sont à charger
+            Queue<Personne> queue = new Queue<Personne>();
+            // Ajout du cujus
+            queue.Enqueue(cujus);
+
+            Personne enfant;
+            // Id des parents à récupérer
+            int? idPere; Personne pere;
+            int? idMere; Personne mere;
+
+            while (queue.Count > 0)
+            {
+                // Récupere une enfant dans la file
+                enfant = queue.Dequeue(); 
+
+                idPere = enfant.IdPere;
+                if(idPere is not null)
+                {
+                    pere = GetPersonneById((int)idPere);
+                    arbre.AjouterPere(enfant.Numero, (Homme)pere);
+                    queue.Enqueue(pere);
+                }
+
+                idMere = enfant.IdMere;
+                if (idMere is not null)
+                {
+                    mere = GetPersonneById((int)idMere);
+                    arbre.AjouterMere(enfant.Numero, (Femme)mere);
+                    queue.Enqueue(mere);
+                }
+
+            }
+
+
+            return arbre;
         }
 
         public FichierImage GetFichierImageById(int idImage)
@@ -105,7 +150,7 @@ namespace DataBase
                 image = GetFichierImageById(idImageId); // Récupération de l'image
 
                 // Check si ce n'est pas l'image de profil
-                imgProfil = (idImageId == idImageProfilBdd); 
+                imgProfil = (idImageId == idImageProfilBdd);
 
                 personne.AjouterImage(image, imgProfil);
             }
@@ -150,7 +195,7 @@ namespace DataBase
         {
             // Insertion des images de la personne dans la Table Image et la Table d'association
             List<FichierImage> fichierImages = personne.GetFichierImages();
-            foreach(var x in fichierImages)
+            foreach (var x in fichierImages)
             {
                 InsererFichierImage(x);
             }
