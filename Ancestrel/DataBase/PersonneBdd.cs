@@ -358,6 +358,51 @@ namespace DataBase
             return idImageProfil;
         }
 
+        /**
+         * @fn public void AjouterRelationParente
+         * @brief Ajout dans la BDD les id du père et de la mère à l'enfant.
+         * 
+         * @param int idEnfant
+         * @param int? idPere
+         * @param int? idMere
+         */
+        public void AjouterRelationParente(int idEnfant, int? idPere, int? idMere)
+        {
+            const string VALUENULL = "NULL";
 
+            // Requete SQL pour récuperer les infos sur une personne 
+            string queryString = $"UPDATE {_PersonneTable} " +
+                                 $"SET {_IdPere} = {(idPere is null ? VALUENULL : idPere)} " +
+                                 $"SET {_IdMere} = {(idMere is null ? VALUENULL : idMere)} " +
+                                 $"WHERE {_Id} = {idEnfant};";
+
+            // Connexion à la bdd
+            SqlConnection connexion = new SqlConnection(_chaineConnexion);
+            SqlCommand commandSql;
+
+            try
+            {
+                connexion.Open(); // Ouverture de la connexion à la bdd
+
+                // Création et execution de la requete SQL
+                Console.WriteLine(queryString);
+                commandSql = new SqlCommand(queryString, connexion);
+                Console.WriteLine(commandSql.ExecuteNonQuery() + $" ligne modifiée. " +
+                    $"Enfant : {idEnfant} => Père : {idPere} et Mère : {idMere}");
+
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("Error SQL Generated. Details: " + e.ToString());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error Generated. Details: " + e.ToString());
+            }
+            finally
+            {
+                connexion.Close();
+            }
+        }
     }
 }

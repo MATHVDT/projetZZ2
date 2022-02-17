@@ -38,7 +38,7 @@ namespace DataBase
 
         public void AjouterRelationParente(int idEnfant, int? idPere, int? idMere)
         {
-            throw new NotImplementedException();
+            _personneBdd.AjouterRelationParente(idEnfant, idPere, idMere);
         }
 
         public Arbre ChargerArbre(int idPersonne)
@@ -84,8 +84,6 @@ namespace DataBase
                 }
 
             }
-
-
             return arbre;
         }
 
