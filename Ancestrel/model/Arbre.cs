@@ -72,7 +72,7 @@ namespace Model
             DateOnly? dateNaissance = null, DateOnly? dateDeces = null,
             Ville? lieuNaissance = null, string? nationalite = null)
         {
-            Homme pere = new Homme(idEnfant, null, nom, prenoms, dateNaissance, dateDeces, lieuNaissance, nationalite);
+            Homme pere = new Homme(idEnfant, null, null, null, nom, prenoms, dateNaissance, dateDeces, lieuNaissance, nationalite);
             Personnes.Add(pere.Numero, pere);
         }
 
@@ -95,7 +95,7 @@ namespace Model
             DateOnly? dateNaissance = null, DateOnly? dateDeces = null,
             Ville? lieuNaissance = null, string? nationalite = null)
         {
-            Femme mere = new Femme(idEnfant, null, nom, prenoms, dateNaissance, dateDeces, lieuNaissance, nationalite);
+            Femme mere = new Femme(idEnfant, null, null, null, nom, prenoms, dateNaissance, dateDeces, lieuNaissance, nationalite);
             Personnes.Add(mere.Numero, mere);
         }
 
@@ -117,6 +117,11 @@ namespace Model
             {
                 throw new ArgumentException("La personne n'est pas présente dans l'arbre (id : " + idPersonne + ")");
             }
+        }
+
+        public int GetNumeroMax()
+        {
+            return Personnes.Keys.Max();
         }
 
     }

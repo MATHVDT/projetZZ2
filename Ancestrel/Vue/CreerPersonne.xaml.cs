@@ -1,6 +1,7 @@
 ﻿using Model;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -133,6 +134,7 @@ namespace Vue
                     else
                     {
                         manager.CreerArbre(personne);
+                        Debug.WriteLine(personne.Numero);
                         this.NavigationService.Navigate(new Arbre());
                     }
                 }

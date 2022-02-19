@@ -9,7 +9,7 @@ namespace Model
     public class Manager
     {
         private static Manager? _mInstance;
-        public Arbre? Arbre { get; private set; }
+        public Arbre Arbre { get; private set; }
 
         private Manager()
         {
@@ -69,5 +69,16 @@ namespace Model
             //UpdateEnfant(idMere)
         }
 
+        public Personne GetPersonne(int i)
+        {
+            if (Arbre.Personnes.ContainsKey(i))
+            {
+                return Arbre.Personnes[i];
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }

@@ -16,23 +16,33 @@ using System.Windows.Shapes;
 namespace Vue
 {
     /// <summary>
-    /// Logique d'interaction pour Accueil.xaml
+    /// Logique d'interaction pour DetailsPersonne.xaml
     /// </summary>
-    public partial class Accueil : Page
+    public partial class DetailsPersonne : Page
     {
-        public Accueil()
+        public DetailsPersonne()
         {
             InitializeComponent();
         }
 
-        private void CreerArbre_Click(object sender, RoutedEventArgs e)
+        private void Retour_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new CreerPersonne());
+
         }
 
-        private void ChargerArbre_Click(object sender, RoutedEventArgs e)
+        private void BTModifier_Click(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+
+        }
+
+        private void BTValider_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BTImages_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

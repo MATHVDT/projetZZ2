@@ -12,7 +12,7 @@
                 BorderThickness="10">
         <DockPanel>
             <Label x:Name="Numero" Content="1" DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Top" BorderBrush="DarkGray" BorderThickness="4, 0, 0, 4"  FontFamily="Bahnschrift Light" FontSize="16" FontWeight="Bold"/>
-            <Image x:Name="Portrait" DockPanel.Dock="Left" Source="Images\Homme.png"/>
+            <Image x:Name="Portrait" DockPanel.Dock="Left" Source="Images/Homme.png"/>
             <StackPanel Margin="10" Orientation="Vertical" >
                 <Label x:Name="Nom" Margin="20, 20, 20, 0" Content="Inconnu" FontFamily="Bahnschrift Light Condensed" FontSize="20" FontWeight="Normal"/>
                 <Label x:Name="Prenom" Margin="20, 0, 20, 0" Content="Inconnu" FontFamily="Bahnschrift Light Condensed" FontSize="20"/>

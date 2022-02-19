@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:Vue"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Accueil">
+      Title="Accueil"
+      Background="#FF033249">
 
 
     <Grid x:Name="G1">
@@ -14,7 +15,7 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Image VerticalAlignment="Center" Source="/logo.png"/>
+        <Image VerticalAlignment="Center" Source="C:\Users\emper\OneDrive\Documents\ISIMA\ZZ2\Projet\Ancestrel\Vue\Images\logo.png"/>
         <StackPanel VerticalAlignment="Center"  Grid.Column="1">
             <Button Height="70" Margin="30" Name="CreerArbre" Content="Créer un nouvel arbre" Click="CreerArbre_Click" Background="#FF016B15" BorderThickness="0" Foreground="White">
                 <Button.Resources>

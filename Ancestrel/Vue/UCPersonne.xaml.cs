@@ -1,4 +1,4 @@
-﻿using model;
+﻿using Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,9 +23,11 @@ namespace Vue
     {
         private const string _INCONNUE = "Inconnue";
         private Personne personne;
-        public UCPersonne(Personne p)
+        private Page page;
+        public UCPersonne(Personne p, Page page)
         {
             InitializeComponent();
+            this.page = page;
             this.Cursor = Cursors.Hand;
             personne = p;
             AffectationValeur();
@@ -35,7 +37,7 @@ namespace Vue
         {
             if (personne.Inconnu)
             {
-                Portrait.Source = personne is Homme ? new BitmapImage(new Uri(@"Images/Homme.png", UriKind.RelativeOrAbsolute)) : new BitmapImage(new Uri(@"Images/Femme.png", UriKind.RelativeOrAbsolute));
+               // Portrait.Source = personne is Homme ? new BitmapImage(new Uri(@"Images/Homme.png", UriKind.RelativeOrAbsolute)) : new BitmapImage(new Uri(@"Images/Femme.png", UriKind.RelativeOrAbsolute));
                 Nom.Content = _INCONNUE;
                 Prenom.Content = "";
                 Naissance.Content = "";
