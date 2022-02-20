@@ -17,6 +17,8 @@ namespace Model
     public interface IBddSaver
     {
 
+        public void InsererArbre(Arbre arbre);
+
         /**
          * @fn public void InsererPersonne
          * @brief Insere une personne dans le *SPC*

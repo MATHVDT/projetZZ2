@@ -1,9 +1,4 @@
 ﻿using Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataBase
 {
@@ -49,7 +44,7 @@ namespace DataBase
                 throw new ArgumentNullException($"Cujus {idPersonne} pas dans la bdd"); // Créer une exception pas de cujus
 
             // Création de l'arbre
-            Arbre arbre = new Arbre("Arbre Chargé depuis la bdd",
+            Arbre arbre = new Arbre("\nArbre Chargé depuis la bdd",
                                     $"Abre à partir de {cujus.Id} : {cujus.Nom} {cujus.Prenoms}",
                                     cujus);
             // Création de la file de cujus dont les parents sont à charger
@@ -82,7 +77,7 @@ namespace DataBase
                     arbre.AjouterMere(enfant.Numero, (Femme)mere);
                     queue.Enqueue(mere);
                 }
-
+                //Console.WriteLine($"idPere {idPere} et idMere {idMere}");
             }
             return arbre;
         }
@@ -193,6 +188,42 @@ namespace DataBase
             return ville;
         }
 
+
+
+
+        public void InsererArbre(Arbre arbre)
+        {
+            //Console.WriteLine("Enregistrement personne");
+
+            // Inserer les personnes une à une => elles obtiennent un id
+            foreach (Personne p in arbre.Personnes.Values)
+            {
+                InsererPersonne(p);
+            }
+
+            //Console.WriteLine("\n Enregistrement relation parente");
+            // Enregistrement des relations parents/enfant
+            int? idPere; int? idMere;
+            Personne pere;
+            Personne mere;
+            foreach (Personne p in arbre.Personnes.Values)
+            {
+                if (p.Id is null)
+                    throw new ArgumentNullException("La personne n'a pas d'id");
+                arbre.Personnes.TryGetValue(p.GetPereNumero(), out pere);
+                arbre.Personnes.TryGetValue(p.GetMereNumero(), out mere);
+
+                idPere = pere?.Id;
+                idMere = mere?.Id;
+
+                //Console.WriteLine($"idEnfant {p.Id}, idPere {idPere}, idMere {idMere}");
+                AjouterRelationParente((int)p.Id, idPere, idMere);
+            }
+        }
+
+
+
+
         public void InsererFichierImage(FichierImage fichierImage)
         {
             // Verifier s'il y est deja insere ie si id != null => ModifierFichierImage
@@ -223,7 +254,8 @@ namespace DataBase
                 InsererPrenomsPersonne(personne);
 
             // Insertion de la Nationnalité dans la Table d'association
-            _paysBdd.InsererNationalitePersonne(personne);
+            if (personne.Nationalite is not null)
+                _paysBdd.InsererNationalitePersonne(personne);
         }
 
         public void InsererPrenomsPersonne(Personne personne)

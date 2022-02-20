@@ -105,7 +105,8 @@ namespace DataBase
                     p = new Homme(0, idBdd, nomUsageBdd, null, dateNaissanceBdd, dateDecesBdd,
                         null, null, description);
                 }
-
+                p.IdPere = idPere;
+                p.IdMere = idMere;
             }
             catch (SqlException e)
             {
@@ -206,7 +207,6 @@ namespace DataBase
             //SELECT IDENT_CURRENT('Personne');
 
         }
-
 
 
         /**
@@ -372,8 +372,8 @@ namespace DataBase
 
             // Requete SQL pour récuperer les infos sur une personne 
             string queryString = $"UPDATE {_PersonneTable} " +
-                                 $"SET {_IdPere} = {(idPere is null ? VALUENULL : idPere)} " +
-                                 $"SET {_IdMere} = {(idMere is null ? VALUENULL : idMere)} " +
+                                 $"SET {_IdPere} = {(idPere is null ? VALUENULL : idPere)}, \n" +
+                                 $"{_IdMere} = {(idMere is null ? VALUENULL : idMere)} " +
                                  $"WHERE {_Id} = {idEnfant};";
 
             // Connexion à la bdd
