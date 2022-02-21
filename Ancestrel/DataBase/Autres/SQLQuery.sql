@@ -1,8 +1,8 @@
-﻿select * from Personne;
+﻿select Personne.Id as id_personne , Personne.Nom_usage, Prenom.Prenom, Ordre from Personne 
+JOIN Prenom_Personne  on  Personne.Id = Prenom_Personne.Id_personne 
+JOIN prenom  ON Prenom.Id = Prenom_Personne.Id_prenom
 
-UPDATE Personne  
-SET = Nom_usage = 'Delomp',
-Nom = NULL,
-Date_naissance = NULL,
-Date_deces = CONVERT(date, '25/04/2056', 103), NULL,
-Id_ville_naissance = NULL,                                                                                              Id_img_principale = NULL,                             WHERE Id = 1; 
+DELETE FROM Prenom_Personne
+WHERE Id_personne = 1;
+
+select * from Prenom

@@ -275,31 +275,6 @@ namespace DataBase
 
         }
 
-        public void InsererPrenomsPersonne(Personne personne)
-        {
-            List<string> listPrenoms = personne.GetListPrenoms();
-            if (listPrenoms.Count == 0)
-                return;
-
-            // La personne n'a pas encore été inséré dans la table
-            if (personne.Id is null)
-            {
-                Console.WriteLine("Personne pas encore ajouté à la bdd.");
-                _personneBdd.InsererPersonneTable(personne);
-                _personneDejaChargee.Add((int)personne.Id, personne);
-            }
-            try
-            {
-                int idPersonne = (int)personne.Id;
-                _prenomBdd.InsererAssociationPrenomsPersonneId(listPrenoms, idPersonne);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.ToString());
-            }
-
-        }
-
         public void InsererVille(Ville ville)
         {
             // Verifier si la ville existe pas déjà => id
@@ -351,6 +326,42 @@ namespace DataBase
 
         #endregion
 
+        /**
+         * @fn private void InsererPrenomsPersonne
+         * @brief Insere les prenoms d'une personne
+         * 
+         * @param Personne personne 
+         * 
+         * @warning Supprime dabord dans la table d'assocation
+         * tous les prénoms attachés à la pesonne et réinsere
+         * les nouveaux.
+         */
+        private void InsererPrenomsPersonne(Personne personne)
+        {
+            List<string> listPrenoms = personne.GetListPrenoms();
+            if (listPrenoms.Count == 0)
+                return;
+
+            // La personne n'a pas encore été inséré dans la table
+            if (personne.Id is null)
+            {
+                Console.WriteLine("Personne pas encore ajouté à la bdd.");
+                _personneBdd.InsererPersonneTable(personne);
+                _personneDejaChargee.Add((int)personne.Id, personne);
+            }
+            try
+            {
+                int idPersonne = (int)personne.Id;
+                _prenomBdd.InsererAssociationPrenomsPersonneId(listPrenoms, idPersonne);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+        }
+
+
         #region IBddSaver Update
 
         public void UpdatePersonne(Personne personne)
@@ -358,8 +369,12 @@ namespace DataBase
             if (personne.Id is null)
                 InsererPersonne(personne);
 
+            // Update des Valeurs de la personne dans la Table personne
             _personneBdd.UpdatePersonneTable(personne);
-            
+
+            // Update des prénoms de la personne
+            //_prenomBdd
+
         }
 
         public void UpdateVille(Ville ville)

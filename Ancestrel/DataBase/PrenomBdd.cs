@@ -69,6 +69,23 @@ namespace DataBase
             return prenoms;
         }
 
+        /**
+         * @fn public void InsererAssociationPrenomsPersonneId
+         * @brief Insere correctement les prénoms à une personne.
+         * 
+         * @param List<string> listPrenoms
+         * @param int idPersonne
+         * 
+         * @details 
+         * Insere les prenoms dans la tables Prenom s'il n'y sont pas présent,
+         * puis insère les associations entre la personne et les prénoms dans
+         * la table d'association en tenant compte de l'ordre des prénoms.
+         * 
+         * @warning La personne ne doit pas avoir de prénoms pour utiliser
+         * cette méthode. Il faut supprimer les prénoms de la personne avant,
+         * ie supprimer dans la table d'association les relations prenom-ordre-personne.
+         * *Cela vient du fait que l'on stocke l'ordre des prénoms.*
+         */
         public void InsererAssociationPrenomsPersonneId(List<string> listPrenoms, int idPersonne)
         {
             // Construction de la string Values pour la requete SQL

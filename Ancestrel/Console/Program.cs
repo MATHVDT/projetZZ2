@@ -104,7 +104,7 @@ Bdd bdd = new Bdd(chaineConnexion);
 //}
 
 /**  Test arbre     **/
-Homme cujus = new Homme( nom: "VDT", prenoms: "Toto", nationalite: "française");
+Homme cujus = new Homme(nom: "VDT", prenoms: "Toto", nationalite: "française");
 
 //Arbre arbre = new Arbre("arbre1", "description", cujus);
 
@@ -134,25 +134,42 @@ Homme cujus = new Homme( nom: "VDT", prenoms: "Toto", nationalite: "française")
 
 //bdd.AjouterLienParent(cujus);
 
-Personne p = bdd.GetPersonneById(2);
 
-Console.WriteLine();
-Console.WriteLine(p.ToString());
-Console.WriteLine();
+/** Test update d'une personne **/
+#region Test Update personne
+//Personne p = bdd.GetPersonneById(2);
 
-p.Nom = "Delomp";
-p.DateDeces = DateOnly.Parse("25/04/2056");
+//Console.WriteLine();
+//Console.WriteLine(p.ToString());
+//Console.WriteLine();
 
-Console.WriteLine();
-Console.WriteLine(p.ToString());
-Console.WriteLine();
+//p.Nom = "Delomp";
+//p.DateDeces = DateOnly.Parse("25/04/2056");
 
-bdd.UpdatePersonne(p);
+//Console.WriteLine();
+//Console.WriteLine(p.ToString());
+//Console.WriteLine();
 
-Personne p2 = bdd.GetPersonneById(2);
+//bdd.UpdatePersonne(p);
 
-Console.WriteLine();
-Console.WriteLine(p2.ToString());
-Console.WriteLine();
+//Personne p2 = bdd.GetPersonneById(2);
+
+//Console.WriteLine();
+//Console.WriteLine(p2.ToString());
+//Console.WriteLine();
+
+#endregion
+
+
+//Homme h = new(nom: "Delafontaine");
+//h.AddPrenoms("Jean jacques");
+
+Homme h = (Homme)bdd.GetPersonneById(1);
+
+h.AddPrenoms("Lustucru");
+
+bdd.InsererPrenomsPersonne(h);
+
+//bdd.InsererPersonne(h);
 
 

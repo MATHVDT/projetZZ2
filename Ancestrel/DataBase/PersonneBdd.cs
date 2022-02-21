@@ -524,6 +524,14 @@ namespace DataBase
             return valuesBuilder.ToString();
         }
 
+        /**
+         * @fn public void UpdatePersonneTable
+         * @brief Update les données d'une personne dans la Table Personne
+         * 
+         * @param Personne personne - *Personne à modifier*
+         * 
+         * @warning La personne doit être present dans la table.
+         */
         public void UpdatePersonneTable(Personne personne)
         {
             SqlConnection connexion = new SqlConnection(_chaineConnexion);
@@ -561,6 +569,9 @@ namespace DataBase
                 connexion.Close();
             }
         }
+        
+        
+        
         #endregion
 
     }
