@@ -108,7 +108,7 @@ Homme cujus = new Homme(0, nom: "VDT", prenoms: "Toto", nationalite: "française
 
 Arbre arbre = new Arbre("arbre1", "description", cujus);
 
-Homme pere = new Homme(cujus.Numero, nom: "Père", prenoms: "pere1 pere2", dateNaissance: DateOnly.Parse("01/02/1999"), nationalite: "française Chilienne");
+Homme pere = new Homme(cujus.Numero, nom: "Père", prenoms: "pere1 pere2", dateNaissance: DateOnly.Parse("21/02/1999"), nationalite: "française Chilienne");
 Femme mere = new Femme(cujus.Numero, nom: "Mère", prenoms: "mere1 mere2", lieuNaissance: ville);
 
 arbre.AjouterPere(cujus.Numero, pere);
