@@ -359,14 +359,14 @@ namespace DataBase
         }
 
         /**
-         * @fn public void AjouterLienParenteById
+         * @fn public void AjouterLienParents
          * @brief Ajout dans la BDD les id du père et de la mère à l'enfant.
          * 
          * @param int idEnfant
          * @param int? idPere
          * @param int? idMere
          */
-        public void AjouterRelationParente(int idEnfant, int? idPere, int? idMere)
+        public void AjouterLienParents(int idEnfant, int? idPere, int? idMere)
         {
             const string VALUENULL = "NULL";
 
@@ -404,5 +404,96 @@ namespace DataBase
                 connexion.Close();
             }
         }
+
+        /**
+         * @fn public void AjouterLienPere
+         * @brief Ajout dans la BDD l'id du pere à l'enfant.
+         * 
+         * @param int idEnfant
+         * @param int? idPere
+         */
+        public void AjouterLienPere(int idEnfant, int? idPere)
+        {
+            const string VALUENULL = "NULL";
+
+            // Requete SQL pour récuperer les infos sur une personne 
+            string queryString = $"UPDATE {_PersonneTable} " +
+                                 $"SET {_IdPere} = {(idPere is null ? VALUENULL : idPere)}, \n" +
+                                 $"WHERE {_Id} = {idEnfant};";
+
+            // Connexion à la bdd
+            SqlConnection connexion = new SqlConnection(_chaineConnexion);
+            SqlCommand commandSql;
+
+            try
+            {
+                connexion.Open(); // Ouverture de la connexion à la bdd
+
+                // Création et execution de la requete SQL
+                Console.WriteLine(queryString);
+                commandSql = new SqlCommand(queryString, connexion);
+                Console.WriteLine(commandSql.ExecuteNonQuery() + $" ligne modifiée. " +
+                    $"Enfant : {idEnfant} => Père : {idPere}");
+
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("Error SQL Generated. Details: " + e.ToString());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error Generated. Details: " + e.ToString());
+            }
+            finally
+            {
+                connexion.Close();
+            }
+        }
+
+        /**
+         * @fn public void AjouterLienMere
+         * @brief Ajout dans la BDD l'id de la mere à l'enfant.
+         * 
+         * @param int idEnfant
+         * @param int? idMere
+         */     
+        public void AjouterLienMere(int idEnfant, int? idMere)
+        {
+            const string VALUENULL = "NULL";
+
+            // Requete SQL pour récuperer les infos sur une personne 
+            string queryString = $"UPDATE {_PersonneTable} " +
+                                 $"SET {_IdPere} = {(idMere is null ? VALUENULL : idMere)}, \n" +
+                                 $"WHERE {_Id} = {idEnfant};";
+
+            // Connexion à la bdd
+            SqlConnection connexion = new SqlConnection(_chaineConnexion);
+            SqlCommand commandSql;
+
+            try
+            {
+                connexion.Open(); // Ouverture de la connexion à la bdd
+
+                // Création et execution de la requete SQL
+                Console.WriteLine(queryString);
+                commandSql = new SqlCommand(queryString, connexion);
+                Console.WriteLine(commandSql.ExecuteNonQuery() + $" ligne modifiée. " +
+                    $"Enfant : {idEnfant} => Mère : {idMere}");
+
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("Error SQL Generated. Details: " + e.ToString());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error Generated. Details: " + e.ToString());
+            }
+            finally
+            {
+                connexion.Close();
+            }
+        }
+
     }
 }

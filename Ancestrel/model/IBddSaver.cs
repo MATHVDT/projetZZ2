@@ -81,8 +81,10 @@ namespace Model
          * @param int? idMere
          * 
          * @warning L'idEnfant ne doit pas être null.
+         * Ne pas utiliser, ne met pas à jour les idPere/Mere dans l'objet enfant
+         * Pas trop grave mais préferé AjouterLienParent(Personne personne)
          */
-        public void AjouterLienParenteById(int idEnfant, int? idPere, int? idMere);
+        public void AjouterLienParents(int idEnfant, int? idPere, int? idMere);
 
 
         /**
@@ -91,8 +93,10 @@ namespace Model
          * 
          * @param Personne personne
          * 
-         * @warning 
+         * @warning Renvoie ArgumentNullException
+         *  - si la personne n'a pas de numéro, ie pas placé dans l'arbre
+         *  - si l'enfant de la personne n'est pas dans l'arbre
          */
-        public void AjouterLienParente(Personne personne);
+        public void AjouterLienParent(Personne personne);
     }
 }

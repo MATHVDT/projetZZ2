@@ -17,7 +17,7 @@ namespace DataBase
         private Dictionary<int, FichierImage> _imageDejaChargee;
 
         public Bdd(string chaineConnexion)
-            //dico personne, image, ville
+        //dico personne, image, ville
         {
             _chaineConnexion = chaineConnexion;
 
@@ -35,7 +35,7 @@ namespace DataBase
 
 
         }
-  
+
 
         #region IBddLoader
         public Arbre ChargerArbre(int idPersonne)
@@ -222,7 +222,7 @@ namespace DataBase
                 idMere = mere?.Id;
 
                 //Console.WriteLine($"idEnfant {p.Id}, idPere {idPere}, idMere {idMere}");
-                AjouterLienParenteById((int)p.Id, idPere, idMere);
+                AjouterLienParents((int)p.Id, idPere, idMere);
             }
         }
 
@@ -305,19 +305,43 @@ namespace DataBase
             _villeBdd.InsererVilleTable(ville);
         }
 
-        public void AjouterLienParente(Personne personne)
+        public void AjouterLienParent(Personne personne)
         {
-            int numPersonne;
-            //try
-            //{
-                numPersonne = personne.Numero;
-            //}catch(exception)
+            // Check l'id de la personne
+            if (personne.Id is null)
+                InsererPersonne(personne);
 
+            // Récupère le numéro de la personne
+            int numPersonne = personne.Numero;
+            if (numPersonne == 0)
+                throw new ArgumentNullException($"La personne {personne.Id} n'est pas placée dans l'arbre.");
+
+            // Récupère le numéro de l'enfant
+            int numEnfant = numPersonne / 2;
+            Personne enfant;
+            if (!_personneDejaChargee.TryGetValue(numEnfant, out enfant))
+                throw new ArgumentNullException($"L'enfant de numero {numEnfant} n'est pas dans l'arbre");
+
+            // Check l'id de l'enfant
+            if (enfant.Id is null)
+                InsererPersonne(enfant);
+
+            if (personne is Homme)
+            {
+                _personneBdd.AjouterLienPere((int)enfant.Id, personne.Id);
+                enfant.IdPere =personne.Id;
+            }
+            else
+            {
+                _personneBdd.AjouterLienMere((int)enfant.Id, personne.Id);
+                enfant.IdMere = personne.Id;
+            }
         }
+  
 
-        public void AjouterLienParenteById(int idEnfant, int? idPere, int? idMere)
+        public void AjouterLienParents(int idEnfant, int? idPere, int? idMere)
         {
-            _personneBdd.AjouterRelationParente(idEnfant, idPere, idMere);
+            _personneBdd.AjouterLienParents(idEnfant, idPere, idMere);
         }
         #endregion
     }

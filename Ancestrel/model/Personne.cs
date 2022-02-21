@@ -247,6 +247,8 @@ namespace Model
          * @brief Constructeur de la classe Personne.
          * @details
          * Definie les propiétés de la personne.
+         * 
+         * @warning Numero = 0 => pas de position dans l'arbre.
          */
         public Personne(int? id = null,
             string? nom = null, string? prenoms = null,
@@ -254,7 +256,7 @@ namespace Model
             Ville? lieuNaissance = null, string? nationalite = null,
             string? description = null)
         {
-            //Numero = 0; // Défini en utilisant LienParente
+            Numero = 0; // Défini en utilisant LienParente, par defaut 0 = pas de position
             Id = id;
             IdPere = null;
             IdMere = null;

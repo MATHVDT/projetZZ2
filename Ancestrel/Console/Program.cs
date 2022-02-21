@@ -132,4 +132,4 @@ Homme cujus = new Homme( nom: "VDT", prenoms: "Toto", nationalite: "française")
 
 //Console.WriteLine("\n\n" + arbreCharge.Personnes.Values==arbre.Personnes.Values ? "Egal": "pas egal");
 
-//bdd.AjouterLienParente(cujus);
+bdd.AjouterLienParent(cujus);
