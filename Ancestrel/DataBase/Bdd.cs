@@ -192,9 +192,7 @@ namespace DataBase
         }
         #endregion
 
-        #region IBddSaver
-
-
+        #region IBddSaver Insertion
 
         public void InsererArbre(Arbre arbre)
         {
@@ -227,11 +225,12 @@ namespace DataBase
         }
 
 
-
-
         public void InsererFichierImage(FichierImage fichierImage)
         {
             // Verifier s'il y est deja insere ie si id != null => ModifierFichierImage
+            if (fichierImage is not null)
+                //UpdateImage
+
             _imageBdd.InsererImageTable(fichierImage);
             _imageDejaChargee.Add((int)fichierImage.Id, fichierImage);
         }
@@ -239,9 +238,11 @@ namespace DataBase
 
         public void InsererPersonne(Personne personne)
         {
-            //if (personne.Id is not null)
-            //    modiferPersonn;
-            //        return;
+            if (personne.Id is not null)
+            {
+                //UpdatePersonne(personne);
+                return;
+            }
 
             // Insertion ville
             if (personne.LieuNaissance is not null)
@@ -285,6 +286,7 @@ namespace DataBase
             {
                 Console.WriteLine("Personne pas encore ajouté à la bdd.");
                 _personneBdd.InsererPersonneTable(personne);
+                _personneDejaChargee.Add((int)personne.Id, personne);
             }
             try
             {
@@ -301,8 +303,11 @@ namespace DataBase
         public void InsererVille(Ville ville)
         {
             // Verifier si la ville existe pas déjà => id
-            //if()
-            _villeBdd.InsererVilleTable(ville);
+            if (ville.Id is not null)
+                //UpdateVille(ville)
+
+                _villeBdd.InsererVilleTable(ville);
+            _villeDejaChargee.Add((int)ville.Id, ville);
         }
 
         public void AjouterLienParent(Personne personne)
@@ -329,7 +334,7 @@ namespace DataBase
             if (personne is Homme)
             {
                 _personneBdd.AjouterLienPere((int)enfant.Id, personne.Id);
-                enfant.IdPere =personne.Id;
+                enfant.IdPere = personne.Id;
             }
             else
             {
@@ -337,11 +342,34 @@ namespace DataBase
                 enfant.IdMere = personne.Id;
             }
         }
-  
+
 
         public void AjouterLienParents(int idEnfant, int? idPere, int? idMere)
         {
             _personneBdd.AjouterLienParents(idEnfant, idPere, idMere);
+        }
+
+        #endregion
+
+        #region IBddSaver Update
+
+        public void UpdatePersonne(Personne personne)
+        {
+            if (personne.Id is null)
+                InsererPersonne(personne);
+
+            _personneBdd.UpdatePersonneTable(personne);
+            
+        }
+
+        public void UpdateVille(Ville ville)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateFichierImage(FichierImage fichierImage)
+        {
+            throw new NotImplementedException();
         }
         #endregion
     }

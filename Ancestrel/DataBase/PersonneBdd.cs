@@ -36,8 +36,43 @@ namespace DataBase
         }
 
 
+        /**
+         * private string PersonneValuesInsert(Personne personne)
+         * @brief Récupère et donne les valeurs des champs à inserer dans la bdd.
+         * 
+         * @param Personne personne
+         * 
+         * @return string *Valeurs à inserer*
+         */
+        private string PersonneValuesInsert(Personne personne)
+        {
+            // Récupération des champs personne
+            const string VALUENULL = "NULL";
 
+            StringBuilder valuesBuilder = new StringBuilder();
 
+            valuesBuilder.Append($"{(personne is Homme ? 0 : 1)}, ");
+            valuesBuilder.Append($"{(personne.Nom is null ? VALUENULL : "'" + personne.Nom + "'")}, ");
+            valuesBuilder.Append($"{(personne is Femme ? "'" + ((Femme)personne).NomJeuneFille + "'" ?? VALUENULL : VALUENULL)}, ");
+
+            valuesBuilder.Append($"{(personne.Description is null ? VALUENULL : personne.Description)}, ");
+
+            valuesBuilder.Append($"{(personne.DateNaissance is null ? VALUENULL : $"CONVERT(date, '{personne.DateNaissance}', 103)")}, ");
+            valuesBuilder.Append($"{(personne.DateDeces is null ? VALUENULL : $"CONVERT(date, '{personne.DateDeces}', 103)")}, ");
+
+            int? idLieuNaissance = personne.LieuNaissance is null ? null : personne.LieuNaissance.Id;
+            valuesBuilder.Append($"{(idLieuNaissance is null ? VALUENULL : idLieuNaissance)}, ");
+
+            int? idImageProfil = personne.GetFichierImageProfil()?.Id;
+            valuesBuilder.Append($"{(idImageProfil is null ? VALUENULL : idImageProfil)}, ");
+
+            valuesBuilder.Append($"{(personne.IdPere is null ? VALUENULL : personne.IdPere) }, ");
+            valuesBuilder.Append($"{(personne.IdMere is null ? VALUENULL : personne.IdMere) } ");
+
+            return valuesBuilder.ToString();
+        }
+
+        #region Insertion
 
         /**
          * @fn public static Personne GetPersonneTableById(int id)
@@ -97,13 +132,13 @@ namespace DataBase
 
                 if (sexe == 1) // Femme 
                 {
-                    p = new Femme( idBdd, nomUsageBdd, null, dateNaissanceBdd, dateDecesBdd,
+                    p = new Femme(idBdd, nomUsageBdd, null, dateNaissanceBdd, dateDecesBdd,
                         null, null, nomBdd, description);
                 }
                 else // Homme
                 {
                     p = new Homme(id: idBdd, nom: nomUsageBdd, dateNaissance: dateNaissanceBdd, dateDeces: dateDecesBdd,
-                        description :description);
+                        description: description);
                 }
                 p.IdPere = idPere;
                 p.IdMere = idMere;
@@ -141,9 +176,6 @@ namespace DataBase
         {
             // Récupération des champs personne (prénoms exclus)
             string values = PersonneValuesInsert(personne);
-
-
-            //Console.WriteLine(queryString);
 
             // Connexion à la bdd
             SqlConnection connexion = new SqlConnection(_chaineConnexion);
@@ -195,54 +227,6 @@ namespace DataBase
             {
                 connexion.Close();
             }
-
-            // SqlTransaction
-            // Enregistrer les images avant
-            // Enregistrer la description
-            // Enregister Ville ?
-
-            // Enregistrer les prenoms
-
-            // Récupérer l'id générer par la bdd
-            //SELECT IDENT_CURRENT('Personne');
-
-        }
-
-
-        /**
-         * public static string PersonneValuesInsert(Personne personne)
-         * @brief Récupère et donne les valeurs des champs à inserer dans la bdd.
-         * 
-         * @param Personne personne
-         * 
-         * @return string *Valeurs à inserer*
-         */
-        public static string PersonneValuesInsert(Personne personne)
-        {
-            // Récupération des champs personne
-            const string VALUENULL = "NULL";
-
-            StringBuilder valuesBuilder = new StringBuilder();
-
-            valuesBuilder.Append($"{(personne is Homme ? 0 : 1)}, ");
-            valuesBuilder.Append($"{(personne.Nom is null ? VALUENULL : "'" + personne.Nom + "'")}, ");
-            valuesBuilder.Append($"{(personne is Femme ? "'" + ((Femme)personne).NomJeuneFille + "'" ?? VALUENULL : VALUENULL)}, ");
-
-            valuesBuilder.Append($"{(personne.Description is null ? VALUENULL : personne.Description)}, ");
-
-            valuesBuilder.Append($"{(personne.DateNaissance is null ? VALUENULL : $"CONVERT(date, '{personne.DateNaissance}', 103)")}, ");
-            valuesBuilder.Append($"{(personne.DateDeces is null ? VALUENULL : $"CONVERT(date, '{personne.DateDeces}', 103)")}, ");
-
-            int? idLieuNaissance = personne.LieuNaissance is null ? null : personne.LieuNaissance.Id;
-            valuesBuilder.Append($"{(idLieuNaissance is null ? VALUENULL : idLieuNaissance)}, ");
-
-            int? idImageProfil = personne.GetFichierImageProfil()?.Id;
-            valuesBuilder.Append($"{(idImageProfil is null ? VALUENULL : idImageProfil)}, ");
-
-            valuesBuilder.Append($"{(personne.IdPere is null ? VALUENULL : personne.IdPere) }, ");
-            valuesBuilder.Append($"{(personne.IdMere is null ? VALUENULL : personne.IdMere) } ");
-
-            return valuesBuilder.ToString();
         }
 
         /**
@@ -303,13 +287,13 @@ namespace DataBase
 
 
         /**
-      * @fn public int? GetIdImageProfilPersonneById(int idPersonne)
-      * @brief Recupere l'id de la ville de naissance d'une personne.
-      * 
-      * @param int idPersonne
-      * 
-      * @return int? idImageProfil 
-      */
+          * @fn public int? GetIdImageProfilPersonneById(int idPersonne)
+          * @brief Recupere l'id de la ville de naissance d'une personne.
+          * 
+          * @param int idPersonne
+          * 
+          * @return int? idImageProfil 
+          */
         public int? GetIdImageProfilPersonneById(int idPersonne)
         {
             // id de la ville de naissance à récup
@@ -357,6 +341,8 @@ namespace DataBase
 
             return idImageProfil;
         }
+
+        #endregion
 
         /**
          * @fn public void AjouterLienParents
@@ -456,7 +442,7 @@ namespace DataBase
          * 
          * @param int idEnfant
          * @param int? idMere
-         */     
+         */
         public void AjouterLienMere(int idEnfant, int? idMere)
         {
             const string VALUENULL = "NULL";
@@ -494,6 +480,88 @@ namespace DataBase
                 connexion.Close();
             }
         }
+
+
+        #region Update
+
+        /**
+         * private static string PersonneValuesUpdate(Personne personne)
+         * @brief Récupère et donne les instructions pour update les valeurs.
+         * 
+         * @param Personne personne
+         * 
+         * @return instruction *Valeurs à update*
+         */
+        private string PersonneValuesUpdate(Personne personne)
+        {
+            // Récupération des champs personne
+            const string VALUENULL = "NULL";
+
+            StringBuilder valuesBuilder = new StringBuilder();
+
+            valuesBuilder.Append($"\nSET {_NomUsage} = ");
+            valuesBuilder.Append($"{(personne.Nom is null ? VALUENULL : "'" + personne.Nom + "'")}, ");
+
+            valuesBuilder.Append($"\n{_Nom} = ");
+            valuesBuilder.Append($"{(personne is Femme ? "'" + ((Femme)personne).NomJeuneFille + "'" ?? VALUENULL : VALUENULL)}, ");
+
+            valuesBuilder.Append($"\n{_DateNaissance} = ");
+            valuesBuilder.Append($"{(personne.DateNaissance is null ? VALUENULL : $"CONVERT(date, '{personne.DateNaissance}', 103)")}, ");
+            valuesBuilder.Append($"\n{_DateDeces} = ");
+            valuesBuilder.Append($"{(personne.DateDeces is null ? VALUENULL : $"CONVERT(date, '{personne.DateDeces}', 103)")}, ");
+
+            valuesBuilder.Append($"\n{_Description} = ");
+            valuesBuilder.Append($"{(personne.Description is null ? VALUENULL : personne.Description)}, ");
+
+            int? idLieuNaissance = personne.LieuNaissance is null ? null : personne.LieuNaissance.Id;
+            valuesBuilder.Append($"\n{_IdVilleNaissance} = ");
+            valuesBuilder.Append($"{(idLieuNaissance is null ? VALUENULL : idLieuNaissance)}, ");
+
+            int? idImageProfil = personne.GetFichierImageProfil()?.Id;
+            valuesBuilder.Append($"\n{_IdImgProfil} = ");
+            valuesBuilder.Append($"{(idImageProfil is null ? VALUENULL : idImageProfil)} ");
+
+            return valuesBuilder.ToString();
+        }
+
+        public void UpdatePersonneTable(Personne personne)
+        {
+            SqlConnection connexion = new SqlConnection(_chaineConnexion);
+            SqlCommand commandSql;
+            string queryString;
+
+            try
+            {
+                connexion.Open(); // Ouverture connexion
+
+                // Requete SQL pour update les valeurs de la personne
+                queryString = $"UPDATE {_PersonneTable} " +
+                              $"{PersonneValuesUpdate(personne)} \n" +
+                              $"WHERE {_Id} = {(int)personne.Id};";
+
+
+                // Création de la requete SQL d'INSERTION
+                commandSql = new SqlCommand(queryString, connexion);
+
+                // Excecution de l'insertion
+                Console.WriteLine(queryString);
+                Console.WriteLine(commandSql.ExecuteNonQuery() + " lignes modifiés.");
+
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("Error SQL Generated. Details: " + e.ToString());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error Generated. Details: " + e.ToString());
+            }
+            finally
+            {
+                connexion.Close();
+            }
+        }
+        #endregion
 
     }
 }

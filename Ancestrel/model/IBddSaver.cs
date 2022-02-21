@@ -17,6 +17,7 @@ namespace Model
     public interface IBddSaver
     {
 
+        #region Insertion
         public void InsererArbre(Arbre arbre);
 
         /**
@@ -98,5 +99,14 @@ namespace Model
          *  - si l'enfant de la personne n'est pas dans l'arbre
          */
         public void AjouterLienParent(Personne personne);
+        #endregion
+
+        #region Update
+        public void UpdatePersonne(Personne personne);
+
+        public void UpdateVille(Ville ville);
+        public void UpdateFichierImage(FichierImage fichierImage);
+
+        #endregion
     }
 }

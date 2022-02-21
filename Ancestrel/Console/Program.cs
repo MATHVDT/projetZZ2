@@ -132,4 +132,27 @@ Homme cujus = new Homme( nom: "VDT", prenoms: "Toto", nationalite: "française")
 
 //Console.WriteLine("\n\n" + arbreCharge.Personnes.Values==arbre.Personnes.Values ? "Egal": "pas egal");
 
-bdd.AjouterLienParent(cujus);
+//bdd.AjouterLienParent(cujus);
+
+Personne p = bdd.GetPersonneById(2);
+
+Console.WriteLine();
+Console.WriteLine(p.ToString());
+Console.WriteLine();
+
+p.Nom = "Delomp";
+p.DateDeces = DateOnly.Parse("25/04/2056");
+
+Console.WriteLine();
+Console.WriteLine(p.ToString());
+Console.WriteLine();
+
+bdd.UpdatePersonne(p);
+
+Personne p2 = bdd.GetPersonneById(2);
+
+Console.WriteLine();
+Console.WriteLine(p2.ToString());
+Console.WriteLine();
+
+
