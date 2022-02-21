@@ -73,7 +73,7 @@ namespace Model
         public void InsererFichierImage(FichierImage fichierImage);
 
         /**
-         * @fn public void AjouterRelationParente
+         * @fn public void AjouterLienParenteById
          * @brief Ajout l'id du pere et de la mere à l'enfant dans le *SPC*
          * 
          * @param int idEnfant
@@ -82,8 +82,17 @@ namespace Model
          * 
          * @warning L'idEnfant ne doit pas être null.
          */
-        public void AjouterRelationParente(int idEnfant, int? idPere, int? idMere);
+        public void AjouterLienParenteById(int idEnfant, int? idPere, int? idMere);
 
-        //ajouter relation enfant id enfant idPere/idmere
+
+        /**
+         * @fn public void AjouterLienParente
+         * @brief Ajout l'id de la personne comme parent à son enfant dans le *SPC*
+         * 
+         * @param Personne personne
+         * 
+         * @warning 
+         */
+        public void AjouterLienParente(Personne personne);
     }
 }

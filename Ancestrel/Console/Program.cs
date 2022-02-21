@@ -104,12 +104,12 @@ Bdd bdd = new Bdd(chaineConnexion);
 //}
 
 /**  Test arbre     **/
-//Homme cujus = new Homme(0, nom: "VDT", prenoms: "Toto", nationalite: "française");
+Homme cujus = new Homme( nom: "VDT", prenoms: "Toto", nationalite: "française");
 
 //Arbre arbre = new Arbre("arbre1", "description", cujus);
 
-//Homme pere = new Homme(cujus.Numero, nom: "Père", prenoms: "pere1 pere2", dateNaissance: DateOnly.Parse("21/02/1999"), nationalite: "française Chilienne");
-//Femme mere = new Femme(cujus.Numero, nom: "Mère", prenoms: "mere1 mere2", lieuNaissance: ville);
+//Homme pere = new Homme( nom: "Père", prenoms: "pere1 pere2", dateNaissance: DateOnly.Parse("21/02/1999"), nationalite: "française Chilienne");
+//Femme mere = new Femme( nom: "Mère", prenoms: "mere1 mere2", lieuNaissance: ville);
 
 //arbre.AjouterPere(cujus.Numero, pere);
 //arbre.AjouterMere(cujus.Numero, mere);
@@ -132,7 +132,4 @@ Bdd bdd = new Bdd(chaineConnexion);
 
 //Console.WriteLine("\n\n" + arbreCharge.Personnes.Values==arbre.Personnes.Values ? "Egal": "pas egal");
 
-int? a = null;
-DateTime? b = null;
-Console.WriteLine(a.ToString() == "");
-Console.WriteLine(b.ToString() == "");
+//bdd.AjouterLienParente(cujus);

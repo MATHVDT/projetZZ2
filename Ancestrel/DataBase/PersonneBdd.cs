@@ -359,7 +359,7 @@ namespace DataBase
         }
 
         /**
-         * @fn public void AjouterRelationParente
+         * @fn public void AjouterLienParenteById
          * @brief Ajout dans la BDD les id du père et de la mère à l'enfant.
          * 
          * @param int idEnfant

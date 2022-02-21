@@ -12,6 +12,7 @@ namespace DataBase
         private readonly ImageBdd _imageBdd;
         private readonly PaysBdd _paysBdd;
 
+        private Dictionary<int, Personne> _personneDejaChargee;
         private Dictionary<int, Ville> _villeDejaChargee;
         private Dictionary<int, FichierImage> _imageDejaChargee;
 
@@ -26,18 +27,17 @@ namespace DataBase
             _imageBdd = new ImageBdd(_chaineConnexion);
             _paysBdd = new PaysBdd(_chaineConnexion);
 
+            // A lié avec ceux passé en param
+            _personneDejaChargee = new Dictionary<int, Personne>();
             _villeDejaChargee = new Dictionary<int, Ville>();
             _imageDejaChargee = new Dictionary<int, FichierImage>();
 
 
 
         }
+  
 
-        public void AjouterRelationParente(int idEnfant, int? idPere, int? idMere)
-        {
-            _personneBdd.AjouterRelationParente(idEnfant, idPere, idMere);
-        }
-
+        #region IBddLoader
         public Arbre ChargerArbre(int idPersonne)
         {
             // Récupération du cujus
@@ -190,7 +190,9 @@ namespace DataBase
 
             return ville;
         }
+        #endregion
 
+        #region IBddSaver
 
 
 
@@ -220,7 +222,7 @@ namespace DataBase
                 idMere = mere?.Id;
 
                 //Console.WriteLine($"idEnfant {p.Id}, idPere {idPere}, idMere {idMere}");
-                AjouterRelationParente((int)p.Id, idPere, idMere);
+                AjouterLienParenteById((int)p.Id, idPere, idMere);
             }
         }
 
@@ -302,5 +304,21 @@ namespace DataBase
             //if()
             _villeBdd.InsererVilleTable(ville);
         }
+
+        public void AjouterLienParente(Personne personne)
+        {
+            int numPersonne;
+            //try
+            //{
+                numPersonne = personne.Numero;
+            //}catch(exception)
+
+        }
+
+        public void AjouterLienParenteById(int idEnfant, int? idPere, int? idMere)
+        {
+            _personneBdd.AjouterRelationParente(idEnfant, idPere, idMere);
+        }
+        #endregion
     }
 }
