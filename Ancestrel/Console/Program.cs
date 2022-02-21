@@ -104,36 +104,35 @@ Bdd bdd = new Bdd(chaineConnexion);
 //}
 
 /**  Test arbre     **/
+#region Test Arbre
+
 Homme cujus = new Homme(nom: "VDT", prenoms: "Toto", nationalite: "française");
 
-//Arbre arbre = new Arbre("arbre1", "description", cujus);
+Arbre arbre = new Arbre("arbre1", "description", cujus);
 
-//Homme pere = new Homme( nom: "Père", prenoms: "pere1 pere2", dateNaissance: DateOnly.Parse("21/02/1999"), nationalite: "française Chilienne");
-//Femme mere = new Femme( nom: "Mère", prenoms: "mere1 mere2", lieuNaissance: ville);
+Homme pere = new Homme(nom: "Père", prenoms: "yves lucien", dateNaissance: DateOnly.Parse("21/02/1999"), nationalite: "française Chilienne");
+Femme mere = new Femme(nom: "Mère", lieuNaissance: ville);
 
-//arbre.AjouterPere(cujus.Numero, pere);
-//arbre.AjouterMere(cujus.Numero, mere);
-
-
-//Console.WriteLine("\n\n Arbre à enregistrer");
-//foreach (var p in arbre.Personnes.Values)
-//    Console.WriteLine(p.ToString());
-
-//bdd.InsererArbre(arbre);
+arbre.AjouterPere(cujus.Numero, pere);
+arbre.AjouterMere(cujus.Numero, mere);
 
 
-//Console.WriteLine("\n\n Chargement arbre");
-//Arbre arbreCharge = bdd.ChargerArbre((int)cujus.Id);
+Console.WriteLine("\n\n Arbre à enregistrer");
+foreach (var p in arbre.Personnes.Values)
+    Console.WriteLine(p.ToString());
 
-//Console.WriteLine("\n\n Arbre chargé");
-//foreach (var p in arbreCharge.Personnes.Values)
-//    Console.WriteLine(p.ToString());
+bdd.InsererArbre(arbre);
 
+Console.WriteLine("\n\n Chargement arbre");
+Arbre arbreCharge = bdd.ChargerArbre((int)cujus.Id);
 
-//Console.WriteLine("\n\n" + arbreCharge.Personnes.Values==arbre.Personnes.Values ? "Egal": "pas egal");
+Console.WriteLine("\n\n Arbre chargé");
+foreach (var p in arbreCharge.Personnes.Values)
+    Console.WriteLine(p.ToString());
 
-//bdd.AjouterLienParent(cujus);
+bdd.AjouterLienParent(cujus);
 
+#endregion
 
 /** Test update d'une personne **/
 #region Test Update personne
@@ -161,19 +160,21 @@ Homme cujus = new Homme(nom: "VDT", prenoms: "Toto", nationalite: "française");
 #endregion
 
 
+
 #region Test Update Prenom d'une personne
-Homme h1 = new(nom: "Delafontaine");
-h1.AddPrenoms("Jean jacques");
 
-Console.WriteLine(h1.ToString());
-bdd.InsererPersonne(h1);
-h1.AddPrenoms("Lustucru");
-Console.WriteLine(h1.ToString());
+//Homme h1 = new(nom: "Delafontaine");
+//h1.AddPrenoms("Jean jacques");
 
-bdd.UpdatePersonne(h1);
+//Console.WriteLine(h1.ToString());
+//bdd.InsererPersonne(h1);
+//h1.AddPrenoms("Lustucru");
+//Console.WriteLine(h1.ToString());
 
-Homme h2 = (Homme)bdd.GetPersonneById((int)h1.Id);
-Console.WriteLine(h2.ToString());
+//bdd.UpdatePersonne(h1);
+
+//Homme h2 = (Homme)bdd.GetPersonneById((int)h1.Id);
+//Console.WriteLine(h2.ToString());
 
 #endregion
 

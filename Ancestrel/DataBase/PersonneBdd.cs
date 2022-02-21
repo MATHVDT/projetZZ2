@@ -159,6 +159,52 @@ namespace DataBase
             return p;
         }
 
+        /**
+         * @fn public void DefinirImageProfil
+         * @brief Definit l'image de profil d'un personne
+         * 
+         * @param Personne personne
+         */
+        public void DefinirImageProfil(Personne personne)
+        {
+            string idImageProfil =
+                (personne.GetFichierImageProfil()?.Id is null ? "NULL" : personne.GetFichierImageProfil().Id.ToString());
+
+            // Requete SQL pour récuperer les infos sur une personne 
+            string queryString = $"UPDATE {_PersonneTable} " +
+                                 $"SET {_IdImgProfil} = {idImageProfil} " +
+                                 $"WHERE {_Id} = {(int)personne.Id};";
+
+
+            // Connexion à la bdd
+            SqlConnection connexion = new SqlConnection(_chaineConnexion);
+            SqlCommand commandSql;
+
+            try
+            {
+                connexion.Open(); // Ouverture de la connexion à la bdd
+
+                // Création et execution de la requete SQL
+                Console.WriteLine(queryString);
+                commandSql = new SqlCommand(queryString, connexion);
+
+                Console.WriteLine(commandSql.ExecuteNonQuery() + " ligne modfié (image profil).");
+
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("Error SQL Generated. Details: " + e.ToString());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error Generated. Details: " + e.ToString());
+            }
+            finally
+            {
+                connexion.Close();
+            }
+
+        }
 
         /**
          * @fn public static void InsererPersonneTable
@@ -569,9 +615,9 @@ namespace DataBase
                 connexion.Close();
             }
         }
-        
-        
-        
+
+
+
         #endregion
 
     }

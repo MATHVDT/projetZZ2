@@ -69,7 +69,12 @@ namespace DataBase
             return prenoms;
         }
 
-
+        /**
+         * @fn public void SuppressionPrenomPersonne
+         * @brief Supprime les associations des prénoms d'une personne.
+         * 
+         * @param int idPersonne
+         */
         public void SuppressionPrenomPersonne(int idPersonne)
         {
             // Connexion à la bdd

@@ -222,6 +222,14 @@ namespace DataBase
          * 
          * @param int idImage
          * @param int idPersonne
+         * 
+         * @details
+         * Fait l'associations une image et une personne dans
+         * la table d'association.
+         * 
+         * @warning La personne ne doit pas avoir d'image pour utiliser
+         * cette méthode. Il faut supprimer les images de la personne avant,
+         * ie supprimer dans la table d'association les relations image-personne.
          */
         public void InsererAssociationImagePersonneId(int idImage, int idPersonne)
         {
@@ -262,7 +270,47 @@ namespace DataBase
             }
         }
 
+        /**
+         * @fn public void SuppressionImagePersonne
+         * @brief Supprime les associations des images d'une personne.
+         * 
+         * @param int idPersonne
+         */
+        public void SuppressionImagePersonne(int idPersonne)
+        {
+            // Connexion à la bdd
+            SqlConnection connexion = new SqlConnection(_chaineConnexion);
+            SqlCommand commandSql;
+            string queryString;
 
+            // Requete SQL pour récupérer supprimer les images d'une personne dans la bdd
+            queryString = $"DELETE FROM {_ImagePersonneTable} " +
+                          $"WHERE {_IdPersonne} = {idPersonne}; ";
+            try
+            {
+                connexion.Open(); // Ouverture connexion
+
+                // Création de la requete SQL
+                commandSql = new SqlCommand(queryString, connexion);
+
+                // Excecution de la requete de suppression
+                Console.WriteLine(queryString);
+                Console.WriteLine(commandSql.ExecuteNonQuery() + " lignes spprimées.");
+
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("Error SQL Generated. Details: " + e.ToString());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error Generated. Details: " + e.ToString());
+            }
+            finally
+            {
+                connexion.Close();
+            }
+        }
         /**
          * public string ImageValuesInsert
          * @brief Récupère et donne les valeurs des champs à inserer dans la bdd. (image exclue)

@@ -225,19 +225,20 @@ namespace DataBase
         public void InsererFichierImage(FichierImage fichierImage)
         {
             // Verifier s'il y est deja insere ie si id != null => ModifierFichierImage
-            if (fichierImage is not null)
-                //UpdateImage
+            if (fichierImage.Id is not null)
+                UpdateFichierImage(fichierImage);
 
-                _imageBdd.InsererImageTable(fichierImage);
+            _imageBdd.InsererImageTable(fichierImage);
             _imageDejaChargee.Add((int)fichierImage.Id, fichierImage);
         }
 
 
         public void InsererPersonne(Personne personne)
         {
+            // Si la personne est déjà dans la bbd, à un id => modification et non insertion
             if (personne.Id is not null)
             {
-                //UpdatePersonne(personne);
+                UpdatePersonne(personne);
                 return;
             }
 
@@ -245,18 +246,14 @@ namespace DataBase
             if (personne.LieuNaissance is not null)
                 InsererVille(personne.LieuNaissance);
 
-            // Insertion des images de la personne dans la Table Image et la Table d'association
-            List<FichierImage> fichierImages = personne.GetFichierImages();
-            foreach (var x in fichierImages)
-            {
-                InsererFichierImage(x);
-            }
-
             // Insertion de la personne dans la Table Personne
             _personneBdd.InsererPersonneTable(personne);
 
             // Association image personne 
-            // ....
+            InsererImagesPersonne(personne);
+
+            // Set image profil
+            _personneBdd.DefinirImageProfil(personne);
 
             // Insertion des prénoms de la personne dans la Table Prenom et la Table d'association
             if (personne.Prenoms is not null)
@@ -268,6 +265,7 @@ namespace DataBase
 
 
             // inserer lier  fils parent
+            //AjouterLienParent(personne);
             //dico perso tryget ...
 
         }
@@ -276,9 +274,9 @@ namespace DataBase
         {
             // Verifier si la ville existe pas déjà => id
             if (ville.Id is not null)
-                //UpdateVille(ville)
+                UpdateVille(ville);
 
-                _villeBdd.InsererVilleTable(ville);
+            _villeBdd.InsererVilleTable(ville);
             _villeDejaChargee.Add((int)ville.Id, ville);
         }
 
@@ -294,24 +292,27 @@ namespace DataBase
                 throw new ArgumentNullException($"La personne {personne.Id} n'est pas placée dans l'arbre.");
 
             // Récupère le numéro de l'enfant
-            int numEnfant = numPersonne / 2;
-            Personne enfant;
-            if (!_personneDejaChargee.TryGetValue(numEnfant, out enfant))
-                throw new ArgumentNullException($"L'enfant de numero {numEnfant} n'est pas dans l'arbre");
-
-            // Check l'id de l'enfant
-            if (enfant.Id is null)
-                InsererPersonne(enfant);
-
-            if (personne is Homme)
+            if (numPersonne != 1) // Si c'est pas le cujus
             {
-                _personneBdd.AjouterLienPere((int)enfant.Id, personne.Id);
-                enfant.IdPere = personne.Id;
-            }
-            else
-            {
-                _personneBdd.AjouterLienMere((int)enfant.Id, personne.Id);
-                enfant.IdMere = personne.Id;
+                int numEnfant = numPersonne / 2;
+                Personne enfant;
+                if (!_personneDejaChargee.TryGetValue(numEnfant, out enfant))
+                    throw new ArgumentNullException($"L'enfant numero {numPersonne}/2={numEnfant} n'est pas dans l'arbre");
+
+                // Check l'id de l'enfant
+                if (enfant.Id is null)
+                    InsererPersonne(enfant);
+
+                if (personne is Homme)
+                {
+                    _personneBdd.AjouterLienPere((int)enfant.Id, personne.Id);
+                    enfant.IdPere = personne.Id;
+                }
+                else
+                {
+                    _personneBdd.AjouterLienMere((int)enfant.Id, personne.Id);
+                    enfant.IdMere = personne.Id;
+                }
             }
         }
 
@@ -361,6 +362,31 @@ namespace DataBase
             _prenomBdd.InsererAssociationPrenomsPersonneId(listPrenoms, (int)idPersonne);
         }
 
+        private void InsererImagesPersonne(Personne personne)
+        {
+            int? idPersonne = personne.Id;
+
+            // La personne n'a pas encore été inséré dans la table
+            if (idPersonne is null)
+                throw new ArgumentNullException($"Personne pas dans la bdd"); // Créer une exception pas de cujus
+
+
+            // Suppression des iamges déjà associés
+            _imageBdd.SuppressionImagePersonne((int)idPersonne);
+
+            // Pas d'image à ajouter
+            List<FichierImage> listFichierImages = personne.GetFichierImages();
+            if (listFichierImages.Count == 0)
+                return;
+
+            // Insertion de toutes les images
+            foreach (var image in listFichierImages)
+            {
+                InsererFichierImage(image); // Insère l'image dans la bdd
+                // Associe une image et une personne dans la bdd
+                _imageBdd.InsererAssociationImagePersonneId((int)image.Id, (int)personne.Id);
+            }
+        }
 
         #endregion
 
@@ -380,12 +406,14 @@ namespace DataBase
 
         public void UpdateVille(Ville ville)
         {
+            return;
             throw new NotImplementedException();
         }
 
         public void UpdateFichierImage(FichierImage fichierImage)
-        {
-            throw new NotImplementedException();
+        { // Pas de modif des image pour l'instant
+            return;
+            throw new NotImplementedException("Pas de modif des fichiers images pour l'instant");
         }
         #endregion
     }
