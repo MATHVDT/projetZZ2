@@ -103,32 +103,36 @@ Bdd bdd = new Bdd(chaineConnexion);
 //    Console.WriteLine(e.Message);
 //}
 
+/**  Test arbre     **/
+//Homme cujus = new Homme(0, nom: "VDT", prenoms: "Toto", nationalite: "française");
 
-Homme cujus = new Homme(0, nom: "VDT", prenoms: "Toto", nationalite: "française");
+//Arbre arbre = new Arbre("arbre1", "description", cujus);
 
-Arbre arbre = new Arbre("arbre1", "description", cujus);
+//Homme pere = new Homme(cujus.Numero, nom: "Père", prenoms: "pere1 pere2", dateNaissance: DateOnly.Parse("21/02/1999"), nationalite: "française Chilienne");
+//Femme mere = new Femme(cujus.Numero, nom: "Mère", prenoms: "mere1 mere2", lieuNaissance: ville);
 
-Homme pere = new Homme(cujus.Numero, nom: "Père", prenoms: "pere1 pere2", dateNaissance: DateOnly.Parse("21/02/1999"), nationalite: "française Chilienne");
-Femme mere = new Femme(cujus.Numero, nom: "Mère", prenoms: "mere1 mere2", lieuNaissance: ville);
-
-arbre.AjouterPere(cujus.Numero, pere);
-arbre.AjouterMere(cujus.Numero, mere);
-
-
-Console.WriteLine("\n\n Arbre à enregistrer");
-foreach (var p in arbre.Personnes.Values)
-    Console.WriteLine(p.ToString());
-
-bdd.InsererArbre(arbre);
+//arbre.AjouterPere(cujus.Numero, pere);
+//arbre.AjouterMere(cujus.Numero, mere);
 
 
-Console.WriteLine("\n\n Chargement arbre");
-Arbre arbreCharge = bdd.ChargerArbre((int)cujus.Id);
+//Console.WriteLine("\n\n Arbre à enregistrer");
+//foreach (var p in arbre.Personnes.Values)
+//    Console.WriteLine(p.ToString());
 
-Console.WriteLine("\n\n Arbre chargé");
-foreach (var p in arbreCharge.Personnes.Values)
-    Console.WriteLine(p.ToString());
+//bdd.InsererArbre(arbre);
+
+
+//Console.WriteLine("\n\n Chargement arbre");
+//Arbre arbreCharge = bdd.ChargerArbre((int)cujus.Id);
+
+//Console.WriteLine("\n\n Arbre chargé");
+//foreach (var p in arbreCharge.Personnes.Values)
+//    Console.WriteLine(p.ToString());
 
 
 //Console.WriteLine("\n\n" + arbreCharge.Personnes.Values==arbre.Personnes.Values ? "Egal": "pas egal");
 
+int? a = null;
+DateTime? b = null;
+Console.WriteLine(a.ToString() == "");
+Console.WriteLine(b.ToString() == "");

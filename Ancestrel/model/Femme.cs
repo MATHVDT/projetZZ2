@@ -58,16 +58,14 @@ namespace Model
          * Definie les propiétés de la personne.
          * Definie le Numero et le nom de jeune fille de la personne.
          */
-        public Femme(int num, int? id = null,
+        public Femme(int? id = null,
                      string? nom = null, string? prenoms = null,
                      DateOnly? dateNaissance = null, DateOnly? dateDeces = null,
                      Ville? lieuNaissance = null, string? nationalite = null,
                      string? nomJeuneFille = null, string? description = null) :
-                base(2 * num + 1, id, nom, prenoms, dateNaissance, dateDeces, lieuNaissance, nationalite, description)
+                base(id: id,nom: nom, prenoms, dateNaissance, dateDeces, lieuNaissance, nationalite, description)
         {
-            //Numero = 2 * num + 1;
             NomJeuneFille = nomJeuneFille;
-
         }
 
 
@@ -80,6 +78,7 @@ namespace Model
             return base.ToString() + " née " +
                 (NomJeuneFille is null ? "NomJeuneFilleInconnu " : NomJeuneFille);
         }
+
 
 
         /**
@@ -95,5 +94,11 @@ namespace Model
             Inconnu = _estInconnu();
         }
 
+
+        
+        public override void LierEnfant(int numEnfant)
+        {
+            this.Numero = 2 * numEnfant + 1;
+        }
     }
 }

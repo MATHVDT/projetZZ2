@@ -25,7 +25,6 @@ namespace Model
 
         /**
          * @fn public Homme 
-         * @param int num *Numero de l'enfant*
          * @param int? id = null *Id de la personne dans la BDD*
          * @param string? nom = null,
          * @param string? prenoms = null
@@ -38,16 +37,20 @@ namespace Model
          * @details
          * Definie les propiétés de la personne.
          */
-        public Homme(int num, int? id = null, 
+        public Homme(int? id = null,
                      string? nom = null, string? prenoms = null,
                      DateOnly? dateNaissance = null, DateOnly? dateDeces = null,
                      Ville? lieuNaissance = null, string? nationalite = null,
                      string? description = null) :
-                base(2 * num, id,   nom, prenoms, dateNaissance, dateDeces, lieuNaissance, nationalite, description)
+                base(id: id, nom: nom, prenoms: prenoms, dateNaissance: dateNaissance, 
+                    dateDeces: dateDeces, lieuNaissance: lieuNaissance, 
+                    nationalite: nationalite, description)
         {
-            //Numero = 2 * iden;
         }
 
-
+        public override void LierEnfant(int numEnfant)
+        {
+            this.Numero = 2 * numEnfant;
+        }
     }
 }

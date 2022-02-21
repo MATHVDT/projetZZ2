@@ -5,6 +5,7 @@ namespace DataBase
     public class Bdd : IBddLoader, IBddSaver
     {
         private readonly string _chaineConnexion;
+
         private readonly PersonneBdd _personneBdd;
         private readonly PrenomBdd _prenomBdd;
         private readonly VilleBdd _villeBdd;
@@ -15,6 +16,7 @@ namespace DataBase
         private Dictionary<int, FichierImage> _imageDejaChargee;
 
         public Bdd(string chaineConnexion)
+            //dico personne, image, ville
         {
             _chaineConnexion = chaineConnexion;
 
@@ -67,6 +69,7 @@ namespace DataBase
                 {
                     pere = GetPersonneById((int)idPere);
                     arbre.AjouterPere(enfant.Numero, (Homme)pere);
+                    //ajout au dico+
                     queue.Enqueue(pere);
                 }
 
@@ -234,6 +237,10 @@ namespace DataBase
 
         public void InsererPersonne(Personne personne)
         {
+            //if (personne.Id is not null)
+            //    modiferPersonn;
+            //        return;
+
             // Insertion ville
             if (personne.LieuNaissance is not null)
                 InsererVille(personne.LieuNaissance);
@@ -248,6 +255,8 @@ namespace DataBase
             // Insertion de la personne dans la Table Personne
             _personneBdd.InsererPersonneTable(personne);
 
+            // Association image personne 
+            // ....
 
             // Insertion des prénoms de la personne dans la Table Prenom et la Table d'association
             if (personne.Prenoms is not null)
@@ -256,6 +265,11 @@ namespace DataBase
             // Insertion de la Nationnalité dans la Table d'association
             if (personne.Nationalite is not null)
                 _paysBdd.InsererNationalitePersonne(personne);
+
+
+            // inserer lier  fils parent
+            //dico perso tryget ...
+
         }
 
         public void InsererPrenomsPersonne(Personne personne)
@@ -285,6 +299,7 @@ namespace DataBase
         public void InsererVille(Ville ville)
         {
             // Verifier si la ville existe pas déjà => id
+            //if()
             _villeBdd.InsererVilleTable(ville);
         }
     }

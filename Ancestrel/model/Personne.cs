@@ -236,7 +236,6 @@ namespace Model
 
         /**
          * @fn public Personne
-         * @param int num *Numero de l'enfant*
          * @param int? id = null *Id de la personne dans la BDD*
          * @param string? nom = null,
          * @param string? prenoms = null
@@ -249,13 +248,13 @@ namespace Model
          * @details
          * Definie les propiétés de la personne.
          */
-        public Personne(int num, int? id = null,
+        public Personne(int? id = null,
             string? nom = null, string? prenoms = null,
             DateOnly? dateNaissance = null, DateOnly? dateDeces = null,
             Ville? lieuNaissance = null, string? nationalite = null,
             string? description = null)
         {
-            Numero = num;
+            //Numero = 0; // Défini en utilisant LienParente
             Id = id;
             IdPere = null;
             IdMere = null;
@@ -276,6 +275,13 @@ namespace Model
 
         }
 
+        /**
+         * @fn public virtual void LierEnfant
+         * @brief Set le numéro d'un parent en fonction de celui de sont enfant.
+         * 
+         * @param int numEnfant - *Numéro de l'enfant*
+         */
+        public virtual void LierEnfant(int numEnfant) { }
 
         /**
         * @fn public void AddPrenoms(string[] inListeValue)

@@ -31,8 +31,8 @@ namespace ModelTests
         public void PersonneInconnueTest()
         {
             // Test Homme Inconnu
-            Homme h = new Homme(1);
-
+            Homme h = new Homme() ;
+            h.LierEnfant(1);
             Assert.IsNotNull(h); // Bonne création de l'objet
             // Vérification des propiétés à null
             Assert.AreEqual(h.Numero,2);
@@ -48,8 +48,8 @@ namespace ModelTests
             Assert.IsTrue(h.Inconnu);
 
             // Test Femme Inconnu
-            Femme f = new Femme(1);
-
+            Femme f = new Femme();
+            f.LierEnfant(1);
             Assert.IsNotNull(f); // Bonne création de l'objet
             // Vérification des propiétés à null
             Assert.AreEqual(f.Numero, 2+1);
@@ -77,14 +77,19 @@ namespace ModelTests
 
             string nom = "Dupond";
             string prenoms = "Jean Toto";
+            string description = "Description de jean toto dupond";
             DateOnly dateNaissance = new DateOnly(2000,02,16);
             DateOnly dateDeces = new DateOnly(2048,02,28);
             Ville villeNaissance = new Ville("Dijon");
             string nationalite = "fr";
 
 
-            Homme h = new Homme(i, null,nom, prenoms, dateNaissance,dateDeces,villeNaissance,nationalite); ;
+            Homme h = new Homme(id: null, nom:nom, prenoms:prenoms, 
+                dateNaissance:dateNaissance,dateDeces:dateDeces,lieuNaissance:villeNaissance,
+                nationalite:nationalite, description:description); ;
+            h.LierEnfant(i);
             Assert.IsNotNull(h);
+
             Assert.AreEqual((int)2*i, h.Numero);
             Assert.AreEqual( nom, h.Nom);    
             Assert.AreEqual(prenoms, h.Prenoms);
@@ -92,6 +97,7 @@ namespace ModelTests
             Assert.AreEqual(dateDeces, h.DateDeces);    
             Assert.AreEqual(villeNaissance, h.LieuNaissance);
             Assert.AreEqual(nationalite, h.Nationalite);
+            Assert.AreEqual(description, h.Description);
         }
 
         /*
@@ -105,6 +111,7 @@ namespace ModelTests
 
             string nom = "Wayne";
             string prenoms = "Diana";
+            string description = "j'avais regardé Batman VS Superman quand j'ai codé d'ou les nom";
             DateOnly dateNaissance = new DateOnly(2000, 02, 16);
             DateOnly dateDeces = new DateOnly(2048, 02, 28);
             Ville villeNaissance = new Ville("Dijon");
@@ -112,9 +119,14 @@ namespace ModelTests
 
             string nomJeuneFille = "Price";
 
-            Femme f = new Femme(i,null, nom, prenoms, 
-                dateNaissance, dateDeces, villeNaissance, nationalite,
-                nomJeuneFille); 
+            Femme f = new Femme(id:null, nom:nom, prenoms:prenoms, 
+                dateNaissance:dateNaissance, 
+                dateDeces:dateDeces, lieuNaissance:villeNaissance, 
+                nationalite:nationalite,
+                nomJeuneFille: nomJeuneFille
+                , description:description);
+            f.LierEnfant(i);
+
             Assert.IsNotNull(f);
             Assert.AreEqual((int)2*i+1, f.Numero);
             Assert.AreEqual(nom, f.Nom);
@@ -124,6 +136,7 @@ namespace ModelTests
             Assert.AreEqual(villeNaissance, f.LieuNaissance);
             Assert.AreEqual(nationalite, f.Nationalite);
             Assert.AreEqual(nomJeuneFille, f.NomJeuneFille);
+            Assert.AreEqual(description, f.Description);
         }
 
 

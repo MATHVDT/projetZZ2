@@ -51,7 +51,7 @@ namespace Model
          * 
          * @warning L'idPersonne ne doit pas être null.
          */
-        public string? GetPrenomByIdPersonne(int idPersonne);
+        public string? GetPrenomByIdPersonne(int idPersonne); // a degager
 
         /**
          * @fn public FichierImage GetFichierImageById
@@ -98,7 +98,7 @@ namespace Model
          * 
          * @return string? - *Nationalité(s) de la personne chargée à partir*
          */
-        public string? GetNationalitesByIdPersonne(int idPersonne);
+        public string? GetNationalitesByIdPersonne(int idPersonne); // a degager
 
     }
 }

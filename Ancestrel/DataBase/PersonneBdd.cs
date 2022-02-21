@@ -47,7 +47,7 @@ namespace DataBase
          * 
          * @return Personne *Personne avec les champs de la table complétés*
          */
-        public Personne GetPersonneTableById(int id)
+        public Personne GetPersonneTableById(int idPersonne)
         {
             // Création de la personne avec les infos récupérées
             Personne p = null;
@@ -55,7 +55,7 @@ namespace DataBase
             // Requete SQL pour récuperer les infos sur une personne 
             string queryString = $"SELECT * " +
                                  $"FROM {_PersonneTable} " +
-                                 $"WHERE {_Id} = {id};";
+                                 $"WHERE {_Id} = {idPersonne};";
 
             // Connexion à la bdd
             SqlConnection connexion = new SqlConnection(_chaineConnexion);
@@ -97,13 +97,13 @@ namespace DataBase
 
                 if (sexe == 1) // Femme 
                 {
-                    p = new Femme(0, idBdd, nomUsageBdd, null, dateNaissanceBdd, dateDecesBdd,
+                    p = new Femme( idBdd, nomUsageBdd, null, dateNaissanceBdd, dateDecesBdd,
                         null, null, nomBdd, description);
                 }
                 else // Homme
                 {
-                    p = new Homme(0, idBdd, nomUsageBdd, null, dateNaissanceBdd, dateDecesBdd,
-                        null, null, description);
+                    p = new Homme(id: idBdd, nom: nomUsageBdd, dateNaissance: dateNaissanceBdd, dateDeces: dateDecesBdd,
+                        description :description);
                 }
                 p.IdPere = idPere;
                 p.IdMere = idMere;

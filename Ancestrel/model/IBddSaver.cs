@@ -42,7 +42,7 @@ namespace Model
          * 
          * @warning La personne ne doit pas être null.
          */
-        public void InsererPrenomsPersonne(Personne personne);
+        public void InsererPrenomsPersonne(Personne personne); // a degager
 
         /**
         * @fn public void InsererVille
@@ -83,5 +83,7 @@ namespace Model
          * @warning L'idEnfant ne doit pas être null.
          */
         public void AjouterRelationParente(int idEnfant, int? idPere, int? idMere);
+
+        //ajouter relation enfant id enfant idPere/idmere
     }
 }
