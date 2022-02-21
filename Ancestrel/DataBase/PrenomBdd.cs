@@ -69,6 +69,44 @@ namespace DataBase
             return prenoms;
         }
 
+
+        public void SuppressionPrenomPersonne(int idPersonne)
+        {
+            // Connexion à la bdd
+            SqlConnection connexion = new SqlConnection(_chaineConnexion);
+            SqlCommand commandSql;
+            string queryString;
+
+            // Requete SQL pour récupérer les prénoms qui sont déjà dans la bdd
+            queryString = $"DELETE FROM {_PrenomPersonneTable} " +
+                          $"WHERE {_IdPersonne} = {idPersonne}; ";
+            try
+            {
+                connexion.Open(); // Ouverture connexion
+
+                // Création de la requete SQL
+                commandSql = new SqlCommand(queryString, connexion);
+
+                // Excecution de la requete de suppression
+                Console.WriteLine(queryString);
+                Console.WriteLine(commandSql.ExecuteNonQuery() + " lignes spprimées.");
+
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("Error SQL Generated. Details: " + e.ToString());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error Generated. Details: " + e.ToString());
+            }
+            finally
+            {
+                connexion.Close();
+            }
+        }
+
+
         /**
          * @fn public void InsererAssociationPrenomsPersonneId
          * @brief Insere correctement les prénoms à une personne.
@@ -94,7 +132,7 @@ namespace DataBase
             listPrenoms.ForEach(x => listPrenomsValuesBuilder.Append("'" + x.ToUpper() + "' "));
             listPrenomsValuesBuilder.Replace(" '", ", '");
 
-  
+
             // Sert à garder en mémoire les prenoms et leurs id associé qui sont enregistré
             Dictionary<string, int> prenomsDejaEnregistres = new Dictionary<string, int>();
 

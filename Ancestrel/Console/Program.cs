@@ -161,15 +161,22 @@ Homme cujus = new Homme(nom: "VDT", prenoms: "Toto", nationalite: "française");
 #endregion
 
 
-//Homme h = new(nom: "Delafontaine");
-//h.AddPrenoms("Jean jacques");
+#region Test Update Prenom d'une personne
+Homme h1 = new(nom: "Delafontaine");
+h1.AddPrenoms("Jean jacques");
 
-Homme h = (Homme)bdd.GetPersonneById(1);
+Console.WriteLine(h1.ToString());
+bdd.InsererPersonne(h1);
+h1.AddPrenoms("Lustucru");
+Console.WriteLine(h1.ToString());
 
-h.AddPrenoms("Lustucru");
+bdd.UpdatePersonne(h1);
 
-bdd.InsererPrenomsPersonne(h);
+Homme h2 = (Homme)bdd.GetPersonneById((int)h1.Id);
+Console.WriteLine(h2.ToString());
 
-//bdd.InsererPersonne(h);
+#endregion
+
+
 
 

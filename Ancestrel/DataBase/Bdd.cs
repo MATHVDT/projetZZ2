@@ -17,7 +17,7 @@ namespace DataBase
         private Dictionary<int, FichierImage> _imageDejaChargee;
 
         public Bdd(string chaineConnexion)
-        //dico personne, image, ville
+        //dico personne, image, ville du manager a passer en param
         {
             _chaineConnexion = chaineConnexion;
 
@@ -31,9 +31,6 @@ namespace DataBase
             _personneDejaChargee = new Dictionary<int, Personne>();
             _villeDejaChargee = new Dictionary<int, Ville>();
             _imageDejaChargee = new Dictionary<int, FichierImage>();
-
-
-
         }
 
 
@@ -231,7 +228,7 @@ namespace DataBase
             if (fichierImage is not null)
                 //UpdateImage
 
-            _imageBdd.InsererImageTable(fichierImage);
+                _imageBdd.InsererImageTable(fichierImage);
             _imageDejaChargee.Add((int)fichierImage.Id, fichierImage);
         }
 
@@ -326,41 +323,46 @@ namespace DataBase
 
         #endregion
 
+
+        #region Insertion par Suppression Table association
+
         /**
          * @fn private void InsererPrenomsPersonne
          * @brief Insere les prenoms d'une personne
          * 
          * @param Personne personne 
          * 
-         * @warning Supprime dabord dans la table d'assocation
+         * @details
+         * Supprime dabord dans la table d'assocation
          * tous les prénoms attachés à la pesonne et réinsere
          * les nouveaux.
+         * 
+         * @warning 
+         * - ArgumentNullException : si la personne n'est pas dans la bdd
+         * - Supprime les prénoms déjà associés avant de tous les réinserer
          */
         private void InsererPrenomsPersonne(Personne personne)
         {
+            int? idPersonne = personne.Id;
+
+            // La personne n'a pas encore été inséré dans la table
+            if (idPersonne is null)
+                throw new ArgumentNullException($"Personne pas dans la bdd"); // Créer une exception pas de cujus
+
+            // Suppression des prénoms déjà associés
+            _prenomBdd.SuppressionPrenomPersonne((int)idPersonne);
+
+            // Pas de prénoms à ajouter
             List<string> listPrenoms = personne.GetListPrenoms();
             if (listPrenoms.Count == 0)
                 return;
 
-            // La personne n'a pas encore été inséré dans la table
-            if (personne.Id is null)
-            {
-                Console.WriteLine("Personne pas encore ajouté à la bdd.");
-                _personneBdd.InsererPersonneTable(personne);
-                _personneDejaChargee.Add((int)personne.Id, personne);
-            }
-            try
-            {
-                int idPersonne = (int)personne.Id;
-                _prenomBdd.InsererAssociationPrenomsPersonneId(listPrenoms, idPersonne);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.ToString());
-            }
-
+            // Insertion de tous les prénoms
+            _prenomBdd.InsererAssociationPrenomsPersonneId(listPrenoms, (int)idPersonne);
         }
 
+
+        #endregion
 
         #region IBddSaver Update
 
@@ -373,8 +375,7 @@ namespace DataBase
             _personneBdd.UpdatePersonneTable(personne);
 
             // Update des prénoms de la personne
-            //_prenomBdd
-
+            InsererPrenomsPersonne(personne);
         }
 
         public void UpdateVille(Ville ville)

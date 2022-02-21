@@ -90,15 +90,5 @@ namespace Model
          */
         public string GetNationaliteByIdPays(int idPays);
 
-        /**
-         * @fn public Ville GetNationalitesByIdPersonne
-         * @brief Récupère les nationalités d'une personne depuis le *SPC* avec l'id de la personne.
-         * 
-         * @param int idPersonne
-         * 
-         * @return string? - *Nationalité(s) de la personne chargée à partir*
-         */
-        public string? GetNationalitesByIdPersonne(int idPersonne); // a degager
-
     }
 }

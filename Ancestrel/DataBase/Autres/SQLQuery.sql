@@ -2,7 +2,5 @@
 JOIN Prenom_Personne  on  Personne.Id = Prenom_Personne.Id_personne 
 JOIN prenom  ON Prenom.Id = Prenom_Personne.Id_prenom
 
-DELETE FROM Prenom_Personne
-WHERE Id_personne = 1;
 
 select * from Prenom

@@ -34,17 +34,6 @@ namespace Model
          */
         public void InsererPersonne(Personne personne);
 
-
-        /**
-         * @fn public void InsererPrenomsPersonne
-         * @brief Insère les prenoms de la personne le *SPC*
-         * 
-         * @param Personne personne
-         * 
-         * @warning La personne ne doit pas être null.
-         */
-        public void InsererPrenomsPersonne(Personne personne); // a degager
-
         /**
         * @fn public void InsererVille
         * @brief Ajout une ville dans le *SPC*
