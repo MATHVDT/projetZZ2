@@ -48,24 +48,35 @@ namespace Vue
             {
                 if (i < NombreColonne)
                 {
-                    ColumnDefinition column = new ColumnDefinition
-                    {
-                        Width = new GridLength(300)
-                    };
+                    ColumnDefinition column = new ColumnDefinition();
                     GridArbre.ColumnDefinitions.Add(column);
                 }
                 if (i <= HauteurArbre)
                 {
-                    RowDefinition row = new RowDefinition()
-                    {
-                        Height = new GridLength(300)
-                    };
+                    RowDefinition row = new RowDefinition();
 
 
                     GridArbre.RowDefinitions.Add(row);
                 }
             }
 
+
+            for (int c = 0; c <= NombreColonne; c++)
+            {
+                for (int j = 0; j <= HauteurArbre; j++)
+                {
+
+                    Border border = new Border
+                    {
+                        BorderBrush = Brushes.Black,
+                        BorderThickness = new Thickness(2)
+                    };
+
+                    GridArbre.Children.Add(border);
+                    Grid.SetRow(border, j);
+                    Grid.SetColumn(border, c);
+                }
+            }
 
             Debug.WriteLine($"Nmax:{Nmax}, Hauteur:{HauteurArbre}, Colonne:{NombreColonne}");
 
@@ -80,7 +91,11 @@ namespace Vue
                 Personne p = manager.GetPersonne(i);
                 if (p != null)
                 {
-                    o = new UCPersonne(p, this);
+                    o = new UCPersonne(p, this)
+                    {
+                        Width = 320,
+                        Height = 150,
+                    };
                 }
                 else
                 {
@@ -88,14 +103,21 @@ namespace Vue
                     int numeroFils = (int)(i / 2);
                     if (manager.GetPersonne(numeroFils) != null)
                     {
-                        o = new Button();
-                        ((Button)o).Content = "+";
-                        ((Button)o).VerticalAlignment = VerticalAlignment.Center;
-                        ((Button)o).HorizontalAlignment = HorizontalAlignment.Center;
+                        o = new Button()
+                        {
+                            Content = "+",
+                            VerticalAlignment = VerticalAlignment.Center,
+                            HorizontalAlignment = HorizontalAlignment.Center,
+                            Width = 50,
+                            Height = 50,
+
+                        };
                         ((Button)o).Click += (sender, args) =>
                         {
-                            this.NavigationService.Navigate(new CreerPersonne(numeroFils, numero));
+                            this.NavigationService.Navigate(new CreerPersonne(p));
                         };
+                        ((Button)o).SetResourceReference(Control.StyleProperty, "RoundCorner");
+
                     }
                 }
                 if (o != null)
@@ -109,9 +131,9 @@ namespace Vue
             }
 
 
-            foreach (Personne P in manager.Arbre.Personnes.Values)
+            /*foreach (Personne P in manager.Arbre.Personnes.Values)
             {
-                UCPersonne UCPersonne = new UCPersonne(P, this);
+                UCPersonne UCPersonne 
                 int ligne = CalculerNumLigne(P.Numero);
                 int span = CalculerSpan(NombreColonne, ligne);
                 int colonne = CalculerNumCol(P.Numero, span, ligne);
@@ -120,7 +142,7 @@ namespace Vue
                 Grid.SetRow(UCPersonne, ligne);
                 Grid.SetColumn(UCPersonne, colonne);
                 Grid.SetColumnSpan(UCPersonne, span);
-            }
+            }*/
         }
 
         private int CalculerSpan(int nbcolonne, int nligne)

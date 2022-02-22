@@ -1,6 +1,7 @@
 ﻿using Model;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,7 +38,6 @@ namespace Vue
         {
             if (personne.Inconnu)
             {
-               // Portrait.Source = personne is Homme ? new BitmapImage(new Uri(@"Images/Homme.png", UriKind.RelativeOrAbsolute)) : new BitmapImage(new Uri(@"Images/Femme.png", UriKind.RelativeOrAbsolute));
                 Nom.Content = _INCONNUE;
                 Prenom.Content = "";
                 Naissance.Content = "";
@@ -49,7 +49,16 @@ namespace Vue
                 Prenom.Content = personne.Prenoms != null ? personne.Prenoms : _INCONNUE;
                 Naissance.Content = personne.DateNaissance != null ? personne.DateNaissance : _INCONNUE;
                 Deces.Content = personne.DateDeces != null ? personne.DateDeces : _INCONNUE;
+                Portrait.Source = new BitmapImage(new Uri(@"/Homme.png", UriKind.RelativeOrAbsolute));
                 //Portrait = personne.GetFichierImageProfil().Image; //Utiliser un converter
+            }
+            if(personne.GetImageProfil() != null)
+            {
+                throw new NotImplementedException();
+            }
+            else
+            {
+                Portrait.Source = personne is Homme ? new BitmapImage(new Uri(@"/Homme.png", UriKind.RelativeOrAbsolute)) : new BitmapImage(new Uri(@"/Femme.png", UriKind.RelativeOrAbsolute));
             }
         }
     }

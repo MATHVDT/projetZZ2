@@ -27,18 +27,18 @@ namespace Vue
         private int Index = 0;
         private bool EstNouvelArbre = true;
         private Personne personne;
+        private Personne enfant;
 
         public CreerPersonne()
         {
             InitializeComponent();
         }
 
-        public CreerPersonne(int numero, int index)
+        public CreerPersonne(Personne enfant)
         {
             InitializeComponent();
             EstNouvelArbre = false;
-            Numero = numero;
-            Index = index;
+            this.enfant = enfant;
             InitialiserVue();
         }
 
@@ -79,71 +79,51 @@ namespace Vue
 
         private void ButtonAjout_Click(object sender, RoutedEventArgs e) 
         {
-            Boolean test = true;
-            personne = Sexe_ComboBox.SelectedValue == "Masculin" ? new Homme(): new Femme(); 
-            if (string.IsNullOrWhiteSpace(Nom_TextBox.Text))
+            personne = Sexe_ComboBox.SelectedIndex == 0 ? new Homme(): new Femme(); 
+            if(personne is Homme)
             {
-                Nom_TextBox.Background = new SolidColorBrush(Colors.Red);
-                test = false;
+                Debug.WriteLine("homme");
             }
             else
             {
-                personne.Nom=Nom_TextBox.Text;
-                Nom_TextBox.Background = new SolidColorBrush(Colors.White);
+                Debug.WriteLine("Femme");
             }
             foreach (Object o in SP_Prenoms.Children)
             {
                 if (o.GetType().Equals(typeof(TextBox)))
                 {
-                    if (string.IsNullOrWhiteSpace(((TextBox)o).Text))
-                    {
-                        ((TextBox)o).Background = new SolidColorBrush(Colors.Red);
-                        test = false;
-                    }
-                    else
+                    if (!string.IsNullOrWhiteSpace(((TextBox)o).Text))
                     {
                         personne.AjouterPrenoms(((TextBox)o).Text);
-                        ((TextBox)o).Background = new SolidColorBrush(Colors.White);
                     }
                 }
             }
-            if (test)
+            try
             {
-                try
+                if (!EstNouvelArbre)
                 {
-                    if (!EstNouvelArbre)
+                    if(personne is Homme)
                     {
-                        if (Sexe_ComboBox.SelectedIndex == 0)
-                        {
-                            //ajouterPere
-                            throw new NotImplementedException();
-                        }
-                        else
-                        {
-                            if (Sexe_ComboBox.SelectedIndex == 1)
-                            {
-                                //AjouterMere
-                                throw new NotImplementedException();
-                            }
-                            else
-                            {
-                                test = false;
-                            }
-                        }
+                        manager.AjouterPere(enfant, (Homme)personne);
                     }
-                    else
+                    else if (personne is Femme)
                     {
-                        manager.CreerArbre(personne);
-                        Debug.WriteLine(personne.Numero);
-                        this.NavigationService.Navigate(new Arbre());
+                        manager.AjouterMere(enfant, (Femme)personne);
                     }
+                    
                 }
-                catch (Exception exc)
+                else
                 {
-                    test = false;
-                    MessageBox.Show(exc.Message);
+                    manager.CreerArbre(personne);
+                    Debug.WriteLine(personne.Numero);
+                    this.NavigationService.Navigate(new Arbre());
                 }
             }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
+
         }
 
         private void ButtonPrenoms_Click(object sender, RoutedEventArgs e)
