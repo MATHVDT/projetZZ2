@@ -406,8 +406,9 @@ namespace DataBase
 
         public void UpdateVille(Ville ville)
         {
-            return;
-            throw new NotImplementedException();
+            if (ville.Id is null)
+                InsererVille(ville);
+            _villeBdd.UpdateVilleTable(ville);
         }
 
         public void UpdateFichierImage(FichierImage fichierImage)

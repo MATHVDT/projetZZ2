@@ -106,31 +106,31 @@ Bdd bdd = new Bdd(chaineConnexion);
 /**  Test arbre     **/
 #region Test Arbre
 
-Homme cujus = new Homme(nom: "VDT", prenoms: "Toto", nationalite: "française");
+//Homme cujus = new Homme(nom: "VDT", prenoms: "Toto", nationalite: "française");
 
-Arbre arbre = new Arbre("arbre1", "description", cujus);
+//Arbre arbre = new Arbre("arbre1", "description", cujus);
 
-Homme pere = new Homme(nom: "Père", prenoms: "yves lucien", dateNaissance: DateOnly.Parse("21/02/1999"), nationalite: "française Chilienne");
-Femme mere = new Femme(nom: "Mère", lieuNaissance: ville);
+//Homme pere = new Homme(nom: "Père", prenoms: "yves lucien", dateNaissance: DateOnly.Parse("21/02/1999"), nationalite: "française Chilienne");
+//Femme mere = new Femme(nom: "Mère", lieuNaissance: ville);
 
-arbre.AjouterPere(cujus.Numero, pere);
-arbre.AjouterMere(cujus.Numero, mere);
+//arbre.AjouterPere(cujus.Numero, pere);
+//arbre.AjouterMere(cujus.Numero, mere);
 
 
-Console.WriteLine("\n\n Arbre à enregistrer");
-foreach (var p in arbre.Personnes.Values)
-    Console.WriteLine(p.ToString());
+//Console.WriteLine("\n\n Arbre à enregistrer");
+//foreach (var p in arbre.Personnes.Values)
+//    Console.WriteLine(p.ToString());
 
-bdd.InsererArbre(arbre);
+//bdd.InsererArbre(arbre);
 
-Console.WriteLine("\n\n Chargement arbre");
-Arbre arbreCharge = bdd.ChargerArbre((int)cujus.Id);
+//Console.WriteLine("\n\n Chargement arbre");
+//Arbre arbreCharge = bdd.ChargerArbre((int)cujus.Id);
 
-Console.WriteLine("\n\n Arbre chargé");
-foreach (var p in arbreCharge.Personnes.Values)
-    Console.WriteLine(p.ToString());
+//Console.WriteLine("\n\n Arbre chargé");
+//foreach (var p in arbreCharge.Personnes.Values)
+//    Console.WriteLine(p.ToString());
 
-bdd.AjouterLienParent(cujus);
+//bdd.AjouterLienParent(cujus);
 
 #endregion
 
@@ -179,5 +179,26 @@ bdd.AjouterLienParent(cujus);
 #endregion
 
 
+#region Test Insertion et Update Ville
 
+Ville v = new Ville("Rivebois", 48.48, 102.22);
+
+Console.WriteLine("Ville " + v.ToString());
+bdd.InsererVille(v);
+
+Ville vChargee = bdd.GetVilleById((int)v.Id);
+
+Console.WriteLine("\nVille chargee " + vChargee.ToString());
+
+vChargee.Nom = "Vendeaume";
+vChargee.Longitude = 55.555;
+Console.WriteLine("\nVille modif " + vChargee.ToString());
+
+bdd.UpdateVille(vChargee);
+
+
+Ville vUpdate = bdd.GetVilleById((int)v.Id);
+Console.WriteLine("\nVille update charge " + vUpdate.ToString());
+
+#endregion
 

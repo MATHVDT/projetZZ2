@@ -137,5 +137,84 @@ namespace DataBase
         }
 
 
+
+        /**
+        * private static string VilleValuesUpdate(Ville ville)
+        * @brief Récupère et donne les instructions pour update les valeurs.
+        * 
+        * @param Ville ville
+        * 
+        * @return instruction *Valeurs à update*
+        */
+        private string VilleValuesUpdate(Ville ville)
+        {
+            // Récupération des champs personne
+            const string VALUENULL = "NULL";
+
+            StringBuilder valuesBuilder = new StringBuilder();
+
+            valuesBuilder.Append($"\nSET {_Nom} = ");
+            valuesBuilder.Append($"{(ville.Nom is null ? VALUENULL : "'" + ville.Nom + "'")}, ");
+
+            valuesBuilder.Append($"\n{_Latitude} = ");
+            valuesBuilder.Append($"{(ville.Latitude is null ? VALUENULL : ville.Latitude.ToString().Replace(",", "."))}, ");
+            
+            valuesBuilder.Append($"\n{_Longitude} = ");
+            valuesBuilder.Append($"{(ville.Longitude is null ? VALUENULL : ville.Longitude.ToString().Replace(",", "."))} ");
+
+            // Pas de prise en compte de l'id du pays dans l'objet Ville
+            //valuesBuilder.Append($"\n{_Pays} = ");
+            //valuesBuilder.Append($"{(ville.IdPays is null ? VALUENULL : ville.IdPays)}, ");
+
+
+            return valuesBuilder.ToString();
+        }
+
+
+        /**
+         * @fn public void UpdateVilleTable
+         * @brief Update les données d'une ville dans la Table Ville
+         * 
+         * @param Ville ville - *Ville à modifier*
+         * 
+         * @warning La ville doit être present dans la table.
+         */
+        public void UpdateVilleTable(Ville ville)
+        {
+            SqlConnection connexion = new SqlConnection(_chaineConnexion);
+            SqlCommand commandSql;
+            string queryString;
+
+            try
+            {
+                connexion.Open(); // Ouverture connexion
+
+                // Requete SQL pour update les valeurs de la personne
+                queryString = $"UPDATE {_VilleTable} " +
+                              $"{VilleValuesUpdate(ville)} \n" +
+                              $"WHERE {_Id} = {(int)ville.Id};";
+
+
+                // Création de la requete SQL d'INSERTION
+                commandSql = new SqlCommand(queryString, connexion);
+
+                // Excecution de l'insertion
+                Console.WriteLine(queryString);
+                Console.WriteLine(commandSql.ExecuteNonQuery() + " lignes modifiés.");
+
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("Error SQL Generated. Details: " + e.ToString());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error Generated. Details: " + e.ToString());
+            }
+            finally
+            {
+                connexion.Close();
+            }
+        }
     }
 }
