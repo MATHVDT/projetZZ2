@@ -46,11 +46,6 @@ CREATE TABLE [dbo].[Ville]
 )
 
 
-CREATE TABLE [dbo].[Description]
-(
-	[Id] INT NOT NULL PRIMARY KEY IDENTITY(1,1),
-	[Description] VARCHAR(MAX) NULL
-)
 
 CREATE TABLE [dbo].[Personne]
 (
@@ -60,7 +55,7 @@ CREATE TABLE [dbo].[Personne]
 	[Nom] VARCHAR(200)  NULL,
 	[Date_naissance] DATE NULL,
 	[Date_deces] DATE NULL,
-	[Description] INT NULL,
+	[Description] VARCHAR( NULL,
 	[Id_ville_naissance] INT NULL,
 	[Id_img_principale] INT NULL,
 	[Id_pere] INT NULL,
