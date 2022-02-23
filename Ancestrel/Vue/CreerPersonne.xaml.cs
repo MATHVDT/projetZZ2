@@ -129,26 +129,16 @@ namespace Vue
                     else
                     {
                         //CreerArbre
-                        throw new NotImplementedException();
+                        /*
+                         * ici
+                         * */
+                        this.NavigationService.Navigate(new Arbre());
                     }
                 }
                 catch (Exception exc)
                 {
                     test = false;
                     MessageBox.Show(exc.Message);
-                }
-            }
-            if (test)
-            {
-                if (EstNouvelArbre)
-                {
-                    //nouvellePage
-                    throw new NotImplementedException();
-                }
-                else
-                {
-                    //Page Arbre
-                    throw new NotImplementedException();
                 }
             }
         }
