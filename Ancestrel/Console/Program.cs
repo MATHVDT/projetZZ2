@@ -181,34 +181,43 @@ Bdd bdd = new Bdd(chaineConnexion);
 
 #region Test Insertion et Update Ville
 
-Ville v = new Ville("Rivebois", 48.48, 102.22);
+//Ville v = new Ville("Rivebois", 48.48, 102.22);
 
-Console.WriteLine("Ville " + v.ToString());
-bdd.InsererVille(v);
+//Console.WriteLine("Ville " + v.ToString());
+//bdd.InsererVille(v);
 
-Ville vChargee = bdd.GetVilleById((int)v.Id);
+//Ville vChargee = bdd.GetVilleById((int)v.Id);
 
-Console.WriteLine("\nVille chargee " + vChargee.ToString());
+//Console.WriteLine("\nVille chargee " + vChargee.ToString());
 
-vChargee.Nom = "Vendeaume";
-vChargee.Longitude = 55.555;
-Console.WriteLine("\nVille modif " + vChargee.ToString());
+//vChargee.Nom = "Vendeaume";
+//vChargee.Longitude = 55.555;
+//Console.WriteLine("\nVille modif " + vChargee.ToString());
 
-bdd.UpdateVille(vChargee);
+//bdd.UpdateVille(vChargee);
 
 
-Ville vUpdate = bdd.GetVilleById((int)v.Id);
-Console.WriteLine("\nVille update charge " + vUpdate.ToString());
+//Ville vUpdate = bdd.GetVilleById((int)v.Id);
+//Console.WriteLine("\nVille update charge " + vUpdate.ToString());
 
 #endregion
 
 #region Test Recup noms/id villes
 
-Dictionary<int, string> villesNom = bdd.GetNomVilles();
+//Dictionary<int, string> villesNom = bdd.GetNomVilles();
 
-foreach (var villeNom in villesNom)
-{
-    Console.WriteLine($"ville : {villeNom.Key}, {villeNom.Value}");
-}
+//foreach (var villeNom in villesNom)
+//{
+//    Console.WriteLine($"ville : {villeNom.Key}, {villeNom.Value}");
+//}
+
+#endregion
+
+#region Recup nom/prenoms/id personne
+
+//Dictionary<int, string> personnesNomPrenom = bdd.GetNomPrenomPersonnes();
+
+//foreach (var personne in personnesNomPrenom)
+//    Console.WriteLine($"personne : {personne.Key}, {personne.Value}");
 
 #endregion

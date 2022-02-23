@@ -426,7 +426,26 @@ namespace DataBase
 
         public Dictionary<int, string> GetNomPrenomPersonnes()
         {
-            throw new NotImplementedException();
+            Dictionary<int, string> personnesNomPrenoms = new();
+            Dictionary<int, string> personnesNom;
+
+            // Récup des noms
+            personnesNom = _personneBdd.GetNomPersonnes();
+
+            // Ajout de prenoms dans un dico avec les noms
+            string? prenoms;
+            foreach (var personne in personnesNom)
+            {
+                prenoms = _prenomBdd.GetPrenomByIdPersonne(personne.Key);
+
+                if (prenoms is not null)
+                {
+                    personnesNomPrenoms.Add(personne.Key, personne.Value + " " + prenoms);
+                }
+            }
+
+            return personnesNomPrenoms;
+
         }
 
         #endregion

@@ -35,6 +35,7 @@ namespace DataBase
             _chaineConnexion = chaineConnexion;
         }
 
+        #region Insertion
 
         /**
          * private string PersonneValuesInsert(Personne personne)
@@ -72,92 +73,6 @@ namespace DataBase
             return valuesBuilder.ToString();
         }
 
-        #region Insertion
-
-        /**
-         * @fn public static Personne GetPersonneTableById(int id)
-         * @brief Récuperer une personne Table grâce à son id dans la BDD.
-         * 
-         * @param int id - *Id de la personne dans la BDD*
-         * 
-         * @return Personne *Personne avec les champs de la table complétés*
-         */
-        public Personne GetPersonneTableById(int idPersonne)
-        {
-            // Création de la personne avec les infos récupérées
-            Personne p = null;
-
-            // Requete SQL pour récuperer les infos sur une personne 
-            string queryString = $"SELECT * " +
-                                 $"FROM {_PersonneTable} " +
-                                 $"WHERE {_Id} = {idPersonne};";
-
-            // Connexion à la bdd
-            SqlConnection connexion = new SqlConnection(_chaineConnexion);
-            SqlCommand commandSql;
-            SqlDataReader reader;
-
-            try
-            {
-                connexion.Open(); // Ouverture de la connexion à la bdd
-
-                // Création et execution de la requete SQL
-                Console.WriteLine(queryString);
-                commandSql = new SqlCommand(queryString, connexion);
-                reader = commandSql.ExecuteReader();
-
-                reader.Read(); // Debut de la lecture du la requete
-
-                // Recupération de différent champs de la requete
-                int idBdd = (int)reader[_Id];
-
-                string? nomUsageBdd = (string?)(reader[_NomUsage] is System.DBNull ? null : reader[_NomUsage]);
-                string? nomBdd = (string?)(reader[_Nom] is System.DBNull ? null : reader[_Nom]);
-
-                DateOnly? dateNaissanceBdd = (DateOnly?)(reader[_DateNaissance] is System.DBNull ? null : DateOnly.FromDateTime((DateTime)reader[_DateNaissance]));
-                DateOnly? dateDecesBdd = (DateOnly?)(reader[_DateDeces] is System.DBNull ? null : DateOnly.FromDateTime((DateTime)reader[_DateDeces]));
-
-                string? description = (string?)(reader[_Description] is System.DBNull ? null : reader[_Description]);
-
-                int? idPere = (reader[_IdPere] is System.DBNull ? null : (int?)reader[_IdPere]);
-                int? idMere = (reader[_IdMere] is System.DBNull ? null : (int?)reader[_IdMere]);
-
-
-                int? idVilleNaissance = (reader[_IdVilleNaissance] is System.DBNull ? null : (int?)reader[_IdVilleNaissance]);
-
-                int sexe = (int)reader[_Sexe]; // 0 -> Homme et 1 -> Femme
-
-                reader.Close();  // Fermeture de la lecture de la requete
-
-
-                if (sexe == 1) // Femme 
-                {
-                    p = new Femme(idBdd, nomUsageBdd, null, dateNaissanceBdd, dateDecesBdd,
-                        null, null, nomBdd, description);
-                }
-                else // Homme
-                {
-                    p = new Homme(id: idBdd, nom: nomUsageBdd, dateNaissance: dateNaissanceBdd, dateDeces: dateDecesBdd,
-                        description: description);
-                }
-                p.IdPere = idPere;
-                p.IdMere = idMere;
-            }
-            catch (SqlException e)
-            {
-                Console.WriteLine("Error SQL Generated. Details: " + e.ToString());
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Error Generated. Details: " + e.ToString());
-            }
-            finally
-            {
-                connexion.Close();
-            }
-
-            return p;
-        }
 
         /**
          * @fn public void DefinirImageProfil
@@ -274,6 +189,163 @@ namespace DataBase
                 connexion.Close();
             }
         }
+
+        #endregion
+
+        #region Charger
+
+        /**
+         * @fn public Dictionary<int, string> GetNomPersonnes
+         * @brief Charge toutes les personnes ayant un nom de famille
+         * 
+         */
+        public Dictionary<int, string> GetNomPersonnes()
+        {
+            Dictionary<int, string> personnesNom = new();
+            string? nomPersonne;
+
+            SqlConnection connexion = new SqlConnection(_chaineConnexion);
+            SqlCommand commandSql;
+            string queryString;
+
+            try
+            {
+                connexion.Open(); // Ouverture connexion
+
+                // Requete SQL pour réccupérer les noms et id
+                queryString = $"SELECT {_Id}, {_NomUsage}, {_Nom} " +
+                              $"FROM {_PersonneTable};";
+
+
+                // Création de la requete SQL de recupération
+                commandSql = new SqlCommand(queryString, connexion);
+
+                // Excecution de la requete de récupération des noms et id de toutes les personnes
+                Console.WriteLine(queryString);
+                SqlDataReader reader = commandSql.ExecuteReader();
+
+                // Récupération des noms des personnes non null
+                while (reader.Read())
+                {
+                    nomPersonne = (string?)(reader[_NomUsage] is System.DBNull ? null : reader[_NomUsage]);
+
+                    if (reader[_Nom] is not System.DBNull)
+                    {
+                        nomPersonne += (string?)(nomPersonne is null ? null : " ");
+                        nomPersonne += reader[_Nom];
+                    }
+
+                    if (nomPersonne is not null) // Vérifie que ya bien un nom 
+                    {
+                        personnesNom.Add((int)reader[_Id], (string)nomPersonne);
+                    }
+
+                }
+                reader.Close();
+
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("Error SQL Generated. Details: " + e.ToString());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error Generated. Details: " + e.ToString());
+            }
+            finally
+            {
+                connexion.Close();
+            }
+            return personnesNom;
+        }
+
+
+
+        /**
+         * @fn public static Personne GetPersonneTableById(int id)
+         * @brief Récuperer une personne Table grâce à son id dans la BDD.
+         * 
+         * @param int id - *Id de la personne dans la BDD*
+         * 
+         * @return Personne *Personne avec les champs de la table complétés*
+         */
+        public Personne GetPersonneTableById(int idPersonne)
+        {
+            // Création de la personne avec les infos récupérées
+            Personne p = null;
+
+            // Requete SQL pour récuperer les infos sur une personne 
+            string queryString = $"SELECT * " +
+                                 $"FROM {_PersonneTable} " +
+                                 $"WHERE {_Id} = {idPersonne};";
+
+            // Connexion à la bdd
+            SqlConnection connexion = new SqlConnection(_chaineConnexion);
+            SqlCommand commandSql;
+            SqlDataReader reader;
+
+            try
+            {
+                connexion.Open(); // Ouverture de la connexion à la bdd
+
+                // Création et execution de la requete SQL
+                Console.WriteLine(queryString);
+                commandSql = new SqlCommand(queryString, connexion);
+                reader = commandSql.ExecuteReader();
+
+                reader.Read(); // Debut de la lecture du la requete
+
+                // Recupération de différent champs de la requete
+                int idBdd = (int)reader[_Id];
+
+                string? nomUsageBdd = (string?)(reader[_NomUsage] is System.DBNull ? null : reader[_NomUsage]);
+                string? nomBdd = (string?)(reader[_Nom] is System.DBNull ? null : reader[_Nom]);
+
+                DateOnly? dateNaissanceBdd = (DateOnly?)(reader[_DateNaissance] is System.DBNull ? null : DateOnly.FromDateTime((DateTime)reader[_DateNaissance]));
+                DateOnly? dateDecesBdd = (DateOnly?)(reader[_DateDeces] is System.DBNull ? null : DateOnly.FromDateTime((DateTime)reader[_DateDeces]));
+
+                string? description = (string?)(reader[_Description] is System.DBNull ? null : reader[_Description]);
+
+                int? idPere = (reader[_IdPere] is System.DBNull ? null : (int?)reader[_IdPere]);
+                int? idMere = (reader[_IdMere] is System.DBNull ? null : (int?)reader[_IdMere]);
+
+
+                int? idVilleNaissance = (reader[_IdVilleNaissance] is System.DBNull ? null : (int?)reader[_IdVilleNaissance]);
+
+                int sexe = (int)reader[_Sexe]; // 0 -> Homme et 1 -> Femme
+
+                reader.Close();  // Fermeture de la lecture de la requete
+
+
+                if (sexe == 1) // Femme 
+                {
+                    p = new Femme(idBdd, nomUsageBdd, null, dateNaissanceBdd, dateDecesBdd,
+                        null, null, nomBdd, description);
+                }
+                else // Homme
+                {
+                    p = new Homme(id: idBdd, nom: nomUsageBdd, dateNaissance: dateNaissanceBdd, dateDeces: dateDecesBdd,
+                        description: description);
+                }
+                p.IdPere = idPere;
+                p.IdMere = idMere;
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("Error SQL Generated. Details: " + e.ToString());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error Generated. Details: " + e.ToString());
+            }
+            finally
+            {
+                connexion.Close();
+            }
+
+            return p;
+        }
+
 
         /**
          * @fn public int? GetIdVilleNaissancePersonneById(int idPersonne)

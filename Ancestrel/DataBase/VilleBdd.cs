@@ -218,6 +218,10 @@ namespace DataBase
         }
 
 
+        /**
+         * @fn public Dictionary<int, string> GetNomVilles
+         * @brief Récupère tous les noms et id des villes dans la bdd.
+         */
         public Dictionary<int, string> GetNomVilles()
         {
             Dictionary<int, string> villesNom = new();
