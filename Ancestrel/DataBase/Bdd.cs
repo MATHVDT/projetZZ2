@@ -107,7 +107,7 @@ namespace DataBase
         }
 
         public string? GetNationalitesByIdPersonne(int idPersonne)
-        {
+        { // Pas utilisé pour l'instant
             return _paysBdd.GetNationalitesByIdPersonne(idPersonne);
         }
 
@@ -122,14 +122,11 @@ namespace DataBase
                 throw new ArgumentNullException($"Personne {idPersonne} pas dans la BDD.");
 
             // Recupération des prénoms de la personne dans la Table Prenom et la Table d'association
-            string? prenomsBdd = GetPrenomByIdPersonne(idPersonne);
-            if (prenomsBdd is not null)
-                personne.AddPrenoms(prenomsBdd);
+            string? prenomsBdd = _prenomBdd.GetPrenomByIdPersonne(idPersonne);
+            personne.Prenoms = prenomsBdd;
 
             // Recupération lieu de naissance dans la Table Ville et la Table d'association
             int? idVilleNaissance = _personneBdd.GetIdVilleNaissancePersonneById(idPersonne);
-
-            Console.WriteLine("Id ville : " + idVilleNaissance ?? "null");
 
             // A une ville de naissance
             if (idVilleNaissance is not null)
@@ -159,20 +156,12 @@ namespace DataBase
             }
 
             // Recupération de la Nationnalité dans la Table d'association
+            // Récupère rien pour l'instant
             personne.Nationalite = GetNationalitesByIdPersonne(idPersonne);
-
-            // Récupération des prénoms
-            string? prenoms = _prenomBdd.GetPrenomByIdPersonne(idPersonne);
-            personne.Prenoms = prenoms;
-
 
             return personne;
         }
 
-        public string? GetPrenomByIdPersonne(int idPersonne)
-        {
-            return _prenomBdd.GetPrenomByIdPersonne(idPersonne);
-        }
 
         public Ville GetVilleById(int idVille)
         {
@@ -200,8 +189,6 @@ namespace DataBase
 
         public void InsererArbre(Arbre arbre)
         {
-            //Console.WriteLine("Enregistrement personne");
-
             // Inserer les personnes une à une => elles obtiennent un id
             foreach (Personne p in arbre.Personnes.Values)
             {
@@ -216,15 +203,10 @@ namespace DataBase
             foreach (Personne p in arbre.Personnes.Values)
             {
                 if (p.Id is null)
-                    throw new ArgumentNullException("La personne n'a pas d'id");
-                arbre.Personnes.TryGetValue(p.GetPereNumero(), out pere);
-                arbre.Personnes.TryGetValue(p.GetMereNumero(), out mere);
+                    throw new ArgumentNullException("La personne n'a pas d'id, erreur d'insertion");
 
-                idPere = pere?.Id;
-                idMere = mere?.Id;
-
-                //Console.WriteLine($"idEnfant {p.Id}, idPere {idPere}, idMere {idMere}");
-                AjouterLienParents((int)p.Id, idPere, idMere);
+                // Lier l'enfant à son parent
+                AjouterLienParent(p);
             }
         }
 
@@ -233,7 +215,10 @@ namespace DataBase
         {
             // Verifier s'il y est deja insere ie si id != null => ModifierFichierImage
             if (fichierImage.Id is not null)
+            {
                 UpdateFichierImage(fichierImage);
+                return;
+            }
 
             _imageBdd.InsererImageTable(fichierImage);
             _imageDejaChargee.Add((int)fichierImage.Id, fichierImage);
@@ -249,7 +234,7 @@ namespace DataBase
                 return;
             }
 
-            // Insertion ville
+            // Insertion ville de naissance dans la bdd
             if (personne.LieuNaissance is not null)
                 InsererVille(personne.LieuNaissance);
 
@@ -272,8 +257,7 @@ namespace DataBase
 
 
             // inserer lier  fils parent
-            //AjouterLienParent(personne);
-            //dico perso tryget ...
+            AjouterLienParent(personne);
 
         }
 
@@ -281,7 +265,10 @@ namespace DataBase
         {
             // Verifier si la ville existe pas déjà => id
             if (ville.Id is not null)
+            {
                 UpdateVille(ville);
+                return;
+            }
 
             _villeBdd.InsererVilleTable(ville);
             _villeDejaChargee.Add((int)ville.Id, ville);
@@ -291,7 +278,10 @@ namespace DataBase
         {
             // Check l'id de la personne
             if (personne.Id is null)
+            {
                 InsererPersonne(personne);
+                return;
+            }
 
             // Récupère le numéro de la personne
             int numPersonne = personne.Numero;
@@ -401,20 +391,36 @@ namespace DataBase
 
         public void UpdatePersonne(Personne personne)
         {
+            // Personne pas encore dans la bdd
             if (personne.Id is null)
+            {
                 InsererPersonne(personne);
+                return;
+            }
 
             // Update des Valeurs de la personne dans la Table personne
             _personneBdd.UpdatePersonneTable(personne);
 
             // Update des prénoms de la personne
             InsererPrenomsPersonne(personne);
+
+            // Update des images
+            InsererImagesPersonne(personne);
+
+            // Set de l'image de profil
+            _personneBdd.DefinirImageProfil(personne);
+
+            // Update nationalité
+            // ... pas prit en compte pour l'instant
         }
 
         public void UpdateVille(Ville ville)
         {
             if (ville.Id is null)
+            {
                 InsererVille(ville);
+                return;
+            }
             _villeBdd.UpdateVilleTable(ville);
         }
 
