@@ -419,11 +419,16 @@ namespace DataBase
         }
 
         public void UpdateFichierImage(FichierImage fichierImage)
-        { // Pas de modif des image pour l'instant
+        { // Pas de modif des images pour l'instant
             return;
             throw new NotImplementedException("Pas de modif des fichiers images pour l'instant");
         }
 
-            #endregion
+        public Dictionary<int, string> GetNomPrenomPersonnes()
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }

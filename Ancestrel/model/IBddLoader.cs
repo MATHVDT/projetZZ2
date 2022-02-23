@@ -78,7 +78,7 @@ namespace Model
         public Ville GetVilleById(int idVille);
 
         /**
-         * @fn public str GetNationaliteByIdPays
+         * @fn public string GetNationaliteByIdPays
          * @brief Récupère la nationalité d'un pays depuis le *SPC* avec l'id du pays.
          * 
          * @param int idPays
@@ -90,7 +90,30 @@ namespace Model
          */
         public string GetNationaliteByIdPays(int idPays);
 
+
+        /**
+         * @fn public Dictionary<int, string> GetNomVilles()
+         * @brief Récupère un dico des noms des villes avec leur id.
+         * 
+         * @details
+         * Récupère des infos sur les villes dans le *SPC*,
+         * sans les charger complètement.
+         */
         public Dictionary<int, string> GetNomVilles();
+
+
+        /**
+         * @fn public Dictionary<int, string> GetNomPrenomPersonnes()
+         * @brief Récupère un dico des noms et prenoms des personnes avec leur id.
+         * 
+         * @details
+         * Récupère des infos sur les personnes dans le *SPC*,
+         * sans les charger complètement. Sert pour savoir l'id
+         * du cujus pour démarrer l'arbre.
+         * 
+         * @warning Ne retourne que les personnes ayant un Nom et prénom dans le *SPC*
+         */
+        public Dictionary<int, string> GetNomPrenomPersonnes();
 
     }
 }

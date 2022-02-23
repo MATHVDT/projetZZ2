@@ -91,9 +91,32 @@ namespace Model
         #endregion
 
         #region Update
+
+        /**
+         * @fn public void UpdatePersonne
+         * @brief Modifie une personne dans le *SPC*
+         * 
+         * @param Personne personne
+         */
         public void UpdatePersonne(Personne personne);
 
+        /**
+         * @fn public void UpdateVille
+         * @brief Modifie une ville dans le *SPC*
+         * 
+         * @param Ville ville 
+         */
         public void UpdateVille(Ville ville);
+
+        /**
+         * @fn public void UpdateFichierImage
+         * @brief Modifie une image dans le *SPC*
+         * 
+         * @param FichierImage fichierImage
+         * 
+         * @todo A faire ?
+         * @warning Pas encore implémenté, pas de modif d'image pour l'instant.
+         */
         public void UpdateFichierImage(FichierImage fichierImage);
 
         #endregion
