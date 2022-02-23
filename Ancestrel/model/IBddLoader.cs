@@ -90,5 +90,7 @@ namespace Model
          */
         public string GetNationaliteByIdPays(int idPays);
 
+        public Dictionary<int, string> GetNomVilles();
+
     }
 }

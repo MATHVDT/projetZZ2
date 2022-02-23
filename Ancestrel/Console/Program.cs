@@ -202,3 +202,13 @@ Console.WriteLine("\nVille update charge " + vUpdate.ToString());
 
 #endregion
 
+#region Test Recup noms/id villes
+
+Dictionary<int, string> villesNom = bdd.GetNomVilles();
+
+foreach (var villeNom in villesNom)
+{
+    Console.WriteLine($"ville : {villeNom.Key}, {villeNom.Value}");
+}
+
+#endregion

@@ -187,6 +187,13 @@ namespace DataBase
 
             return ville;
         }
+
+
+        public Dictionary<int, string> GetNomVilles()
+        {
+            return _villeBdd.GetNomVilles();
+        }
+
         #endregion
 
         #region IBddSaver Insertion
@@ -416,6 +423,7 @@ namespace DataBase
             return;
             throw new NotImplementedException("Pas de modif des fichiers images pour l'instant");
         }
-        #endregion
+
+            #endregion
     }
 }

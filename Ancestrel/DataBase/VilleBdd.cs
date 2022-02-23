@@ -158,7 +158,7 @@ namespace DataBase
 
             valuesBuilder.Append($"\n{_Latitude} = ");
             valuesBuilder.Append($"{(ville.Latitude is null ? VALUENULL : ville.Latitude.ToString().Replace(",", "."))}, ");
-            
+
             valuesBuilder.Append($"\n{_Longitude} = ");
             valuesBuilder.Append($"{(ville.Longitude is null ? VALUENULL : ville.Longitude.ToString().Replace(",", "."))} ");
 
@@ -215,6 +215,52 @@ namespace DataBase
             {
                 connexion.Close();
             }
+        }
+
+
+        public Dictionary<int, string> GetNomVilles()
+        {
+            Dictionary<int, string> villesNom = new();
+
+            SqlConnection connexion = new SqlConnection(_chaineConnexion);
+            SqlCommand commandSql;
+            string queryString;
+
+            try
+            {
+                connexion.Open(); // Ouverture connexion
+
+                // Requete SQL pour réccupérer les noms et id
+                queryString = $"SELECT {_Id}, {_Nom} " +
+                              $"FROM {_VilleTable};";
+
+
+                // Création de la requete SQL de recupération
+                commandSql = new SqlCommand(queryString, connexion);
+
+                // Excecution de la requete de récupération des noms et id de toutes les villes
+                Console.WriteLine(queryString);
+                SqlDataReader reader = commandSql.ExecuteReader();
+                
+                while (reader.Read())
+                {
+                    villesNom.Add((int)reader[_Id], (string)reader[_Nom]);
+                }
+                reader.Close();
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("Error SQL Generated. Details: " + e.ToString());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error Generated. Details: " + e.ToString());
+            }
+            finally
+            {
+                connexion.Close();
+            }
+            return villesNom;
         }
     }
 }

@@ -55,7 +55,7 @@ CREATE TABLE [dbo].[Personne]
 	[Nom] VARCHAR(200)  NULL,
 	[Date_naissance] DATE NULL,
 	[Date_deces] DATE NULL,
-	[Description] VARCHAR( NULL,
+	[Description] VARCHAR(max) NULL,
 	[Id_ville_naissance] INT NULL,
 	[Id_img_principale] INT NULL,
 	[Id_pere] INT NULL,
