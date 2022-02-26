@@ -1,6 +1,5 @@
 # Genealogie
 
-[![pipeline status](https://gitlab.isima.fr/fldumas5/genealogie/badges/main/pipeline.svg)](https://gitlab.isima.fr/fldumas5/genealogie/-/commits/main)
 
 
 
