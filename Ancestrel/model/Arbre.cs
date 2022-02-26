@@ -69,7 +69,7 @@ namespace Model
         * Ajoute une personne de type Homme avec le Numero calculé en fonction de celui de l'enfant
         */
         public void AjouterPere(int idEnfant, string? nom = null, string? prenoms = null,
-            DateOnly? dateNaissance = null, DateOnly? dateDeces = null,
+            DateTime? dateNaissance = null, DateTime? dateDeces = null,
             Ville? lieuNaissance = null, string? nationalite = null)
         {
             Homme pere = new Homme(idEnfant, null, null, null, nom, prenoms, dateNaissance, dateDeces, lieuNaissance, nationalite);
@@ -92,7 +92,7 @@ namespace Model
         * Ajoute une personne de type Femme avec le Numero calculé en fonction de celui de l'enfant
         */
         public void AjouterMere(int idEnfant, string? nom = null, string? prenoms = null,
-            DateOnly? dateNaissance = null, DateOnly? dateDeces = null,
+            DateTime? dateNaissance = null, DateTime? dateDeces = null,
             Ville? lieuNaissance = null, string? nationalite = null)
         {
             Femme mere = new Femme(idEnfant, null, null, null, nom, prenoms, dateNaissance, dateDeces, lieuNaissance, nationalite);

@@ -88,6 +88,7 @@ namespace Vue
             {
                 Debug.WriteLine("Femme");
             }
+            personne.Nom=!String.IsNullOrWhiteSpace(Nom_TextBox.Text) ? Nom_TextBox.Text : null;
             foreach (Object o in SP_Prenoms.Children)
             {
                 if (o.GetType().Equals(typeof(TextBox)))

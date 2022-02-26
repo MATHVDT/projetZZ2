@@ -23,8 +23,10 @@ namespace Vue
     public partial class UCPersonne : UserControl
     {
         private const string _INCONNUE = "Inconnue";
+        private const string _INCONNU = "Inconnu";
         private Personne personne;
         private Page page;
+        bool button = false;
         public UCPersonne(Personne p, Page page)
         {
             InitializeComponent();
@@ -38,18 +40,18 @@ namespace Vue
         {
             if (personne.Inconnu)
             {
-                Nom.Content = _INCONNUE;
-                Prenom.Content = "";
-                Naissance.Content = "";
-                Deces.Content = "";
+                Nom.Content = _INCONNU;
+                Prenom.Visibility = Visibility.Collapsed;
+                Naissance.Visibility = Visibility.Collapsed;
+                Deces.Visibility = Visibility.Collapsed;
+                Separateur.Visibility = Visibility.Collapsed;
             }
             else
             {
-                Nom.Content = personne.Nom != null ? personne.Nom : _INCONNUE;
-                Prenom.Content = personne.Prenoms != null ? personne.Prenoms : _INCONNUE;
+                Nom.Content = personne.Nom != null ? personne.Nom : _INCONNU;
+                Prenom.Content = personne.Prenoms != null ? personne.Prenoms : _INCONNU;
                 Naissance.Content = personne.DateNaissance != null ? personne.DateNaissance : _INCONNUE;
                 Deces.Content = personne.DateDeces != null ? personne.DateDeces : _INCONNUE;
-                Portrait.Source = new BitmapImage(new Uri(@"/Homme.png", UriKind.RelativeOrAbsolute));
                 //Portrait = personne.GetFichierImageProfil().Image; //Utiliser un converter
             }
             if(personne.GetImageProfil() != null)
@@ -60,6 +62,24 @@ namespace Vue
             {
                 Portrait.Source = personne is Homme ? new BitmapImage(new Uri(@"/Homme.png", UriKind.RelativeOrAbsolute)) : new BitmapImage(new Uri(@"/Femme.png", UriKind.RelativeOrAbsolute));
             }
+        }
+
+        private void UserControl_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            button = true;
+        }
+
+        private void UserControl_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (button)
+            {
+                page.NavigationService.Navigate(new DetailsPersonne(personne));
+            }
+        }
+
+        private void UserControl_MouseLeave(object sender, MouseEventArgs e)
+        {
+            button = false;
         }
     }
 }

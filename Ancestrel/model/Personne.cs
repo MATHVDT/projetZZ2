@@ -30,8 +30,8 @@ namespace Model
     {
         private string? _nom;
         private List<string> _listePrenom = new List<string>();
-        private DateOnly? _dateNaissance;
-        private DateOnly? _dateDeces;
+        private DateTime? _dateNaissance;
+        private DateTime? _dateDeces;
         private Ville? _lieuNaissance;
         private string? _nationalite;
 
@@ -134,12 +134,12 @@ namespace Model
          * @brief Date de naissance de la personne.
          * @warning Peut être null.
          */
-        public DateOnly? DateNaissance
+        public DateTime? DateNaissance
         {
             get => _dateNaissance;
             set
             {
-                if (value is DateOnly || value is null)
+                if (value is DateTime || value is null)
                 {
                     _dateNaissance = value;
                     Inconnu = false;
@@ -152,12 +152,12 @@ namespace Model
          * @brief Date de deces de la personne.
          * @warning Peut être null.
          */
-        public DateOnly? DateDeces
+        public DateTime? DateDeces
         {
             get => _dateDeces;
             set
             {
-                if (value is DateOnly || value is null)
+                if (value is DateTime || value is null)
                 {
                     _dateDeces = value;
                 }
@@ -228,7 +228,7 @@ namespace Model
          */
         public Personne(int num, int? id = null, int? idPere = null, int? idMere = null,
             string? nom = null, string? prenoms = null,
-            DateOnly? dateNaissance = null, DateOnly? dateDeces = null,
+            DateTime? dateNaissance = null, DateTime? dateDeces = null,
             Ville? lieuNaissance = null, string? nationalite = null)
         {
             Id = id;

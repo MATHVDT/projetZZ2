@@ -42,7 +42,7 @@ namespace Model
          */
         public Homme(int num, int? id = null, int? idPere = null, int? idMere = null,
                      string? nom = null, string? prenoms = null,
-                     DateOnly? dateNaissance = null, DateOnly? dateDeces = null,
+                     DateTime? dateNaissance = null, DateTime? dateDeces = null,
                      Ville? lieuNaissance = null, string? nationalite = null) :
                 base(2 * num, id, idPere, idMere, nom, prenoms, dateNaissance, dateDeces, lieuNaissance, nationalite)
         {
