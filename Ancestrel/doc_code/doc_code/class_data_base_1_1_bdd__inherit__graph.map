@@ -1,0 +1,5 @@
+<map id="DataBase.Bdd" name="DataBase.Bdd">
+<area shape="rect" id="node1" title=" " alt="" coords="120,233,327,545"/>
+<area shape="rect" id="node2" href="$interface_model_1_1_bdd_loader.html" title=" " alt="" coords="5,5,212,185"/>
+<area shape="rect" id="node3" href="$interface_model_1_1_bdd_saver.html" title=" " alt="" coords="236,5,443,185"/>
+</map>

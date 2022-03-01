@@ -1,0 +1,4 @@
+<map id="Model.Personne.AjouterPrenoms" name="Model.Personne.AjouterPrenoms">
+<area shape="rect" id="node1" title="Ajouter un/des prenom(s) à la personne." alt="" coords="5,5,219,32"/>
+<area shape="rect" id="node2" href="$class_model_1_1_personne.html#afdeda92c40ca611a9c32ae9f53916bb1" title="Check si la personne est inconnu." alt="" coords="267,5,457,32"/>
+</map>

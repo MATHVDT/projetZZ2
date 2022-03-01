@@ -1,0 +1,4 @@
+<map id="Model.Femme.SupprimerNomJeuneFille" name="Model.Femme.SupprimerNomJeuneFille">
+<area shape="rect" id="node1" title="Supprime le nom de jeune fille de la personne." alt="" coords="5,5,200,47"/>
+<area shape="rect" id="node2" href="$class_model_1_1_personne.html#afdeda92c40ca611a9c32ae9f53916bb1" title="Check si la personne est inconnu." alt="" coords="248,13,439,39"/>
+</map>
