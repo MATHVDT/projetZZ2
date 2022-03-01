@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:Vue"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Créer un arbre">
+      Title="Créer un arbre"
+      Style="{DynamicResource Backgroud}">
 
     <Grid Margin="10">
         <Grid.RowDefinitions>
@@ -21,7 +22,7 @@
             <StackPanel x:Name="SP_Prenoms" Margin="10" Orientation="Horizontal">
                 <Label Content="Prenoms :" FontFamily="Bahnschrift Light Condensed" FontSize="16" FontWeight="Normal" FontStyle="Normal"/>
                 <TextBox Margin="5" Width="200" x:Name="Prenom_TextBox"/>
-                <Button x:Name="ButtonPrenoms" HorizontalAlignment="Left" Content="+" Click="ButtonPrenoms_Click"/>
+                <Button x:Name="ButtonPrenoms" HorizontalAlignment="Left" Content="+" Width="20" Height="30" Click="ButtonPrenoms_Click" Style="{DynamicResource RoundCorner}"/>
             </StackPanel>
             <StackPanel Margin="10" Orientation="Horizontal">
                 <Label Content="Sexe :" FontFamily="Bahnschrift Light Condensed" FontSize="16" FontWeight="Normal"/>

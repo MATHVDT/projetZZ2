@@ -8,11 +8,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Femme.png" />
+    <None Remove="Homme.png" />
     <None Remove="logo.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Model\Model.csproj" />
+    <ProjectReference Include="..\model\Model.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Femme.png" />
+    <Resource Include="Homme.png" />
+    <Resource Include="logo.png" />
   </ItemGroup>
 
 </Project>

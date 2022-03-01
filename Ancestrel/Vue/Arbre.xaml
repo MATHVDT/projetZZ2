@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:Vue"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Arbre">
+      Title="Arbre"
+      Style="{DynamicResource Backgroud}">
 
     <ScrollViewer HorizontalScrollBarVisibility="Visible">
         <Grid ScrollViewer.CanContentScroll="True" x:Name="GridArbre" />

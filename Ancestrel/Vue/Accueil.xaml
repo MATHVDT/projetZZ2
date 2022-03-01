@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:Vue"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Accueil">
+      Title="Accueil"
+      Style="{DynamicResource Backgroud}">
 
 
     <Grid x:Name="G1">

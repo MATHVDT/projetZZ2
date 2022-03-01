@@ -204,7 +204,7 @@ namespace ModelTests
          * @fn public void AddPrenomTest()
          * @brief [TestMethod] Ajoute prenoms.
          * @details
-         * Test l'ajout de prénom avec la methode *AddPrenoms*,
+         * Test l'ajout de prénom avec la methode *AjouterPrenoms*,
          * avec string ou string[]. Test pas d'ajout de prenoms en double.
          */
         [TestMethod]
@@ -216,37 +216,37 @@ namespace ModelTests
             Assert.IsTrue(p.Inconnu);
 
             // Ajoute un prenom
-            p.AddPrenoms("   Charles   ");
+            p.AjouterPrenoms("   Charles   ");
             Assert.AreEqual(p.Prenoms, "Charles");
             Assert.IsFalse(p.Inconnu);
 
-            p.AddPrenoms("Xavier    ");
+            p.AjouterPrenoms("Xavier    ");
             Assert.AreEqual(p.Prenoms, "Charles Xavier");
             Assert.IsFalse(p.Inconnu);
 
-            p.AddPrenoms("  Xavier  ");
+            p.AjouterPrenoms("  Xavier  ");
             Assert.AreEqual(p.Prenoms, "Charles Xavier");
             Assert.IsFalse(p.Inconnu);
 
             // Reset les prénoms
             string[] vide = new string[] { };
             p.Prenoms = "";
-            p.AddPrenoms(vide);
+            p.AjouterPrenoms(vide);
             Assert.IsNull(p.Prenoms);
             Assert.IsTrue(p.Inconnu);
 
             // Ajoute prénoms avec string[]
             string[] liste1 = new string[] { "   Robert  ", "John " };
-            p.AddPrenoms(liste1);
+            p.AjouterPrenoms(liste1);
             Assert.AreEqual(p.Prenoms, "Robert John");
             Assert.IsFalse(p.Inconnu);
 
             string[] liste2 = new string[] { "  Junior ", "Robert " };
-            p.AddPrenoms(liste2);
+            p.AjouterPrenoms(liste2);
             Assert.AreEqual(p.Prenoms, "Robert John Junior");
             Assert.IsFalse(p.Inconnu);
 
-            p.AddPrenoms(vide);
+            p.AjouterPrenoms(vide);
             Assert.AreEqual(p.Prenoms, "Robert John Junior");
             Assert.IsFalse(p.Inconnu);
         }
