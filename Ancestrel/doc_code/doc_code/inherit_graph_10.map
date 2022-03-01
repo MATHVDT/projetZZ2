@@ -1,5 +1,0 @@
-<map id="Graphe hiérarchique des classes" name="Graphe hiérarchique des classes">
-<area shape="rect" id="node1" href="$class_model_1_1_personne.html" title="classe abstraite d&#39;une personne" alt="" coords="5,31,121,57"/>
-<area shape="rect" id="node2" href="$class_model_1_1_femme.html" title="Classe pour une femme." alt="" coords="170,5,275,32"/>
-<area shape="rect" id="node3" href="$class_model_1_1_homme.html" title="Classe pour une homme." alt="" coords="169,56,276,83"/>
-</map>
