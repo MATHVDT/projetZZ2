@@ -68,10 +68,12 @@ namespace DataBase
             catch (SqlException e)
             {
                 Console.WriteLine("Error SQL Generated. Details: " + e.ToString());
+                throw;
             }
             catch (Exception e)
             {
                 Console.WriteLine("Error Generated. Details: " + e.ToString());
+                throw;
             }
             finally
             {
@@ -125,10 +127,12 @@ namespace DataBase
             catch (SqlException e)
             {
                 Console.WriteLine("Error SQL Generated. Details: " + e.ToString());
+                throw;
             }
             catch (Exception e)
             {
                 Console.WriteLine("Error Generated. Details: " + e.ToString());
+                throw;
             }
             finally
             {
@@ -206,10 +210,12 @@ namespace DataBase
             catch (SqlException e)
             {
                 Console.WriteLine("Error SQL Generated. Details: " + e.ToString());
+                throw;
             }
             catch (Exception e)
             {
                 Console.WriteLine("Error Generated. Details: " + e.ToString());
+                throw;
             }
             finally
             {
@@ -255,10 +261,12 @@ namespace DataBase
             catch (SqlException e)
             {
                 Console.WriteLine("Error SQL Generated. Details: " + e.ToString());
+                throw;
             }
             catch (Exception e)
             {
                 Console.WriteLine("Error Generated. Details: " + e.ToString());
+                throw;
             }
             finally
             {
