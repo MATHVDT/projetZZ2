@@ -30,8 +30,8 @@ namespace Model
     {
         private string? _nom;
         private List<string> _listePrenom = new List<string>();
-        private DateOnly? _dateNaissance;
-        private DateOnly? _dateDeces;
+        private DateTime? _dateNaissance;
+        private DateTime? _dateDeces;
         private Ville? _lieuNaissance;
         private string? _nationalite;
         private string? _decription;
@@ -142,12 +142,12 @@ namespace Model
          * @brief Date de naissance de la personne.
          * @warning Peut être null.
          */
-        public DateOnly? DateNaissance
+        public DateTime? DateNaissance
         {
             get => _dateNaissance;
             set
             {
-                if (value is DateOnly || value is null)
+                if (value is DateTime || value is null)
                 {
                     _dateNaissance = value;
                     Inconnu = false;
@@ -160,12 +160,12 @@ namespace Model
          * @brief Date de deces de la personne.
          * @warning Peut être null.
          */
-        public DateOnly? DateDeces
+        public DateTime? DateDeces
         {
             get => _dateDeces;
             set
             {
-                if (value is DateOnly || value is null)
+                if (value is DateTime || value is null)
                 {
                     _dateDeces = value;
                 }
@@ -252,9 +252,8 @@ namespace Model
          */
         public Personne(int? id = null,
             string? nom = null, string? prenoms = null,
-            DateOnly? dateNaissance = null, DateOnly? dateDeces = null,
-            Ville? lieuNaissance = null, string? nationalite = null,
-            string? description = null)
+            DateTime? dateNaissance = null, DateTime? dateDeces = null,
+            Ville? lieuNaissance = null, string? nationalite = null)
         {
             Numero = 0; // Défini en utilisant LienParente, par defaut 0 = pas de position
             Id = id;
@@ -286,14 +285,14 @@ namespace Model
         public virtual void LierEnfant(int numEnfant) { }
 
         /**
-        * @fn public void AddPrenoms(string[] inListeValue)
+        * @fn public void AjouterPrenoms(string[] inListeValue)
         * @param string[] inListeValue *Liste de prenoms*
         * @brief Ajouter un/des prenom(s) à la personne.
         * @details
         * Ajoute les prenoms passés en paramètre à la personne.
         * Regarde si le nom n'est pas déjà ajouté dans la liste des prenoms.
         */
-        public void AddPrenoms(string[] inListeValue)
+        public void AjouterPrenoms(string[] inListeValue)
         {
             if (inListeValue != null)
             {
@@ -311,16 +310,16 @@ namespace Model
         }
 
         /**
-        * @overload public void AddPrenoms(string value)
+        * @overload public void AjouterPrenoms(string value)
         * @param string value *Chaine de caractères de prenoms*
         */
-        public void AddPrenoms(string value)
+        public void AjouterPrenoms(string value)
         {
             if (value != null)
             {
 
                 string[] listeValues = value.Split(" ", StringSplitOptions.RemoveEmptyEntries);
-                this.AddPrenoms(listeValues);
+                this.AjouterPrenoms(listeValues);
             }
         }
 

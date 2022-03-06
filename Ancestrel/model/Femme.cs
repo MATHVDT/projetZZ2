@@ -60,7 +60,7 @@ namespace Model
          */
         public Femme(int? id = null,
                      string? nom = null, string? prenoms = null,
-                     DateOnly? dateNaissance = null, DateOnly? dateDeces = null,
+                     DateTime? dateNaissance = null, DateTime? dateDeces = null,
                      Ville? lieuNaissance = null, string? nationalite = null,
                      string? nomJeuneFille = null, string? description = null) :
                 base(id: id,nom: nom, prenoms, dateNaissance, dateDeces, lieuNaissance, nationalite, description)

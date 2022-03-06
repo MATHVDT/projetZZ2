@@ -28,28 +28,6 @@ namespace Model
     {
 
         /**
-         * @var Id
-         * @brief Id de l'arbre dans la BDD.
-         */
-        public string? Id { get; set; }
-
-        /**
-        * @var Nom
-        * @brief Nom de l'arbre
-        * @details
-        * Nom de l'arbre
-        */
-        public string Nom { get; set; }
-
-        /**
-         * @var Description
-         * @brief Description de l'arbre
-         * @details
-         * Description de l'arbre
-         */
-        public string Description { get; set; }
-
-        /**
         * @var Personnes
         * @brief Dictionnaire des personnes
         * @details
@@ -67,11 +45,8 @@ namespace Model
          * @details
          * Construit la base d'un arbre.
          */
-        public Arbre(int? id, string nom, string desc, Personne cujus)
+        public Arbre(Personne cujus)
         {
-            Id = Id;
-            Nom = nom;
-            Description = desc;
             Personnes = new Dictionary<int, Personne>();
             cujus.Numero = 1;
             Personnes.Add(cujus.Numero, cujus);
@@ -115,7 +90,7 @@ namespace Model
         * Ajoute une personne de type Homme avec le Numero calculé en fonction de celui de l'enfant
         */
         public void AjouterPere(int idEnfant, string? nom = null, string? prenoms = null,
-            DateOnly? dateNaissance = null, DateOnly? dateDeces = null,
+            DateTime? dateNaissance = null, DateTime? dateDeces = null,
             Ville? lieuNaissance = null, string? nationalite = null)
         {
             Homme pere = new Homme(id:idEnfant, nom:nom,prenoms: prenoms, dateNaissance:dateNaissance, dateDeces:dateDeces, lieuNaissance:lieuNaissance, nationalite:nationalite);
@@ -152,7 +127,7 @@ namespace Model
         * Ajoute une personne de type Femme avec le Numero calculé en fonction de celui de l'enfant
         */
         public void AjouterMere(int idEnfant, string? nom = null, string? prenoms = null,
-            DateOnly? dateNaissance = null, DateOnly? dateDeces = null,
+            DateTime? dateNaissance = null, DateTime? dateDeces = null,
             Ville? lieuNaissance = null, string? nationalite = null)
         {
             Femme mere = new Femme( null, nom, prenoms, dateNaissance, dateDeces, lieuNaissance, nationalite);
@@ -190,6 +165,11 @@ namespace Model
             {
                 throw new ArgumentException("La personne n'est pas présente dans l'arbre (id : " + idPersonne + ")");
             }
+        }
+
+        public int GetNumeroMax()
+        {
+            return Personnes.Keys.Max();
         }
 
     }

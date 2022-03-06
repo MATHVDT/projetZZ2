@@ -39,7 +39,7 @@ namespace Model
          */
         public Homme(int? id = null,
                      string? nom = null, string? prenoms = null,
-                     DateOnly? dateNaissance = null, DateOnly? dateDeces = null,
+                     DateTime? dateNaissance = null, DateTime? dateDeces = null,
                      Ville? lieuNaissance = null, string? nationalite = null,
                      string? description = null) :
                 base(id: id, nom: nom, prenoms: prenoms, dateNaissance: dateNaissance, 

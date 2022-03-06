@@ -1,6 +1,7 @@
 ﻿using Model;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,21 +22,23 @@ namespace Vue
     /// </summary>
     public partial class CreerPersonne : Page
     {
+        private Manager manager= Manager.GetInstance();
         private int Numero;
         private int Index = 0;
         private bool EstNouvelArbre = true;
+        private Personne personne;
+        private Personne enfant;
 
         public CreerPersonne()
         {
             InitializeComponent();
         }
 
-        public CreerPersonne(int numero, int index)
+        public CreerPersonne(Personne enfant)
         {
             InitializeComponent();
             EstNouvelArbre = false;
-            Numero = numero;
-            Index = index;
+            this.enfant = enfant;
             InitialiserVue();
         }
 
@@ -74,83 +77,54 @@ namespace Vue
             }
         }
 
-        private void ButtonAjout_Click(object sender, RoutedEventArgs e)
+        private void ButtonAjout_Click(object sender, RoutedEventArgs e) 
         {
-            Boolean test = true;
-
-            if (string.IsNullOrWhiteSpace(Nom_TextBox.Text))
+            personne = Sexe_ComboBox.SelectedIndex == 0 ? new Homme(): new Femme(); 
+            if(personne is Homme)
             {
-                Nom_TextBox.Background = new SolidColorBrush(Colors.Red);
-                test = false;
+                Debug.WriteLine("homme");
             }
             else
             {
-                Nom_TextBox.Background = new SolidColorBrush(Colors.White);
+                Debug.WriteLine("Femme");
             }
+            personne.Nom=!String.IsNullOrWhiteSpace(Nom_TextBox.Text) ? Nom_TextBox.Text : null;
             foreach (Object o in SP_Prenoms.Children)
             {
                 if (o.GetType().Equals(typeof(TextBox)))
                 {
-                    if (string.IsNullOrWhiteSpace(((TextBox)o).Text))
+                    if (!string.IsNullOrWhiteSpace(((TextBox)o).Text))
                     {
-                        ((TextBox)o).Background = new SolidColorBrush(Colors.Red);
-                        test = false;
-                    }
-                    else
-                    {
-                        ((TextBox)o).Background = new SolidColorBrush(Colors.White);
+                        personne.AjouterPrenoms(((TextBox)o).Text);
                     }
                 }
             }
-            if (test)
+            try
             {
-                try
+                if (!EstNouvelArbre)
                 {
-                    if (!EstNouvelArbre)
+                    if(personne is Homme)
                     {
-                        if (Sexe_ComboBox.SelectedIndex == 0)
-                        {
-                            //ajouterPere
-                            throw new NotImplementedException();
-                        }
-                        else
-                        {
-                            if (Sexe_ComboBox.SelectedIndex == 1)
-                            {
-                                //AjouterMere
-                                throw new NotImplementedException();
-                            }
-                            else
-                            {
-                                test = false;
-                            }
-                        }
+                        manager.AjouterPere(enfant, (Homme)personne);
                     }
-                    else
+                    else if (personne is Femme)
                     {
-                        //CreerArbre
-                        throw new NotImplementedException();
+                        manager.AjouterMere(enfant, (Femme)personne);
                     }
-                }
-                catch (Exception exc)
-                {
-                    test = false;
-                    MessageBox.Show(exc.Message);
-                }
-            }
-            if (test)
-            {
-                if (EstNouvelArbre)
-                {
-                    //nouvellePage
-                    throw new NotImplementedException();
+                    
                 }
                 else
                 {
-                    //Page Arbre
-                    throw new NotImplementedException();
+                    manager.CreerArbre(personne);
+                    Debug.WriteLine(personne.Numero);
+                    this.NavigationService.Navigate(new Arbre());
                 }
             }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
+
         }
 
         private void ButtonPrenoms_Click(object sender, RoutedEventArgs e)

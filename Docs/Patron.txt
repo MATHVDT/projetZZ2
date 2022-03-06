@@ -1,0 +1,4 @@
+Singleton: Manager
+Facade: Manager
+factory
+Strategie : Iloader et ses fils

@@ -6,26 +6,27 @@
       xmlns:local="clr-namespace:Vue"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Créer un arbre">
+      Title="Créer un arbre"
+      Style="{DynamicResource Backgroud}">
 
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.80*"/>
             <RowDefinition Height="0.20*"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Orientation="Vertical">
-            <StackPanel Margin="5" Orientation="Horizontal">
-                <Label Content="Nom d'Usage :"/>
+        <StackPanel Margin="30" Grid.Row="0" Orientation="Vertical">
+            <StackPanel Margin="10" Orientation="Horizontal">
+                <Label Content="Nom d'Usage :" FontFamily="Bahnschrift Light Condensed" FontSize="16"/>
                 <TextBox Margin="5" Width="200" x:Name="Nom_TextBox"/>
             </StackPanel>
-            <StackPanel x:Name="SP_Prenoms" Margin="5" Orientation="Horizontal">
-                <Label Content="Prenoms :"/>
+            <StackPanel x:Name="SP_Prenoms" Margin="10" Orientation="Horizontal">
+                <Label Content="Prenoms :" FontFamily="Bahnschrift Light Condensed" FontSize="16" FontWeight="Normal" FontStyle="Normal"/>
                 <TextBox Margin="5" Width="200" x:Name="Prenom_TextBox"/>
-                <Button x:Name="ButtonPrenoms" HorizontalAlignment="Left" Content="+" Click="ButtonPrenoms_Click"/>
+                <Button x:Name="ButtonPrenoms" HorizontalAlignment="Left" Content="+" Width="20" Height="30" Click="ButtonPrenoms_Click" Style="{DynamicResource RoundCorner}"/>
             </StackPanel>
-            <StackPanel Margin="5" Orientation="Horizontal">
-                <Label Content="Sexe :"/>
-                <ComboBox x:Name="Sexe_ComboBox" SelectedIndex="0">
+            <StackPanel Margin="10" Orientation="Horizontal">
+                <Label Content="Sexe :" FontFamily="Bahnschrift Light Condensed" FontSize="16" FontWeight="Normal"/>
+                <ComboBox x:Name="Sexe_ComboBox" Margin="10,0, 0, 5" SelectedIndex="0">
                     <ComboBoxItem Name="Masculin" Content="Masculin"/>
                     <ComboBoxItem Name="Feminin" Content="Feminin"/>
                 </ComboBox>

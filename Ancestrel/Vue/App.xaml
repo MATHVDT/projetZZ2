@@ -4,6 +4,19 @@
              xmlns:local="clr-namespace:Vue"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+        <Style x:Key="Backgroud" TargetType="Page">
+            <Setter Property="Background" Value="#FF033249"/>
+        </Style>
+        <Style x:Key="FontStyle" TargetType="Label">
+            <Setter Property="FontFamily" Value="Bahnschrift Light Condensed"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style x:Key="TBStyle" TargetType="TextBox">
+            <Setter Property="FontSize" Value="17"/>
+            <Setter Property="FontFamily" Value="Bahnschrift Light Condensed"/>
+        </Style>
         <Style x:Key="RoundCorner" TargetType="{x:Type Button}">
             <Setter Property="Template">
                 <Setter.Value>
