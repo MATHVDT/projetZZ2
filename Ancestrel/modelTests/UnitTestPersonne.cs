@@ -31,11 +31,11 @@ namespace ModelTests
         public void PersonneInconnueTest()
         {
             // Test Homme Inconnu
-            Homme h = new Homme() ;
+            Homme h = new Homme();
             h.LierEnfant(1);
             Assert.IsNotNull(h); // Bonne création de l'objet
             // Vérification des propiétés à null
-            Assert.AreEqual(h.Numero,2);
+            Assert.AreEqual(h.Numero, 2);
             Assert.IsNull(h.Nom);
             Assert.IsNull(h.Prenoms);
             Assert.IsNull(h.DateNaissance);
@@ -52,7 +52,7 @@ namespace ModelTests
             f.LierEnfant(1);
             Assert.IsNotNull(f); // Bonne création de l'objet
             // Vérification des propiétés à null
-            Assert.AreEqual(f.Numero, 2+1);
+            Assert.AreEqual(f.Numero, 2 + 1);
             Assert.IsNull(f.Nom);
             Assert.IsNull(f.Prenoms);
             Assert.IsNull(f.DateNaissance);
@@ -78,23 +78,23 @@ namespace ModelTests
             string nom = "Dupond";
             string prenoms = "Jean Toto";
             string description = "Description de jean toto dupond";
-            DateOnly dateNaissance = new DateOnly(2000,02,16);
-            DateOnly dateDeces = new DateOnly(2048,02,28);
+            DateTime dateNaissance = new DateTime(2000, 02, 16);
+            DateTime dateDeces = new DateTime(2048, 02, 28);
             Ville villeNaissance = new Ville("Dijon");
             string nationalite = "fr";
 
 
-            Homme h = new Homme(id: null, nom:nom, prenoms:prenoms, 
-                dateNaissance:dateNaissance,dateDeces:dateDeces,lieuNaissance:villeNaissance,
-                nationalite:nationalite, description:description); ;
+            Homme h = new Homme(id: null, nom: nom, prenoms: prenoms,
+                dateNaissance: dateNaissance, dateDeces: dateDeces, lieuNaissance: villeNaissance,
+                nationalite: nationalite, description: description); ;
             h.LierEnfant(i);
             Assert.IsNotNull(h);
 
-            Assert.AreEqual((int)2*i, h.Numero);
-            Assert.AreEqual( nom, h.Nom);    
+            Assert.AreEqual((int)2 * i, h.Numero);
+            Assert.AreEqual(nom, h.Nom);
             Assert.AreEqual(prenoms, h.Prenoms);
             Assert.AreEqual(dateNaissance, h.DateNaissance);
-            Assert.AreEqual(dateDeces, h.DateDeces);    
+            Assert.AreEqual(dateDeces, h.DateDeces);
             Assert.AreEqual(villeNaissance, h.LieuNaissance);
             Assert.AreEqual(nationalite, h.Nationalite);
             Assert.AreEqual(description, h.Description);
@@ -112,23 +112,23 @@ namespace ModelTests
             string nom = "Wayne";
             string prenoms = "Diana";
             string description = "j'avais regardé Batman VS Superman quand j'ai codé d'ou les nom";
-            DateOnly dateNaissance = new DateOnly(2000, 02, 16);
-            DateOnly dateDeces = new DateOnly(2048, 02, 28);
+            DateTime dateNaissance = new DateTime(2000, 02, 16);
+            DateTime dateDeces = new DateTime(2048, 02, 28);
             Ville villeNaissance = new Ville("Dijon");
             string nationalite = "fr";
 
             string nomJeuneFille = "Price";
 
-            Femme f = new Femme(id:null, nom:nom, prenoms:prenoms, 
-                dateNaissance:dateNaissance, 
-                dateDeces:dateDeces, lieuNaissance:villeNaissance, 
-                nationalite:nationalite,
+            Femme f = new Femme(id: null, nom: nom, prenoms: prenoms,
+                dateNaissance: dateNaissance,
+                dateDeces: dateDeces, lieuNaissance: villeNaissance,
+                nationalite: nationalite,
                 nomJeuneFille: nomJeuneFille
-                , description:description);
+                , description: description);
             f.LierEnfant(i);
 
             Assert.IsNotNull(f);
-            Assert.AreEqual((int)2*i+1, f.Numero);
+            Assert.AreEqual((int)2 * i + 1, f.Numero);
             Assert.AreEqual(nom, f.Nom);
             Assert.AreEqual(prenoms, f.Prenoms);
             Assert.AreEqual(dateNaissance, f.DateNaissance);

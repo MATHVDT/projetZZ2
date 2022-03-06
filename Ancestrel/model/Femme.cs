@@ -63,7 +63,8 @@ namespace Model
                      DateTime? dateNaissance = null, DateTime? dateDeces = null,
                      Ville? lieuNaissance = null, string? nationalite = null,
                      string? nomJeuneFille = null, string? description = null) :
-                base(id: id,nom: nom, prenoms, dateNaissance, dateDeces, lieuNaissance, nationalite, description)
+                base(id: id, nom: nom, prenoms: prenoms, dateNaissance: dateNaissance, dateDeces: dateDeces,
+                    lieuNaissance: lieuNaissance, nationalite: nationalite, description: description)
         {
             NomJeuneFille = nomJeuneFille;
         }
@@ -95,7 +96,7 @@ namespace Model
         }
 
 
-        
+
         public override void LierEnfant(int numEnfant)
         {
             this.Numero = 2 * numEnfant + 1;

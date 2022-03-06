@@ -301,8 +301,8 @@ namespace DataBase
                 string? nomUsageBdd = (string?)(reader[_NomUsage] is System.DBNull ? null : reader[_NomUsage]);
                 string? nomBdd = (string?)(reader[_Nom] is System.DBNull ? null : reader[_Nom]);
 
-                DateOnly? dateNaissanceBdd = (DateOnly?)(reader[_DateNaissance] is System.DBNull ? null : DateOnly.FromDateTime((DateTime)reader[_DateNaissance]));
-                DateOnly? dateDecesBdd = (DateOnly?)(reader[_DateDeces] is System.DBNull ? null : DateOnly.FromDateTime((DateTime)reader[_DateDeces]));
+                DateTime? dateNaissanceBdd = (DateTime?)(reader[_DateNaissance] is System.DBNull ? null : (DateTime)reader[_DateNaissance]);
+                DateTime? dateDecesBdd = (DateTime?)(reader[_DateDeces] is System.DBNull ? null : (DateTime)reader[_DateDeces]);
 
                 string? description = (string?)(reader[_Description] is System.DBNull ? null : reader[_Description]);
 

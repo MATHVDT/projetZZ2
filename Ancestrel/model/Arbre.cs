@@ -37,9 +37,6 @@ namespace Model
 
         /**
          * @fn public Arbre 
-         * @param int? id = null
-         * @param string nom
-         * @param string desc
          * @param Personne cujus *Personne à la base de l'arbre*
          * @brief Constructeur de la classe Arbre.
          * @details
@@ -55,10 +52,11 @@ namespace Model
 
         /**
          * @overload public Arbre(string nom, string desc, Personne cujus)
-         * @brief Constructeur d'un nouvel arbre. *sans id*
+         * @brief Constructeur d'un nouvel arbre. 
+         * @warning Nom et desc ne servent à rien
          */
         public Arbre(string nom, string desc, Personne cujus)
-            : this(null, nom, desc, cujus) { }
+            : this( cujus) { }
 
 
         /**

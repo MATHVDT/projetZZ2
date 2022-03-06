@@ -41,17 +41,6 @@ namespace Model
          */
         public Personne GetPersonneById(int idPersonne);
 
-        /**
-         * @fn public string? GetPrenomById
-         * @brief Récupère les prénoms d'une personne depuis le *SPC* avec l'id de la personne.
-         * 
-         * @param int idPersonne
-         * 
-         * @return string? - *Prénoms de la personne*
-         * 
-         * @warning L'idPersonne ne doit pas être null.
-         */
-        public string? GetPrenomByIdPersonne(int idPersonne); // a degager
 
         /**
          * @fn public FichierImage GetFichierImageById

@@ -64,10 +64,6 @@ Image img2 = (Image)imgTest.Clone();*/
 
 Ville ville = new Ville("Blancherive", 4.444, 48.42);
 
-//Personne personne = new Homme(num: 1,
-//nationalite: "française Chilienne", lieuNaissance: ville,
-//dateNaissance: DateOnly.Parse("16/02/2000"), dateDeces: DateOnly.Parse("04/12/2048"));
-
 
 string chaineConnexion = $@"Data Source=(LocalDB)\MSSQLLocalDB;Integrated Security=True";
 //string chaineConnexion = $@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\mavilledie4\Source\Repos\genealogie\Ancestrel\DataBase\SampleDatabase.mdf;Integrated Security=True";
@@ -75,8 +71,18 @@ string chaineConnexion = $@"Data Source=(LocalDB)\MSSQLLocalDB;Integrated Securi
 Bdd bdd = new Bdd(chaineConnexion);
 
 
-//bdd.InsererPersonne(personne);
+#region Inserer personne
 
+//Personne personne = new Homme(nationalite: "française Chilienne", lieuNaissance: ville,
+//dateNaissance: DateTime.Parse("16/02/2000"), dateDeces: DateTime.Parse("04/12/2048"));
+//Console.WriteLine(personne.ToString());
+//personne.Numero = 1;
+
+//bdd.InsererPersonne(personne);
+//Console.WriteLine("personne insérée !");
+//Console.WriteLine(bdd.GetPersonneById((int)personne.Id).ToString());
+
+#endregion
 
 //Console.WriteLine(bdd.GetPersonneById((int)personne.Id)?.ToString() ?? "personne pas trouvée");
 //Console.WriteLine(bdd.GetNationaliteByIdPays(5)?.ToString() ?? "Pays pas trouvé");
@@ -94,14 +100,7 @@ Bdd bdd = new Bdd(chaineConnexion);
 //f.SaveTest();
 
 
-//try
-//{
-//    bdd.GetNationaliteByIdPays(42);
-//}
-//catch (ArgumentNullException e)
-//{
-//    Console.WriteLine(e.Message);
-//}
+
 
 /**  Test arbre     **/
 #region Test Arbre

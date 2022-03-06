@@ -253,7 +253,7 @@ namespace Model
         public Personne(int? id = null,
             string? nom = null, string? prenoms = null,
             DateTime? dateNaissance = null, DateTime? dateDeces = null,
-            Ville? lieuNaissance = null, string? nationalite = null)
+            Ville? lieuNaissance = null, string? nationalite = null, string? description = null)
         {
             Numero = 0; // Défini en utilisant LienParente, par defaut 0 = pas de position
             Id = id;
