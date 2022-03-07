@@ -61,7 +61,6 @@ namespace Vue
             Sexe_ComboBox.SelectedIndex = Index;
             if (!EstNouvelArbre)
             {
-                Sexe_ComboBox.IsEnabled = false;
                 if (Index == 1) 
                 { 
                     ButtonAjout.Content = "Ajouter Mère";
@@ -111,7 +110,7 @@ namespace Vue
                     {
                         manager.AjouterMere(enfant, (Femme)personne);
                     }
-                    
+                    this.NavigationService.Navigate(new Arbre());
                 }
                 else
                 {

@@ -61,23 +61,6 @@ namespace Vue
             }
 
 
-            for (int c = 0; c <= NombreColonne; c++)
-            {
-                for (int j = 0; j <= HauteurArbre; j++)
-                {
-
-                    Border border = new Border
-                    {
-                        BorderBrush = Brushes.Black,
-                        BorderThickness = new Thickness(2)
-                    };
-
-                    GridArbre.Children.Add(border);
-                    Grid.SetRow(border, j);
-                    Grid.SetColumn(border, c);
-                }
-            }
-
             Debug.WriteLine($"Nmax:{Nmax}, Hauteur:{HauteurArbre}, Colonne:{NombreColonne}");
 
             for (int i = 1; i <= Math.Pow(2, HauteurArbre + 1) - 1; i++)
@@ -101,7 +84,8 @@ namespace Vue
                 {
                     int numero = i;
                     int numeroFils = (int)(i / 2);
-                    if (manager.GetPersonne(numeroFils) != null)
+                    Personne enfant = manager.GetPersonne(numeroFils);
+                    if (enfant != null)
                     {
                         o = new Button()
                         {
@@ -114,7 +98,7 @@ namespace Vue
                         };
                         ((Button)o).Click += (sender, args) =>
                         {
-                            this.NavigationService.Navigate(new CreerPersonne(p));
+                            this.NavigationService.Navigate(new CreerPersonne(enfant));
                         };
                         ((Button)o).SetResourceReference(Control.StyleProperty, "RoundCorner");
 

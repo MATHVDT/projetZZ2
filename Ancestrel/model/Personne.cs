@@ -266,7 +266,6 @@ namespace Model
             DateDeces = dateDeces;
             LieuNaissance = lieuNaissance;
             Nationalite = nationalite;
-
             Description = description;
 
 

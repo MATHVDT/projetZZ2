@@ -23,8 +23,8 @@
                         <TextBox x:Name="Nom" Width="150" Margin="5, 0" Visibility="Collapsed" Style="{DynamicResource TBStyle}"/>
                     </StackPanel>
                     <StackPanel Margin="50, 0" Name="SP_Nom_JF" Visibility="Hidden" Orientation="Horizontal">
-                        <Label Content="Nom de jeune fille :"/>
-                        <Label Name="Label_Nom_JF" Content="Inconnu"/>
+                        <Label Content="Nom de jeune fille :" Style="{DynamicResource FontStyle}"/>
+                        <Label Name="Label_Nom_JF" Content="Inconnu" Style="{DynamicResource FontStyle}"/>
                         <TextBox x:Name="NomJF" Width="150" Margin="5, 0" Visibility="Collapsed" Style="{DynamicResource TBStyle}"/>
                     </StackPanel>
                 </StackPanel>
@@ -52,7 +52,9 @@
         </DockPanel>
         <ScrollViewer Margin="10" BorderBrush="Black" BorderThickness="10" Grid.Row="1">
             <WrapPanel x:Name="WPImages" VerticalAlignment="Top" Margin="10">
-                <Button x:Name="BTImages" Content="+" Margin="10, 5" Click="BTImages_Click" Height="70" Width="70"/>
+                <Image Source="/Homme.png" Height="70" Width="70" Margin="5, 5"/>
+                <Image Source="/logo.png" Height="70" Width="70" Margin="5, 5" />
+                <Button x:Name="BTImages" Content="+" Margin="5, 5" Click="BTImages_Click" Height="70" Width="70"/>
             </WrapPanel>
         </ScrollViewer>
     </Grid>

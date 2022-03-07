@@ -20,9 +20,9 @@
                 <Label x:Name="Nom" Margin="5, 0, 20, 0" Content="Inconnu" FontFamily="Bahnschrift Light Condensed" FontSize="20" FontWeight="Normal"/>
                 <Label x:Name="Prenom" Margin="5, 0, 20, 0" Content="Inconnu" FontFamily="Bahnschrift Light Condensed" FontSize="20"/>
                 <StackPanel Margin="5, 20, 0, 0" x:Name="Date" Orientation="Horizontal">
-                    <Label x:Name="Naissance" Content="Inconnu" FontFamily="Bahnschrift Light Condensed" FontSize="20"/>
+                    <Label x:Name="Naissance" Content="Inconnue" FontFamily="Bahnschrift Light Condensed" FontSize="20"/>
                     <Label x:Name="Separateur" Content="-" FontFamily="Bahnschrift Light Condensed" FontSize="20"/>
-                    <Label x:Name="Deces" Content="Inconnu" FontFamily="Bahnschrift Light Condensed" FontSize="20"/>
+                    <Label x:Name="Deces" Content="Inconnue" FontFamily="Bahnschrift Light Condensed" FontSize="20"/>
                 </StackPanel>
             </StackPanel>
         </DockPanel>

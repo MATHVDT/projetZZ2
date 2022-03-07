@@ -35,7 +35,7 @@ namespace Vue
         {
             ModifierVisibiliteLabel(Visibility.Visible);
             ModifierVisibiliteTextBox(Visibility.Collapsed);
-            Label_Nom.Content = personne.Nom != null ? personne.Nom : _INCONNU;
+            Label_Nom.Content = !string.IsNullOrWhiteSpace(personne.Nom) ? personne.Nom : _INCONNU;
             Label_Prenom.Content = personne.Prenoms != null ? personne.Prenoms : _INCONNU;
             Label_Date_Dc.Content = personne.DateDeces != null ? personne.DateDeces : _INCONNUE;
             Label_Date_Naissance.Content = personne.DateNaissance != null ? personne.DateNaissance : _INCONNUE;
@@ -43,7 +43,7 @@ namespace Vue
             ImagePrincipale.Source = personne is Homme ? new BitmapImage(new Uri(@"/Homme.png", UriKind.RelativeOrAbsolute)) : new BitmapImage(new Uri(@"/Femme.png", UriKind.RelativeOrAbsolute));
             if(personne is Femme)
             {
-                Label_Nom_JF.Content = ((Femme)personne).NomJeuneFille != null ? ((Femme)personne).NomJeuneFille : _INCONNU;
+                Label_Nom_JF.Content = !string.IsNullOrWhiteSpace(((Femme)personne).NomJeuneFille) ? ((Femme)personne).NomJeuneFille : _INCONNU;
                 SP_Nom_JF.Visibility = Visibility.Visible;
             }
         }
@@ -66,7 +66,7 @@ namespace Vue
             Prenom.Text = personne.Prenoms != null ? personne.Prenoms : "";
             if(personne is Femme)
             {
-                NomJF.Text = ((Femme)personne).NomJeuneFille != null ? ((Femme)personne).NomJeuneFille : "";
+                NomJF.Text = ((Femme)personne).NomJeuneFille != null ? ((Femme)personne).NomJeuneFille :"";
             }
             Date_Naissance.SelectedDate = personne.DateNaissance;
             Date_Dc.SelectedDate = personne.DateDeces;

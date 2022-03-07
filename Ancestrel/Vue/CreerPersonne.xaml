@@ -16,16 +16,16 @@
         </Grid.RowDefinitions>
         <StackPanel Margin="30" Grid.Row="0" Orientation="Vertical">
             <StackPanel Margin="10" Orientation="Horizontal">
-                <Label Content="Nom d'Usage :" FontFamily="Bahnschrift Light Condensed" FontSize="16"/>
+                <Label Content="Nom d'Usage :" Style="{DynamicResource FontStyle}"/>
                 <TextBox Margin="5" Width="200" x:Name="Nom_TextBox"/>
             </StackPanel>
             <StackPanel x:Name="SP_Prenoms" Margin="10" Orientation="Horizontal">
-                <Label Content="Prenoms :" FontFamily="Bahnschrift Light Condensed" FontSize="16" FontWeight="Normal" FontStyle="Normal"/>
+                <Label Content="Prenoms :" Style="{DynamicResource FontStyle}"/>
                 <TextBox Margin="5" Width="200" x:Name="Prenom_TextBox"/>
                 <Button x:Name="ButtonPrenoms" HorizontalAlignment="Left" Content="+" Width="20" Height="30" Click="ButtonPrenoms_Click" Style="{DynamicResource RoundCorner}"/>
             </StackPanel>
             <StackPanel Margin="10" Orientation="Horizontal">
-                <Label Content="Sexe :" FontFamily="Bahnschrift Light Condensed" FontSize="16" FontWeight="Normal"/>
+                <Label Content="Sexe :" Style="{DynamicResource FontStyle}"/>
                 <ComboBox x:Name="Sexe_ComboBox" Margin="10,0, 0, 5" SelectedIndex="0">
                     <ComboBoxItem Name="Masculin" Content="Masculin"/>
                     <ComboBoxItem Name="Feminin" Content="Feminin"/>

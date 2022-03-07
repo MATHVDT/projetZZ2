@@ -55,8 +55,9 @@ namespace Model
         public void AjouterPere(Personne enfant, Homme pere)
         {
             int idPere = 0;
+            Arbre.AjouterParent(enfant.Numero, pere);
             //id=AJOUTPere
-            enfant.IdPere = idPere;
+            //enfant.IdPere = idPere;
             //UpdateEnfant(idPere)!
 
         }
@@ -64,8 +65,9 @@ namespace Model
         public void AjouterMere(Personne enfant, Femme mere)
         {
             int idMere=0; //
+            Arbre.AjouterParent(enfant.Numero, mere);
             //id=AJOUTMERE
-            enfant.IdMere = idMere;
+            //enfant.IdMere = idMere;
             //UpdateEnfant(idMere)
         }
 
