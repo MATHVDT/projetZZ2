@@ -1,9 +1,11 @@
-# Genealogie
+# Ancestrel Généalogie
+
+Ancestrel est une application de généalogie permettant de construire une arbre généalogique.
 
 
 
 
-Docs lien utiles : https://1drv.ms/w/s!AvLUXlbw1t9v738K6vQ_W9EYfRxm?e=0krBZi
+Membres : - Villedieu De Torcy Mathieu
+          - DUMAS Florian 
 
-overleaf : https://www.overleaf.com/project/6207b35f545e0fe5603bc2aa
-
+Tuteur : Yon Loïc
