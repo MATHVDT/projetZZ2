@@ -114,7 +114,6 @@ namespace Model
          * 
          * @param FichierImage fichierImage
          * 
-         * @todo A faire ?
          * @warning Pas encore implémenté, pas de modif d'image pour l'instant.
          */
         public void UpdateFichierImage(FichierImage fichierImage);

@@ -35,7 +35,6 @@ namespace Model
         /**
          * @var DateAjoutFichier
          * @brief Date d'ajout du fichier dans le logiciel.
-         * @todo Peut etre plutot la date d'ajout dans la bdd ???
          */
         public readonly DateTime DateAjoutFichier;
 
@@ -53,9 +52,6 @@ namespace Model
          * Crée un ficher. L'id est celui dans la BDD,
          * s'il est null, cela veut dire qu'il n'a pas encore été ajouté 
          * dans la BDD.
-         * @todo 
-         * La var dateAjout est modifier ici, mais peut etre la virer de la classe 
-         * et gerer la date au moment de l'insertion de l'element dans la BDD.
          */
         public Fichier(DateTime? dateAjout = null, int? inId = null, string? inNomFichier = null)
         {
