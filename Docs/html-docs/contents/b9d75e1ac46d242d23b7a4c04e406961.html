@@ -93,6 +93,10 @@
         
         <li><a href='afcd6cdb6230d23556b8798d2a450d6e.html'><span class='node-icon staruml-icon icon-UMLClass'></span>Femme</a></li>
         
+        <li><a href='afcd6cdb6230d23556b8798d2a450d6e.html'><span class='node-icon staruml-icon icon-UMLClass'></span>Femme</a></li>
+        
+        <li><a href='5f4a0828850ac7e61214fed75b35060f.html'><span class='node-icon staruml-icon icon-UMLClass'></span>Homme</a></li>
+        
         <li><a href='5f4a0828850ac7e61214fed75b35060f.html'><span class='node-icon staruml-icon icon-UMLClass'></span>Homme</a></li>
         
     </ul>
@@ -157,62 +161,62 @@
           <tr>
             <td>public</td>
             <td><a href="b1f3bf62a2557e0fd4739378dcbfe99f.html">Id</a></td>
-            <td>int?</td>
+            <td>int</td>
             <td></td>
           </tr>
           
           <tr>
             <td>public</td>
             <td><a href="862c6449a770e362b6c1302537bd79bd.html">Numero</a></td>
-            <td>uint</td>
+            <td>int</td>
             <td></td>
           </tr>
           
           <tr>
             <td>public</td>
-            <td><a href="500998900e5b912ab3748a9cf19c783a.html">nom</a></td>
-            <td><span class='label label-info'>none</span></td>
+            <td><a href="500998900e5b912ab3748a9cf19c783a.html">Nom</a></td>
+            <td>String</td>
             <td></td>
           </tr>
           
           <tr>
             <td>public</td>
-            <td><a href="919fa42eb3be6ab3fe171d69bbadb821.html">prenoms</a></td>
-            <td>Collection&lt;String&gt;</td>
+            <td><a href="919fa42eb3be6ab3fe171d69bbadb821.html">Prenoms</a></td>
+            <td>List&lt;String&gt;</td>
             <td></td>
           </tr>
           
           <tr>
             <td>public</td>
             <td><a href="3dc0e325d7d8abc5028a18ba796fa4cf.html">DateNaissance</a></td>
-            <td><span class='label label-info'>none</span></td>
+            <td>DateOnly</td>
             <td></td>
           </tr>
           
           <tr>
             <td>public</td>
             <td><a href="d6bf349e94ab41f2dfb294a1e33c1246.html">DateDeces</a></td>
-            <td><span class='label label-info'>none</span></td>
+            <td>DateOnly</td>
             <td></td>
           </tr>
           
           <tr>
             <td>public</td>
             <td><a href="846b342131ce23d685c46e6b8166a208.html">LieuNaissance</a></td>
-            <td><span class='label label-info'>none</span></td>
+            <td><a href='181f12da199620c888977f368ee6496a.html'>Ville</a></td>
             <td></td>
           </tr>
           
           <tr>
             <td>public</td>
             <td><a href="86ebbf586861b8834a96ebd5c089d366.html">Nationalite</a></td>
-            <td><span class='label label-info'>none</span></td>
+            <td>String</td>
             <td></td>
           </tr>
           
           <tr>
             <td>public</td>
-            <td><a href="7dc081359e3a389e990cb21e898c95bb.html">inconnu</a></td>
+            <td><a href="7dc081359e3a389e990cb21e898c95bb.html">Inconnu</a></td>
             <td>boolean</td>
             <td></td>
           </tr>
@@ -220,7 +224,7 @@
           <tr>
             <td>public</td>
             <td><a href="4974b6a6adbde5283dbbd431db1424a1.html">ListDocument</a></td>
-            <td>Collection&lt;Fichier&gt;</td>
+            <td>List&lt;Fichier&gt;</td>
             <td></td>
           </tr>
           
@@ -230,6 +234,30 @@
 
       <!-- Operations -->
 
+      
+      <section>
+        <h3>Operations</h3>
+        <table class="table table-striped table-bordered">
+          <tr>
+            <th>Visibility</th>
+            <th>Name</th>
+            <th>Description</th>
+          </tr>
+          
+          <tr>
+            <td>public</td>
+            <td><a href="7c0e7dc186e5b3f8a33dca3fa251c56f.html">LierEnfant(int numEnfant)</a></td>
+            <td></td>
+          </tr>
+          
+          <tr>
+            <td>public</td>
+            <td><a href="40d0bceaf62390c6c09b06c11e3d05c6.html">AjouterImage(FichierImage image, bool imageProfil)</a></td>
+            <td></td>
+          </tr>
+          
+        </table>
+      </section>
       
 
       <!-- Receptions -->
@@ -445,7 +473,7 @@
         
         <li><a href='b99581e4eb31822538be97d68a3ee013.html'><span class='node-icon staruml-icon icon-UMLAssociation'></span>(Personne—Arbre)</a></li>
         
-        <li><a href='0631e3ddf844ea216316076a7db71b90.html'><span class='node-icon staruml-icon icon-UMLAssociation'></span>(Personne—Ville)</a></li>
+        <li><a href='0631e3ddf844ea216316076a7db71b90.html'><span class='node-icon staruml-icon icon-UMLAssociation'></span>LieuNaissance (Personne—Ville)</a></li>
         
         <li><a href='782c3f081a583b660fdc98e580efa5e3.html'><span class='node-icon staruml-icon icon-UMLAssociation'></span>(Personne—Fichier)</a></li>
         
@@ -453,11 +481,19 @@
         
         <li><a href='d62f93f931345f2a28839b5a4caf135d.html'><span class='node-icon staruml-icon icon-UMLAssociation'></span>(Personne—Personne)</a></li>
         
+        <li><a href='c26bf09ce8b4b3d50ea2889eae6dfd8e.html'><span class='node-icon staruml-icon icon-UMLAssociation'></span>lieuNaissance (Personne—Ville)</a></li>
+        
         <li><a href='1529c1f0cc196a58a50fc825e38f16fd.html'><span class='node-icon staruml-icon icon-UMLGeneralization'></span>(Femme→Personne)</a></li>
+        
+        <li><a href='ec0d78773b1e2058a0894e0101bc4af7.html'><span class='node-icon staruml-icon icon-UMLGeneralization'></span>(Femme→Personne)</a></li>
         
         <li><a href='c048367a7ee6978d6afeddba10398054.html'><span class='node-icon staruml-icon icon-UMLGeneralization'></span>(Homme→Personne)</a></li>
         
-        <li><a href='d5e9912cb1b959e9932351a133eccb5b.html'><span class='node-icon staruml-icon icon-UMLAssociation'></span>(Fichier—Personne)</a></li>
+        <li><a href='d68fc141a5e4382b3d003dc532761283.html'><span class='node-icon staruml-icon icon-UMLGeneralization'></span>(Homme→Personne)</a></li>
+        
+        <li><a href='ef186b06104822e3dd5cde64b0464321.html'><span class='node-icon staruml-icon icon-UMLAssociation'></span>LieuNaissance (Ville—Personne)</a></li>
+        
+        <li><a href='d5e9912cb1b959e9932351a133eccb5b.html'><span class='node-icon staruml-icon icon-UMLAssociation'></span>ListFichier (Fichier—Personne)</a></li>
         
     </ul>
 </section>
@@ -476,13 +512,15 @@
         
         <li><a href='b99581e4eb31822538be97d68a3ee013.html'><span class='node-icon staruml-icon icon-UMLAssociation'></span>(Personne—Arbre)</a></li>
         
-        <li><a href='0631e3ddf844ea216316076a7db71b90.html'><span class='node-icon staruml-icon icon-UMLAssociation'></span>(Personne—Ville)</a></li>
+        <li><a href='0631e3ddf844ea216316076a7db71b90.html'><span class='node-icon staruml-icon icon-UMLAssociation'></span>LieuNaissance (Personne—Ville)</a></li>
         
         <li><a href='782c3f081a583b660fdc98e580efa5e3.html'><span class='node-icon staruml-icon icon-UMLAssociation'></span>(Personne—Fichier)</a></li>
         
         <li><a href='620397f60678177efd2e2a57da02d1ae.html'><span class='node-icon staruml-icon icon-UMLAssociation'></span>(Personne—Arbre)</a></li>
         
         <li><a href='d62f93f931345f2a28839b5a4caf135d.html'><span class='node-icon staruml-icon icon-UMLAssociation'></span>(Personne—Personne)</a></li>
+        
+        <li><a href='c26bf09ce8b4b3d50ea2889eae6dfd8e.html'><span class='node-icon staruml-icon icon-UMLAssociation'></span>lieuNaissance (Personne—Ville)</a></li>
         
     </ul>
 </section>

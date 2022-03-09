@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>ILoader</title>
+    <title>Chargement</title>
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic|Source+Code+Pro:300,400,700' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="../assets/css/bootstrap.css">
 <link rel="stylesheet" href="../assets/css/jquery.bonsai.css">
@@ -18,7 +18,7 @@
 
       <!-- Name Title -->
 
-      <h1>ILoader</h1>
+      <h1>Chargement</h1>
 
       <!-- Type and Stereotype -->
 
@@ -28,7 +28,7 @@
           UMLClass
         </span>
         
-          <span style="margin-left: 10px" class="alert alert-info">«Interface»</span>
+          <span style="margin-left: 10px" class="alert alert-info">«interface»</span>
         
       </section>
 
@@ -45,7 +45,7 @@
           <span class="label label-info"><a href='ff68f4494b6c87ee3b3ddc222e22825c.html'><span class='node-icon staruml-icon icon-UMLModel'></span>Class</a></span>
         
           <span>::</span>
-          <span class="label label-info"><a href='5a1d33c3cf97f5114a93532aab6eb515.html'><span class='node-icon staruml-icon icon-UMLClass'></span>«Interface»ILoader</a></span>
+          <span class="label label-info"><a href='5a1d33c3cf97f5114a93532aab6eb515.html'><span class='node-icon staruml-icon icon-UMLClass'></span>«interface»Chargement</a></span>
         
       </section>
 
@@ -91,7 +91,13 @@
     <h3>Specialized Elements</h3>
     <ul class="nav nav-list">
         
-        <li><a href='1f8844933fa953a27b3d1800cd00bc53.html'><span class='node-icon staruml-icon icon-UMLClass'></span>BDDLoader</a></li>
+        <li><a href='1f8844933fa953a27b3d1800cd00bc53.html'><span class='node-icon staruml-icon icon-UMLClass'></span>BDD</a></li>
+        
+        <li><a href='1f8844933fa953a27b3d1800cd00bc53.html'><span class='node-icon staruml-icon icon-UMLClass'></span>BDD</a></li>
+        
+        <li><a href='1f8844933fa953a27b3d1800cd00bc53.html'><span class='node-icon staruml-icon icon-UMLClass'></span>BDD</a></li>
+        
+        <li><a href='1f8844933fa953a27b3d1800cd00bc53.html'><span class='node-icon staruml-icon icon-UMLClass'></span>BDD</a></li>
         
     </ul>
 </section>
@@ -157,19 +163,25 @@
           
           <tr>
             <td>public</td>
-            <td><a href="61bb841f2250a9a69601296c2f60ec85.html">charger(int idArbre): Arbre</a></td>
+            <td><a href="61bb841f2250a9a69601296c2f60ec85.html">ChargerArbre(int idCujus): Arbre</a></td>
             <td></td>
           </tr>
           
           <tr>
             <td>public</td>
-            <td><a href="bc8611ed267a111bd6d099c02e9729d3.html">Sauvegarder(Arbre)</a></td>
+            <td><a href="1b8360aa380049896564151c47814589.html">ChargerPersonne(int idPersonne): Personne</a></td>
             <td></td>
           </tr>
           
           <tr>
             <td>public</td>
-            <td><a href="667e77eeac28631ea60910865056a2b8.html">ChargerPersonne(int numero, int arbre)</a></td>
+            <td><a href="54b50cfa86952ada7be18bf7ee82aca5.html">ChargerVille(int idVille): Ville</a></td>
+            <td></td>
+          </tr>
+          
+          <tr>
+            <td>public</td>
+            <td><a href="a69dfacba034afbcc5ba85a411b3da25.html">ChargerImage(int idImage): FichierImage</a></td>
             <td></td>
           </tr>
           
@@ -273,7 +285,7 @@
     
     <tr>
         <td>name</td>
-        <td>ILoader</td>
+        <td>Chargement</td>
     </tr>
     
     
@@ -288,7 +300,7 @@
     
     <tr>
         <td>stereotype</td>
-        <td>Interface</td>
+        <td>interface</td>
     </tr>
     
     
@@ -373,7 +385,9 @@
     <h3>Dependants</h3>
     <ul class="nav nav-list">
         
-        <li><a href='1f8844933fa953a27b3d1800cd00bc53.html'><span class='node-icon staruml-icon icon-UMLClass'></span>BDDLoader</a></li>
+        <li><a href='1f8844933fa953a27b3d1800cd00bc53.html'><span class='node-icon staruml-icon icon-UMLClass'></span>BDD</a></li>
+        
+        <li><a href='1f8844933fa953a27b3d1800cd00bc53.html'><span class='node-icon staruml-icon icon-UMLClass'></span>BDD</a></li>
         
     </ul>
 </section>
@@ -389,11 +403,21 @@
     <h3>Relationships</h3>
     <ul class="nav nav-list">
         
-        <li><a href='ceef54d613c6a0c66792f0be729d28a7.html'><span class='node-icon staruml-icon icon-UMLAssociation'></span>(Manager—ILoader)</a></li>
+        <li><a href='ceef54d613c6a0c66792f0be729d28a7.html'><span class='node-icon staruml-icon icon-UMLAssociation'></span>chargeur (Manager—Chargement)</a></li>
         
-        <li><a href='506e6639e46bdc5c3d7d10e9308febb7.html'><span class='node-icon staruml-icon icon-UMLGeneralization'></span>(BDDLoader→ILoader)</a></li>
+        <li><a href='506e6639e46bdc5c3d7d10e9308febb7.html'><span class='node-icon staruml-icon icon-UMLGeneralization'></span>(BDD→Chargement)</a></li>
         
-        <li><a href='a5f42a24c1f7928306235bd786694c80.html'><span class='node-icon staruml-icon icon-UMLDependency'></span>(BDDLoader→ILoader)</a></li>
+        <li><a href='a5f42a24c1f7928306235bd786694c80.html'><span class='node-icon staruml-icon icon-UMLDependency'></span>(BDD→Chargement)</a></li>
+        
+        <li><a href='0538af202e3de446d5a4a67e80fc448e.html'><span class='node-icon staruml-icon icon-UMLGeneralization'></span>(BDD→Chargement)</a></li>
+        
+        <li><a href='4901779feebfaeba8f9681522725ec8d.html'><span class='node-icon staruml-icon icon-UMLGeneralization'></span>(BDD→Chargement)</a></li>
+        
+        <li><a href='61261ec39654d2485a98742ca0f5d69c.html'><span class='node-icon staruml-icon icon-UMLDependency'></span>(BDD→Chargement)</a></li>
+        
+        <li><a href='bc47bc96e1ed0f045bdfb78af6abc84b.html'><span class='node-icon staruml-icon icon-UMLGeneralization'></span>(BDD→Chargement)</a></li>
+        
+        <li><a href='2cacedccd7da220964f5b19c17ac1c21.html'><span class='node-icon staruml-icon icon-UMLAssociation'></span>(Factory—Chargement)</a></li>
         
     </ul>
 </section>
