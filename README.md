@@ -5,7 +5,8 @@ Ancestrel est une application de généalogie permettant de construire une arbre
 
 
 
-Membres : - Villedieu De Torcy Mathieu
-          - DUMAS Florian 
+Membres : 
+- DUMAS Florian   
+- Villedieu de Torcy Mathieu  
 
 Tuteur : Yon Loïc
