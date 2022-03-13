@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using System.Drawing;
 using System.IO;
 using System.Drawing.Imaging;
+using System.Diagnostics;
 
 namespace Model
 {
@@ -42,30 +43,30 @@ namespace Model
             }
             catch (TypeInitializationException e)
             {
-                Console.WriteLine(e.ToString());
-                Console.WriteLine("using System.Drawing : bibliothèque spécifique à Windows ");
+                Debug.WriteLine(e.ToString());
+                Debug.WriteLine("using System.Drawing : bibliothèque spécifique à Windows ");
             }
             catch (OutOfMemoryException e)
             {
-                Console.WriteLine(e.ToString());
-                Console.WriteLine("Format d'image du fichier n'est pas valide.");
+                Debug.WriteLine(e.ToString());
+                Debug.WriteLine("Format d'image du fichier n'est pas valide.");
             }
             catch (FileNotFoundException)
             {
-                Console.WriteLine("Le fichier spécifié n'existe pas.");
+                Debug.WriteLine("Le fichier spécifié n'existe pas.");
             }
             catch (ArgumentException)
             {
-                Console.WriteLine("ArgumentException");
+                Debug.WriteLine("ArgumentException");
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.ToString());
+                Debug.WriteLine(e.ToString());
             }
 
             if (_image == null)
             {
-                Console.WriteLine("image non chargée");
+                Debug.WriteLine("image non chargée");
                 throw new Exception("Image non chargée");
             }
         }
@@ -107,7 +108,7 @@ namespace Model
         public void SaveTest()
         {
             string path = @"C:\Users\ma_th\Desktop\test\";
-            Console.WriteLine(path);
+            Debug.WriteLine(path);
             //Image.Save();
 
             _image.Save(path + Guid.NewGuid() + ".png", ImageFormat.Png);

@@ -39,36 +39,34 @@ Console.WriteLine("Personne : " + p.ToString());
 Homme h = new(num: 1, nom: "Dupond", prenoms: "Jean Remi",
    dateNaissance: DateOnly.Parse("16/02/2000"));
 
-
-
 Console.WriteLine();
 Console.WriteLine(h.ToString());
 Console.WriteLine(h.Prenoms);
 Console.WriteLine(h.GetPrenoms());*/
 
-/*
-Console.WriteLine(File.Exists("C:/Users/emper/OneDrive/Documents/ISIMA/ZZ2/Projet/Ancestrel/Console/Image1.jpg"));
-string path = "C:\\Users\\emper\\OneDrive\\Documents\\ISIMA\\ZZ2\\Projet\\Ancestrel\\Console\\Image1.jpg";
 
-FichierImage f = new FichierImage(path, nomFichier: "image");
+//Console.WriteLine(File.Exists(@"C:\Users\emper\OneDrive\Pictures\Anglais\Pech kucha\7c6e6dc8.jpg"));
+//string path = @"C:\Users\emper\OneDrive\Pictures\Anglais\Pech kucha\7c6e6dc8.jpg";
 
-h.AjouterImage(f);
+//FichierImage f = new FichierImage(path, nomFichier: "image");
 
-Console.WriteLine(f.NomFichier);
-*/
+//h.AjouterImage(f);
+
+//Console.WriteLine(f.NomFichier);
+
 
 /*Image imgTest = Image.FromFile("P:\\zz2\\genealogie\\Ancestrel\\Image1.png");
 Image img2 = (Image)imgTest.Clone();*/
 
 //const string VALUENULL = "NULL";
 
-Ville ville = new Ville("Blancherive", 4.444, 48.42);
+//Ville ville = new Ville("Blancherive", 4.444, 48.42);
 
 
-string chaineConnexion = $@"Data Source=(LocalDB)\MSSQLLocalDB;Integrated Security=True";
+//string chaineConnexion = $@"Data Source=(LocalDB)\MSSQLLocalDB;Integrated Security=True";
 //string chaineConnexion = $@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\mavilledie4\Source\Repos\genealogie\Ancestrel\DataBase\SampleDatabase.mdf;Integrated Security=True";
 
-Bdd bdd = new Bdd(chaineConnexion);
+//Bdd bdd = new Bdd(chaineConnexion);
 
 
 #region Inserer personne

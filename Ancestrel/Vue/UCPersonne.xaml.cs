@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,8 +40,14 @@ namespace Vue
 
         private void AffectationValeur()
         {
+            string path = @"C:\Users\emper\OneDrive\Pictures\Anglais\Pech kucha\7c6e6dc8.jpg";
+            Debug.WriteLine(File.Exists(path));
+
+            FichierImage f = new FichierImage(path, nomFichier: "jojo");
+            personne.AjouterImage(f, true);
             if (personne.Inconnu)
             {
+                Numero.Visibility = Visibility.Collapsed;
                 Nom.Content = _INCONNU;
                 Prenom.Visibility = Visibility.Collapsed;
                 Naissance.Visibility = Visibility.Collapsed;
@@ -48,15 +56,16 @@ namespace Vue
             }
             else
             {
+                Numero.Content = personne.Numero;
                 Nom.Content = personne.Nom != null ? personne.Nom : _INCONNU;
                 Prenom.Content = personne.Prenoms != null ? personne.Prenoms : _INCONNU;
-                Naissance.Content = personne.DateNaissance != null ? personne.DateNaissance : _INCONNUE;
-                Deces.Content = personne.DateDeces != null ? personne.DateDeces : _INCONNUE;
-                //Portrait = personne.GetFichierImageProfil().Image; //Utiliser un converter
+                Naissance.Content = personne.DateNaissance != null ? ((DateTime)personne.DateNaissance).ToString("DD/'MM'/'YYYY'") : _INCONNUE;
+                Deces.Content = personne.DateDeces != null ? ((DateTime)personne.DateDeces).ToString("DD/'MM'/'YYYY'") : _INCONNUE;
             }
             if(personne.GetImageProfil() != null)
             {
-                throw new NotImplementedException();
+                
+                Portrait.Source = ToBitmapImage(personne.GetFichierImageProfil().Image);
             }
             else
             {
@@ -80,6 +89,25 @@ namespace Vue
         private void UserControl_MouseLeave(object sender, MouseEventArgs e)
         {
             button = false;
+        }
+
+
+        private BitmapImage ToBitmapImage(System.Drawing.Image bitmap)
+        {
+            using (var memory = new MemoryStream())
+            {
+                bitmap.Save(memory, ImageFormat.Png);
+                memory.Position = 0;
+
+                var bitmapImage = new BitmapImage();
+                bitmapImage.BeginInit();
+                bitmapImage.StreamSource = memory;
+                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                bitmapImage.EndInit();
+                bitmapImage.Freeze();
+
+                return bitmapImage;
+            }
         }
     }
 }
