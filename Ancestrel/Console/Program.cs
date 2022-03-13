@@ -6,19 +6,6 @@
 * @brief Fichier pour lancer en mode console
 * @details Le fichier ne contient que les instructions de la fonction main
 */
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using DataBase;
-using Model;
-using Model;
 
 /**
 * @fn Main

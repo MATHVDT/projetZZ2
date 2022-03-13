@@ -6,12 +6,9 @@
  * @copyright ...
  */
 
-using Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 
 /**
@@ -56,7 +53,7 @@ namespace Model
          * @warning Nom et desc ne servent à rien
          */
         public Arbre(string nom, string desc, Personne cujus)
-            : this( cujus) { }
+            : this(cujus) { }
 
 
         /**
@@ -91,7 +88,7 @@ namespace Model
             DateTime? dateNaissance = null, DateTime? dateDeces = null,
             Ville? lieuNaissance = null, string? nationalite = null)
         {
-            Homme pere = new Homme(id:idEnfant, nom:nom,prenoms: prenoms, dateNaissance:dateNaissance, dateDeces:dateDeces, lieuNaissance:lieuNaissance, nationalite:nationalite);
+            Homme pere = new Homme(id: idEnfant, nom: nom, prenoms: prenoms, dateNaissance: dateNaissance, dateDeces: dateDeces, lieuNaissance: lieuNaissance, nationalite: nationalite);
             Personnes.Add(pere.Numero, pere);
         }
 
@@ -128,7 +125,7 @@ namespace Model
             DateTime? dateNaissance = null, DateTime? dateDeces = null,
             Ville? lieuNaissance = null, string? nationalite = null)
         {
-            Femme mere = new Femme( null, nom, prenoms, dateNaissance, dateDeces, lieuNaissance, nationalite);
+            Femme mere = new Femme(null, nom, prenoms, dateNaissance, dateDeces, lieuNaissance, nationalite);
             Personnes.Add(mere.Numero, mere);
         }
 

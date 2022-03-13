@@ -1,21 +1,12 @@
 ﻿using Model;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Vue
 {
@@ -40,11 +31,6 @@ namespace Vue
 
         private void AffectationValeur()
         {
-            string path = @"C:\Users\emper\OneDrive\Pictures\Anglais\Pech kucha\7c6e6dc8.jpg";
-            Debug.WriteLine(File.Exists(path));
-
-            FichierImage f = new FichierImage(path, nomFichier: "jojo");
-            personne.AjouterImage(f, true);
             if (personne.Inconnu)
             {
                 Numero.Visibility = Visibility.Collapsed;
@@ -62,10 +48,11 @@ namespace Vue
                 Naissance.Content = personne.DateNaissance != null ? ((DateTime)personne.DateNaissance).ToString("DD/'MM'/'YYYY'") : _INCONNUE;
                 Deces.Content = personne.DateDeces != null ? ((DateTime)personne.DateDeces).ToString("DD/'MM'/'YYYY'") : _INCONNUE;
             }
-            if(personne.GetImageProfil() != null)
+            if (personne.GetImageProfil() != null)
             {
-                
+
                 Portrait.Source = ToBitmapImage(personne.GetFichierImageProfil().Image);
+
             }
             else
             {

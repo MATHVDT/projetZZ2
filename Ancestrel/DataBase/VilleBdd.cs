@@ -1,10 +1,6 @@
 ﻿using Model;
-using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace DataBase
 {
@@ -251,7 +247,7 @@ namespace DataBase
                 // Excecution de la requete de récupération des noms et id de toutes les villes
                 Console.WriteLine(queryString);
                 SqlDataReader reader = commandSql.ExecuteReader();
-                
+
                 while (reader.Read())
                 {
                     villesNom.Add((int)reader[_Id], (string)reader[_Nom]);

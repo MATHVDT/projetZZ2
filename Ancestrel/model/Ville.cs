@@ -7,10 +7,7 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 /**
  * @namespace Model
@@ -30,7 +27,7 @@ namespace Model
         * @details
         * Identifiant de la ville
         */
-        public int? Id { get;  set; }
+        public int? Id { get; set; }
 
         /**
         * @var Nom
@@ -99,7 +96,7 @@ namespace Model
 
             strBuil.Append(Nom is null ? "NomInconnu " : Nom + " (");
             strBuil.Append(Latitude is null ? "x.xxx" : "Latitude : " + Latitude + "; ");
-            strBuil.Append(Longitude is null ? "x.xxx" : "Longitude : " + Longitude+")");
+            strBuil.Append(Longitude is null ? "x.xxx" : "Longitude : " + Longitude + ")");
 
             return strBuil.ToString();
         }

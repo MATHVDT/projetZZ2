@@ -1,6 +1,5 @@
 ﻿using Model;
 using System.Data.SqlClient;
-using System.Data.SqlTypes;
 using System.Text;
 
 namespace DataBase

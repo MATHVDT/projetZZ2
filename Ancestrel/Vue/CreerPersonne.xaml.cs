@@ -1,19 +1,9 @@
-﻿using Model;
+﻿using Controller;
+using Model;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Vue
 {
@@ -22,7 +12,7 @@ namespace Vue
     /// </summary>
     public partial class CreerPersonne : Page
     {
-        private Manager manager= Manager.GetInstance();
+        private Manager manager = Manager.GetInstance();
         private int Numero;
         private int Index = 0;
         private bool EstNouvelArbre = true;
@@ -61,8 +51,8 @@ namespace Vue
             Sexe_ComboBox.SelectedIndex = Index;
             if (!EstNouvelArbre)
             {
-                if (Index == 1) 
-                { 
+                if (Index == 1)
+                {
                     ButtonAjout.Content = "Ajouter Mère";
                 }
                 else
@@ -76,10 +66,11 @@ namespace Vue
             }
         }
 
-        private void ButtonAjout_Click(object sender, RoutedEventArgs e) 
+        private void ButtonAjout_Click(object sender, RoutedEventArgs e)
         {
-            personne = Sexe_ComboBox.SelectedIndex == 0 ? new Homme(): new Femme(); 
-            if(personne is Homme)
+            manager.ConnexionBdd($@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\emper\OneDrive\Documents\ISIMA\ZZ2\Projet\Ancestrel\DataBase\Database.mdf;Integrated Security=True");
+            personne = Sexe_ComboBox.SelectedIndex == 0 ? new Homme() : new Femme();
+            if (personne is Homme)
             {
                 Debug.WriteLine("homme");
             }
@@ -87,7 +78,7 @@ namespace Vue
             {
                 Debug.WriteLine("Femme");
             }
-            personne.Nom=!String.IsNullOrWhiteSpace(Nom_TextBox.Text) ? Nom_TextBox.Text : null;
+            personne.Nom = !String.IsNullOrWhiteSpace(Nom_TextBox.Text) ? Nom_TextBox.Text : null;
             foreach (Object o in SP_Prenoms.Children)
             {
                 if (o.GetType().Equals(typeof(TextBox)))
@@ -102,7 +93,7 @@ namespace Vue
             {
                 if (!EstNouvelArbre)
                 {
-                    if(personne is Homme)
+                    if (personne is Homme)
                     {
                         manager.AjouterPere(enfant, (Homme)personne);
                     }

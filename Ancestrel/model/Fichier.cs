@@ -6,10 +6,6 @@
  * @copyright ...
  */
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Model
 {
@@ -77,7 +73,7 @@ namespace Model
          * @brief Constructeur d'un nouveau fichier. *sans id*
          */
         public Fichier(int? inId = null, string? inNomFichier = null)
-        :this(null, null, inNomFichier) { }
+        : this(null, null, inNomFichier) { }
 
         public override string ToString()
         {

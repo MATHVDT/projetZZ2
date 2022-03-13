@@ -5,12 +5,7 @@
  * @date 30/12/2021
  * @copyright ...
  */
-using Model;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Model
 {
@@ -42,8 +37,8 @@ namespace Model
                      DateTime? dateNaissance = null, DateTime? dateDeces = null,
                      Ville? lieuNaissance = null, string? nationalite = null,
                      string? description = null) :
-                base(id: id, nom: nom, prenoms: prenoms, dateNaissance: dateNaissance, 
-                    dateDeces: dateDeces, lieuNaissance: lieuNaissance, 
+                base(id: id, nom: nom, prenoms: prenoms, dateNaissance: dateNaissance,
+                    dateDeces: dateDeces, lieuNaissance: lieuNaissance,
                     nationalite: nationalite, description)
         {
         }
