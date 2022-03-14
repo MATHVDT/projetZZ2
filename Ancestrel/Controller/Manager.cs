@@ -39,15 +39,20 @@ namespace Controller
 
         }
 
-        public void ChargerArbre(Arbre a)
+        public void ChargerArbre(int idcujus)
         {
-            Arbre = a;
+            Arbre = BddLoader.ChargerArbre(idcujus);
+        }
+
+        public Dictionary<int, string>  ChargerPersonnes()
+        {
+            return BddLoader.GetNomPrenomPersonnes();
         }
 
         public void CreerArbre(Personne p)
         {
             Arbre = new Arbre(p);
-            //BddSaver.InsererPersonne(p);
+            BddSaver.InsererPersonne(p);
         }
 
         public void SupprimerPersonne(Personne p)
@@ -62,11 +67,12 @@ namespace Controller
         public void ModifierPersonne(Personne p)
         {
             //UpdatePersonne(p)
-            //BddSaver.UpdatePersonne(p);
+            BddSaver.UpdatePersonne(p);
         }
 
         public void AjouterPere(Personne enfant, Homme pere)
         {
+            pere.LierEnfant(enfant.Numero);
             BddSaver.InsererPersonne((pere as Personne));
             Arbre.AjouterParent(enfant.Numero, pere);
 
@@ -74,7 +80,8 @@ namespace Controller
 
         public void AjouterMere(Personne enfant, Femme mere)
         {
-            //BddSaver.InsererPersonne((mere as Personne));
+            mere.LierEnfant(enfant.Numero);
+            BddSaver.InsererPersonne((mere as Personne));
             Arbre.AjouterParent(enfant.Numero, mere);
         }
 

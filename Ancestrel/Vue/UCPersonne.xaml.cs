@@ -45,8 +45,8 @@ namespace Vue
                 Numero.Content = personne.Numero;
                 Nom.Content = personne.Nom != null ? personne.Nom : _INCONNU;
                 Prenom.Content = personne.Prenoms != null ? personne.Prenoms : _INCONNU;
-                Naissance.Content = personne.DateNaissance != null ? ((DateTime)personne.DateNaissance).ToString("DD/'MM'/'YYYY'") : _INCONNUE;
-                Deces.Content = personne.DateDeces != null ? ((DateTime)personne.DateDeces).ToString("DD/'MM'/'YYYY'") : _INCONNUE;
+                Naissance.Content = personne.DateNaissance != null ? ((DateTime)personne.DateNaissance).ToString("dd/MM/yyyy") : _INCONNUE;
+                Deces.Content = personne.DateDeces != null ? ((DateTime)personne.DateDeces).ToString("dd/MM/yyyy") : _INCONNUE;
             }
             if (personne.GetImageProfil() != null)
             {

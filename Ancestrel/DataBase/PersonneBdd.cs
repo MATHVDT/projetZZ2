@@ -535,7 +535,7 @@ namespace DataBase
 
             // Requete SQL pour récuperer les infos sur une personne 
             string queryString = $"UPDATE {_PersonneTable} " +
-                                 $"SET {_IdPere} = {(idPere is null ? VALUENULL : idPere)}, \n" +
+                                 $"SET {_IdPere} = {(idPere is null ? VALUENULL : idPere)} \n" +
                                  $"WHERE {_Id} = {idEnfant};";
 
             // Connexion à la bdd
@@ -582,7 +582,7 @@ namespace DataBase
 
             // Requete SQL pour récuperer les infos sur une personne 
             string queryString = $"UPDATE {_PersonneTable} " +
-                                 $"SET {_IdPere} = {(idMere is null ? VALUENULL : idMere)}, \n" +
+                                 $"SET {_IdPere} = {(idMere is null ? VALUENULL : idMere)} \n" +
                                  $"WHERE {_Id} = {idEnfant};";
 
             // Connexion à la bdd

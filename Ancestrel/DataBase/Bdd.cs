@@ -46,6 +46,7 @@ namespace DataBase
             Arbre arbre = new Arbre("\nArbre Chargé depuis la bdd",
                                     $"Abre à partir de {cujus.Id} : {cujus.Nom} {cujus.Prenoms}",
                                     cujus);
+            _personneDejaChargee = arbre.Personnes;
             // Création de la file de cujus dont les parents sont à charger
             Queue<Personne> queue = new Queue<Personne>();
             // Ajout du cujus
@@ -158,6 +159,8 @@ namespace DataBase
             // Recupération de la Nationnalité dans la Table d'association
             // Récupère rien pour l'instant
             personne.Nationalite = GetNationalitesByIdPersonne(idPersonne);
+
+            //_personneDejaChargee.Add(((int)personne.Numero), personne);
 
             return personne;
         }

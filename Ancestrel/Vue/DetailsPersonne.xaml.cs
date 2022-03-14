@@ -29,8 +29,8 @@ namespace Vue
             ModifierVisibiliteTextBox(Visibility.Collapsed);
             Label_Nom.Content = !string.IsNullOrWhiteSpace(personne.Nom) ? personne.Nom : _INCONNU;
             Label_Prenom.Content = personne.Prenoms != null ? personne.Prenoms : _INCONNU;
-            Label_Date_Dc.Content = personne.DateDeces != null ? personne.DateDeces : _INCONNUE;
-            Label_Date_Naissance.Content = personne.DateNaissance != null ? personne.DateNaissance : _INCONNUE;
+            Label_Date_Dc.Content = personne.DateDeces != null ? ((DateTime)personne.DateDeces).ToString("dd/MM/yyyy") : _INCONNUE;
+            Label_Date_Naissance.Content = personne.DateNaissance != null ? ((DateTime)personne.DateNaissance).ToString("dd/MM/yyyy") : _INCONNUE;
             ///////Gestion image : convertion image
             ImagePrincipale.Source = personne is Homme ? new BitmapImage(new Uri(@"/Homme.png", UriKind.RelativeOrAbsolute)) : new BitmapImage(new Uri(@"/Femme.png", UriKind.RelativeOrAbsolute));
             if (personne is Femme)

@@ -68,7 +68,6 @@ namespace Vue
 
         private void ButtonAjout_Click(object sender, RoutedEventArgs e)
         {
-            manager.ConnexionBdd($@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\emper\OneDrive\Documents\ISIMA\ZZ2\Projet\Ancestrel\DataBase\Database.mdf;Integrated Security=True");
             personne = Sexe_ComboBox.SelectedIndex == 0 ? new Homme() : new Femme();
             if (personne is Homme)
             {
@@ -105,6 +104,7 @@ namespace Vue
                 }
                 else
                 {
+                    manager.ConnexionBdd($@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\emper\OneDrive\Documents\ISIMA\ZZ2\Projet\Ancestrel\DataBase\SampleDatabase.mdf;Integrated Security=True");
                     manager.CreerArbre(personne);
                     Debug.WriteLine(personne.Numero);
                     this.NavigationService.Navigate(new Arbre());
