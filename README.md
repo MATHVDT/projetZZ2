@@ -27,5 +27,5 @@ Git.
 - VILLEDIEU DE TORCY Mathieu *([site](https://perso.isima.fr/~mavilledie4/))*   
 
 
-Projet non terminé mais fonctinnel avec les principales actions pour créer un arbre généalogique. 
+Projet non terminé mais fonctionnel avec les principales actions pour créer un arbre généalogique. 
 
