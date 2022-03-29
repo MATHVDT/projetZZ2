@@ -24,8 +24,8 @@ Git.
 
 **Membre du groupe :**
 - DUMAS Florian
-- VILLEDIEU DE TORCY Mathieu *([site](perso.isima.fr/~mavilledie4))*   
+- VILLEDIEU DE TORCY Mathieu *([site](https://perso.isima.fr/~mavilledie4/))*   
 
 
-
+Projet non terminé mais fonctinnel avec les principales actions pour créer un arbre généalogique. 
 
